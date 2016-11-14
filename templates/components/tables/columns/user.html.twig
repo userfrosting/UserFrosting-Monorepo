@@ -1,9 +1,11 @@
-{# This contains a series of <script> blocks, each of which is a client-side Handlebars template. #}
+{# This contains a series of <script> blocks, each of which is a client-side Handlebars template.
+ # Requires handlebars-helpers.js, moment.js
+#}
 {% verbatim %}
 <script id="user-table-column-info" type="text/x-handlebars-template">
-    <td data-text="{{user.user_name}}">
+    <td data-text="{{user.last_name}}">
         <strong>
-            <a href="{{site.uri.public}}/users/u/{{user.id}}">{{user.user_name}} ({{user.display_name}})</a>
+            <a href="{{site.uri.public}}/users/u/{{user.user_name}}">{{user.first_name}} {{user.last_name}} ({{user.user_name}})</a>
         </strong>
         <div>
             <i>{{user.title}}</i>
@@ -14,26 +16,16 @@
     </td>
 </script>
 
-<script id="user-table-column-registered-since" type="text/x-handlebars-template">
-    {{#if user.sign_up_time }}    
-    <td data-num="{{dateFormat user.sign_up_time format='x'}}">
-        {{dateFormat user.sign_up_time format="dddd"}}<br>{{dateFormat user.sign_up_time format="MMM Do, YYYY h:mm a"}}
+<script id="user-table-column-last-activity" type="text/x-handlebars-template">
+    {{#if user.last_activity_at }}    
+    <td data-num="{{dateFormat user.last_activity_at format='x'}}">
+        {{dateFormat user.last_activity_at format="dddd"}}<br>{{dateFormat user.last_activity_at format="MMM Do, YYYY h:mm a"}}
+        <br>
+        <i>{{user.last_activity.description}}</i>
     </td>
     {{ else }}
     <td data-num="0">
             <i>Unknown</i>
-    </td>
-    {{/if }}    
-</script>
-
-<script id="user-table-column-last-sign-in" type="text/x-handlebars-template">
-    {{#if user.last_sign_in_time }}
-    <td data-num="{{dateFormat user.last_sign_in_time format='x'}}">
-        {{dateFormat user.last_sign_in_time format="dddd"}}<br>{{dateFormat user.last_sign_in_time format="MMM Do, YYYY h:mm a"}}
-    </td>
-    {{ else }}
-    <td data-num="0">
-            <i>Brand new!</i>
     </td>
     {{/if }}
 </script>
