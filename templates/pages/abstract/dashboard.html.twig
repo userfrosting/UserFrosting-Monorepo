@@ -1,4 +1,4 @@
-{% extends "layouts/basic.html.twig" %}
+{% extends "pages/abstract/base.html.twig" %}
 
 {% block stylesheets_page_group %}
     <!-- Page-group-specific CSS asset bundle -->
@@ -43,14 +43,14 @@
                 <span class="sr-only">Toggle navigation</span>
             </a>
             <!-- Main nav buttons -->
-            {% include "components/dashboard/navbar.html.twig" %}
+            {% include "navigation/navbar.html.twig" %}
         </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            {% include 'components/dashboard/sidebar.html.twig' %}
+            {% include 'navigation/sidebar.html.twig' %}
         </section>
         <!-- /.sidebar -->
       </aside>
@@ -63,7 +63,7 @@
           <h1>{% block header_title %}{{ block('page_title') }}{% endblock %}</h1>
           {% if block('page_description') is not empty %}<h1><small>{% block header_description %}{{ block('page_description') }}{% endblock %}</small></h1>{% endif %}
           {% block breadcrumb %}
-            {% include 'components/breadcrumb.html.twig' with {page_title: block('page_title')} %}
+            {% include 'navigation/breadcrumb.html.twig' with {page_title: block('page_title')} %}
           {% endblock %}
           <div id="alerts-page"></div>
         </section>
@@ -76,7 +76,7 @@
 
     <!-- Footer -->
     {% block footer %}
-        {% include "components/footer.html.twig" %}
+        {% include "pages/partials/footer.html.twig" %}
     {% endblock %}
 
     </div>

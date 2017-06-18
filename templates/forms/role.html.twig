@@ -1,5 +1,5 @@
 <form class="js-form" method="{{form.method | default('POST')}}" action="{{site.uri.public}}/{{form.action}}">
-    {% include "components/csrf.html.twig" %}
+    {% include "forms/csrf.html.twig" %}
     <div class="js-form-alerts">
     </div>
     <div class="row">
@@ -52,5 +52,5 @@
 </form>
 <!-- Include validation rules -->
 <script>
-{% include "components/page.js.twig" %}
+{% include "pages/partials/page.js.twig" %}
 </script>

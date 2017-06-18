@@ -1,10 +1,10 @@
-{% extends "layouts/modal.html.twig" %}
+{% extends "modals/modal.html.twig" %}
 
 {% block modal_title %}{{translate("ROLE.DELETE")}}{% endblock %}
 
 {% block modal_body %}
 <form class="js-form" method="delete" action="{{site.uri.public}}/{{form.action}}">
-    {% include "components/csrf.html.twig" %}
+    {% include "forms/csrf.html.twig" %}
     <div class="js-form-alerts">
     </div>
     <h4>{{translate("ROLE.DELETE_CONFIRM", {name: role.name})}}<br><small>{{translate("DELETE_CANNOT_UNDONE")}}</small></h4>

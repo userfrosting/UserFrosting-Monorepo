@@ -1,10 +1,10 @@
-{% extends "layouts/modal.html.twig" %}
+{% extends "modals/modal.html.twig" %}
 
 {% block modal_title %}{{translate("CACHE.CLEAR")}}{% endblock %}
 
 {% block modal_body %}
 <form class="js-form" method="post" action="{{site.uri.public}}/{{form.action}}">
-    {% include "components/csrf.html.twig" %}
+    {% include "forms/csrf.html.twig" %}
     <div class="js-form-alerts">
     </div>
     <h4>{{translate("CACHE.CLEAR_CONFIRM")}}<br><small>{{translate("DELETE_CANNOT_UNDONE")}}</small></h4>

@@ -1,10 +1,10 @@
-{% extends "layouts/modal.html.twig" %}
+{% extends "modals/modal.html.twig" %}
 
 {% block modal_title %}{{translate("ROLE.MANAGE")}}{% endblock %}
 
 {% block modal_body %}
 <form class="js-form" method="PUT" action="{{site.uri.public}}/api/users/u/{{user.user_name}}/roles">
-    {% include "components/csrf.html.twig" %}
+    {% include "forms/csrf.html.twig" %}
     <div class="js-form-alerts">
     </div>
     <div class="js-form-roles">
@@ -72,6 +72,6 @@
 
 <!-- Include validation rules -->
 <script>
-    {% include "components/page.js.twig" %}
+    {% include "pages/partials/page.js.twig" %}
 </script>
 {% endblock %}
