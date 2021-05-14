@@ -10,13 +10,39 @@
 
 namespace UserFrosting\Sprinkle\Admin;
 
-use UserFrosting\System\Sprinkle\Sprinkle;
+use UserFrosting\Sprinkle\SprinkleReceipe;
 
-/**
- * Bootstrapper class for the 'admin' sprinkle.
- *
- * @author Alex Weissman (https://alexanderweissman.com)
- */
-class Admin extends Sprinkle
+class Admin implements SprinkleReceipe
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getName(): string
+    {
+        return 'Admin Sprinkle';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPath(): string
+    {
+        return __DIR__;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBakeryCommands(): array
+    {
+        return [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSprinkles(): array
+    {
+        return [];
+    }
 }
