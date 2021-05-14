@@ -1,0 +1,23 @@
+# Ignores text editor metadata
+*.komodoproject
+.editorconfig
+.vscode
+
+# Ignores Mac metadata.  You can configure this globally if you use a Mac: http://islegend.com/development/setting-global-gitignore-mac-windows/
+.DS_Store
+
+# Ignore developer resources
+_meta/*
+
+# Ignore composer-generated files
+composer.lock
+
+# Ignore Composer vendor
+vendor/*
+
+# Ignore dev utils cache
+.phpunit.result.cache
+.php_cs.cache
+
+# Ignore api doc
+api/
