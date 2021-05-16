@@ -17,7 +17,7 @@ class Admin implements SprinkleReceipe
     /**
      * {@inheritdoc}
      */
-    public function getName(): string
+    public static function getName(): string
     {
         return 'Admin Sprinkle';
     }
@@ -25,7 +25,7 @@ class Admin implements SprinkleReceipe
     /**
      * {@inheritdoc}
      */
-    public function getPath(): string
+    public static function getPath(): string
     {
         return __DIR__;
     }
@@ -33,7 +33,7 @@ class Admin implements SprinkleReceipe
     /**
      * {@inheritdoc}
      */
-    public function getBakeryCommands(): array
+    public static function getBakeryCommands(): array
     {
         return [];
     }
@@ -41,7 +41,7 @@ class Admin implements SprinkleReceipe
     /**
      * {@inheritdoc}
      */
-    public function getSprinkles(): array
+    public static function getSprinkles(): array
     {
         return [];
     }
