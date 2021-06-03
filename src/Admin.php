@@ -27,7 +27,7 @@ class Admin implements SprinkleReceipe
      */
     public static function getPath(): string
     {
-        return __DIR__;
+        return __DIR__ . '/../';
     }
 
     /**
@@ -42,6 +42,26 @@ class Admin implements SprinkleReceipe
      * {@inheritdoc}
      */
     public static function getSprinkles(): array
+    {
+        return [];
+    }
+
+    /**
+     * Returns a list of routes definition in PHP files.
+     *
+     * @return string[]
+     */
+    public static function getRoutes(): array
+    {
+        return [];
+    }
+
+    /**
+     * Returns a list of all PHP-DI services/container definitions files.
+     *
+     * @return string[]
+     */
+    public static function getServices(): array
     {
         return [];
     }
