@@ -1,28 +1,29 @@
 <?php
 
 /*
- * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
+ * UserFrosting AdminLTE Theme (http://www.userfrosting.com)
  *
- * @link      https://github.com/userfrosting/sprinkle-admin
- * @copyright Copyright (c) 2022 Alexander Weissman & Louis Charette
- * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
+ * @link      https://github.com/userfrosting/theme-adminlte
+ * @copyright Copyright (c) 2021 Alexander Weissman & Louis Charette
+ * @license   https://github.com/userfrosting/theme-adminlte/blob/master/LICENSE (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Admin;
+namespace UserFrosting\Develop\Admin;
 
 use UserFrosting\Sprinkle\Account\Account;
+use UserFrosting\Sprinkle\Admin\Admin;
 use UserFrosting\Sprinkle\Core\Core;
 use UserFrosting\Sprinkle\SprinkleRecipe;
 use UserFrosting\Theme\AdminLTE\AdminLTE;
 
-class Admin implements SprinkleRecipe
+class App implements SprinkleRecipe
 {
     /**
      * {@inheritdoc}
      */
     public function getName(): string
     {
-        return 'Admin Sprinkle';
+        return 'Admin Sprinkle (Develop)';
     }
 
     /**
@@ -30,13 +31,11 @@ class Admin implements SprinkleRecipe
      */
     public function getPath(): string
     {
-        return __DIR__ . '/../';
+        return __DIR__.'/';
     }
 
     /**
      * {@inheritdoc}
-     *
-     * @codeCoverageIgnore
      */
     public function getBakeryCommands(): array
     {
@@ -52,6 +51,7 @@ class Admin implements SprinkleRecipe
             Core::class,
             Account::class,
             AdminLTE::class,
+            Admin::class,
         ];
     }
 
@@ -60,7 +60,9 @@ class Admin implements SprinkleRecipe
      */
     public function getRoutes(): array
     {
-        return [];
+        return [
+            Routes::class,
+        ];
     }
 
     /**

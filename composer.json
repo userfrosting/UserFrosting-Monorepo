@@ -47,6 +47,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "UserFrosting\\Develop\\Admin\\": "develop/",
             "UserFrosting\\Sprinkle\\Admin\\Tests\\": "app/tests/"
         }
     },

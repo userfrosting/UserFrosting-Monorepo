@@ -1,6 +1,4 @@
 # Ignores text editor metadata
-*.komodoproject
-.editorconfig
 .vscode
 
 # Ignores Mac metadata.  You can configure this globally if you use a Mac: http://islegend.com/development/setting-global-gitignore-mac-windows/
@@ -10,18 +8,21 @@
 _meta/
 
 # Ignore personal config files (dev)
-app/.env
+develop/.env
 
-# Ignore lock files
-composer.lock
-package-lock.json
+# Ignore log, cache, sessions and storage directories
+develop/cache/*
+develop/database/*
+develop/logs/*
+develop/sessions/*
+develop/storage/*
 
-# Ignore log, cache, sessions and storage directories in sprinkle
-app/cache/
-app/database/
-app/logs/
-app/sessions/
-app/storage/
+# Unignore log, cache, sessions and storage .gitkeeps
+!develop/cache/.gitkeep
+!develop/database/.gitkeep
+!develop/logs/.gitkeep
+!develop/sessions/.gitkeep
+!develop/storage/.gitkeep
 
 # Ignore Composer vendor
 vendor/
@@ -35,6 +36,3 @@ public/assets/
 # Ignore dev utils cache
 .phpunit.result.cache
 .php_cs.cache
-
-# Ignore api doc
-api/
