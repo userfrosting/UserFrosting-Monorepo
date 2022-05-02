@@ -7,13 +7,30 @@
 .DS_Store
 
 # Ignore developer resources
-_meta/*
+_meta/
 
-# Ignore composer-generated files
+# Ignore personal config files (dev)
+app/.env
+
+# Ignore lock files
 composer.lock
+package-lock.json
+
+# Ignore log, cache, sessions and storage directories in sprinkle
+app/cache/
+app/database/
+app/logs/
+app/sessions/
+app/storage/
 
 # Ignore Composer vendor
-vendor/*
+vendor/
+
+# Ignore node modules
+node_modules/
+
+# Ignore compiled assets
+public/assets/
 
 # Ignore dev utils cache
 .phpunit.result.cache
