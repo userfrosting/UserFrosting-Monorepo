@@ -1,11 +1,11 @@
 <?php
 
 /*
- * UserFrosting (http://www.userfrosting.com)
+ * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
- * @link      https://github.com/userfrosting/UserFrosting
- * @copyright Copyright (c) 2019 Alexander Weissman
- * @license   https://github.com/userfrosting/UserFrosting/blob/master/LICENSE.md (MIT License)
+ * @link      https://github.com/userfrosting/sprinkle-admin
+ * @copyright Copyright (c) 2022 Alexander Weissman & Louis Charette
+ * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
  */
 
 namespace UserFrosting\Sprinkle\Admin\Controller;
@@ -678,8 +678,7 @@ class UserController extends SimpleController
         $classMapper = $this->ci->classMapper;
 
         // Get the user to edit
-        $user = $classMapper->getClassMapping('user')
-            ::where('user_name', $user->user_name)
+        $user = $classMapper->getClassMapping('user')::where('user_name', $user->user_name)
             ->with('group')
             ->first();
 
@@ -1465,8 +1464,7 @@ class UserController extends SimpleController
         $classMapper = $this->ci->classMapper;
 
         // Get the user to delete
-        $user = $classMapper->getClassMapping('user')
-            ::where('user_name', $data['user_name'])
+        $user = $classMapper->getClassMapping('user')::where('user_name', $data['user_name'])
             ->first();
 
         return $user;
