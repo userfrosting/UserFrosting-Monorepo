@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
 [![Build](https://img.shields.io/github/workflow/status/userfrosting/sprinkle-admin/Build/5.0?logo=github)](https://github.com/userfrosting/sprinkle-admin/actions)
 [![Codecov](https://codecov.io/gh/userfrosting/sprinkle-admin/branch/5.0/graph/badge.svg)](https://app.codecov.io/gh/userfrosting/sprinkle-admin/branch/5.0)
-[![StyleCI](https://github.styleci.io/repos/448371817/shield?branch=5.0&style=flat)](https://github.styleci.io/repos/448371817)
+[![StyleCI](https://github.styleci.io/repos/487673317/shield?branch=5.0&style=flat)](https://github.styleci.io/repos/487673317)
 [![PHPStan](https://img.shields.io/github/workflow/status/userfrosting/sprinkle-admin/PHPStan/5.0?label=PHPStan)](https://github.com/userfrosting/sprinkle-admin/actions/workflows/PHPStan.yml)
 [![Join the chat](https://img.shields.io/badge/Chat-UserFrosting-brightgreen?logo=Rocket.Chat)](https://chat.userfrosting.com)
 [![Donate](https://img.shields.io/badge/Open%20Collective-Donate-blue.svg)](https://opencollective.com/userfrosting#backer)
