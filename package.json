@@ -1,0 +1,21 @@
+{
+    "name": "sprinkle-admin",
+    "license": "MIT",
+    "version": "5.0.0",
+    "description": "Admin Sprinkle for UserFrosting 5",
+    "main": "app/assets/main.js",
+    "dependencies": {
+        "theme-adminlte": "github:userfrosting/theme-adminlte"
+    },
+    "devDependencies": {
+        "@symfony/webpack-encore": "^1.7.0",
+        "sass": "^1.51.0",
+        "webpack-notifier": "^1.14.1"
+    },
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    }
+}
