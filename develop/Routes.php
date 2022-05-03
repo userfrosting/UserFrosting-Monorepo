@@ -1,11 +1,11 @@
 <?php
 
 /*
- * UserFrosting AdminLTE Theme (http://www.userfrosting.com)
+ * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
- * @link      https://github.com/userfrosting/theme-adminlte
- * @copyright Copyright (c) 2021 Alexander Weissman & Louis Charette
- * @license   https://github.com/userfrosting/theme-adminlte/blob/master/LICENSE (MIT License)
+ * @link      https://github.com/userfrosting/sprinkle-admin
+ * @copyright Copyright (c) 2022 Alexander Weissman & Louis Charette
+ * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
  */
 
 namespace UserFrosting\Develop\Admin;

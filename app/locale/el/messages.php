@@ -1,11 +1,11 @@
 <?php
 
 /*
- * UserFrosting (http://www.userfrosting.com)
+ * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
- * @link      https://github.com/userfrosting/UserFrosting
- * @copyright Copyright (c) 2019 Alexander Weissman
- * @license   https://github.com/userfrosting/UserFrosting/blob/master/LICENSE.md (MIT License)
+ * @link      https://github.com/userfrosting/sprinkle-admin
+ * @copyright Copyright (c) 2022 Alexander Weissman & Louis Charette
+ * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
  */
 
 return [
