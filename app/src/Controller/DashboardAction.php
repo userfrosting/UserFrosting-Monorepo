@@ -28,7 +28,7 @@ use UserFrosting\Sprinkle\SprinkleManager;
 use UserFrosting\UniformResourceLocator\ResourceLocatorInterface;
 
 /**
- * Controller class for /dashboard URL. Handles admin-related activities
+ * Controller class for /dashboard URL. Handles admin-related activities.
  */
 class DashboardAction
 {

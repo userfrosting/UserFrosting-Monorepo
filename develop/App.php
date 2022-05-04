@@ -10,11 +10,8 @@
 
 namespace UserFrosting\Develop\Admin;
 
-use UserFrosting\Sprinkle\Account\Account;
 use UserFrosting\Sprinkle\Admin\Admin;
-use UserFrosting\Sprinkle\Core\Core;
 use UserFrosting\Sprinkle\SprinkleRecipe;
-use UserFrosting\Theme\AdminLTE\AdminLTE;
 
 class App implements SprinkleRecipe
 {
