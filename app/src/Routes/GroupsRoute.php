@@ -1,0 +1,53 @@
+<?php
+
+/*
+ * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
+ *
+ * @link      https://github.com/userfrosting/sprinkle-admin
+ * @copyright Copyright (c) 2022 Alexander Weissman & Louis Charette
+ * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
+ */
+
+namespace UserFrosting\Sprinkle\Admin\Routes;
+
+use Slim\App;
+use UserFrosting\Routes\RouteDefinitionInterface;
+use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
+
+/*
+ * Routes for administrative group management.
+ */
+class GroupsRoute implements RouteDefinitionInterface
+{
+    public function register(App $app): void
+    {
+        // $app->group('/groups', function () {
+        //     $this->get('', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:pageList')
+        //         ->setName('uri_groups');
+
+        //     $this->get('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:pageInfo');
+        // })->add('authGuard')->add(new NoCache());
+
+        // $app->group('/api/groups', function () {
+        //     $this->delete('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:delete');
+
+        //     $this->get('', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getList');
+
+        //     $this->get('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getInfo');
+
+        //     $this->get('/g/{slug}/users', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getUsers');
+
+        //     $this->post('', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:create');
+
+        //     $this->put('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:updateInfo');
+        // })->add('authGuard')->add(new NoCache());
+
+        // $app->group('/modals/groups', function () {
+        //     $this->get('/confirm-delete', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getModalConfirmDelete');
+
+        //     $this->get('/create', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getModalCreate');
+
+        //     $this->get('/edit', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getModalEdit');
+        // })->add('authGuard')->add(new NoCache());
+    }
+}

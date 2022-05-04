@@ -48,9 +48,6 @@ class App implements SprinkleRecipe
     public function getSprinkles(): array
     {
         return [
-            Core::class,
-            Account::class,
-            AdminLTE::class,
             Admin::class,
         ];
     }

@@ -55,6 +55,7 @@
     </div>
     <!-- /.row -->
 
+    {# TODO : Doesn't work, even on V4 ? #}
     {% elseif checkAccess('uri_group', {
         'group': current_user.group
     }) %}
@@ -135,7 +136,7 @@
                         <div class="box-body">
                           <dl class="dl-horizontal">
                             <dt>{{translate("SYSTEM_INFO.UF_VERSION")}}</dt>
-                            <dd>{{info.version.UF}}</dd>
+                            <dd>{{info.version.framework}}</dd>
 
                             <dt>{{translate("SYSTEM_INFO.PHP_VERSION")}}</dt>
                             <dd>{{info.version.php}}</dd>
@@ -143,8 +144,11 @@
                             <dt>{{translate("SYSTEM_INFO.SERVER")}}</dt>
                             <dd>{{info.environment.SERVER_SOFTWARE}}</dd>
 
+                            <dt>{{translate("SYSTEM_INFO.DB_CONNECTION")}}</dt>
+                            <dd>{{info.database.connection}}</dd>
+
                             <dt>{{translate("SYSTEM_INFO.DB_VERSION")}}</dt>
-                            <dd>{{info.version.database.type}} {{info.version.database.version}}</dd>
+                            <dd>{{info.database.type}} {{info.database.version}}</dd>
 
                             <dt>{{translate("SYSTEM_INFO.DB_NAME")}}</dt>
                             <dd>{{info.database.name}}</dd>
@@ -268,7 +272,7 @@
 
     // Add user name
     page = $.extend(
-        true,               // deep extend
+        true, // deep extend
         {
             "group_slug": "{{current_user.group.slug}}"
         },

@@ -1,7 +1,7 @@
 {% block navigation %}
     {% if checkAccess('uri_dashboard') %}
     <li>
-        <a href="{{site.uri.public}}/dashboard"><i class="fas fa-tachometer-alt fa-fw"></i> <span>{{ translate("DASHBOARD") }}</span></a>
+        <a href="{{ urlFor('dashboard') }}"><i class="fas fa-tachometer-alt fa-fw"></i> <span>{{ translate("DASHBOARD") }}</span></a>
     </li>
     {% endif %}
     {% if checkAccess('uri_users') %}

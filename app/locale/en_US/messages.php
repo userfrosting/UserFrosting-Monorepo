@@ -116,14 +116,15 @@ return [
     'SYSTEM_INFO' => [
         '@TRANSLATION'  => 'System information',
 
-        'DB_NAME'       => 'Database name',
-        'DB_VERSION'    => 'Database version',
-        'DIRECTORY'     => 'Project directory',
-        'PHP_VERSION'   => 'PHP version',
-        'SERVER'        => 'Webserver software',
-        'SPRINKLES'     => 'Loaded sprinkles',
-        'UF_VERSION'    => 'UserFrosting version',
-        'URL'           => 'Site root url',
+        'DB_NAME'       => 'Database Name',
+        'DB_CONNECTION' => 'Database Connection',
+        'DB_VERSION'    => 'Database Version',
+        'DIRECTORY'     => 'Project Directory',
+        'PHP_VERSION'   => 'PHP Version',
+        'SERVER'        => 'Webserver Software',
+        'SPRINKLES'     => 'Loaded Sprinkles',
+        'UF_VERSION'    => 'Framework Version',
+        'URL'           => 'Site Root Url',
     ],
 
     'TOGGLE_COLUMNS' => 'Toggle columns',
