@@ -26,12 +26,12 @@ use UserFrosting\Tests\TestCase;
 /**
  * Tests RoleController
  */
-class RoleControllerTest extends TestCase
+class RoleControllerTest //extends TestCase
 {
-    use TestDatabase;
-    use RefreshDatabase;
-    use withTestUser;
-    use withController;
+    // use TestDatabase;
+    // use RefreshDatabase;
+    // use withTestUser;
+    // use withController;
 
     /**
      * @var bool DB is initialized for normal db
@@ -41,7 +41,7 @@ class RoleControllerTest extends TestCase
     /**
      * Setup test database for controller tests
      */
-    public function setUp(): void
+    /*public function setUp(): void
     {
         parent::setUp();
         $this->setupTestDatabase();
@@ -59,7 +59,7 @@ class RoleControllerTest extends TestCase
         }
     }
 
-    public function testControllerConstructor()
+    /*public function testControllerConstructor()
     {
         $controller = $this->getController();
         $this->assertInstanceOf(RoleController::class, $controller);
@@ -69,7 +69,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructor
      * @return RoleController
      */
-    public function testControllerConstructorWithUser()
+    /*public function testControllerConstructorWithUser()
     {
         // Skip user setup if using in-memory db
         if (!$this->usingInMemoryDatabase()) {
@@ -86,7 +86,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testCreate(RoleController $controller)
+    /*public function testCreate(RoleController $controller)
     {
         // Set post data
         $data = [
@@ -106,7 +106,7 @@ class RoleControllerTest extends TestCase
         $this->assertSame('foo', $role->name);
 
         // Test message
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms * /
         $ms = $this->ci->alerts;
         $messages = $ms->getAndClearMessages();
         $this->assertSame('success', end($messages)['type']);
@@ -116,7 +116,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testCreateWithMissingName(RoleController $controller)
+    /*public function testCreateWithMissingName(RoleController $controller)
     {
         // Set post data
         $data = [
@@ -132,7 +132,7 @@ class RoleControllerTest extends TestCase
         $this->assertSame('[]', (string) $result->getBody());
 
         // Test message
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms * /
         $ms = $this->ci->alerts;
         $messages = $ms->getAndClearMessages();
         $this->assertSame('danger', end($messages)['type']);
@@ -142,7 +142,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testCreateWithDuplicateSlug(RoleController $controller)
+    /*public function testCreateWithDuplicateSlug(RoleController $controller)
     {
         // Set post data. Foo has already been set by testCreate
         $data = [
@@ -158,7 +158,7 @@ class RoleControllerTest extends TestCase
         $this->assertSame('[]', (string) $result->getBody());
 
         // Test message
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms * /
         $ms = $this->ci->alerts;
         $messages = $ms->getAndClearMessages();
         $this->assertSame('danger', end($messages)['type']);
@@ -168,7 +168,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testCreateWithDuplicateName(RoleController $controller)
+    /*public function testCreateWithDuplicateName(RoleController $controller)
     {
         // Set post data. Bar has already been set by testCreate
         $data = [
@@ -184,7 +184,7 @@ class RoleControllerTest extends TestCase
         $this->assertSame('[]', (string) $result->getBody());
 
         // Test message
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms * /
         $ms = $this->ci->alerts;
         $messages = $ms->getAndClearMessages();
         $this->assertSame('danger', end($messages)['type']);
@@ -194,7 +194,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testDelete(RoleController $controller)
+    /*public function testDelete(RoleController $controller)
     {
         // Create test role
         $fm = $this->ci->factory;
@@ -210,7 +210,7 @@ class RoleControllerTest extends TestCase
         $this->assertNull(Role::where('slug', $role->slug)->first());
 
         // Test message
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms * /
         $ms = $this->ci->alerts;
         $messages = $ms->getAndClearMessages();
         $this->assertSame('success', end($messages)['type']);
@@ -221,7 +221,7 @@ class RoleControllerTest extends TestCase
      * @depends testDelete
      * @param RoleController $controller
      */
-    public function testDeleteWithNotExistingRole(RoleController $controller)
+    /*public function testDeleteWithNotExistingRole(RoleController $controller)
     {
         // Set expectations
         $this->expectException(NotFoundException::class);
@@ -235,7 +235,7 @@ class RoleControllerTest extends TestCase
      * @depends testDelete
      * @param RoleController $controller
      */
-    public function testDeleteWithDefaultRole(RoleController $controller)
+    /*public function testDeleteWithDefaultRole(RoleController $controller)
     {
         // Change config
         $this->ci->config['site.registration.user_defaults.roles'] = ['foo' => true];
@@ -249,7 +249,7 @@ class RoleControllerTest extends TestCase
      * @depends testDelete
      * @param RoleController $controller
      */
-    public function testDeleteWithUserInRole(RoleController $controller)
+    /*public function testDeleteWithUserInRole(RoleController $controller)
     {
         $testUser = User::find(1)->first();
 
@@ -269,7 +269,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testGetInfoWithNotFoundException(RoleController $controller)
+    /*public function testGetInfoWithNotFoundException(RoleController $controller)
     {
         $this->expectException(NotFoundException::class);
         $controller->getInfo($this->getRequest(), $this->getResponse(), ['slug' => '']);
@@ -279,7 +279,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testGetInfo(RoleController $controller)
+    /*public function testGetInfo(RoleController $controller)
     {
         $result = $controller->getInfo($this->getRequest(), $this->getResponse(), ['slug' => 'foo']);
         $this->assertSame($result->getStatusCode(), 200);
@@ -292,7 +292,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testGetList(RoleController $controller)
+    /*public function testGetList(RoleController $controller)
     {
         $result = $controller->getList($this->getRequest(), $this->getResponse(), []);
         $this->assertSame($result->getStatusCode(), 200);
@@ -304,7 +304,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testGetModalConfirmDelete(RoleController $controller)
+    /*public function testGetModalConfirmDelete(RoleController $controller)
     {
         $request = $this->getRequest()->withQueryParams([
             'slug' => 'foo',
@@ -321,7 +321,7 @@ class RoleControllerTest extends TestCase
      * @depends testGetModalConfirmDelete
      * @param RoleController $controller
      */
-    public function testGetModalConfirmDeleteWithNoGetData(RoleController $controller)
+    /*public function testGetModalConfirmDeleteWithNoGetData(RoleController $controller)
     {
         $this->expectException(BadRequestException::class);
         $controller->getModalConfirmDelete($this->getRequest(), $this->getResponse(), []);
@@ -332,7 +332,7 @@ class RoleControllerTest extends TestCase
      * @depends testGetModalConfirmDelete
      * @param RoleController $controller
      */
-    public function testGetModalConfirmDeleteWithNonExistingRole(RoleController $controller)
+    /*public function testGetModalConfirmDeleteWithNonExistingRole(RoleController $controller)
     {
         $request = $this->getRequest()->withQueryParams([
             'slug' => 'foobar',
@@ -347,7 +347,7 @@ class RoleControllerTest extends TestCase
      * @depends testGetModalConfirmDelete
      * @param RoleController $controller
      */
-    public function testGetModalConfirmDeleteWithUserInRole(RoleController $controller)
+    /*public function testGetModalConfirmDeleteWithUserInRole(RoleController $controller)
     {
         $testUser = User::find(1)->first();
 
@@ -372,7 +372,7 @@ class RoleControllerTest extends TestCase
      * @depends testGetModalConfirmDelete
      * @param RoleController $controller
      */
-    public function testGetModalConfirmDeleteWithDefaultRole(RoleController $controller)
+    /*public function testGetModalConfirmDeleteWithDefaultRole(RoleController $controller)
     {
         // Change config
         $this->ci->config['site.registration.user_defaults.roles'] = ['foo' => true];
@@ -392,7 +392,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testGetModalCreate(RoleController $controller)
+    /*public function testGetModalCreate(RoleController $controller)
     {
         $result = $controller->getModalCreate($this->getRequest(), $this->getResponse(), []);
         $this->assertSame($result->getStatusCode(), 200);
@@ -403,7 +403,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testGetModalEdit(RoleController $controller)
+    /*public function testGetModalEdit(RoleController $controller)
     {
         $request = $this->getRequest()->withQueryParams([
             'slug' => 'foo',
@@ -420,7 +420,7 @@ class RoleControllerTest extends TestCase
      * @depends testGetModalEdit
      * @param RoleController $controller
      */
-    public function testGetModalEditWithNoGetData(RoleController $controller)
+    /*public function testGetModalEditWithNoGetData(RoleController $controller)
     {
         $this->expectException(BadRequestException::class);
         $controller->getModalEdit($this->getRequest(), $this->getResponse(), []);
@@ -431,7 +431,7 @@ class RoleControllerTest extends TestCase
      * @depends testGetModalEdit
      * @param RoleController $controller
      */
-    public function testGetModalEditWithNonExistingRole(RoleController $controller)
+    /*public function testGetModalEditWithNonExistingRole(RoleController $controller)
     {
         $request = $this->getRequest()->withQueryParams([
             'slug' => 'foobar',
@@ -445,7 +445,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testGetUsersWithBadSlug(RoleController $controller)
+    /*public function testGetUsersWithBadSlug(RoleController $controller)
     {
         $this->expectException(NotFoundException::class);
         $controller->getUsers($this->getRequest(), $this->getResponse(), ['slug' => 'foobar']);
@@ -455,7 +455,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testGetUsersWithNoSlug(RoleController $controller)
+    /*public function testGetUsersWithNoSlug(RoleController $controller)
     {
         $this->expectException(BadRequestException::class);
         $controller->getUsers($this->getRequest(), $this->getResponse(), []);
@@ -465,7 +465,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testGetUsers(RoleController $controller)
+    /*public function testGetUsers(RoleController $controller)
     {
         $result = $controller->getUsers($this->getRequest(), $this->getResponse(), ['slug' => 'foo']);
         $this->assertSame($result->getStatusCode(), 200);
@@ -477,7 +477,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testpageInfo(RoleController $controller)
+    /*public function testpageInfo(RoleController $controller)
     {
         $result = $controller->pageInfo($this->getRequest(), $this->getResponse(), ['slug' => 'foo']);
         $this->assertSame($result->getStatusCode(), 200);
@@ -488,7 +488,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testpageInfoWithBadSlug(RoleController $controller)
+    /*public function testpageInfoWithBadSlug(RoleController $controller)
     {
         $this->expectException(NotFoundException::class);
         $controller->pageInfo($this->getRequest(), $this->getResponse(), ['slug' => 'foobar']);
@@ -498,7 +498,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testpageList(RoleController $controller)
+    /*public function testpageList(RoleController $controller)
     {
         $result = $controller->pageList($this->getRequest(), $this->getResponse(), []);
         $this->assertSame($result->getStatusCode(), 200);
@@ -509,7 +509,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testUpdateInfo(RoleController $controller)
+    /*public function testUpdateInfo(RoleController $controller)
     {
         // Create a role
         $fm = $this->ci->factory;
@@ -538,7 +538,7 @@ class RoleControllerTest extends TestCase
         $this->assertSame($role->description, $editedRole->description);
 
         // Test message
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms * /
         $ms = $this->ci->alerts;
         $messages = $ms->getAndClearMessages();
         $this->assertSame('success', end($messages)['type']);
@@ -549,7 +549,7 @@ class RoleControllerTest extends TestCase
      * @depends testUpdateInfo
      * @param RoleController $controller
      */
-    public function testUpdateInfoWithMissingName(RoleController $controller)
+    /*public function testUpdateInfoWithMissingName(RoleController $controller)
     {
         // Set post data
         $data = [
@@ -569,7 +569,7 @@ class RoleControllerTest extends TestCase
         $this->assertSame('bar', $editedRole->name);
 
         // Test message
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms * /
         $ms = $this->ci->alerts;
         $messages = $ms->getAndClearMessages();
         $this->assertSame('danger', end($messages)['type']);
@@ -580,7 +580,7 @@ class RoleControllerTest extends TestCase
      * @depends testUpdateInfo
      * @param RoleController $controller
      */
-    public function testUpdateInfoWithMissingSlug(RoleController $controller)
+    /*public function testUpdateInfoWithMissingSlug(RoleController $controller)
     {
         // Set post data
         $data = [
@@ -600,7 +600,7 @@ class RoleControllerTest extends TestCase
         $this->assertNotNull($editedRole);
 
         // Test message
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms * /
         $ms = $this->ci->alerts;
         $messages = $ms->getAndClearMessages();
         $this->assertSame('danger', end($messages)['type']);
@@ -611,7 +611,7 @@ class RoleControllerTest extends TestCase
      * @depends testUpdateInfo
      * @param RoleController $controller
      */
-    public function testUpdateInfoWithDuplicateSlug(RoleController $controller)
+    /*public function testUpdateInfoWithDuplicateSlug(RoleController $controller)
     {
         // Create a role
         $fm = $this->ci->factory;
@@ -630,7 +630,7 @@ class RoleControllerTest extends TestCase
         $this->assertSame('[]', (string) $result->getBody());
 
         // Test message
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms * /
         $ms = $this->ci->alerts;
         $messages = $ms->getAndClearMessages();
         $this->assertSame('danger', end($messages)['type']);
@@ -641,7 +641,7 @@ class RoleControllerTest extends TestCase
      * @depends testUpdateInfo
      * @param RoleController $controller
      */
-    public function testUpdateInfoWithDuplicateName(RoleController $controller)
+    /*public function testUpdateInfoWithDuplicateName(RoleController $controller)
     {
         // Create a role
         $fm = $this->ci->factory;
@@ -660,7 +660,7 @@ class RoleControllerTest extends TestCase
         $this->assertSame('[]', (string) $result->getBody());
 
         // Test message
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms * /
         $ms = $this->ci->alerts;
         $messages = $ms->getAndClearMessages();
         $this->assertSame('danger', end($messages)['type']);
@@ -670,7 +670,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testGetModalEditPermissions(RoleController $controller)
+    /*public function testGetModalEditPermissions(RoleController $controller)
     {
         $request = $this->getRequest()->withQueryParams([
             'slug' => 'foo',
@@ -687,7 +687,7 @@ class RoleControllerTest extends TestCase
      * @depends testGetModalEditPermissions
      * @param RoleController $controller
      */
-    public function testGetModalEditPermissionsWithNoGetData(RoleController $controller)
+    /*public function testGetModalEditPermissionsWithNoGetData(RoleController $controller)
     {
         $this->expectException(BadRequestException::class);
         $controller->getModalEditPermissions($this->getRequest(), $this->getResponse(), []);
@@ -698,7 +698,7 @@ class RoleControllerTest extends TestCase
      * @depends testGetModalEditPermissions
      * @param RoleController $controller
      */
-    public function testGetModalEditPermissionsWithNonExistingRole(RoleController $controller)
+    /*public function testGetModalEditPermissionsWithNonExistingRole(RoleController $controller)
     {
         $request = $this->getRequest()->withQueryParams([
             'slug' => 'foobar',
@@ -712,7 +712,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testGetPermissions(RoleController $controller)
+    /*public function testGetPermissions(RoleController $controller)
     {
         $result = $controller->getPermissions($this->getRequest(), $this->getResponse(), ['slug' => 'foo']);
         $this->assertSame($result->getStatusCode(), 200);
@@ -725,7 +725,7 @@ class RoleControllerTest extends TestCase
      * @depends testGetPermissions
      * @param RoleController $controller
      */
-    public function testGetPermissionsWithNoArgs(RoleController $controller)
+    /*public function testGetPermissionsWithNoArgs(RoleController $controller)
     {
         $this->expectException(BadRequestException::class);
         $controller->getPermissions($this->getRequest(), $this->getResponse(), []);
@@ -736,7 +736,7 @@ class RoleControllerTest extends TestCase
      * @depends testGetPermissions
      * @param RoleController $controller
      */
-    public function testGetPermissionsWithNonExistingRole(RoleController $controller)
+    /*public function testGetPermissionsWithNonExistingRole(RoleController $controller)
     {
         $this->expectException(NotFoundException::class);
         $controller->getPermissions($this->getRequest(), $this->getResponse(), ['slug' => 'foobar']);
@@ -746,7 +746,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testupdateField(RoleController $controller)
+    /*public function testupdateField(RoleController $controller)
     {
         // Create a role
         $fm = $this->ci->factory;
@@ -774,7 +774,7 @@ class RoleControllerTest extends TestCase
         $this->assertSame($role->description, $editedRole->description);
 
         // Test message
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms * /
         $ms = $this->ci->alerts;
         $messages = $ms->getAndClearMessages();
         $this->assertSame('success', end($messages)['type']);
@@ -784,7 +784,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testupdateFieldWithNonExistingRole(RoleController $controller)
+    /*public function testupdateFieldWithNonExistingRole(RoleController $controller)
     {
         $this->expectException(NotFoundException::class);
         $controller->updateField($this->getRequest(), $this->getResponse(), ['slug' => 'foobar']);
@@ -794,7 +794,7 @@ class RoleControllerTest extends TestCase
      * @depends testControllerConstructorWithUser
      * @param RoleController $controller
      */
-    public function testupdateFieldNoValue(RoleController $controller)
+    /*public function testupdateFieldNoValue(RoleController $controller)
     {
         $this->expectException(BadRequestException::class);
         $controller->updateField($this->getRequest(), $this->getResponse(), ['slug' => 'foo', 'field' => 'name']);
@@ -805,7 +805,7 @@ class RoleControllerTest extends TestCase
      * @depends testupdateField
      * @param RoleController $controller
      */
-    public function testupdateFieldWithFailedValidation(RoleController $controller)
+    /*public function testupdateFieldWithFailedValidation(RoleController $controller)
     {
         // Create a string which will be too long for validation
         $faker = Faker::getGenerator();
@@ -827,7 +827,7 @@ class RoleControllerTest extends TestCase
      * @depends testupdateField
      * @param RoleController $controller
      */
-    public function testupdateFieldWithPermissionField(RoleController $controller)
+    /*public function testupdateFieldWithPermissionField(RoleController $controller)
     {
         // Create a role
         $fm = $this->ci->factory;
@@ -858,7 +858,7 @@ class RoleControllerTest extends TestCase
         $this->assertCount(1, $role->permissions);
 
         // Test message
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms * /
         $ms = $this->ci->alerts;
         $messages = $ms->getAndClearMessages();
         $this->assertSame('success', end($messages)['type']);
