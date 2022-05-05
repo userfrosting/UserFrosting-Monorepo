@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
@@ -147,13 +149,13 @@ class DashboardAction
         ];
 
         try {
-            $results['type'] = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+            $results['type'] = strval($pdo->getAttribute(PDO::ATTR_DRIVER_NAME));
         } catch (Exception $e) {
             $results['type'] = 'Unknown';
         }
 
         try {
-            $results['version'] = $pdo->getAttribute(PDO::ATTR_SERVER_VERSION);
+            $results['version'] = strval($pdo->getAttribute(PDO::ATTR_SERVER_VERSION));
         } catch (Exception $e) {
             $results['version'] = '';
         }

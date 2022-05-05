@@ -23,7 +23,7 @@ use UserFrosting\Tests\TestCase;
 /**
  * Tests RoleController
  */
-class RoleControllerGuestTest// extends TestCase
+class RoleControllerGuestTest //extends TestCase
 {
     // use TestDatabase;
     // use RefreshDatabase;

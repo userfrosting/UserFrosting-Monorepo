@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
@@ -18,7 +20,7 @@ use UserFrosting\Sprinkle\Admin\Controller\DashboardAction;
 /*
  * Routes for administrative panel management.
  */
-class AdminRoutes implements RouteDefinitionInterface
+class DashboardRoutes implements RouteDefinitionInterface
 {
     public function register(App $app): void
     {
