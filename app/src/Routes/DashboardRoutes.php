@@ -15,10 +15,12 @@ namespace UserFrosting\Sprinkle\Admin\Routes;
 use Slim\App;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
+use UserFrosting\Sprinkle\Admin\Controller\CacheApiAction;
+use UserFrosting\Sprinkle\Admin\Controller\CacheModalAction;
 use UserFrosting\Sprinkle\Admin\Controller\DashboardAction;
 
 /*
- * Routes for administrative panel management.
+ * Routes for dashboard page.
  */
 class DashboardRoutes implements RouteDefinitionInterface
 {
@@ -28,7 +30,10 @@ class DashboardRoutes implements RouteDefinitionInterface
             ->setName('dashboard')
             ->add(AuthGuard::class); // ->add(new NoCache());
 
-        // $app->post('/api/dashboard/clear-cache', [AdminController::class, 'clearCache'])->add(AuthGuard::class); // ->add(new NoCache());
-        // $app->get('/modals/dashboard/clear-cache', [AdminController::class, 'getModalConfirmClearCache'])->add(AuthGuard::class); // ->add(new NoCache());
+        $app->post('/api/dashboard/clear-cache', CacheApiAction::class)
+            ->add(AuthGuard::class); // ->add(new NoCache());
+
+        $app->get('/modals/dashboard/clear-cache', CacheModalAction::class)
+            ->add(AuthGuard::class); // ->add(new NoCache());
     }
 }
