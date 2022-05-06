@@ -14,7 +14,7 @@ namespace UserFrosting\Sprinkle\Admin\Controller;
 
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Connection;
 use PDO;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -45,7 +45,7 @@ class DashboardAction
         protected AuthorizationManager $authorizer,
         protected Authenticator $authenticator,
         protected Config $config,
-        protected Capsule $db,
+        protected Connection $dbConnection,
         protected SprinkleManager $sprinkleManager,
         protected ResourceLocatorInterface $locator,
         protected UserInterface $userModel,
@@ -142,10 +142,10 @@ class DashboardAction
     protected function getDatabaseInfo(): array
     {
         $database = $this->config->getString('db.default');
-        $pdo = $this->db::connection($database)->getPdo();
+        $pdo = $this->dbConnection->getPdo();
         $results = [
             'connection' => $database,
-            'name'       => $this->db::connection()->getDatabaseName(),
+            'name'       => $this->dbConnection->getDatabaseName(),
         ];
 
         try {
