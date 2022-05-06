@@ -9,7 +9,7 @@
     {% if checkAccess('uri_users') %}
     <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-12">
-          <a href="{{site.uri.public}}/users">
+          <a href="{{site.uri.public}}/users"> {# TODO #}
             <div class="info-box">
               <span class="info-box-icon bg-aqua"><i class="fas fa-user fa-fw"></i></span>
               <div class="info-box-content">
@@ -24,7 +24,7 @@
         <!-- /.col -->
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-          <a href="{{site.uri.public}}/roles">
+          <a href="{{site.uri.public}}/roles"> {# TODO #}
             <div class="info-box">
               <span class="info-box-icon bg-red"><i class="fas fa-id-card"></i></span>
               <div class="info-box-content">
@@ -39,7 +39,7 @@
         <!-- /.col -->
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-          <a href="{{site.uri.public}}/groups">
+          <a href="{{site.uri.public}}/groups"> {# TODO #}
             <div class="info-box">
               <span class="info-box-icon bg-green"><i class="fas fa-users"></i></span>
               <div class="info-box-content">
@@ -105,7 +105,7 @@
                         {% for user in users %}
                         <li>
                           <img src="{{ user.avatar }}" alt="User Image">
-                          <a class="users-list-name" href="{{site.uri.public}}/users/u/{{user.user_name}}">{{user.first_name}} {{user.last_name}}</a>
+                          <a class="users-list-name" href="{{site.uri.public}}/users/u/{{user.user_name}}">{{user.first_name}} {{user.last_name}}</a> {# TODO #}
                           <span class="users-list-date">{{ user.registered }}</span>
                         </li>
                         {% endfor %}
@@ -114,7 +114,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer text-center">
-                      <a href="{{site.uri.public}}/users" class="uppercase">{{translate("USER.VIEW_ALL")}}</a>
+                      <a href="{{site.uri.public}}/users" class="uppercase">{{translate("USER.VIEW_ALL")}}</a> {# TODO #}
                     </div>
                     <!-- /.box-footer -->
                   </div>
@@ -281,6 +281,6 @@
     </script>
 
     <!-- Include page-specific JS -->
-    {{ assets.js('js/pages/dashboard') | raw }}
+    {{ encore_entry_script_tags('page.dashboard') }}
 
 {% endblock %}

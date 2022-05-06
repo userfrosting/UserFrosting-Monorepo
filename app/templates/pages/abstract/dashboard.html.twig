@@ -1,10 +1,5 @@
 {% extends "pages/abstract/base.html.twig" %}
 
-{% block stylesheets_page_group %}
-    <!-- Page-group-specific CSS asset bundle -->
-    {{ assets.css('css/admin') | raw }}
-{% endblock %}
-
 {% block body_attributes %}
     {% if current_user.isMaster() %}
         class="hold-transition skin-red sidebar-mini"
@@ -29,7 +24,7 @@
       <header class="main-header">
         <!-- Logo -->
         {% block navbar_logo %}
-        <a href="{{site.uri.public}}" class="logo">
+        <a href="{{ urlFor('index') }}" class="logo">
             <i class="fas fa-home"></i>
             {{site.title}}
         </a>
@@ -77,11 +72,16 @@
         {% include "pages/partials/footer.html.twig" %}
     {% endblock %}
 
+    <!-- Manually include alerts, as default abstract is not used -->
+    {% block uf_alerts_template %}
+        {% include "pages/partials/alerts.html.twig" %}
+    {% endblock %}
+
     </div>
     <!-- ./wrapper -->
 
 {% endblock %}
 
 {% block scripts_page_group %}
-    {{ assets.js('js/admin') | raw }}
+    {{ encore_entry_script_tags('dashboard') }}
 {% endblock %}
