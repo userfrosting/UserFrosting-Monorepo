@@ -15,9 +15,9 @@ namespace UserFrosting\Sprinkle\Admin\Routes;
 use Slim\App;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
-use UserFrosting\Sprinkle\Admin\Controller\CacheApiAction;
-use UserFrosting\Sprinkle\Admin\Controller\CacheModalAction;
-use UserFrosting\Sprinkle\Admin\Controller\DashboardAction;
+use UserFrosting\Sprinkle\Admin\Controller\Dashboard\CacheApiAction;
+use UserFrosting\Sprinkle\Admin\Controller\Dashboard\CacheModalAction;
+use UserFrosting\Sprinkle\Admin\Controller\Dashboard\DashboardAction;
 
 /*
  * Routes for dashboard page.

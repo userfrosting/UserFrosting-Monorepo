@@ -10,19 +10,20 @@ declare(strict_types=1);
  * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Admin\Controller;
+namespace UserFrosting\Sprinkle\Admin\Controller\Dashboard;
 
+use Illuminate\Cache\Repository as Cache;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Views\Twig;
+use UserFrosting\Alert\AlertStream;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 
 /**
- * Controller class for clear cache confirmation modal.
+ * Controller class for clear cache api.
  */
-class CacheModalAction
+class CacheApiAction
 {
     /** @var string Page template */
     protected string $template = 'modals/confirm-clear-cache.html.twig';
@@ -31,7 +32,8 @@ class CacheModalAction
      * Inject dependencies.
      */
     public function __construct(
-        protected Twig $view,
+        protected AlertStream $alerts,
+        protected Cache $cache,
         protected AuthorizationManager $authorizer,
         protected Authenticator $authenticator,
     ) {
@@ -47,9 +49,14 @@ class CacheModalAction
     public function __invoke(Request $request, Response $response): Response
     {
         $this->validateAccess();
-        $payload = $this->handle($request);
+        $this->cache->flush(); // @phpstan-ignore-line False positive, Laravel magic method.
+        $this->alerts->addMessageTranslated('success', 'CACHE.CLEARED');
 
-        return $this->view->render($response, $this->template, $payload);
+        // Write empty response
+        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $response->getBody()->write($payload);
+
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     /**
@@ -62,21 +69,5 @@ class CacheModalAction
         if (!$this->authorizer->checkAccess($this->authenticator->user(), 'clear_cache')) {
             throw new ForbiddenException();
         }
-    }
-
-    /**
-     * Handle the request and return the payload.
-     *
-     * @param Request $request
-     *
-     * @return mixed[]
-     */
-    protected function handle(Request $request): array
-    {
-        return [
-            'form' => [
-                'action' => 'api/dashboard/clear-cache',
-            ],
-        ];
     }
 }
