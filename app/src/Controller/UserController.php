@@ -450,45 +450,6 @@ class UserController extends SimpleController
     }
 
     /**
-     * Returns a list of Users.
-     *
-     * Generates a list of users, optionally paginated, sorted and/or filtered.
-     * This page requires authentication.
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param string[] $args
-     *
-     * @throws ForbiddenException If user is not authorized to access page
-     */
-    public function getList(Request $request, Response $response, array $args)
-    {
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'uri_users')) {
-            throw new ForbiddenException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-        $classMapper = $this->ci->classMapper;
-
-        $sprunje = $classMapper->createInstance('user_sprunje', $classMapper, $params);
-
-        // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
-        // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
-        return $sprunje->toResponse($response);
-    }
-
-    /**
      * Renders the modal form to confirm user deletion.
      *
      * This does NOT render a complete page.  Instead, it renders the HTML for the modal, which can be embedded in other pages.
@@ -1097,37 +1058,6 @@ class UserController extends SimpleController
             'widgets'         => $widgets,
             'delete_redirect' => $this->ci->router->pathFor('uri_users'),
         ]);
-    }
-
-    /**
-     * Renders the user listing page.
-     *
-     * This page renders a table of users, with dropdown menus for admin actions for each user.
-     * Actions typically include: edit user details, activate user, enable/disable user, delete user.
-     *
-     * This page requires authentication.
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param string[] $args
-     *
-     * @throws ForbiddenException If user is not authorized to access page
-     */
-    public function pageList(Request $request, Response $response, array $args)
-    {
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'uri_users')) {
-            throw new ForbiddenException();
-        }
-
-        return $this->ci->view->render($response, 'pages/users.html.twig');
     }
 
     /**

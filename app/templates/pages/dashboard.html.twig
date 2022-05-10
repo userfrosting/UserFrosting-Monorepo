@@ -55,7 +55,6 @@
     </div>
     <!-- /.row -->
 
-    {# TODO : Doesn't work, even on V4 ? #}
     {% elseif checkAccess('uri_group', {
         'group': current_user.group
     }) %}
@@ -256,8 +255,6 @@
                 </div>
             </div>
             <!-- /.widget-user -->
-
-
         </div>
         <!-- /.row -->
         {% endif %}

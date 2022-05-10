@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
@@ -10,61 +12,67 @@
 
 namespace UserFrosting\Sprinkle\Admin\Sprunje;
 
-use Illuminate\Database\Schema\Builder;
-use UserFrosting\Sprinkle\Core\Facades\Translator;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder as QueryBuilder;
+use UserFrosting\I18n\Translator;
+use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Core\Sprunje\Sprunje;
 
 /**
- * UserSprunje.
- *
  * Implements Sprunje for the users API.
- *
- * @author Alex Weissman (https://alexanderweissman.com)
  */
 class UserSprunje extends Sprunje
 {
-    protected $name = 'users';
+    protected string $name = 'users';
 
-    protected $listable = [
+    protected array $listable = [
         'status',
     ];
 
-    protected $sortable = [
+    protected array $sortable = [
         'name',
         'last_activity',
         'status',
     ];
 
-    protected $filterable = [
+    protected array $filterable = [
         'name',
         'last_activity',
         'status',
     ];
 
-    protected $excludeForAll = [
+    protected array $excludeForAll = [
         'last_activity',
     ];
+
+    public function __construct(
+        protected UserInterface $userModel,
+        protected Translator $translator,
+    ) {
+        parent::__construct();
+    }
 
     /**
+     * Join user's most recent activity
      * {@inheritdoc}
      */
-    protected function baseQuery()
+    protected function baseQuery(): EloquentBuilder|QueryBuilder|Relation|Model
     {
-        $query = $this->classMapper->createInstance('user');
-
-        // Join user's most recent activity
-        return $query->joinLastActivity()->with('lastActivity');
+        // @phpstan-ignore-next-line Activity interface mixin Model and non-static method.
+        return $this->userModel->joinLastActivity();
     }
 
     /**
      * Filter LIKE the last activity description.
      *
-     * @param Builder $query
-     * @param mixed   $value
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                $value
      *
-     * @return self
+     * @return static
      */
-    protected function filterLastActivity($query, $value)
+    protected function filterLastActivity(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -80,12 +88,12 @@ class UserSprunje extends Sprunje
     /**
      * Filter LIKE the first name, last name, or email.
      *
-     * @param Builder $query
-     * @param mixed   $value
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                $value
      *
-     * @return self
+     * @return static
      */
-    protected function filterName($query, $value)
+    protected function filterName(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -103,12 +111,12 @@ class UserSprunje extends Sprunje
     /**
      * Filter by status (active, disabled, unactivated).
      *
-     * @param Builder $query
-     * @param mixed   $value
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                $value
      *
-     * @return self
+     * @return static
      */
-    protected function filterStatus($query, $value)
+    protected function filterStatus(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -132,22 +140,22 @@ class UserSprunje extends Sprunje
     /**
      * Return a list of possible user statuses.
      *
-     * @return array
+     * @return array{value: string, text: string}[]
      */
-    protected function listStatus()
+    protected function listStatus(): array
     {
         return [
             [
                 'value' => 'active',
-                'text'  => Translator::translate('ACTIVE'),
+                'text'  => $this->translator->translate('ACTIVE'),
             ],
             [
                 'value' => 'unactivated',
-                'text'  => Translator::translate('UNACTIVATED'),
+                'text'  => $this->translator->translate('UNACTIVATED'),
             ],
             [
                 'value' => 'disabled',
-                'text'  => Translator::translate('DISABLED'),
+                'text'  => $this->translator->translate('DISABLED'),
             ],
         ];
     }
@@ -155,12 +163,12 @@ class UserSprunje extends Sprunje
     /**
      * Sort based on last activity time.
      *
-     * @param Builder $query
-     * @param string  $direction
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                $direction
      *
-     * @return self
+     * @return static
      */
-    protected function sortLastActivity($query, $direction)
+    protected function sortLastActivity(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
     {
         $query->orderBy('activities.occurred_at', $direction);
 
@@ -170,12 +178,12 @@ class UserSprunje extends Sprunje
     /**
      * Sort based on last name.
      *
-     * @param Builder $query
-     * @param string  $direction
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                $direction
      *
-     * @return self
+     * @return static
      */
-    protected function sortName($query, $direction)
+    protected function sortName(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
     {
         $query->orderBy('last_name', $direction);
 
@@ -185,12 +193,12 @@ class UserSprunje extends Sprunje
     /**
      * Sort active, unactivated, disabled.
      *
-     * @param Builder $query
-     * @param string  $direction
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                $direction
      *
-     * @return self
+     * @return static
      */
-    protected function sortStatus($query, $direction)
+    protected function sortStatus(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
     {
         $query->orderBy('flag_enabled', $direction)->orderBy('flag_verified', $direction);
 

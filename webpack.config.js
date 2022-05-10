@@ -13,6 +13,7 @@ Encore
     .addEntry('dashboard', './app/assets/dashboard.js')
     .addEntry('page.dashboard', './app/assets/page.dashboard.js')
     .addEntry('page.activities', './app/assets/page.activities.js')
+    .addEntry('page.users', './app/assets/page.users.js')
     .addEntry('page.register', './node_modules/theme-adminlte/app/assets/register.js')
     .addEntry('page.sign-in', './node_modules/theme-adminlte/app/assets/sign-in.js')
     .addEntry('page.forgot-password', './node_modules/theme-adminlte/app/assets/forgot-password.js')

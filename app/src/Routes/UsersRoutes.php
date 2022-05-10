@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
@@ -11,8 +13,10 @@
 namespace UserFrosting\Sprinkle\Admin\Routes;
 
 use Slim\App;
+use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
+use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction;
 
 /*
  * Routes for administrative user management.
@@ -21,17 +25,16 @@ class UsersRoutes implements RouteDefinitionInterface
 {
     public function register(App $app): void
     {
-        // $app->group('/users', function () {
-        //     $this->get('', 'UserFrosting\Sprinkle\Admin\Controller\UserController:pageList')
-        //         ->setName('uri_users');
+        $app->group('/users', function (RouteCollectorProxy $group) {
+            $group->get('', UsersPageAction::class)->setName('uri_users');
 
-        //     $this->get('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:pageInfo');
-        // })->add('authGuard')->add(new NoCache());
+            //     $this->get('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:pageInfo');
+        })->add(AuthGuard::class); //->add(new NoCache());
 
-        // $app->group('/api/users', function () {
-        //     $this->delete('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:delete');
+        $app->group('/api/users', function (RouteCollectorProxy $group) {
+            $group->get('', [UsersPageAction::class, 'sprunje'])->setName('api_users');
 
-        //     $this->get('', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getList');
+            //     $this->delete('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:delete');
 
         //     $this->get('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getInfo');
 
@@ -48,7 +51,7 @@ class UsersRoutes implements RouteDefinitionInterface
         //     $this->put('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:updateInfo');
 
         //     $this->put('/u/{user_name}/{field}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:updateField');
-        // })->add('authGuard')->add(new NoCache());
+        })->add(AuthGuard::class); //->add(new NoCache());
 
         // $app->group('/modals/users', function () {
         //     $this->get('/confirm-delete', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalConfirmDelete');
@@ -60,6 +63,6 @@ class UsersRoutes implements RouteDefinitionInterface
         //     $this->get('/password', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalEditPassword');
 
         //     $this->get('/roles', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalEditRoles');
-        // })->add('authGuard')->add(new NoCache());
+        // })->add(AuthGuard::class); //->add(new NoCache());
     }
 }
