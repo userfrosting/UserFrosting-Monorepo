@@ -58,7 +58,7 @@ class ActivitySprunje extends Sprunje
      * Filter LIKE the user info.
      *
      * @param EloquentBuilder|QueryBuilder|Relation $query
-     * @param string                                 $value
+     * @param string                                $value
      *
      * @return static
      */
