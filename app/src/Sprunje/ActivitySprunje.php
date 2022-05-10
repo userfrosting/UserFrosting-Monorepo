@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
@@ -10,51 +12,57 @@
 
 namespace UserFrosting\Sprinkle\Admin\Sprunje;
 
-use Illuminate\Database\Schema\Builder;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder as QueryBuilder;
+use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\ActivityInterface;
 use UserFrosting\Sprinkle\Core\Sprunje\Sprunje;
 
 /**
- * ActivitySprunje.
- *
  * Implements Sprunje for the activities API.
- *
- * @author Alex Weissman (https://alexanderweissman.com)
  */
 class ActivitySprunje extends Sprunje
 {
-    protected $sortable = [
+    protected string $name = 'activities';
+
+    protected array $sortable = [
         'occurred_at',
         'user',
         'description',
     ];
 
-    protected $filterable = [
+    protected array $filterable = [
         'occurred_at',
         'user',
         'description',
     ];
 
-    protected $name = 'activities';
+    public function __construct(
+        protected ActivityInterface $activityModel,
+    ) {
+        parent::__construct();
+    }
 
     /**
      * Set the initial query used by your Sprunje.
+     * {@inheritDoc}
      */
-    protected function baseQuery()
+    protected function baseQuery(): EloquentBuilder|QueryBuilder|Relation|Model
     {
-        $query = $this->classMapper->createInstance('activity');
-
-        return $query->joinUser();
+        // @phpstan-ignore-next-line Activity interface mixin Model and non-static method.
+        return $this->activityModel->joinUser();
     }
 
     /**
      * Filter LIKE the user info.
      *
-     * @param Builder $query
-     * @param mixed   $value
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                 $value
      *
-     * @return self
+     * @return static
      */
-    protected function filterUser($query, $value)
+    protected function filterUser(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -72,12 +80,12 @@ class ActivitySprunje extends Sprunje
     /**
      * Sort based on user last name.
      *
-     * @param Builder $query
-     * @param string  $direction
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                $direction
      *
-     * @return self
+     * @return static
      */
-    protected function sortUser($query, $direction)
+    protected function sortUser(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
     {
         $query->orderBy('users.last_name', $direction);
 
@@ -87,12 +95,12 @@ class ActivitySprunje extends Sprunje
     /**
      * Sort based on activity occurred_at.
      *
-     * @param Builder $query
-     * @param string  $direction
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                $direction
      *
-     * @return self
+     * @return static
      */
-    protected function sortOccurredAt($query, $direction)
+    protected function sortOccurredAt(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
     {
         $query->orderBy('activities.occurred_at', $direction)
               ->orderby('activities.id', $direction);

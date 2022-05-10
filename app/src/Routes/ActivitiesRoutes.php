@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
@@ -11,8 +13,10 @@
 namespace UserFrosting\Sprinkle\Admin\Routes;
 
 use Slim\App;
+use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
+use UserFrosting\Sprinkle\Admin\Controller\Activity\ActivitiesPageAction;
 
 /*
  * Routes for administrative activity monitoring.
@@ -21,13 +25,12 @@ class ActivitiesRoutes implements RouteDefinitionInterface
 {
     public function register(App $app): void
     {
-        // $app->group('/activities', function () {
-        //     $this->get('', 'UserFrosting\Sprinkle\Admin\Controller\ActivityController:pageList')
-        //         ->setName('uri_activities');
-        // })->add('authGuard')->add(new NoCache());
+        $app->group('/activities', function (RouteCollectorProxy $group) {
+            $group->get('', ActivitiesPageAction::class)->setName('uri_activities');
+        })->add(AuthGuard::class); //->add(new NoCache());
 
-        // $app->group('/api/activities', function () {
-        //     $this->get('', 'UserFrosting\Sprinkle\Admin\Controller\ActivityController:getList');
-        // })->add('authGuard')->add(new NoCache());
+        $app->group('/api/activities', function (RouteCollectorProxy $group) {
+            $group->get('', [ActivitiesPageAction::class, 'sprunje']);
+        })->add(AuthGuard::class); //->add(new NoCache());
     }
 }

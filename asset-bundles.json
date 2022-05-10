@@ -1,17 +1,5 @@
 {
     "bundle": {
-        "js/pages/activities": {
-            "scripts": [
-                "userfrosting/js/pages/activities.js"
-            ],
-            "options": {
-                "result": {
-                    "type": {
-                        "scripts": "plain"
-                    }
-                }
-            }
-        },
         "js/pages/group": {
             "scripts": [
                 "userfrosting/js/widgets/users.js",
