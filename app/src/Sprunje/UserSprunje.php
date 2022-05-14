@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Admin\Sprunje;
 
+use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -203,5 +204,32 @@ class UserSprunje extends Sprunje
         $query->orderBy('flag_enabled', $direction)->orderBy('flag_verified', $direction);
 
         return $this;
+    }
+
+    /**
+     * Count needs to be done without the joined query.
+     * @see https://stackoverflow.com/a/10475248/445757
+     * @see https://oliverlundquist.com/2018/03/06/laravel-wrap-query-and-get-count-from-subquery.html
+     *
+     * {@inheritdoc}
+     */
+    protected function count(EloquentBuilder|QueryBuilder|Relation $query): int
+    {
+        $countQuery = "select count(*) as aggregate from ({$query->toSql()}) c";
+
+        // @phpstan-ignore-next-line Laravel magick methods...
+        $count = collect(Capsule::select($countQuery, $query->getBindings()))->pluck('aggregate')->first();
+
+        // @phpstan-ignore-next-line Laravel magick methods...
+        return $count;
+    }
+
+    /**
+     * Count needs to be done without the joined query.
+     * {@inheritdoc}
+     */
+    protected function countFiltered(EloquentBuilder|QueryBuilder|Relation $query): int
+    {
+        return $this->count($query);
     }
 }
