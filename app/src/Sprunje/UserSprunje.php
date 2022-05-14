@@ -171,7 +171,7 @@ class UserSprunje extends Sprunje
      */
     protected function sortLastActivity(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
     {
-        $query->orderBy('activities.occurred_at', $direction);
+        $query->orderBy('last_activity', $direction);
 
         return $this;
     }
