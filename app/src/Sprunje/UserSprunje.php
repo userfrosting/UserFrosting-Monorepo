@@ -208,7 +208,7 @@ class UserSprunje extends Sprunje
 
     /**
      * Count needs to be done without the joined query.
-     * 
+     *
      * @see https://stackoverflow.com/a/10475248/445757
      * @see https://oliverlundquist.com/2018/03/06/laravel-wrap-query-and-get-count-from-subquery.html
      *
