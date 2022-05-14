@@ -221,8 +221,7 @@ class UserSprunje extends Sprunje
         // @phpstan-ignore-next-line Laravel magick methods...
         $count = collect(Capsule::select($countQuery, $query->getBindings()))->pluck('aggregate')->first();
 
-        // @phpstan-ignore-next-line Laravel magick methods...
-        return $count;
+        return intval($count);
     }
 
     /**
