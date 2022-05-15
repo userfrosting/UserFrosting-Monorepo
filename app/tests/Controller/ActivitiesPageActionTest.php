@@ -18,7 +18,7 @@ use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class ActivityActionTest extends AdminTestCase
+class ActivitiesPageActionTest extends AdminTestCase
 {
     use RefreshDatabase;
     use testUserTrait;
@@ -78,6 +78,9 @@ class ActivityActionTest extends AdminTestCase
         $this->assertNotEmpty((string) $response->getBody());
     }
 
+    /**
+     * N.B.: Sprunje is tested in it's own test class.
+     */
     public function testSprunje(): void
     {
         /** @var User */
