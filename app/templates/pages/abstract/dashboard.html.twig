@@ -1,5 +1,9 @@
 {% extends "pages/abstract/base.html.twig" %}
 
+{% block stylesheets_page_group %}
+    {{ encore_entry_link_tags('dashboard') }}
+{% endblock %}
+
 {% block body_attributes %}
     {% if current_user.isMaster() %}
         class="hold-transition skin-red sidebar-mini"
