@@ -38,7 +38,6 @@ class DashboardActionTest extends AdminTestCase
     public function testPageDashboardForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $this->actAsUser(null);
         $request = $this->createJsonRequest('GET', '/dashboard');
         $response = $this->handleRequest($request);
 
@@ -53,8 +52,8 @@ class DashboardActionTest extends AdminTestCase
     public function testPageDashboardForForbiddenException(): void
     {
         /** @var User */
-        $user = User::factory()->make();
-        $this->actAsUser($user, permissions: ['uri_dashboard' => false]);
+        $user = User::factory()->create();
+        $this->actAsUser($user);
 
         // Create request with method and url and fetch response
         $request = $this->createJsonRequest('GET', '/dashboard');
@@ -69,7 +68,7 @@ class DashboardActionTest extends AdminTestCase
     {
         /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, isMaster: true);
+        $this->actAsUser($user, permissions: ['uri_dashboard']);
 
         // Create request with method and url and fetch response
         $request = $this->createRequest('GET', '/dashboard');

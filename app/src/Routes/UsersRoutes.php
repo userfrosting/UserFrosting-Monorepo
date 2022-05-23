@@ -16,6 +16,8 @@ use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserCreateModal;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserCreationAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction;
 
 /*
@@ -36,33 +38,33 @@ class UsersRoutes implements RouteDefinitionInterface
 
             //     $this->delete('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:delete');
 
-        //     $this->get('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getInfo');
+            //     $this->get('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getInfo');
 
-        //     $this->get('/u/{user_name}/activities', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getActivities');
+            //     $this->get('/u/{user_name}/activities', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getActivities');
 
-        //     $this->get('/u/{user_name}/roles', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getRoles');
+            //     $this->get('/u/{user_name}/roles', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getRoles');
 
-        //     $this->get('/u/{user_name}/permissions', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getPermissions');
+            //     $this->get('/u/{user_name}/permissions', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getPermissions');
 
-        //     $this->post('', 'UserFrosting\Sprinkle\Admin\Controller\UserController:create');
+            $group->post('', UserCreationAction::class)->setName('api.user.create');
 
-        //     $this->post('/u/{user_name}/password-reset', 'UserFrosting\Sprinkle\Admin\Controller\UserController:createPasswordReset');
+            //     $this->post('/u/{user_name}/password-reset', 'UserFrosting\Sprinkle\Admin\Controller\UserController:createPasswordReset');
 
         //     $this->put('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:updateInfo');
 
         //     $this->put('/u/{user_name}/{field}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:updateField');
         })->add(AuthGuard::class); //->add(new NoCache());
 
-        // $app->group('/modals/users', function () {
-        //     $this->get('/confirm-delete', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalConfirmDelete');
+        $app->group('/modals/users', function (RouteCollectorProxy $group) {
+            //     $this->get('/confirm-delete', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalConfirmDelete');
 
-        //     $this->get('/create', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalCreate');
+            $group->get('/create', UserCreateModal::class)->setName('modal.user.create');
 
-        //     $this->get('/edit', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalEdit');
+            //     $this->get('/edit', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalEdit');
 
         //     $this->get('/password', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalEditPassword');
 
         //     $this->get('/roles', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalEditRoles');
-        // })->add(AuthGuard::class); //->add(new NoCache());
+        })->add(AuthGuard::class); //->add(new NoCache());
     }
 }

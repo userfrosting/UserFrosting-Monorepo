@@ -18,7 +18,7 @@ use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class ActivitiesPageActionTest extends AdminTestCase
+class UserCreateModalTest extends AdminTestCase
 {
     use RefreshDatabase;
     use testUserTrait;
@@ -36,7 +36,7 @@ class ActivitiesPageActionTest extends AdminTestCase
     public function testPageForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/activities');
+        $request = $this->createJsonRequest('GET', '/modals/users/create');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -44,7 +44,7 @@ class ActivitiesPageActionTest extends AdminTestCase
         $this->assertResponseStatus(302, $response);
 
         // Assert Event Redirect
-        $this->assertSame('/account/sign-in?redirect=%2Factivities', $response->getHeaderLine('Location'));
+        $this->assertSame('/account/sign-in?redirect=%2Fmodals%2Fusers%2Fcreate', $response->getHeaderLine('Location'));
     }
 
     public function testPageForForbiddenException(): void
@@ -54,7 +54,7 @@ class ActivitiesPageActionTest extends AdminTestCase
         $this->actAsUser($user);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/activities');
+        $request = $this->createJsonRequest('GET', '/modals/users/create');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -66,33 +66,14 @@ class ActivitiesPageActionTest extends AdminTestCase
     {
         /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, permissions: ['uri_activities']);
+        $this->actAsUser($user, permissions: ['create_user']);
 
         // Create request with method and url and fetch response
-        $request = $this->createRequest('GET', '/activities');
+        $request = $this->createJsonRequest('GET', '/modals/users/create');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
         $this->assertNotEmpty((string) $response->getBody());
-    }
-
-    /**
-     * N.B.: Sprunje is tested in it's own test class.
-     */
-    public function testSprunje(): void
-    {
-        /** @var User */
-        $user = User::factory()->create();
-        $this->actAsUser($user, permissions: ['uri_activities']);
-
-        // Create request with method and url and fetch response
-        $request = $this->createRequest('GET', '/api/activities');
-        $response = $this->handleRequest($request);
-
-        // Assert response status & body
-        $this->assertResponseStatus(200, $response);
-        $this->assertJson((string) $response->getBody());
-        $this->assertNotSame('[]', (string) $response->getBody());
     }
 }

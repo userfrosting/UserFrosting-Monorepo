@@ -72,25 +72,6 @@
                 </div>
             </div>
             {% endif %}
-            {% if 'theme' not in form.fields.hidden %}
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="input-theme">{{translate('THEME')}}</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fas fa-puzzle-piece fa-fw"></i></span>
-                        {% if 'theme' in form.fields.disabled %}
-                            <input type="text" class="form-control" name="theme" value="{{themes[user.theme]}}" disabled>
-                        {% else %}
-                            <select id="input-theme" class="form-control js-select2" name="theme">
-                                {% for option, label in theme %}
-                                <option value="{{option}}" {% if (option == user.theme) %}selected{% endif %}>{{label}}</option>
-                                {% endfor %}
-                            </select>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            {% endif %}
             {% if 'locale' not in form.fields.hidden %}
             <div class="col-sm-6">
                 <div class="form-group">

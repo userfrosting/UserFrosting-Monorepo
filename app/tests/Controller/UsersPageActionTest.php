@@ -36,7 +36,6 @@ class UsersPageActionTest extends AdminTestCase
     public function testPageForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $this->actAsUser(null);
         $request = $this->createJsonRequest('GET', '/users');
         $response = $this->handleRequest($request);
 
@@ -51,8 +50,8 @@ class UsersPageActionTest extends AdminTestCase
     public function testPageForForbiddenException(): void
     {
         /** @var User */
-        $user = User::factory()->make();
-        $this->actAsUser($user, permissions: ['uri_users' => false]);
+        $user = User::factory()->create();
+        $this->actAsUser($user);
 
         // Create request with method and url and fetch response
         $request = $this->createJsonRequest('GET', '/users');
@@ -67,7 +66,7 @@ class UsersPageActionTest extends AdminTestCase
     {
         /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, isMaster: true);
+        $this->actAsUser($user, permissions: ['uri_users']);
 
         // Create request with method and url and fetch response
         $request = $this->createRequest('GET', '/users');
@@ -77,7 +76,7 @@ class UsersPageActionTest extends AdminTestCase
         $this->assertResponseStatus(200, $response);
         $this->assertNotEmpty((string) $response->getBody());
     }
-    
+
     /**
      * N.B.: Sprunje is tested in it's own test class.
      */
@@ -85,7 +84,7 @@ class UsersPageActionTest extends AdminTestCase
     {
         /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, isMaster: true);
+        $this->actAsUser($user, permissions: ['uri_users']);
 
         // Create request with method and url and fetch response
         $request = $this->createRequest('GET', '/api/users');
