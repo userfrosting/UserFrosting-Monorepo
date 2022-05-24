@@ -23,7 +23,7 @@ use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
 use UserFrosting\Sprinkle\Core\Mail\Mailer;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class UserCreationActionTest extends AdminTestCase
+class UserCreateActionTest extends AdminTestCase
 {
     use RefreshDatabase;
     use testUserTrait;

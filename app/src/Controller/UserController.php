@@ -110,83 +110,6 @@ class UserController extends SimpleController
     }
 
     /**
-     * Processes the request to delete an existing user.
-     *
-     * Deletes the specified user, removing any existing associations.
-     * Before doing so, checks that:
-     * 1. You are not trying to delete the master account;
-     * 2. You have permission to delete the target user's account.
-     * This route requires authentication (and should generally be limited to admins or the root user).
-     *
-     * Request type: DELETE
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param string[] $args
-     *
-     * @throws NotFoundException   If user is not found
-     * @throws ForbiddenException  If user is not authorized to access page
-     * @throws BadRequestException
-     */
-    public function delete(Request $request, Response $response, array $args)
-    {
-        $user = $this->getUserFromParams($args);
-
-        // If the user doesn't exist, return 404
-        if (!$user) {
-            throw new NotFoundException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'delete_user', [
-            'user' => $user,
-        ])) {
-            throw new ForbiddenException();
-        }
-
-        /** @var \UserFrosting\Support\Repository\Repository $config */
-        $config = $this->ci->config;
-
-        // Check that we are not deleting the master account
-        // Need to use loose comparison for now, because some DBs return `id` as a string
-        if ($user->id == $config['reserved_user_ids.master']) {
-            $e = new BadRequestException();
-            $e->addUserMessage('DELETE_MASTER');
-
-            throw $e;
-        }
-
-        $userName = $user->user_name;
-
-        // Begin transaction - DB will be rolled back if an exception occurs
-        Capsule::transaction(function () use ($user, $userName, $currentUser) {
-            $user->delete();
-            unset($user);
-
-            // Create activity record
-            $this->ci->userActivityLogger->info("User {$currentUser->user_name} deleted the account for {$userName}.", [
-                'type'    => 'account_delete',
-                'user_id' => $currentUser->id,
-            ]);
-        });
-
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
-        $ms = $this->ci->alerts;
-
-        $ms->addMessageTranslated('success', 'DELETION_SUCCESSFUL', [
-            'user_name' => $userName,
-        ]);
-
-        return $response->withJson([], 200);
-    }
-
-    /**
      * Returns activity history for a single user.
      *
      * This page requires authentication.
@@ -289,66 +212,6 @@ class UserController extends SimpleController
         // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
         // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
         return $response->withJson($result, 200, JSON_PRETTY_PRINT);
-    }
-
-    /**
-     * Renders the modal form to confirm user deletion.
-     *
-     * This does NOT render a complete page.  Instead, it renders the HTML for the modal, which can be embedded in other pages.
-     * This page requires authentication.
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param string[] $args
-     *
-     * @throws NotFoundException   If user is not found
-     * @throws ForbiddenException  If user is not authorized to access page
-     * @throws BadRequestException
-     */
-    public function getModalConfirmDelete(Request $request, Response $response, array $args)
-    {
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        $user = $this->getUserFromParams($params);
-
-        // If the user doesn't exist, return 404
-        if (!$user) {
-            throw new NotFoundException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'delete_user', [
-            'user' => $user,
-        ])) {
-            throw new ForbiddenException();
-        }
-
-        /** @var \UserFrosting\Support\Repository\Repository $config */
-        $config = $this->ci->config;
-
-        // Check that we are not deleting the master account
-        // Need to use loose comparison for now, because some DBs return `id` as a string
-        if ($user->id == $config['reserved_user_ids.master']) {
-            $e = new BadRequestException();
-            $e->addUserMessage('DELETE_MASTER');
-
-            throw $e;
-        }
-
-        return $this->ci->view->render($response, 'modals/confirm-delete-user.html.twig', [
-            'user' => $user,
-            'form' => [
-                'action' => "api/users/u/{$user->user_name}",
-            ],
-        ]);
     }
 
     /**
@@ -1099,47 +962,5 @@ class UserController extends SimpleController
         }
 
         return $response->withJson([], 200);
-    }
-
-    /**
-     * Get User instance from params.
-     *
-     * @param string[] $params
-     *
-     * @throws BadRequestException
-     *
-     * @return User|null
-     */
-    protected function getUserFromParams(array $params): ?User
-    {
-        // Load the request schema
-        $schema = new RequestSchema('schema://requests/user/get-by-username.yaml');
-
-        // Whitelist and set parameter defaults
-        $transformer = new RequestDataTransformer($schema);
-        $data = $transformer->transform($params);
-
-        // Validate, and throw exception on validation errors.
-        $validator = new ServerSideValidator($schema, $this->ci->translator);
-        if (!$validator->validate($data)) {
-            // TODO: encapsulate the communication of error messages from ServerSideValidator to the BadRequestException
-            $e = new BadRequestException();
-            foreach ($validator->errors() as $idx => $field) {
-                foreach ($field as $eidx => $error) {
-                    $e->addUserMessage($error);
-                }
-            }
-
-            throw $e;
-        }
-
-        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-        $classMapper = $this->ci->classMapper;
-
-        // Get the user to delete
-        $user = $classMapper->getClassMapping('user')::where('user_name', $data['user_name'])
-            ->first();
-
-        return $user;
     }
 }

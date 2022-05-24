@@ -51,7 +51,7 @@ use UserFrosting\Support\Message\UserMessage;
  *
  * @throws ForbiddenException If user is not authorized to access page
  */
-class UserCreationAction
+class UserCreateAction
 {
     // Request schema for client side form validation
     protected string $schema = 'schema://requests/user/create.yaml';
