@@ -21,6 +21,7 @@ use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
 
 /**
  * Helper class when a user is defined by username in the URL.
+ *
  * @todo : This could probably be middleware ?
  */
 class UserHelper

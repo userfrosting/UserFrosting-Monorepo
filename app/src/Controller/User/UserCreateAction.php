@@ -31,12 +31,12 @@ use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Exceptions\LocaleNotFoundException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
 use UserFrosting\Sprinkle\Account\Validators\UserValidation;
+use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
 use UserFrosting\Sprinkle\Admin\Mail\PasswordEmail;
 use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
 use UserFrosting\Sprinkle\Core\I18n\SiteLocaleInterface;
 use UserFrosting\Sprinkle\Core\Log\DebugLogger;
-use UserFrosting\Support\Message\UserMessage;
 
 /**
  * Processes the request to create a new user (from the admin controls).
@@ -53,6 +53,8 @@ use UserFrosting\Support\Message\UserMessage;
  */
 class UserCreateAction
 {
+    use TranslateExceptionPart;
+
     // Request schema for client side form validation
     protected string $schema = 'schema://requests/user/create.yaml';
 
@@ -250,27 +252,11 @@ class UserCreateAction
         // Check that locale is valid. Required is done in schema.
         if (!in_array($data['locale'], $locales, true)) {
             $e = new LocaleNotFoundException();
-            $e->setLocale($data['locale']);
+            $e->setLocale(strval($data['locale']));
 
             throw $e;
         }
 
         return $data;
-    }
-
-    /**
-     * Translate a string or UserMessage to a string.
-     *
-     * @param string|UserMessage $message
-     *
-     * @return string
-     */
-    protected function translateExceptionPart(string|UserMessage $message): string
-    {
-        if ($message instanceof UserMessage) {
-            return $this->translator->translate($message->message, $message->parameters);
-        }
-
-        return $this->translator->translate($message);
     }
 }

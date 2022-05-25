@@ -16,8 +16,9 @@ use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
-use UserFrosting\Sprinkle\Admin\Controller\User\UserCreateModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserCreateAction;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserCreateModal;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserDeleteModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction;
 
@@ -35,7 +36,7 @@ class UsersRoutes implements RouteDefinitionInterface
 
         $app->group('/api/users', function (RouteCollectorProxy $group) {
             $group->get('', [UsersPageAction::class, 'sprunje'])->setName('api_users');
-            $group->delete('/u/{user_name}', UserDeleteModal::class)->setName('api.users.delete');
+            $group->delete('/u/{user_name}', UserDeleteAction::class)->setName('api.users.delete');
             //     $group->get('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getInfo');
             //     $group->get('/u/{user_name}/activities', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getActivities');
             //     $group->get('/u/{user_name}/roles', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getRoles');
