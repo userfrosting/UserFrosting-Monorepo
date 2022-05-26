@@ -61,11 +61,12 @@ trait testUserTrait
 
             foreach ($permissions as $permission) {
                 if (is_string($permission)) {
-                    $permission = (new Permission([
+                    $permission = new Permission([
                         'slug'       => $permission,
                         'name'       => $permission,
                         'conditions' => 'always()',
-                    ]))->save();
+                    ]);
+                    $permission->save();
                 }
                 $role->permissions()->attach($permission);
                 $role->save();

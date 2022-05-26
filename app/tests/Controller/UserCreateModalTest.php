@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Tests\Controller;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
@@ -67,6 +68,27 @@ class UserCreateModalTest extends AdminTestCase
         /** @var User */
         $user = User::factory()->create();
         $this->actAsUser($user, permissions: ['create_user']);
+
+        // Create request with method and url and fetch response
+        $request = $this->createJsonRequest('GET', '/modals/users/create');
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertResponseStatus(200, $response);
+        $this->assertNotEmpty((string) $response->getBody());
+    }
+
+    public function testPageForOneLocaleAndGroupPermissions(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user, permissions: ['create_user', 'create_user_field']);
+
+        /** @var Config */
+        $config = $this->ci->get(Config::class);
+
+        // Force locale config.
+        $config->set('site.locales.available', ['en_US' => true]);
 
         // Create request with method and url and fetch response
         $request = $this->createJsonRequest('GET', '/modals/users/create');
