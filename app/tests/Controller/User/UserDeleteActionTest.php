@@ -10,15 +10,16 @@ declare(strict_types=1);
  * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Admin\Tests\Controller;
+namespace UserFrosting\Sprinkle\Admin\Tests\Controller\User;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use UserFrosting\Alert\AlertStream;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class UserDeleteModalTest extends AdminTestCase
+class UserDeleteActionTest extends AdminTestCase
 {
     use RefreshDatabase;
     use testUserTrait;
@@ -36,7 +37,7 @@ class UserDeleteModalTest extends AdminTestCase
     public function testPageForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/modals/users/confirm-delete');
+        $request = $this->createJsonRequest('DELETE', '/api/users/u/foo');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -44,26 +45,48 @@ class UserDeleteModalTest extends AdminTestCase
         $this->assertResponseStatus(302, $response);
 
         // Assert Event Redirect
-        $this->assertSame('/account/sign-in?redirect=%2Fmodals%2Fusers%2Fconfirm-delete', $response->getHeaderLine('Location'));
+        $this->assertSame('/account/sign-in?redirect=%2Fapi%2Fusers%2Fu%2Ffoo', $response->getHeaderLine('Location'));
     }
 
-    public function testPageWithNoUser(): void
+    public function testPageWithNotFoundUser(): void
     {
         /** @var User */
         $user = User::factory()->create();
         $this->actAsUser($user);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/modals/users/confirm-delete');
+        $request = $this->createJsonRequest('DELETE', '/api/users/u/foo');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
         $this->assertJsonResponse([
-            'title'       => 'Validation error',
-            'description' => 'Please specify a value for <strong>Username</strong>.',
+            'title'       => 'Account Not Found',
+            'description' => 'This account does not exist. It may have been deleted.',
             'status'      => 400,
         ], $response);
         $this->assertResponseStatus(400, $response);
+    }
+
+    /**
+     * This is different from previous test, since the exception is thrown at the route level.
+     */
+    public function testPageWithNoFoundUser(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user);
+
+        // Create request with method and url and fetch response
+        $request = $this->createJsonRequest('DELETE', '/api/users/u/');
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse([
+            'title'       => 'Not Found',
+            'description' => 'The requested resource could not be found.',
+            'status'      => 404,
+        ], $response);
+        $this->assertResponseStatus(404, $response);
     }
 
     public function testPageForNoPermissions(): void
@@ -77,9 +100,7 @@ class UserDeleteModalTest extends AdminTestCase
         $userToDelete = User::factory()->create();
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/modals/users/confirm-delete')
-                        ->withQueryParams(['user_name' => $userToDelete->user_name]);
-        // $request->set
+        $request = $this->createJsonRequest('DELETE', '/api/users/u/' . $userToDelete->user_name);
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -87,7 +108,7 @@ class UserDeleteModalTest extends AdminTestCase
         $this->assertResponseStatus(403, $response);
     }
 
-    public function testPage(): void
+    public function testPost(): void
     {
         /** @var User */
         $user = User::factory()->create();
@@ -98,24 +119,32 @@ class UserDeleteModalTest extends AdminTestCase
         $userToDelete = User::factory()->create();
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/modals/users/confirm-delete')
-                        ->withQueryParams(['user_name' => $userToDelete->user_name]);
+        $request = $this->createJsonRequest('DELETE', '/api/users/u/' . $userToDelete->user_name);
         $response = $this->handleRequest($request);
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertNotEmpty((string) $response->getBody());
+        $this->assertJsonResponse([], $response);
+
+        // Make sure the user is deleted from the db by querying it
+        $user = User::where('email', $userToDelete->email)->first();
+        $this->assertNull($user);
+
+        // Test message
+        /** @var AlertStream */
+        $ms = $this->ci->get(AlertStream::class);
+        $messages = $ms->getAndClearMessages();
+        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
-    public function testPageForMasterUser(): void
+    public function testPostForMasterUser(): void
     {
         /** @var User */
         $user = User::factory()->create();
         $this->actAsUser($user, isMaster: true);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/modals/users/confirm-delete')
-                        ->withQueryParams(['user_name' => $user->user_name]);
+        $request = $this->createJsonRequest('DELETE', '/api/users/u/' . $user->user_name);
         $response = $this->handleRequest($request);
 
         // Assert response status & body

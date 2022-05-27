@@ -10,16 +10,15 @@ declare(strict_types=1);
  * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Admin\Tests\Controller;
+namespace UserFrosting\Sprinkle\Admin\Tests\Controller\Activity;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class UserCreateModalTest extends AdminTestCase
+class ActivitiesPageActionTest extends AdminTestCase
 {
     use RefreshDatabase;
     use testUserTrait;
@@ -37,7 +36,7 @@ class UserCreateModalTest extends AdminTestCase
     public function testPageForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/modals/users/create');
+        $request = $this->createJsonRequest('GET', '/activities');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -45,7 +44,7 @@ class UserCreateModalTest extends AdminTestCase
         $this->assertResponseStatus(302, $response);
 
         // Assert Event Redirect
-        $this->assertSame('/account/sign-in?redirect=%2Fmodals%2Fusers%2Fcreate', $response->getHeaderLine('Location'));
+        $this->assertSame('/account/sign-in?redirect=%2Factivities', $response->getHeaderLine('Location'));
     }
 
     public function testPageForForbiddenException(): void
@@ -55,7 +54,7 @@ class UserCreateModalTest extends AdminTestCase
         $this->actAsUser($user);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/modals/users/create');
+        $request = $this->createJsonRequest('GET', '/activities');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -67,10 +66,10 @@ class UserCreateModalTest extends AdminTestCase
     {
         /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, permissions: ['create_user']);
+        $this->actAsUser($user, permissions: ['uri_activities']);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/modals/users/create');
+        $request = $this->createRequest('GET', '/activities');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -78,24 +77,22 @@ class UserCreateModalTest extends AdminTestCase
         $this->assertNotEmpty((string) $response->getBody());
     }
 
-    public function testPageForOneLocaleAndGroupPermissions(): void
+    /**
+     * N.B.: Sprunje is tested in it's own test class.
+     */
+    public function testSprunje(): void
     {
         /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, permissions: ['create_user', 'create_user_field']);
-
-        /** @var Config */
-        $config = $this->ci->get(Config::class);
-
-        // Force locale config.
-        $config->set('site.locales.available', ['en_US' => true]);
+        $this->actAsUser($user, permissions: ['uri_activities']);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/modals/users/create');
+        $request = $this->createRequest('GET', '/api/activities');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertNotEmpty((string) $response->getBody());
+        $this->assertJson((string) $response->getBody());
+        $this->assertNotSame('[]', (string) $response->getBody());
     }
 }

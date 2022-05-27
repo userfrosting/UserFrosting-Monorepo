@@ -10,17 +10,16 @@ declare(strict_types=1);
  * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Admin\Tests\Controller;
+namespace UserFrosting\Sprinkle\Admin\Tests\Controller\User;
 
-use Illuminate\Database\Connection;
-use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class DashboardActionTest extends AdminTestCase
+class UserCreateModalTest extends AdminTestCase
 {
     use RefreshDatabase;
     use testUserTrait;
@@ -35,10 +34,10 @@ class DashboardActionTest extends AdminTestCase
         $this->refreshDatabase();
     }
 
-    public function testPageDashboardForGuestUser(): void
+    public function testPageForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/dashboard');
+        $request = $this->createJsonRequest('GET', '/modals/users/create');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -46,17 +45,17 @@ class DashboardActionTest extends AdminTestCase
         $this->assertResponseStatus(302, $response);
 
         // Assert Event Redirect
-        $this->assertSame('/account/sign-in?redirect=%2Fdashboard', $response->getHeaderLine('Location'));
+        $this->assertSame('/account/sign-in?redirect=%2Fmodals%2Fusers%2Fcreate', $response->getHeaderLine('Location'));
     }
 
-    public function testPageDashboardForForbiddenException(): void
+    public function testPageForForbiddenException(): void
     {
         /** @var User */
         $user = User::factory()->create();
         $this->actAsUser($user);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/dashboard');
+        $request = $this->createJsonRequest('GET', '/modals/users/create');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -64,14 +63,14 @@ class DashboardActionTest extends AdminTestCase
         $this->assertResponseStatus(403, $response);
     }
 
-    public function testPageDashboard(): void
+    public function testPage(): void
     {
         /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, permissions: ['uri_dashboard']);
+        $this->actAsUser($user, permissions: ['create_user']);
 
         // Create request with method and url and fetch response
-        $request = $this->createRequest('GET', '/dashboard');
+        $request = $this->createJsonRequest('GET', '/modals/users/create');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -79,25 +78,20 @@ class DashboardActionTest extends AdminTestCase
         $this->assertNotEmpty((string) $response->getBody());
     }
 
-    public function testPageDashboardWithPDOException(): void
+    public function testPageForOneLocaleAndGroupPermissions(): void
     {
-        // Mock PDO
-        $pdo = Mockery::mock(\PDO::class)
-            ->shouldReceive('getAttribute')->with(\PDO::ATTR_DRIVER_NAME)->andThrow(new \PDOException())
-            ->shouldReceive('getAttribute')->with(\PDO::ATTR_SERVER_VERSION)->andThrow(new \PDOException())
-            ->getMock();
-        $connection = Mockery::mock(Connection::class)
-            ->shouldReceive('getDatabaseName')->andReturn('database name')
-            ->shouldReceive('getPdo')->andReturn($pdo)
-            ->getMock();
-        $this->ci->set(Connection::class, $connection);
-
         /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, isMaster: true);
+        $this->actAsUser($user, permissions: ['create_user', 'create_user_field']);
+
+        /** @var Config */
+        $config = $this->ci->get(Config::class);
+
+        // Force locale config.
+        $config->set('site.locales.available', ['en_US' => true]);
 
         // Create request with method and url and fetch response
-        $request = $this->createRequest('GET', '/dashboard');
+        $request = $this->createJsonRequest('GET', '/modals/users/create');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
