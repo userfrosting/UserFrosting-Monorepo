@@ -20,6 +20,7 @@ use UserFrosting\Sprinkle\Admin\Controller\User\UserCreateAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserCreateModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserDeleteModal;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserEditAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserEditModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction;
 
@@ -44,7 +45,7 @@ class UsersRoutes implements RouteDefinitionInterface
             //     $group->get('/u/{user_name}/permissions', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getPermissions');
             $group->post('', UserCreateAction::class)->setName('api.users.create');
             //     $group->post('/u/{user_name}/password-reset', 'UserFrosting\Sprinkle\Admin\Controller\UserController:createPasswordReset');
-            //     $group->put('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:updateInfo');
+            $group->put('/u/{user_name}', UserEditAction::class)->setName('api.users.edit');
             //     $group->put('/u/{user_name}/{field}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:updateField');
         })->add(AuthGuard::class); //->add(new NoCache());
 
