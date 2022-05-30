@@ -110,59 +110,6 @@ class UserController extends SimpleController
     }
 
     /**
-     * Returns activity history for a single user.
-     *
-     * This page requires authentication.
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param string[] $args
-     *
-     * @throws NotFoundException  If user is not found
-     * @throws ForbiddenException If user is not authorized to access page
-     */
-    public function getActivities(Request $request, Response $response, array $args)
-    {
-        $user = $this->getUserFromParams($args);
-
-        // If the user doesn't exist, return 404
-        if (!$user) {
-            throw new NotFoundException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-        $classMapper = $this->ci->classMapper;
-
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'view_user_field', [
-            'user' => $user,
-            'property' => 'activities',
-        ])) {
-            throw new ForbiddenException();
-        }
-
-        $sprunje = $classMapper->createInstance('activity_sprunje', $classMapper, $params);
-
-        $sprunje->extendQuery(function ($query) use ($user) {
-            return $query->where('user_id', $user->id);
-        });
-
-        // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
-        // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
-        return $sprunje->toResponse($response);
-    }
-
-    /**
      * Returns info for a single user.
      *
      * This page requires authentication.
