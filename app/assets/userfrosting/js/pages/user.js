@@ -6,6 +6,7 @@
  *
  * Target page: /users/u/{user_name}
  */
+import { bindUserButtons } from "../widgets/users";
 
 $(document).ready(function() {
     // Control buttons

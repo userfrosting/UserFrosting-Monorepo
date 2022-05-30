@@ -42,9 +42,6 @@ use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
  *
  * This route requires authentication.
  * Request type: PUT
- *
- * @throws NotFoundException  If user is not found
- * @throws ForbiddenException If user is not authorized to access page
  */
 class UserEditAction
 {

@@ -16,7 +16,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
-use UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Admin\Sprunje\UserSprunje;
 
@@ -38,7 +37,6 @@ class UsersPageAction
      * Inject dependencies.
      */
     public function __construct(
-        protected AuthorizationManager $authorizer,
         protected Authenticator $authenticator,
         protected UserSprunje $sprunje,
         protected Twig $view,
@@ -85,7 +83,7 @@ class UsersPageAction
      */
     protected function validateAccess(): void
     {
-        if (!$this->authorizer->checkAccess($this->authenticator->user(), 'uri_users')) {
+        if (!$this->authenticator->checkAccess('uri_users')) {
             throw new ForbiddenException();
         }
     }

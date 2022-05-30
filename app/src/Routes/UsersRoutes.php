@@ -22,6 +22,7 @@ use UserFrosting\Sprinkle\Admin\Controller\User\UserDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserDeleteModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserEditAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserEditModal;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction;
 
 /*
@@ -33,13 +34,13 @@ class UsersRoutes implements RouteDefinitionInterface
     {
         $app->group('/users', function (RouteCollectorProxy $group) {
             $group->get('', UsersPageAction::class)->setName('uri_users');
-            //     $group->get('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:pageInfo');
+            $group->get('/u/{user_name}', UserPageAction::class)->setName('page.user');
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/api/users', function (RouteCollectorProxy $group) {
             $group->get('', [UsersPageAction::class, 'sprunje'])->setName('api_users');
             $group->delete('/u/{user_name}', UserDeleteAction::class)->setName('api.users.delete');
-            //     $group->get('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getInfo');
+            // $group->get('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getInfo');
             //     $group->get('/u/{user_name}/activities', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getActivities');
             //     $group->get('/u/{user_name}/roles', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getRoles');
             //     $group->get('/u/{user_name}/permissions', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getPermissions');
