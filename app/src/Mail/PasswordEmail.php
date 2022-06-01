@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Admin\Mail;
 
+use Carbon\Carbon;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
 use UserFrosting\Config\Config;
@@ -55,6 +56,7 @@ class PasswordEmail
                     'user'                       => $user,
                     'create_password_expiration' => $this->config->getInt('password_reset.timeouts.create') / 3600 . ' hours',
                     'token'                      => $verification->getToken(),
+                    'request_date'               => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
 
         $this->mailer->send($message);

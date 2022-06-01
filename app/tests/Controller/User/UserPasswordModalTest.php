@@ -13,14 +13,13 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Tests\Controller\User;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Database\Models\Permission;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class UserEditModalTest extends AdminTestCase
+class UserPasswordModalTest extends AdminTestCase
 {
     use RefreshDatabase;
     use testUserTrait;
@@ -38,7 +37,7 @@ class UserEditModalTest extends AdminTestCase
     public function testPageForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/modals/users/edit');
+        $request = $this->createJsonRequest('GET', '/modals/users/password');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -46,17 +45,17 @@ class UserEditModalTest extends AdminTestCase
         $this->assertResponseStatus(302, $response);
 
         // Assert Event Redirect
-        $this->assertSame('/account/sign-in?redirect=%2Fmodals%2Fusers%2Fedit', $response->getHeaderLine('Location'));
+        $this->assertSame('/account/sign-in?redirect=%2Fmodals%2Fusers%2Fpassword', $response->getHeaderLine('Location'));
     }
 
     public function testPageForForbiddenException(): void
     {
         /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, permissions: ['create_user']);
+        $this->actAsUser($user);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/modals/users/edit')
+        $request = $this->createJsonRequest('GET', '/modals/users/password')
                         ->withQueryParams(['user_name' => $user->user_name]);
         $response = $this->handleRequest($request);
 
@@ -71,7 +70,7 @@ class UserEditModalTest extends AdminTestCase
         $permission = new Permission([
             'slug'       => 'update_user_field',
             'name'       => 'update_user_field',
-            'conditions' => "subset(fields,['name','email','locale','flag_enabled','flag_verified','password'])",
+            'conditions' => "subset(fields,['password'])",
         ]);
         $permission->save();
 
@@ -79,14 +78,8 @@ class UserEditModalTest extends AdminTestCase
         $user = User::factory()->create();
         $this->actAsUser($user, permissions: [$permission]);
 
-        /** @var Config */
-        $config = $this->ci->get(Config::class);
-
-        // Force locale config.
-        $config->set('site.locales.available', ['en_US' => true]);
-
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/modals/users/edit')
+        $request = $this->createRequest('GET', '/modals/users/password')
                         ->withQueryParams(['user_name' => $user->user_name]);
         $response = $this->handleRequest($request);
 

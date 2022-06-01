@@ -24,6 +24,8 @@ use UserFrosting\Sprinkle\Admin\Controller\User\UserDeleteModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserEditAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserEditModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPageAction;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserPasswordAction;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserPasswordModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserRoleSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction;
 
@@ -47,7 +49,7 @@ class UsersRoutes implements RouteDefinitionInterface
             $group->get('/u/{user_name}/roles', UserRoleSprunje::class);
             // $group->get('/u/{user_name}/permissions', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getPermissions');
             $group->post('', UserCreateAction::class)->setName('api.users.create');
-            //     $group->post('/u/{user_name}/password-reset', 'UserFrosting\Sprinkle\Admin\Controller\UserController:createPasswordReset');
+            $group->post('/u/{user_name}/password-reset', UserPasswordAction::class)->setName('api.users.password-reset');
             $group->put('/u/{user_name}', UserEditAction::class)->setName('api.users.edit');
             //     $group->put('/u/{user_name}/{field}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:updateField');
         })->add(AuthGuard::class); //->add(new NoCache());
@@ -56,7 +58,7 @@ class UsersRoutes implements RouteDefinitionInterface
             $group->get('/confirm-delete', UserDeleteModal::class)->setName('modal.users.delete');
             $group->get('/create', UserCreateModal::class)->setName('modal.user.create');
             $group->get('/edit', UserEditModal::class)->setName('modal.user.edit');
-            //     $group->get('/password', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalEditPassword');
+            $group->get('/password', UserPasswordModal::class)->setName('modal.user.password');
             //     $group->get('/roles', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalEditRoles');
         })->add(AuthGuard::class); //->add(new NoCache());
     }
