@@ -109,7 +109,7 @@ class UserPasswordModal
     {
         if (!$this->authenticator->checkAccess('update_user_field', [
             'user'   => $user,
-            'fields' => ['password']
+            'fields' => ['password'],
         ])) {
             throw new ForbiddenException();
         }
