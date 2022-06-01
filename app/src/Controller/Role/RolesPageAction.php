@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Admin\Controller\Activity;
+namespace UserFrosting\Sprinkle\Admin\Controller\Role;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -18,22 +18,21 @@ use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Admin\Sprunje\ActivitySprunje;
+use UserFrosting\Sprinkle\Admin\Sprunje\RoleSprunje;
 
 /**
- * Renders the activity listing page.
+ * Renders the role listing page.
  *
- * This page renders a table of user activities.
+ * This page renders a table of roles, with dropdown menus for admin actions for each role.
+ * Actions typically include: edit role, delete role.
  * This page requires authentication.
- * Request type: GET
  *
- * This page requires authentication.
  * Request type: GET
  */
-class ActivitiesPageAction
+class RolesPageAction
 {
     /** @var string Page template */
-    protected string $template = 'pages/activities.html.twig';
+    protected string $template = 'pages/roles.html.twig';
 
     /**
      * Inject dependencies.
@@ -41,7 +40,7 @@ class ActivitiesPageAction
     public function __construct(
         protected AuthorizationManager $authorizer,
         protected Authenticator $authenticator,
-        protected ActivitySprunje $sprunje,
+        protected RoleSprunje $sprunje,
         protected Twig $view,
     ) {
     }
@@ -73,9 +72,6 @@ class ActivitiesPageAction
         // GET parameters and pass to Sprunje
         $params = $request->getQueryParams();
         $this->sprunje->setOptions($params);
-        $this->sprunje->extendQuery(function ($query) {
-            return $query->with('user');
-        });
 
         // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
         // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
@@ -89,7 +85,7 @@ class ActivitiesPageAction
      */
     protected function validateAccess(): void
     {
-        if (!$this->authenticator->checkAccess('uri_activities')) {
+        if (!$this->authenticator->checkAccess('uri_roles')) {
             throw new ForbiddenException();
         }
     }

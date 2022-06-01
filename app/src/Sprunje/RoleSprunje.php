@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
@@ -10,52 +12,59 @@
 
 namespace UserFrosting\Sprinkle\Admin\Sprunje;
 
-use Illuminate\Database\Schema\Builder;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder as QueryBuilder;
+use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Core\Sprunje\Sprunje;
 
 /**
- * RoleSprunje.
- *
  * Implements Sprunje for the roles API.
- *
- * @author Alex Weissman (https://alexanderweissman.com)
  */
 class RoleSprunje extends Sprunje
 {
-    protected $name = 'roles';
+    protected string $name = 'roles';
 
-    protected $sortable = [
+    protected array $sortable = [
         'name',
         'description',
     ];
 
-    protected $filterable = [
+    protected array $filterable = [
         'name',
         'description',
         'info',
     ];
 
-    protected $excludeForAll = [
+    protected array $excludeForAll = [
         'info',
     ];
+
+    public function __construct(
+        protected RoleInterface $model,
+    ) {
+        parent::__construct();
+    }
 
     /**
      * {@inheritdoc}
      */
-    protected function baseQuery()
+    protected function baseQuery(): EloquentBuilder|QueryBuilder|Relation|Model
     {
-        return $this->classMapper->createInstance('role')->newQuery();
+        // @phpstan-ignore-next-line RoleInterface is a Model
+        return $this->model;
     }
 
     /**
      * Filter LIKE name OR description.
      *
-     * @param Builder $query
-     * @param mixed   $value
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                $value
      *
-     * @return self
+     * @return static
      */
-    protected function filterInfo($query, $value)
+    protected function filterInfo(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);

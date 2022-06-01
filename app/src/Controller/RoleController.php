@@ -264,46 +264,6 @@ class RoleController extends SimpleController
     }
 
     /**
-     * Returns a list of Roles.
-     *
-     * Generates a list of roles, optionally paginated, sorted and/or filtered.
-     * This page requires authentication.
-     *
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param array    $args
-     *
-     * @throws ForbiddenException If user is not authorized to access page
-     */
-    public function getList(Request $request, Response $response, $args)
-    {
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'uri_roles')) {
-            throw new ForbiddenException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-        $classMapper = $this->ci->classMapper;
-
-        $sprunje = $classMapper->createInstance('role_sprunje', $classMapper, $params);
-
-        // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
-        // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
-        return $sprunje->toResponse($response);
-    }
-
-    /**
      * Display deletion confirmation modal.
      *
      * @param Request  $request
@@ -737,37 +697,6 @@ class RoleController extends SimpleController
             'tools'           => $editButtons,
             'delete_redirect' => $this->ci->router->pathFor('uri_roles'),
         ]);
-    }
-
-    /**
-     * Renders the role listing page.
-     *
-     * This page renders a table of roles, with dropdown menus for admin actions for each role.
-     * Actions typically include: edit role, delete role.
-     * This page requires authentication.
-     *
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param array    $args
-     *
-     * @throws ForbiddenException If user is not authorized to access page
-     */
-    public function pageList(Request $request, Response $response, $args)
-    {
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'uri_roles')) {
-            throw new ForbiddenException();
-        }
-
-        return $this->ci->view->render($response, 'pages/roles.html.twig');
     }
 
     /**

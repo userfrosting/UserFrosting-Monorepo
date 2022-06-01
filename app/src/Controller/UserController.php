@@ -319,58 +319,6 @@ class UserController extends SimpleController
     }
 
     /**
-     * Returns roles associated with a single user.
-     *
-     * This page requires authentication.
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param string[] $args
-     *
-     * @throws NotFoundException  If user is not found
-     * @throws ForbiddenException If user is not authorized to access page
-     */
-    public function getRoles(Request $request, Response $response, array $args)
-    {
-        $user = $this->getUserFromParams($args);
-
-        // If the user doesn't exist, return 404
-        if (!$user) {
-            throw new NotFoundException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-        $classMapper = $this->ci->classMapper;
-
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'view_user_field', [
-            'user' => $user,
-            'property' => 'roles',
-        ])) {
-            throw new ForbiddenException();
-        }
-
-        $sprunje = $classMapper->createInstance('role_sprunje', $classMapper, $params);
-        $sprunje->extendQuery(function ($query) use ($user) {
-            return $query->forUser($user->id);
-        });
-
-        // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
-        // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
-        return $sprunje->toResponse($response);
-    }
-
-    /**
      * Processes the request to update a specific field for an existing user.
      *
      * Supports editing all user fields, including password, enabled/disabled status and verification status.

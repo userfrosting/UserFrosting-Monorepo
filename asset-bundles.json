@@ -65,19 +65,6 @@
                     }
                 }
             }
-        },
-        "js/pages/roles": {
-            "scripts": [
-                "userfrosting/js/widgets/roles.js",
-                "userfrosting/js/pages/roles.js"
-            ],
-            "options": {
-                "result": {
-                    "type": {
-                        "scripts": "plain"
-                    }
-                }
-            }
         }
     }
 }

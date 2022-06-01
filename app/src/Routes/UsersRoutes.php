@@ -24,6 +24,7 @@ use UserFrosting\Sprinkle\Admin\Controller\User\UserDeleteModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserEditAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserEditModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPageAction;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserRoleSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction;
 
 /*
@@ -43,7 +44,7 @@ class UsersRoutes implements RouteDefinitionInterface
             $group->delete('/u/{user_name}', UserDeleteAction::class)->setName('api.users.delete');
             // $group->get('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getInfo');
             $group->get('/u/{user_name}/activities', UserActivitySprunje::class);
-            // $group->get('/u/{user_name}/roles', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getRoles');
+            $group->get('/u/{user_name}/roles', UserRoleSprunje::class);
             // $group->get('/u/{user_name}/permissions', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getPermissions');
             $group->post('', UserCreateAction::class)->setName('api.users.create');
             //     $group->post('/u/{user_name}/password-reset', 'UserFrosting\Sprinkle\Admin\Controller\UserController:createPasswordReset');
