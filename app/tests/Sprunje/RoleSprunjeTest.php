@@ -41,6 +41,7 @@ class RoleSprunjeTest extends AdminTestCase
         // @phpstan-ignore-next-line
         $this->roles = Role::factory()
                         ->count(3)
+                        ->sequence(fn ($sequence) => ['name' => 'Name ' . $sequence->index])
                         ->create();
     }
 
@@ -61,7 +62,7 @@ class RoleSprunjeTest extends AdminTestCase
         /** @var RoleSprunje */
         $sprunje = $this->ci->get(RoleSprunje::class);
         $sprunje->setOptions([
-            'filters' => ['info' => $this->roles[0]->name], // @phpstan-ignore-line
+            'filters' => ['info' => 'Name 1'],
         ]);
         $data = $sprunje->getArray();
 
