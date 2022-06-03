@@ -10,7 +10,11 @@
 
 namespace UserFrosting\Sprinkle\Admin;
 
+use UserFrosting\Event\EventListenerRecipe;
 use UserFrosting\Sprinkle\Account\Account;
+use UserFrosting\Sprinkle\Account\Event\UserRedirectedAfterLoginEvent;
+use UserFrosting\Sprinkle\Admin\Listener\UserRedirectedToDashboard;
+use UserFrosting\Sprinkle\Admin\Listener\UserRedirectedToSettings;
 use UserFrosting\Sprinkle\Admin\Routes\ActivitiesRoutes;
 use UserFrosting\Sprinkle\Admin\Routes\DashboardRoutes;
 use UserFrosting\Sprinkle\Admin\Routes\GroupsRoute;
@@ -21,7 +25,7 @@ use UserFrosting\Sprinkle\Core\Core;
 use UserFrosting\Sprinkle\SprinkleRecipe;
 use UserFrosting\Theme\AdminLTE\AdminLTE;
 
-class Admin implements SprinkleRecipe
+class Admin implements SprinkleRecipe, EventListenerRecipe
 {
     /**
      * {@inheritdoc}
@@ -90,5 +94,19 @@ class Admin implements SprinkleRecipe
     public function getMiddlewares(): array
     {
         return [];
+    }
+
+    /**
+     * {@inheritDoc}
+     * N.B.: Last listeners will be executed first.
+     */
+    public function getEventListeners(): array
+    {
+        return [
+            UserRedirectedAfterLoginEvent::class => [
+                UserRedirectedToSettings::class,
+                UserRedirectedToDashboard::class,
+            ],
+        ];
     }
 }
