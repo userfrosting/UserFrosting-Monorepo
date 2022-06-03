@@ -28,7 +28,10 @@ class UserRedirectedToSettings
     ) {
     }
 
-    public function __invoke(RedirectingEventInterface & StoppableEventInterface $event): void
+    /**
+     * @param RedirectingEventInterface&StoppableEventInterface $event
+     */
+    public function __invoke($event): void
     {
         if ($this->authenticator->checkAccess('uri_account_settings')) {
             $path = $this->routeParser->urlFor('settings');

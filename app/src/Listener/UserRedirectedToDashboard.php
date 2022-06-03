@@ -28,7 +28,10 @@ class UserRedirectedToDashboard
     ) {
     }
 
-    public function __invoke(RedirectingEventInterface & StoppableEventInterface $event): void
+    /**
+     * @param RedirectingEventInterface&StoppableEventInterface $event
+     */
+    public function __invoke($event): void
     {
         if ($this->authenticator->checkAccess('uri_dashboard')) {
             $path = $this->routeParser->urlFor('dashboard');
