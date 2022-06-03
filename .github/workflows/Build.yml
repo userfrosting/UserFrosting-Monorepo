@@ -35,7 +35,7 @@ jobs:
           node-version: 14
       
       - name: Install Dependencies
-        run: composer install --prefer-dist --no-progress
+        run: composer update --prefer-dist --no-progress
       
       - name: Npm Install
         run: npm install
@@ -105,7 +105,7 @@ jobs:
         done
     
     - name: Install Dependencies
-      run: composer install --prefer-dist --no-progress
+      run: composer update --prefer-dist --no-progress
       
     - name: Npm Install
       run: npm install
@@ -155,7 +155,7 @@ jobs:
           node-version: 14
             
       - name: Install Dependencies
-        run: composer install --prefer-dist --no-progress
+        run: composer update --prefer-dist --no-progress
       
       - name: Npm Install
         run: npm install
@@ -217,7 +217,7 @@ jobs:
           node-version: 14
       
       - name: Install Dependencies
-        run: composer install --prefer-dist --no-progress
+        run: composer update --prefer-dist --no-progress
       
       - name: Npm Install
         run: npm install
@@ -267,7 +267,7 @@ jobs:
         node-version: 14
     
     - name: Install Dependencies
-      run: composer install --prefer-dist --no-progress
+      run: composer update --prefer-dist --no-progress
       
     - name: Npm Install
       run: npm install
