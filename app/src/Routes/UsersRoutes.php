@@ -28,6 +28,7 @@ use UserFrosting\Sprinkle\Admin\Controller\User\UserPasswordAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPasswordModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserRoleSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserUpdateFieldAction;
 
 /*
  * Routes for administrative user management.
@@ -51,7 +52,7 @@ class UsersRoutes implements RouteDefinitionInterface
             $group->post('', UserCreateAction::class)->setName('api.users.create');
             $group->post('/u/{user_name}/password-reset', UserPasswordAction::class)->setName('api.users.password-reset');
             $group->put('/u/{user_name}', UserEditAction::class)->setName('api.users.edit');
-            //     $group->put('/u/{user_name}/{field}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:updateField');
+            $group->put('/u/{user_name}/{field}', UserUpdateFieldAction::class)->setName('api.users.update-field');
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/modals/users', function (RouteCollectorProxy $group) {
