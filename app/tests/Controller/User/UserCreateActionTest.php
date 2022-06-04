@@ -175,6 +175,49 @@ class UserCreateActionTest extends AdminTestCase
     /**
      * @depends testPost
      */
+    public function testPostWithPasswordAndFailedPasswordValidation(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user, permissions: ['create_user']);
+
+        /** @var Config */
+        $config = $this->ci->get(Config::class);
+
+        // Force locale config.
+        $config->set('site.registration.user_defaults.locale', 'en_US');
+        $config->set('site.locales.available', ['en_US' => true]);
+
+        /** @var Mailer */
+        $mailer = Mockery::mock(Mailer::class)
+            ->makePartial()
+            ->shouldNotReceive('send')
+            ->getMock();
+        $this->ci->set(Mailer::class, $mailer);
+
+        // Set post payload
+        $data = [
+            'user_name'  => 'foo',
+            'first_name' => 'Foo',
+            'last_name'  => 'Bar',
+            'email'      => 'foo@bar.com',
+            'password'   => 'password1',
+            'passwordc'  => 'password2', // TODO : This should fail
+            'locale'     => 'en_US',
+        ];
+
+        // Create request with method and url and fetch response
+        $request = $this->createJsonRequest('POST', '/api/users', $data);
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse('Your password and confirmation password must match.', $response, 'description');
+        $this->assertResponseStatus(400, $response);
+    }
+
+    /**
+     * @depends testPost
+     */
     public function testPostForFailedGroup(): void
     {
         /** @var User */

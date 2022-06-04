@@ -89,7 +89,6 @@ passwordc:
       label: "&PASSWORD.CONFIRM"
       message: VALIDATE.REQUIRED
     matches:
-      domain: client
       field: password
       label: "&PASSWORD.CONFIRM"
       message: VALIDATE.PASSWORD_MISMATCH
