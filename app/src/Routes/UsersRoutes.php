@@ -23,6 +23,7 @@ use UserFrosting\Sprinkle\Admin\Controller\User\UserDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserDeleteModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserEditAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserEditModal;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserEditRolesModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPasswordAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPasswordModal;
@@ -60,7 +61,7 @@ class UsersRoutes implements RouteDefinitionInterface
             $group->get('/create', UserCreateModal::class)->setName('modal.user.create');
             $group->get('/edit', UserEditModal::class)->setName('modal.user.edit');
             $group->get('/password', UserPasswordModal::class)->setName('modal.user.password');
-            //     $group->get('/roles', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getModalEditRoles');
+            $group->get('/roles', UserEditRolesModal::class)->setName('modal.user.roles');
         })->add(AuthGuard::class); //->add(new NoCache());
     }
 }

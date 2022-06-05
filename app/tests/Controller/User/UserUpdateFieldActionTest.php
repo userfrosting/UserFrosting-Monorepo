@@ -240,14 +240,58 @@ class UserUpdateFieldActionTest extends AdminTestCase
         /** @var Role */
         $roles = Role::factory()->count(2)->create();
 
+        /*
+        N.B.: Expected value format, passed from uf-collection :
+        value[0][role_id]: 1
+        value[1][role_id]: 2
+        value[2][role_id]: 3
+        */
+
+        // @phpstan-ignore-next-line
+        $rolesIds = $roles->map(function ($item) {
+            return ['role_id' => $item->id];
+        })->toArray();
+
         // Create request with method and url and fetch response
-        $data = ['roles' => $roles->toArray()];
+        $data = ['roles' => $rolesIds];
         $request = $this->createJsonRequest('PUT', '/api/users/u/' . $user->user_name . '/roles', $data);
         $response = $this->handleRequest($request);
 
         // Assert response status & body
         $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
+
+        // Make sure the user has the new roles.
+        $user->refresh();
+        $this->assertCount(2, $user->roles);
+
+        // Test message
+        /** @var AlertStream */
+        $ms = $this->ci->get(AlertStream::class);
+        $messages = $ms->getAndClearMessages();
+        $this->assertSame('success', array_reverse($messages)[0]['type']);
+        $this->assertSame('Account details updated for user <strong>' . $user->user_name . '</strong>', array_reverse($messages)[0]['message']);
+    }
+
+    public function testPostForRemovingRoles(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user, permissions: ['update_user_field']);
+        $this->assertCount(1, $user->roles); // Default role above.
+
+        // Create request with method and url and fetch response
+        // uf-collection will pass no data when removing all roles_id.
+        $request = $this->createJsonRequest('PUT', '/api/users/u/' . $user->user_name . '/roles');
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse([], $response);
+        $this->assertResponseStatus(200, $response);
+
+        // Make sure the user has the new roles.
+        $user->refresh();
+        $this->assertCount(0, $user->roles);
 
         // Test message
         /** @var AlertStream */

@@ -77,52 +77,6 @@ class UserController extends SimpleController
     }
 
     /**
-     * Renders the modal form for editing a user's roles.
-     *
-     * This does NOT render a complete page.  Instead, it renders the HTML for the form, which can be embedded in other pages.
-     * This page requires authentication.
-     *
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param string[] $args
-     *
-     * @throws NotFoundException  If user is not found
-     * @throws ForbiddenException If user is not authorized to access page
-     */
-    public function getModalEditRoles(Request $request, Response $response, array $args)
-    {
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        $user = $this->getUserFromParams($params);
-
-        // If the user doesn't exist, return 404
-        if (!$user) {
-            throw new NotFoundException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled resource - check that currentUser has permission to edit "roles" field for this user
-        if (!$authorizer->checkAccess($currentUser, 'update_user_field', [
-            'user' => $user,
-            'fields' => ['roles'],
-        ])) {
-            throw new ForbiddenException();
-        }
-
-        return $this->ci->view->render($response, 'modals/user-manage-roles.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
-    /**
      * Returns a list of effective Permissions for a specified User.
      *
      * Generates a list of permissions, optionally paginated, sorted and/or filtered.

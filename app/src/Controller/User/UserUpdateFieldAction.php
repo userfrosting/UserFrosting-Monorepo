@@ -131,9 +131,12 @@ class UserUpdateFieldAction
         // Get PUT parameters: value
         $put = (array) $request->getParsedBody();
 
-        // Make sure data is part of $_PUT data
+        // Make sure data is part of $_PUT data.
+        // Except for roles, which we allows to be empty.
         if (isset($put[$fieldName])) {
             $fieldData = $put[$fieldName];
+        } elseif ($fieldName === 'roles') {
+            $fieldData = [];
         } else {
             $e = new MissingRequiredParamException();
             $e->setParam($fieldName);
@@ -265,7 +268,7 @@ class UserUpdateFieldAction
     {
         if (!$this->authenticator->checkAccess('update_user_field', [
             'user' => $user,
-            'fields' => [$fieldName]
+            'fields' => [$fieldName],
         ])) {
             throw new ForbiddenException();
         }

@@ -1,5 +1,10 @@
 {% extends "pages/abstract/dashboard.html.twig" %}
 
+{% block stylesheets_page %}
+    <!-- Include page-specific CSS -->
+    {{ encore_entry_link_tags('page.users') }}
+{% endblock %}
+
 {# Overrides blocks in head of base template #}
 {% block page_title %}{{ translate("USER", 2)}}{% endblock %}
 
