@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
@@ -10,34 +12,42 @@
 
 namespace UserFrosting\Sprinkle\Admin\Sprunje;
 
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder as QueryBuilder;
+use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Core\Sprunje\Sprunje;
 
 /**
- * GroupSprunje.
- *
  * Implements Sprunje for the groups API.
- *
- * @author Alex Weissman (https://alexanderweissman.com)
  */
 class GroupSprunje extends Sprunje
 {
-    protected $name = 'groups';
+    protected string $name = 'groups';
 
-    protected $sortable = [
+    protected array $sortable = [
         'name',
         'description',
     ];
 
-    protected $filterable = [
+    protected array $filterable = [
         'name',
         'description',
     ];
+
+    public function __construct(
+        protected GroupInterface $model,
+    ) {
+        parent::__construct();
+    }
 
     /**
      * {@inheritdoc}
      */
-    protected function baseQuery()
+    protected function baseQuery(): EloquentBuilder|QueryBuilder|Relation|Model
     {
-        return $this->classMapper->createInstance('group')->newQuery();
+        // @phpstan-ignore-next-line Model implement Model.
+        return $this->model;
     }
 }

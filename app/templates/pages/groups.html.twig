@@ -2,7 +2,7 @@
 
 {% block stylesheets_page %}
     <!-- Page-specific CSS asset bundle -->
-    {{ assets.css('css/form-widgets') | raw }}
+    {{ encore_entry_link_tags('page.groups') }}
 {% endblock %}
 
 {# Overrides blocks in head of base template #}
@@ -41,12 +41,9 @@
     <!-- Include validation rules -->
     <script>
     {% include "pages/partials/page.js.twig" %}
-    </script>
-
-    <!-- Include form widgets JS -->
-    {{ assets.js('js/form-widgets') | raw }}
+    </script>    
 
     <!-- Include page-specific JS -->
-    {{ assets.js('js/pages/groups') | raw }}
+    {{ encore_entry_script_tags('page.groups') }}
 
 {% endblock %}

@@ -265,46 +265,6 @@ class GroupController extends SimpleController
     }
 
     /**
-     * Returns a list of Groups.
-     *
-     * Generates a list of groups, optionally paginated, sorted and/or filtered.
-     * This page requires authentication.
-     *
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param array    $args
-     *
-     * @throws ForbiddenException If user is not authorized to access page
-     */
-    public function getList(Request $request, Response $response, $args)
-    {
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'uri_groups')) {
-            throw new ForbiddenException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-        $classMapper = $this->ci->classMapper;
-
-        $sprunje = $classMapper->createInstance('group_sprunje', $classMapper, $params);
-
-        // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
-        // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
-        return $sprunje->toResponse($response);
-    }
-
-    /**
      * Get deletion confirmation modal.
      *
      * @param Request  $request
@@ -622,37 +582,6 @@ class GroupController extends SimpleController
             'tools'           => $editButtons,
             'delete_redirect' => $this->ci->router->pathFor('uri_groups'),
         ]);
-    }
-
-    /**
-     * Renders the group listing page.
-     *
-     * This page renders a table of groups, with dropdown menus for admin actions for each group.
-     * Actions typically include: edit group, delete group.
-     * This page requires authentication.
-     *
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param array    $args
-     *
-     * @throws ForbiddenException If user is not authorized to access page
-     */
-    public function pageList(Request $request, Response $response, $args)
-    {
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'uri_groups')) {
-            throw new ForbiddenException();
-        }
-
-        return $this->ci->view->render($response, 'pages/groups.html.twig');
     }
 
     /**

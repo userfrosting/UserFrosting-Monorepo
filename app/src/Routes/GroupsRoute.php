@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
@@ -11,8 +13,10 @@
 namespace UserFrosting\Sprinkle\Admin\Routes;
 
 use Slim\App;
+use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
+use UserFrosting\Sprinkle\Admin\Controller\Group\GroupsPageAction;
 
 /*
  * Routes for administrative group management.
@@ -21,25 +25,24 @@ class GroupsRoute implements RouteDefinitionInterface
 {
     public function register(App $app): void
     {
-        // $app->group('/groups', function () {
-        //     $this->get('', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:pageList')
-        //         ->setName('uri_groups');
-        //     $this->get('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:pageInfo');
-        // })->add('authGuard')->add(new NoCache());
+        $app->group('/groups', function (RouteCollectorProxy $group) {
+            $group->get('', GroupsPageAction::class)->setName('uri_groups');
+            //$group->get('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:pageInfo');
+        })->add(AuthGuard::class); //->add(new NoCache());
 
-        // $app->group('/api/groups', function () {
-        //     $this->delete('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:delete');
-        //     $this->get('', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getList');
-        //     $this->get('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getInfo');
-        //     $this->get('/g/{slug}/users', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getUsers');
-        //     $this->post('', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:create');
-        //     $this->put('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:updateInfo');
-        // })->add('authGuard')->add(new NoCache());
+        $app->group('/api/groups', function (RouteCollectorProxy $group) {
+            //     $group->delete('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:delete');
+            $group->get('', [GroupsPageAction::class, 'sprunje']);
+            //     $group->get('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getInfo');
+        //     $group->get('/g/{slug}/users', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getUsers');
+        //     $group->post('', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:create');
+        //     $group->put('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:updateInfo');
+        })->add(AuthGuard::class); //->add(new NoCache());
 
-        // $app->group('/modals/groups', function () {
-        //     $this->get('/confirm-delete', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getModalConfirmDelete');
-        //     $this->get('/create', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getModalCreate');
-        //     $this->get('/edit', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getModalEdit');
-        // })->add('authGuard')->add(new NoCache());
+        $app->group('/modals/groups', function (RouteCollectorProxy $group) {
+            //     $group->get('/confirm-delete', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getModalConfirmDelete');
+        //     $group->get('/create', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getModalCreate');
+        //     $group->get('/edit', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getModalEdit');
+        })->add(AuthGuard::class); //->add(new NoCache());
     }
 }
