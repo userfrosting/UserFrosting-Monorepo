@@ -7,6 +7,8 @@
  * Target page: /groups
  */
 
+import { bindGroupButtons, bindGroupCreationButton } from "../widgets/groups";
+
 $(document).ready(function() {
 
     $("#widget-groups").ufTable({

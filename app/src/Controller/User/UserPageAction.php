@@ -88,7 +88,7 @@ class UserPageAction
 
         // Fields to hide based on user's access.
         $fields = [
-            'hidden' => ['theme'],
+            'hidden' => [],
         ];
 
         // Determine which fields should be hidden

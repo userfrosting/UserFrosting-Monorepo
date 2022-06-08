@@ -61,6 +61,7 @@ return [
         'NAME_EXPLAIN'        => 'Please enter a name for the group',
         'NONE'                => 'No group',
         'NOT_EMPTY'           => "You can't do that because there are still users associated with the group <strong>{{name}}</strong>.",
+        'NOT_FOUND'           => 'Group not found',
         'PAGE_DESCRIPTION'    => 'A listing of the groups for your site.  Provides management tools for editing and deleting groups.',
         'SUMMARY'             => 'Group Summary',
         'UPDATE'              => 'Details updated for group <strong>{{name}}</strong>',

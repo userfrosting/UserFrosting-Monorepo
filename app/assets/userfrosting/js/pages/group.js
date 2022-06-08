@@ -7,6 +7,9 @@
  * Target page: /groups/g/{slug}
  */
 
+import { bindUserButtons } from "../widgets/users";
+import { bindGroupButtons } from "../widgets/groups";
+
 $(document).ready(function() {
     // Control buttons
     bindGroupButtons($("#view-group"), { delete_redirect: page.delete_redirect });
@@ -22,6 +25,5 @@ $(document).ready(function() {
         bindUserButtons($(this));
     });
 
-$('.icp').iconpicker();
-
+    $('.icp').iconpicker();
 });
