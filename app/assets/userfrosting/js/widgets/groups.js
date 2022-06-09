@@ -143,3 +143,5 @@ function bindGroupCreationButton(el) {
         attachGroupForm();
     });
 };
+
+export { attachGroupForm, bindGroupButtons, bindGroupCreationButton };

@@ -159,3 +159,5 @@ function bindRoleCreationButton(el) {
         attachRoleForm();
     });
 };
+
+export { attachRoleForm, bindRoleButtons, bindRoleCreationButton };

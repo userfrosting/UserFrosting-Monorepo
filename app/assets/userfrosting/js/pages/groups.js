@@ -6,8 +6,7 @@
  *
  * Target page: /groups
  */
-
-import { bindGroupButtons, bindGroupCreationButton } from "../widgets/groups";
+import { bindGroupCreationButton, bindGroupButtons } from "../widgets/groups";
 
 $(document).ready(function() {
 

@@ -321,68 +321,6 @@ class GroupController extends SimpleController
     }
 
     /**
-     * Renders the modal form for creating a new group.
-     *
-     * This does NOT render a complete page.  Instead, it renders the HTML for the modal, which can be embedded in other pages.
-     * This page requires authentication.
-     *
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param array    $args
-     *
-     * @throws ForbiddenException If user is not authorized to access page
-     */
-    public function getModalCreate(Request $request, Response $response, $args)
-    {
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        /** @var \UserFrosting\I18n\Translator $translator */
-        $translator = $this->ci->translator;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'create_group')) {
-            throw new ForbiddenException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-        $classMapper = $this->ci->classMapper;
-
-        // Create a dummy group to prepopulate fields
-        $group = $classMapper->createInstance('group', []);
-
-        $group->icon = 'fas fa-user';
-
-        $fieldNames = ['name', 'slug', 'icon', 'description'];
-        $fields = [
-            'hidden'   => [],
-            'disabled' => [],
-        ];
-
-        // Load validation rules
-        $schema = new RequestSchema('schema://requests/group/create.yaml');
-        $validator = new JqueryValidationAdapter($schema, $this->ci->translator);
-
-        return $this->ci->view->render($response, 'modals/group.html.twig', [
-            'group' => $group,
-            'form'  => [
-                'action'      => 'api/groups',
-                'method'      => 'POST',
-                'fields'      => $fields,
-                'submit_text' => $translator->translate('CREATE'),
-            ],
-            'page' => [
-                'validators' => $validator->rules('json', false),
-            ],
-        ]);
-    }
-
-    /**
      * Renders the modal form for editing an existing group.
      *
      * This does NOT render a complete page.  Instead, it renders the HTML for the modal, which can be embedded in other pages.
