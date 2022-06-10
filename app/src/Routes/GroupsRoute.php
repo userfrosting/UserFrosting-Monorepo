@@ -16,6 +16,7 @@ use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
+use UserFrosting\Sprinkle\Admin\Controller\Group\GroupCreateAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupCreateModal;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupsPageAction;
@@ -37,7 +38,7 @@ class GroupsRoute implements RouteDefinitionInterface
             $group->get('', [GroupsPageAction::class, 'sprunje']);
             // $group->get('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getInfo');
             // $group->get('/g/{slug}/users', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getUsers');
-            // $group->post('', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:create');
+            $group->post('', GroupCreateAction::class);
             // $group->put('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:updateInfo');
         })->add(AuthGuard::class); //->add(new NoCache());
 
