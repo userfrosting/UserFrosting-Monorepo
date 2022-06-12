@@ -19,7 +19,6 @@ use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\ServerSideValidator;
 use UserFrosting\Sprinkle\Account\Database\Models\Group;
 use UserFrosting\Sprinkle\Core\Controller\SimpleController;
-use UserFrosting\Support\Exception\BadRequestException;
 use UserFrosting\Support\Exception\ForbiddenException;
 use UserFrosting\Support\Exception\NotFoundException;
 
@@ -30,97 +29,6 @@ use UserFrosting\Support\Exception\NotFoundException;
  */
 class GroupController extends SimpleController
 {
-    /**
-     * Processes the request to delete an existing group.
-     *
-     * Deletes the specified group.
-     * Before doing so, checks that:
-     * 1. The user has permission to delete this group;
-     * 2. The group is not currently set as the default for new users;
-     * 3. The group is empty (does not have any users);
-     * 4. The submitted data is valid.
-     * This route requires authentication (and should generally be limited to admins or the root user).
-     *
-     * Request type: DELETE
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param array    $args
-     *
-     * @throws NotFoundException   If group is not found
-     * @throws ForbiddenException  If user is not authorized to access page
-     * @throws BadRequestException
-     */
-    public function delete(Request $request, Response $response, $args)
-    {
-        $group = $this->getGroupFromParams($args);
-
-        // If the group doesn't exist, return 404
-        if (!$group) {
-            throw new NotFoundException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'delete_group', [
-            'group' => $group,
-        ])) {
-            throw new ForbiddenException();
-        }
-
-        /** @var \UserFrosting\Support\Repository\Repository $config */
-        $config = $this->ci->config;
-
-        // Check that we are not deleting the default group
-        // Need to use loose comparison for now, because some DBs return `id` as a string
-        if ($group->slug == $config['site.registration.user_defaults.group']) {
-            $e = new BadRequestException();
-            $e->addUserMessage('GROUP.DELETE_DEFAULT', $group->toArray());
-
-            throw $e;
-        }
-
-        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-        $classMapper = $this->ci->classMapper;
-
-        // Check if there are any users in this group
-        $countGroupUsers = $classMapper->getClassMapping('user')::where('group_id', $group->id)->count();
-        if ($countGroupUsers > 0) {
-            $e = new BadRequestException();
-            $e->addUserMessage('GROUP.NOT_EMPTY', $group->toArray());
-
-            throw $e;
-        }
-
-        $groupName = $group->name;
-
-        // Begin transaction - DB will be rolled back if an exception occurs
-        Capsule::transaction(function () use ($group, $groupName, $currentUser) {
-            $group->delete();
-            unset($group);
-
-            // Create activity record
-            $this->ci->userActivityLogger->info("User {$currentUser->user_name} deleted group {$groupName}.", [
-                'type'    => 'group_delete',
-                'user_id' => $currentUser->id,
-            ]);
-        });
-
-        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
-        $ms = $this->ci->alerts;
-
-        $ms->addMessageTranslated('success', 'GROUP.DELETION_SUCCESSFUL', [
-            'name' => $groupName,
-        ]);
-
-        return $response->withJson([], 200);
-    }
-
     /**
      * Returns info for a single group.
      *
@@ -166,62 +74,6 @@ class GroupController extends SimpleController
         // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
         // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
         return $response->withJson($result, 200, JSON_PRETTY_PRINT);
-    }
-
-    /**
-     * Get deletion confirmation modal.
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param array    $args
-     *
-     * @throws NotFoundException   If group is not found
-     * @throws ForbiddenException  If user is not authorized to access page
-     * @throws BadRequestException
-     */
-    public function getModalConfirmDelete(Request $request, Response $response, $args)
-    {
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        $group = $this->getGroupFromParams($params);
-
-        // If the group no longer exists, forward to main group listing page
-        if (!$group) {
-            throw new NotFoundException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'delete_group', [
-            'group' => $group,
-        ])) {
-            throw new ForbiddenException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-        $classMapper = $this->ci->classMapper;
-
-        // Check if there are any users in this group
-        $countGroupUsers = $classMapper->getClassMapping('user')::where('group_id', $group->id)->count();
-        if ($countGroupUsers > 0) {
-            $e = new BadRequestException();
-            $e->addUserMessage('GROUP.NOT_EMPTY', $group->toArray());
-
-            throw $e;
-        }
-
-        return $this->ci->view->render($response, 'modals/confirm-delete-group.html.twig', [
-            'group' => $group,
-            'form'  => [
-                'action' => "api/groups/g/{$group->slug}",
-            ],
-        ]);
     }
 
     /**
