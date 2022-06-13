@@ -19,9 +19,9 @@ use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\AccountException;
-use UserFrosting\Sprinkle\Account\Exceptions\AccountNotFoundException;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Admin\Controller\UserHelper;
+use UserFrosting\Sprinkle\Admin\Exceptions\AccountNotFoundException;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
 
 /**

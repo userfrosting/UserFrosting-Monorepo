@@ -21,9 +21,9 @@ use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
-use UserFrosting\Sprinkle\Account\Exceptions\AccountNotFoundException;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Admin\Controller\UserHelper;
+use UserFrosting\Sprinkle\Admin\Exceptions\AccountNotFoundException;
 use UserFrosting\Sprinkle\Core\I18n\SiteLocaleInterface;
 
 /**

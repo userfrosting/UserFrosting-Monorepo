@@ -20,10 +20,10 @@ use UserFrosting\Support\Message\UserMessage;
 /**
  * Group not found exception.
  */
-final class GroupNotFoundException extends Exception implements UserMessageException
+final class AccountNotFoundException extends Exception implements UserMessageException
 {
-    protected string $title = 'ACCOUNT.EXCEPTION.TITLE';
-    protected string $description = 'GROUP.NOT_FOUND';
+    protected string $title = 'ACCOUNT.EXCEPTION.NOT_FOUND.TITLE';
+    protected string $description = 'ACCOUNT.EXCEPTION.NOT_FOUND.DESCRIPTION';
 
     /**
      * {@inheritDoc}

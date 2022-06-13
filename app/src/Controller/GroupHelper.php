@@ -16,7 +16,6 @@ use UserFrosting\Fortress\ServerSideValidator;
 use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
-use UserFrosting\Sprinkle\Account\Exceptions\AccountNotFoundException;
 use UserFrosting\Sprinkle\Admin\Exceptions\GroupNotFoundException;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
 
@@ -44,7 +43,7 @@ class GroupHelper
      * @param string[] $params
      *
      * @throws ValidationException
-     * @throws AccountNotFoundException If group is not found.
+     * @throws GroupNotFoundException If group is not found.
      *
      * @return GroupInterface
      */

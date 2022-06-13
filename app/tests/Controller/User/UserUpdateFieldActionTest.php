@@ -64,9 +64,9 @@ class UserUpdateFieldActionTest extends AdminTestCase
         $this->assertJsonResponse([
             'title'       => 'Account Not Found',
             'description' => 'This account does not exist. It may have been deleted.',
-            'status'      => 400,
+            'status'      => 404,
         ], $response);
-        $this->assertResponseStatus(400, $response);
+        $this->assertResponseStatus(404, $response);
     }
 
     public function testPostForNoData(): void

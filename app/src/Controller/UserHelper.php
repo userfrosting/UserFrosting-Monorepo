@@ -16,7 +16,7 @@ use UserFrosting\Fortress\ServerSideValidator;
 use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
-use UserFrosting\Sprinkle\Account\Exceptions\AccountNotFoundException;
+use UserFrosting\Sprinkle\Admin\Exceptions\AccountNotFoundException;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
 
 /**

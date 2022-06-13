@@ -21,6 +21,7 @@ use UserFrosting\Sprinkle\Admin\Routes\GroupsRoute;
 use UserFrosting\Sprinkle\Admin\Routes\PermissionsRoutes;
 use UserFrosting\Sprinkle\Admin\Routes\RolesRoutes;
 use UserFrosting\Sprinkle\Admin\Routes\UsersRoutes;
+use UserFrosting\Sprinkle\Admin\ServicesProvider\ErrorHandlerService;
 use UserFrosting\Sprinkle\Core\Core;
 use UserFrosting\Sprinkle\SprinkleRecipe;
 use UserFrosting\Theme\AdminLTE\AdminLTE;
@@ -85,7 +86,9 @@ class Admin implements SprinkleRecipe, EventListenerRecipe
      */
     public function getServices(): array
     {
-        return [];
+        return [
+            ErrorHandlerService::class,
+        ];
     }
 
     /**
