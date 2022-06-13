@@ -20,6 +20,8 @@ use UserFrosting\Sprinkle\Admin\Controller\Group\GroupCreateAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupCreateModal;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupDeleteModal;
+use UserFrosting\Sprinkle\Admin\Controller\Group\GroupEditAction;
+use UserFrosting\Sprinkle\Admin\Controller\Group\GroupEditModal;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupsPageAction;
 
@@ -41,13 +43,13 @@ class GroupsRoute implements RouteDefinitionInterface
             // $group->get('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getInfo');
             // $group->get('/g/{slug}/users', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getUsers');
             $group->post('', GroupCreateAction::class);
-            // $group->put('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:updateInfo');
+            $group->put('/g/{slug}', GroupEditAction::class);
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/modals/groups', function (RouteCollectorProxy $group) {
             $group->get('/confirm-delete', GroupDeleteModal::class)->setName('modal.group.delete');
             $group->get('/create', GroupCreateModal::class)->setName('modal.group.create');
-            // $group->get('/edit', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getModalEdit');
+            $group->get('/edit', GroupEditModal::class)->setName('modal.group.edit');
         })->add(AuthGuard::class); //->add(new NoCache());
     }
 }
