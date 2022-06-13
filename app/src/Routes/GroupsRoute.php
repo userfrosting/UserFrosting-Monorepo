@@ -24,6 +24,7 @@ use UserFrosting\Sprinkle\Admin\Controller\Group\GroupEditAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupEditModal;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupsPageAction;
+use UserFrosting\Sprinkle\Admin\Controller\Group\GroupUsersSprunje;
 
 /*
  * Routes for administrative group management.
@@ -41,7 +42,7 @@ class GroupsRoute implements RouteDefinitionInterface
             $group->delete('/g/{slug}', GroupDeleteAction::class);
             $group->get('', [GroupsPageAction::class, 'sprunje']);
             // $group->get('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getInfo');
-            // $group->get('/g/{slug}/users', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getUsers');
+            $group->get('/g/{slug}/users', GroupUsersSprunje::class);
             $group->post('', GroupCreateAction::class);
             $group->put('/g/{slug}', GroupEditAction::class);
         })->add(AuthGuard::class); //->add(new NoCache());
