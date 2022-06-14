@@ -1,2 +1,2 @@
-require('./userfrosting/js/widgets/roles');
+global.getSlug = require('speakingurl');
 require('./userfrosting/js/pages/roles');

@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Admin\Controller\Group;
+namespace UserFrosting\Sprinkle\Admin\Controller\Role;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -20,34 +20,31 @@ use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
-use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
+use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 
 /**
- * Renders the modal form for creating a new group.
+ * Renders the modal form for creating a new role.
  *
  * This does NOT render a complete page.  Instead, it renders the HTML for the modal, which can be embedded in other pages.
  * This page requires authentication.
  *
  * Request type: GET
  */
-class GroupCreateModal
+class RoleCreateModal
 {
     /** @var string Page template */
-    protected string $template = 'modals/group.html.twig';
+    protected string $template = 'modals/role.html.twig';
 
     // Request schema for client side form validation
-    protected string $schema = 'schema://requests/group/create.yaml';
-
-    // Default group icon
-    protected string $defaultIcon = 'fas fa-user';
+    protected string $schema = 'schema://requests/role/create.yaml';
 
     /**
      * Inject dependencies.
      */
     public function __construct(
         protected Authenticator $authenticator,
-        protected GroupInterface $groupModel,
+        protected RoleInterface $roleModel,
         protected Translator $translator,
         protected Twig $view,
     ) {
@@ -75,10 +72,8 @@ class GroupCreateModal
      */
     protected function handle(): array
     {
-        // Create a dummy user to pre-populate fields
-        $group = new $this->groupModel([
-            'icon' => $this->defaultIcon,
-        ]);
+        // Create a dummy role to pre-populate fields
+        $role = new $this->roleModel([]);
 
         // Load the request schema & validator
         $schema = $this->getSchema();
@@ -91,9 +86,9 @@ class GroupCreateModal
         ];
 
         return [
-            'group'   => $group,
+            'role'    => $role,
             'form'    => [
-                'action'      => 'api/groups',
+                'action'      => 'api/roles',
                 'method'      => 'POST',
                 'fields'      => $fields,
                 'submit_text' => $this->translator->translate('CREATE'),
@@ -111,7 +106,7 @@ class GroupCreateModal
      */
     protected function validateAccess(): void
     {
-        if (!$this->authenticator->checkAccess('create_group')) {
+        if (!$this->authenticator->checkAccess('create_role')) {
             throw new ForbiddenException();
         }
     }

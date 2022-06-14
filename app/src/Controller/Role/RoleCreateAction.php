@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Admin\Controller\Group;
+namespace UserFrosting\Sprinkle\Admin\Controller\Role;
 
 use Illuminate\Database\Connection;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -22,35 +22,35 @@ use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\Fortress\ServerSideValidator;
 use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
-use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
+use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
 use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
-use UserFrosting\Sprinkle\Admin\Exceptions\GroupException;
+use UserFrosting\Sprinkle\Admin\Exceptions\RoleException;
 use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
 use UserFrosting\Support\Message\UserMessage;
 
 /**
- * Processes the request to create a new group.
+ * Processes the request to create a new role.
  *
- * Processes the request from the group creation form, checking that:
- * 1. The group name and slug are not already in use;
- * 2. The user has permission to create a new group;
+ * Processes the request from the role creation form, checking that:
+ * 1. The role name and slug are not already in use;
+ * 2. The user has permission to create a new role;
  * 3. The submitted data is valid.
  * This route requires authentication (and should generally be limited to admins or the root user).
  *
  * Request type: POST
  *
- * @see getModalCreateGroup
+ * @see getModalCreateRole
  */
-class GroupCreateAction
+class RoleCreateAction
 {
     use TranslateExceptionPart;
 
     // Request schema for client side form validation
-    protected string $schema = 'schema://requests/group/create.yaml';
+    protected string $schema = 'schema://requests/role/create.yaml';
 
     /**
      * Inject dependencies.
@@ -59,7 +59,7 @@ class GroupCreateAction
         protected AlertStream $alert,
         protected Authenticator $authenticator,
         protected Connection $db,
-        protected GroupInterface $groupModel,
+        protected RoleInterface $roleModel,
         protected Translator $translator,
         protected UserActivityLogger $userActivityLogger,
     ) {
@@ -111,28 +111,28 @@ class GroupCreateAction
 
         // Validate request data
         $this->validateData($schema, $data);
-        $this->validateGroupName($data['name']);
-        $this->validateGroupSlug($data['slug']);
+        $this->validateName($data['name']);
+        $this->validateSlug($data['slug']);
 
         // Get current user. Won't be null, as AuthGuard prevent it
         /** @var UserInterface */
         $currentUser = $this->authenticator->user();
 
-        // All checks passed!  log events/activities and create group
+        // All checks passed!  log events/activities and create role
         // Begin transaction - DB will be rolled back if an exception occurs
         $this->db->transaction(function () use ($data, $currentUser) {
 
-            // Create the group
-            $group = new $this->groupModel($data);
-            $group->save();
+            // Create the role
+            $role = new $this->roleModel($data);
+            $role->save();
 
             // Create activity record
-            $this->userActivityLogger->info("User {$currentUser->user_name} created group {$group->name}.", [
-                'type'    => 'group_create',
+            $this->userActivityLogger->info("User {$currentUser->user_name} created role {$role->name}.", [
+                'type'    => 'role_create',
                 'user_id' => $currentUser->id,
             ]);
 
-            $this->alert->addMessageTranslated('success', 'GROUP.CREATION_SUCCESSFUL', $data);
+            $this->alert->addMessageTranslated('success', 'ROLE.CREATION_SUCCESSFUL', $data);
         });
     }
 
@@ -143,7 +143,7 @@ class GroupCreateAction
      */
     protected function validateAccess(): void
     {
-        if (!$this->authenticator->checkAccess('create_group')) {
+        if (!$this->authenticator->checkAccess('create_role')) {
             throw new ForbiddenException();
         }
     }
@@ -178,16 +178,16 @@ class GroupCreateAction
     }
 
     /**
-     * Validate group name is not already in use.
+     * Validate name is not already in use.
      *
      * @param string $name
      */
-    protected function validateGroupName(string $name): void
+    protected function validateName(string $name): void
     {
-        $group = $this->groupModel->where('name', $name)->first();
+        $group = $this->roleModel->where('name', $name)->first();
         if ($group !== null) {
-            $e = new GroupException();
-            $message = new UserMessage('GROUP.NAME_IN_USE', ['name' => $name]);
+            $e = new RoleException();
+            $message = new UserMessage('ROLE.NAME_IN_USE', ['name' => $name]);
             $e->setDescription($message);
 
             throw $e;
@@ -195,15 +195,15 @@ class GroupCreateAction
     }
 
     /**
-     * Validate group name is not already in use.
+     * Validate slug is not already in use.
      *
      * @param string $slug
      */
-    protected function validateGroupSlug(string $slug): void
+    protected function validateSlug(string $slug): void
     {
-        $group = $this->groupModel->where('slug', $slug)->first();
+        $group = $this->roleModel->where('slug', $slug)->first();
         if ($group !== null) {
-            $e = new GroupException();
+            $e = new RoleException();
             $message = new UserMessage('SLUG_IN_USE', ['slug' => $slug]);
             $e->setDescription($message);
 

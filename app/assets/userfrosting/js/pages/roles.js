@@ -6,6 +6,7 @@
  *
  * Target page: /roles
  */
+import { bindRoleCreationButton, bindRoleButtons } from "../widgets/roles";
 
 $(document).ready(function() {
     // Set up table of roles

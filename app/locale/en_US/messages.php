@@ -104,6 +104,7 @@ return [
         'DELETE_YES'          => 'Yes, delete role',
         'DELETION_SUCCESSFUL' => 'Successfully deleted role <strong>{{name}}</strong>',
         'EDIT'                => 'Edit role',
+        'EXCEPTION'           => 'Role error',
         'HAS_USERS'           => "You can't do that because there are still users who have the role <strong>{{name}}</strong>.",
         'INFO_PAGE'           => 'Role information page for {{name}}',
         'MANAGE'              => 'Manage Roles',

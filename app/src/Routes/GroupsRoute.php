@@ -48,9 +48,9 @@ class GroupsRoute implements RouteDefinitionInterface
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/modals/groups', function (RouteCollectorProxy $group) {
-            $group->get('/confirm-delete', GroupDeleteModal::class)->setName('modal.group.delete');
-            $group->get('/create', GroupCreateModal::class)->setName('modal.group.create');
-            $group->get('/edit', GroupEditModal::class)->setName('modal.group.edit');
+            $group->get('/confirm-delete', GroupDeleteModal::class)->setName('modal.groups.delete');
+            $group->get('/create', GroupCreateModal::class)->setName('modal.groups.create');
+            $group->get('/edit', GroupEditModal::class)->setName('modal.groups.edit');
         })->add(AuthGuard::class); //->add(new NoCache());
     }
 }

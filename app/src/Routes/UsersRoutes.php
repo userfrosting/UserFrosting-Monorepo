@@ -58,10 +58,10 @@ class UsersRoutes implements RouteDefinitionInterface
 
         $app->group('/modals/users', function (RouteCollectorProxy $group) {
             $group->get('/confirm-delete', UserDeleteModal::class)->setName('modal.users.delete');
-            $group->get('/create', UserCreateModal::class)->setName('modal.user.create');
-            $group->get('/edit', UserEditModal::class)->setName('modal.user.edit');
-            $group->get('/password', UserPasswordModal::class)->setName('modal.user.password');
-            $group->get('/roles', UserEditRolesModal::class)->setName('modal.user.roles');
+            $group->get('/create', UserCreateModal::class)->setName('modal.users.create');
+            $group->get('/edit', UserEditModal::class)->setName('modal.users.edit');
+            $group->get('/password', UserPasswordModal::class)->setName('modal.users.password');
+            $group->get('/roles', UserEditRolesModal::class)->setName('modal.users.roles');
         })->add(AuthGuard::class); //->add(new NoCache());
     }
 }
