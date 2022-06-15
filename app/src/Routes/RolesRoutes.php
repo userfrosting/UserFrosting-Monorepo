@@ -18,6 +18,8 @@ use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleCreateAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleCreateModal;
+use UserFrosting\Sprinkle\Admin\Controller\Role\RoleDeleteAction;
+use UserFrosting\Sprinkle\Admin\Controller\Role\RoleDeleteModal;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolesPageAction;
 
 /*
@@ -33,7 +35,7 @@ class RolesRoutes implements RouteDefinitionInterface
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/api/roles', function (RouteCollectorProxy $group) {
-            // $group->delete('/r/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:delete');
+            $group->delete('/r/{slug}', RoleDeleteAction::class);
             $group->get('', [RolesPageAction::class, 'sprunje']);
             // $group->get('/r/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getInfo');
             // $group->get('/r/{slug}/permissions', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getPermissions');
@@ -44,7 +46,7 @@ class RolesRoutes implements RouteDefinitionInterface
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/modals/roles', function (RouteCollectorProxy $group) {
-            // $group->get('/confirm-delete', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getModalConfirmDelete');
+            $group->get('/confirm-delete', RoleDeleteModal::class)->setName('modal.roles.delete');
             $group->get('/create', RoleCreateModal::class)->setName('modal.roles.create');
             // $group->get('/edit', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getModalEdit');
             // $group->get('/permissions', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getModalEditPermissions');
