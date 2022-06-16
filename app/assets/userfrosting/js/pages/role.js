@@ -6,6 +6,8 @@
  *
  * Target page: /roles/r/{slug}
  */
+import { bindRoleButtons } from "../widgets/roles";
+import { bindUserButtons } from "../widgets/users";
 
 $(document).ready(function() {
     // Control buttons

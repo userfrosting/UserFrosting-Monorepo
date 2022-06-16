@@ -10,16 +10,16 @@ declare(strict_types=1);
  * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Admin\Tests\Controller\Group;
+namespace UserFrosting\Sprinkle\Admin\Tests\Controller\Role;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Sprinkle\Account\Database\Models\Group;
+use UserFrosting\Sprinkle\Account\Database\Models\Role;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class GroupPageActionTest extends AdminTestCase
+class RolePageActionTest extends AdminTestCase
 {
     use RefreshDatabase;
     use testUserTrait;
@@ -37,7 +37,7 @@ class GroupPageActionTest extends AdminTestCase
     public function testPageForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/groups/g/foo');
+        $request = $this->createJsonRequest('GET', '/roles/r/foo');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -45,7 +45,7 @@ class GroupPageActionTest extends AdminTestCase
         $this->assertResponseStatus(302, $response);
 
         // Assert Event Redirect
-        $this->assertSame('/account/sign-in?redirect=%2Fgroups%2Fg%2Ffoo', $response->getHeaderLine('Location'));
+        $this->assertSame('/account/sign-in?redirect=%2Froles%2Fr%2Ffoo', $response->getHeaderLine('Location'));
     }
 
     public function testPageForForbiddenException(): void
@@ -54,11 +54,11 @@ class GroupPageActionTest extends AdminTestCase
         $user = User::factory()->create();
         $this->actAsUser($user);
 
-        /** @var Group */
-        $group = Group::factory()->create();
+        /** @var Role */
+        $role = Role::factory()->create();
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/groups/g/' . $group->slug);
+        $request = $this->createJsonRequest('GET', '/roles/r/' . $role->slug);
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -70,14 +70,14 @@ class GroupPageActionTest extends AdminTestCase
     {
         /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, permissions: ['uri_group']);
+        $this->actAsUser($user, permissions: ['uri_role']);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/groups/g/foo');
+        $request = $this->createJsonRequest('GET', '/roles/r/foo');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse('Group not found', $response, 'description');
+        $this->assertJsonResponse('Role not found', $response, 'description');
         $this->assertResponseStatus(404, $response);
     }
 
@@ -85,13 +85,13 @@ class GroupPageActionTest extends AdminTestCase
     {
         /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, permissions: ['uri_group']);
+        $this->actAsUser($user, permissions: ['uri_role']);
 
-        /** @var Group */
-        $group = Group::factory()->create();
+        /** @var Role */
+        $role = Role::factory()->create();
 
         // Create request with method and url and fetch response
-        $request = $this->createRequest('GET', '/groups/g/' . $group->slug);
+        $request = $this->createRequest('GET', '/roles/r/' . $role->slug);
         $response = $this->handleRequest($request);
 
         // Assert response status & body

@@ -20,6 +20,7 @@ use UserFrosting\Sprinkle\Admin\Controller\Role\RoleCreateAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleCreateModal;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleDeleteModal;
+use UserFrosting\Sprinkle\Admin\Controller\Role\RolePageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolesPageAction;
 
 /*
@@ -31,7 +32,7 @@ class RolesRoutes implements RouteDefinitionInterface
     {
         $app->group('/roles', function (RouteCollectorProxy $group) {
             $group->get('', RolesPageAction::class)->setName('uri_roles');
-            // $group->get('/r/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:pageInfo');
+            $group->get('/r/{slug}', RolePageAction::class);
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/api/roles', function (RouteCollectorProxy $group) {

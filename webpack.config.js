@@ -15,6 +15,7 @@ Encore
     .addEntry('page.activities', './app/assets/page.activities.js')
     .addEntry('page.group', './app/assets/page.group.js')
     .addEntry('page.groups', './app/assets/page.groups.js')
+    .addEntry('page.role', './app/assets/page.role.js')
     .addEntry('page.roles', './app/assets/page.roles.js')
     .addEntry('page.user', './app/assets/page.user.js')
     .addEntry('page.users', './app/assets/page.users.js')

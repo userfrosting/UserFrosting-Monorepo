@@ -13,20 +13,6 @@
                 }
             }
         },
-        "js/pages/role": {
-            "scripts": [
-                "userfrosting/js/widgets/users.js",
-                "userfrosting/js/widgets/roles.js",
-                "userfrosting/js/pages/role.js"
-            ],
-            "options": {
-                "result": {
-                    "type": {
-                        "scripts": "plain"
-                    }
-                }
-            }
-        },
         "js/pages/permissions": {
             "scripts": [
                 "userfrosting/js/pages/permissions.js"
