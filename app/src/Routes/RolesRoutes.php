@@ -22,6 +22,7 @@ use UserFrosting\Sprinkle\Admin\Controller\Role\RoleDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleDeleteModal;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleEditAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleEditModal;
+use UserFrosting\Sprinkle\Admin\Controller\Role\RoleEditPermissionsModal;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolePageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolePermissionsSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolesPageAction;
@@ -54,7 +55,7 @@ class RolesRoutes implements RouteDefinitionInterface
             $group->get('/confirm-delete', RoleDeleteModal::class)->setName('modal.roles.delete');
             $group->get('/create', RoleCreateModal::class)->setName('modal.roles.create');
             $group->get('/edit', RoleEditModal::class)->setName('modal.roles.edit');
-            // $group->get('/permissions', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getModalEditPermissions');
+            $group->get('/permissions', RoleEditPermissionsModal::class)->setName('modal.roles.permissions');
         })->add(AuthGuard::class); //->add(new NoCache());
     }
 }

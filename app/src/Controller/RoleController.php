@@ -77,52 +77,6 @@ class RoleController extends SimpleController
     }
 
     /**
-     * Renders the modal form for editing a role's permissions.
-     *
-     * This does NOT render a complete page.  Instead, it renders the HTML for the form, which can be embedded in other pages.
-     * This page requires authentication.
-     *
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param array    $args
-     *
-     * @throws NotFoundException  If role is not found
-     * @throws ForbiddenException If user is not authorized to access page
-     */
-    public function getModalEditPermissions(Request $request, Response $response, $args)
-    {
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        $role = $this->getRoleFromParams($params);
-
-        // If the role doesn't exist, return 404
-        if (!$role) {
-            throw new NotFoundException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled resource - check that currentUser has permission to edit "permissions" field for this role
-        if (!$authorizer->checkAccess($currentUser, 'update_role_field', [
-            'role' => $role,
-            'fields' => ['permissions'],
-        ])) {
-            throw new ForbiddenException();
-        }
-
-        return $this->ci->view->render($response, 'modals/role-manage-permissions.html.twig', [
-            'role' => $role,
-        ]);
-    }
-
-    /**
      * Processes the request to update a specific field for an existing role, including permissions.
      *
      * Processes the request from the role update form, checking that:
