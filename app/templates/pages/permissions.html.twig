@@ -2,7 +2,7 @@
 
 {% block stylesheets_page %}
     <!-- Page-specific CSS asset bundle -->
-    {{ assets.css('css/form-widgets') | raw }}
+    {{ encore_entry_link_tags('page.permissions') }}
 {% endblock %}
 
 {# Overrides blocks in head of base template #}
@@ -36,10 +36,7 @@
     {% include "pages/partials/page.js.twig" %}
     </script>
 
-    <!-- Include form widgets JS -->
-    {{ assets.js('js/form-widgets') | raw }}
-
     <!-- Include page-specific JS -->
-    {{ assets.js('js/pages/permissions') | raw }}
+    {{ encore_entry_script_tags('page.permissions') }}
 
 {% endblock %}

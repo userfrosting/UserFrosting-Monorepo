@@ -11,8 +11,10 @@
 namespace UserFrosting\Sprinkle\Admin\Routes;
 
 use Slim\App;
+use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
+use UserFrosting\Sprinkle\Admin\Controller\Permission\PermissionsPageAction;
 
 /*
  * Routes for administrative permission management.
@@ -21,16 +23,15 @@ class PermissionsRoutes implements RouteDefinitionInterface
 {
     public function register(App $app): void
     {
-        // $app->group('/permissions', function () {
-        //     $this->get('', 'UserFrosting\Sprinkle\Admin\Controller\PermissionController:pageList')
-        //         ->setName('uri_permissions');
-        //     $this->get('/p/{id}', 'UserFrosting\Sprinkle\Admin\Controller\PermissionController:pageInfo');
-        // })->add('authGuard')->add(new NoCache());
+        $app->group('/permissions', function (RouteCollectorProxy $group) {
+            $group->get('', PermissionsPageAction::class)->setName('uri_permissions');
+            // $group->get('/p/{id}', 'UserFrosting\Sprinkle\Admin\Controller\PermissionController:pageInfo');
+        })->add(AuthGuard::class); //->add(new NoCache());
 
-        // $app->group('/api/permissions', function () {
-        //     $this->get('', 'UserFrosting\Sprinkle\Admin\Controller\PermissionController:getList');
-        //     $this->get('/p/{id}', 'UserFrosting\Sprinkle\Admin\Controller\PermissionController:getInfo');
-        //     $this->get('/p/{id}/users', 'UserFrosting\Sprinkle\Admin\Controller\PermissionController:getUsers');
-        // })->add('authGuard')->add(new NoCache());
+        $app->group('/api/permissions', function (RouteCollectorProxy $group) {
+            $group->get('', [PermissionsPageAction::class, 'sprunje']);
+            // $group->get('/p/{id}', 'UserFrosting\Sprinkle\Admin\Controller\PermissionController:getInfo');
+            // $group->get('/p/{id}/users', 'UserFrosting\Sprinkle\Admin\Controller\PermissionController:getUsers');
+        })->add(AuthGuard::class); //->add(new NoCache());
     }
 }

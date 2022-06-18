@@ -17,6 +17,7 @@ Encore
     .addEntry('page.groups', './app/assets/page.groups.js')
     .addEntry('page.role', './app/assets/page.role.js')
     .addEntry('page.roles', './app/assets/page.roles.js')
+    .addEntry('page.permissions', './app/assets/page.permissions.js')
     .addEntry('page.user', './app/assets/page.user.js')
     .addEntry('page.users', './app/assets/page.users.js')
     .addEntry('page.register', './node_modules/theme-adminlte/app/assets/register.js')
