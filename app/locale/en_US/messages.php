@@ -85,6 +85,7 @@ return [
         'INFO_PAGE'         => "Permission information page for '{{name}}'",
         'MANAGE'            => 'Manage permissions',
         'NOTE_READ_ONLY'    => '<strong>Please note:</strong> permissions are considered "part of the code" and cannot be modified through the interface.  To add, remove, or modify permissions, the site maintainers will need to use a <a href="https://learn.userfrosting.com/database/extending-the-database" target="about:_blank">database migration.</a>',
+        'NOT_FOUND'         => 'Permission not found',
         'PAGE_DESCRIPTION'  => 'A listing of the permissions for your site.  Provides management tools for editing and deleting permissions.',
         'SUMMARY'           => 'Permission Summary',
         'UPDATE'            => 'Update permissions',
