@@ -123,60 +123,6 @@ class RoleController extends SimpleController
     }
 
     /**
-     * Returns a list of Permissions for a specified Role.
-     *
-     * Generates a list of permissions, optionally paginated, sorted and/or filtered.
-     * This page requires authentication.
-     *
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param array    $args
-     *
-     * @throws NotFoundException  If role is not found
-     * @throws ForbiddenException If user is not authorized to access page
-     */
-    public function getPermissions(Request $request, Response $response, $args)
-    {
-        $role = $this->getRoleFromParams($args);
-
-        // If the role no longer exists, forward to main role listing page
-        if (!$role) {
-            throw new NotFoundException();
-        }
-
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'view_role_field', [
-            'role' => $role,
-            'property' => 'permissions',
-        ])) {
-            throw new ForbiddenException();
-        }
-
-        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-        $classMapper = $this->ci->classMapper;
-
-        $sprunje = $classMapper->createInstance('permission_sprunje', $classMapper, $params);
-        $sprunje->extendQuery(function ($query) use ($role) {
-            return $query->forRole($role->id);
-        });
-
-        // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
-        // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
-        return $sprunje->toResponse($response);
-    }
-
-    /**
      * Processes the request to update a specific field for an existing role, including permissions.
      *
      * Processes the request from the role update form, checking that:

@@ -23,6 +23,7 @@ use UserFrosting\Sprinkle\Admin\Controller\Role\RoleDeleteModal;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleEditAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleEditModal;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolePageAction;
+use UserFrosting\Sprinkle\Admin\Controller\Role\RolePermissionsSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolesPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleUsersSprunje;
 
@@ -42,7 +43,7 @@ class RolesRoutes implements RouteDefinitionInterface
             $group->delete('/r/{slug}', RoleDeleteAction::class);
             $group->get('', [RolesPageAction::class, 'sprunje']);
             // $group->get('/r/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getInfo');
-            // $group->get('/r/{slug}/permissions', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getPermissions');
+            $group->get('/r/{slug}/permissions', RolePermissionsSprunje::class);
             $group->get('/r/{slug}/users', RoleUsersSprunje::class);
             $group->post('', RoleCreateAction::class);
             $group->put('/r/{slug}', RoleEditAction::class);

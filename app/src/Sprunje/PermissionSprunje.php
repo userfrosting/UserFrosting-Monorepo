@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
@@ -10,65 +12,73 @@
 
 namespace UserFrosting\Sprinkle\Admin\Sprunje;
 
-use Illuminate\Database\Schema\Builder;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder as QueryBuilder;
+use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\PermissionInterface;
 use UserFrosting\Sprinkle\Core\Sprunje\Sprunje;
 
 /**
- * PermissionSprunje.
- *
  * Implements Sprunje for the permissions API.
- *
- * @author Alex Weissman (https://alexanderweissman.com)
  */
 class PermissionSprunje extends Sprunje
 {
-    protected $name = 'permissions';
+    protected string $name = 'permissions';
 
-    protected $sortable = [
+    protected array $sortable = [
         'name',
         'properties',
     ];
 
-    protected $filterable = [
+    protected array $filterable = [
         'name',
         'properties',
         'info',
     ];
 
-    protected $excludeForAll = [
+    protected array $excludeForAll = [
         'info',
     ];
+
+    public function __construct(
+        protected PermissionInterface $model,
+    ) {
+        parent::__construct();
+    }
 
     /**
      * {@inheritdoc}
      */
-    protected function baseQuery()
+    protected function baseQuery(): EloquentBuilder|QueryBuilder|Relation|Model
     {
-        return $this->classMapper->createInstance('permission')->newQuery();
+        // @phpstan-ignore-next-line Model implement Model.
+        return $this->model;
     }
 
     /**
      * Filter LIKE the slug, conditions, or description.
      *
-     * @param Builder $query
-     * @param mixed   $value
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                $value
      *
-     * @return self
+     * @return static
      */
-    protected function filterInfo($query, $value)
+    protected function filterInfo(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
     {
         return $this->filterProperties($query, $value);
     }
 
     /**
-     * Filter LIKE the slug, conditions, or description.
+     * Filter LIKE the slug, conditions, or description for the slug/condition
+     * UI column.
      *
-     * @param Builder $query
-     * @param mixed   $value
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                $value
      *
-     * @return self
+     * @return static
      */
-    protected function filterProperties($query, $value)
+    protected function filterProperties(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -84,14 +94,14 @@ class PermissionSprunje extends Sprunje
     }
 
     /**
-     * Sort based on slug.
+     * Sort based on slug/condition UI column.
      *
-     * @param Builder $query
-     * @param string  $direction
+     * @param EloquentBuilder|QueryBuilder|Relation $query
+     * @param string                                $direction
      *
-     * @return self
+     * @return static
      */
-    protected function sortProperties($query, $direction)
+    protected function sortProperties(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
     {
         $query->orderBy('slug', $direction);
 
