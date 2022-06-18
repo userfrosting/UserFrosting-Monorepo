@@ -23,7 +23,7 @@ use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
 /**
  * Helper class when a user is defined by username in the URL.
  *
- * @todo : This could probably be middleware ?
+ * @todo : This could probably be middleware : https://www.slimframework.com/docs/v3/concepts/middleware.html
  */
 class RoleHelper
 {

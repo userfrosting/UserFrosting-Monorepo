@@ -20,8 +20,11 @@ use UserFrosting\Sprinkle\Admin\Controller\Role\RoleCreateAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleCreateModal;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleDeleteModal;
+use UserFrosting\Sprinkle\Admin\Controller\Role\RoleEditAction;
+use UserFrosting\Sprinkle\Admin\Controller\Role\RoleEditModal;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolePageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolesPageAction;
+use UserFrosting\Sprinkle\Admin\Controller\Role\RoleUsersSprunje;
 
 /*
  * Routes for administrative role management.
@@ -40,16 +43,16 @@ class RolesRoutes implements RouteDefinitionInterface
             $group->get('', [RolesPageAction::class, 'sprunje']);
             // $group->get('/r/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getInfo');
             // $group->get('/r/{slug}/permissions', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getPermissions');
-            // $group->get('/r/{slug}/users', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getUsers');
+            $group->get('/r/{slug}/users', RoleUsersSprunje::class);
             $group->post('', RoleCreateAction::class);
-            // $group->put('/r/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:updateInfo');
+            $group->put('/r/{slug}', RoleEditAction::class);
             // $group->put('/r/{slug}/{field}', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:updateField');
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/modals/roles', function (RouteCollectorProxy $group) {
             $group->get('/confirm-delete', RoleDeleteModal::class)->setName('modal.roles.delete');
             $group->get('/create', RoleCreateModal::class)->setName('modal.roles.create');
-            // $group->get('/edit', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getModalEdit');
+            $group->get('/edit', RoleEditModal::class)->setName('modal.roles.edit');
             // $group->get('/permissions', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getModalEditPermissions');
         })->add(AuthGuard::class); //->add(new NoCache());
     }
