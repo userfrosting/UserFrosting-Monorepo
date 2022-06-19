@@ -24,7 +24,6 @@ use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Admin\Controller\UserHelper;
 use UserFrosting\Sprinkle\Core\I18n\SiteLocaleInterface;
 
 /**
@@ -54,7 +53,6 @@ class UserPasswordModal
         protected Translator $translator,
         protected Twig $view,
         protected UserInterface $userModel,
-        protected UserHelper $userHelper,
     ) {
     }
 
@@ -62,12 +60,13 @@ class UserPasswordModal
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param Request  $request
-     * @param Response $response
+     * @param UserInterface $user     The user, injected by the middleware.
+     * @param Request       $request
+     * @param Response      $response
      */
-    public function __invoke(Request $request, Response $response): Response
+    public function __invoke(UserInterface $user, Response $response): Response
     {
-        $payload = $this->handle($request);
+        $payload = $this->handle($user);
 
         return $this->view->render($response, $this->template, $payload);
     }
@@ -75,16 +74,12 @@ class UserPasswordModal
     /**
      * Handle the request and return the payload.
      *
+     * @param UserInterface $user
+     *
      * @return mixed[]
      */
-    protected function handle(Request $request): array
+    protected function handle(UserInterface $user): array
     {
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        // Get user to delete.
-        $user = $this->userHelper->getUser($params);
-
         // Access-controlled page based on the user.
         $this->validateAccess($user);
 

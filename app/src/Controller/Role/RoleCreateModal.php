@@ -54,10 +54,9 @@ class RoleCreateModal
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param Request  $request
      * @param Response $response
      */
-    public function __invoke(Request $request, Response $response): Response
+    public function __invoke(Response $response): Response
     {
         $this->validateAccess();
         $payload = $this->handle();

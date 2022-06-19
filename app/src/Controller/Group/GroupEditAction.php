@@ -27,7 +27,6 @@ use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
-use UserFrosting\Sprinkle\Admin\Controller\GroupHelper;
 use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
 use UserFrosting\Sprinkle\Admin\Exceptions\GroupException;
 use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
@@ -63,7 +62,6 @@ class GroupEditAction
         protected Translator $translator,
         protected UserActivityLogger $userActivityLogger,
         protected GroupInterface $groupModel,
-        protected GroupHelper $groupHelper,
     ) {
     }
 
@@ -71,14 +69,14 @@ class GroupEditAction
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $slug     The slug of the group to edit, from the URI.
-     * @param Request  $request
-     * @param Response $response
+     * @param GroupInterface $group    The group to update, injected from middleware.
+     * @param Request        $request
+     * @param Response       $response
      */
-    public function __invoke(string $slug, Request $request, Response $response): Response
+    public function __invoke(GroupInterface $group, Request $request, Response $response): Response
     {
         try {
-            $this->handle($slug, $request);
+            $this->handle($group, $request);
         } catch (UserMessageException $e) {
             $title = $this->translateExceptionPart($e->getTitle());
             $description = $this->translateExceptionPart($e->getDescription());
@@ -96,14 +94,11 @@ class GroupEditAction
     /**
      * Handle the request.
      *
-     * @param string  $slug    The slug of the group to edit, from the URI.
-     * @param Request $request
+     * @param GroupInterface $group
+     * @param Request        $request
      */
-    protected function handle(string $slug, Request $request): void
+    protected function handle(GroupInterface $group, Request $request): void
     {
-        // Get the username from the URL
-        $group = $this->groupHelper->getGroup(['slug' => $slug]);
-
         // Get PUT parameters
         $params = (array) $request->getParsedBody();
 

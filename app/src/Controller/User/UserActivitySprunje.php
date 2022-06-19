@@ -17,7 +17,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Admin\Controller\UserHelper;
 use UserFrosting\Sprinkle\Admin\Sprunje\ActivitySprunje;
 
 /**
@@ -34,7 +33,6 @@ class UserActivitySprunje
     public function __construct(
         protected Authenticator $authenticator,
         protected ActivitySprunje $sprunje,
-        protected UserHelper $userHelper,
     ) {
     }
 
@@ -42,14 +40,13 @@ class UserActivitySprunje
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $user_name The name of the user to delete, from the URI.
-     * @param Request  $request
-     * @param Response $response
+     * @param UserInterface $user     The user, injected by the middleware.
+     * @param Request       $request
+     * @param Response      $response
      */
-    public function __invoke(string $user_name, Request $request, Response $response): Response
+    public function __invoke(UserInterface $user, Request $request, Response $response): Response
     {
-        // Get the username from the URL
-        $user = $this->userHelper->getUser(['user_name' => $user_name]);
+        // Access-controlled page based on the user.
         $this->validateAccess($user);
 
         // GET parameters and pass to Sprunje

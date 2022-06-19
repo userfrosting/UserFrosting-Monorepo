@@ -21,8 +21,8 @@ use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
+use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Admin\Controller\RoleHelper;
 use UserFrosting\Sprinkle\Core\I18n\SiteLocaleInterface;
 
 /**
@@ -50,7 +50,6 @@ class RoleEditModal
         protected SiteLocaleInterface $siteLocale,
         protected Translator $translator,
         protected Twig $view,
-        protected RoleHelper $roleHelper,
     ) {
     }
 
@@ -58,12 +57,12 @@ class RoleEditModal
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param Request  $request
-     * @param Response $response
+     * @param RoleInterface $role
+     * @param Response      $response
      */
-    public function __invoke(Request $request, Response $response): Response
+    public function __invoke(RoleInterface $role, Response $response): Response
     {
-        $payload = $this->handle($request);
+        $payload = $this->handle($role);
 
         return $this->view->render($response, $this->template, $payload);
     }
@@ -71,16 +70,12 @@ class RoleEditModal
     /**
      * Handle the request and return the payload.
      *
-     * @param Request $request
+     * @param RoleInterface $role
      *
      * @return mixed[]
      */
-    protected function handle(Request $request): array
+    protected function handle(RoleInterface $role): array
     {
-        // Get user to edit
-        $params = $request->getQueryParams();
-        $role = ($this->roleHelper)($params);
-
         // Access-controlled resource - check that currentUser has permission
         // to edit basic fields "name", "slug", "description" for this role
         $fieldNames = ['name', 'slug', 'description'];

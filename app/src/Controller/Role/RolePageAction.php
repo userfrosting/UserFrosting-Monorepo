@@ -19,7 +19,6 @@ use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Admin\Controller\RoleHelper;
 
 /**
  * Renders a page displaying a role's information, in read-only mode.
@@ -43,7 +42,6 @@ class RolePageAction
         protected Authenticator $authenticator,
         protected RouteParserInterface $routeParser,
         protected Twig $view,
-        protected RoleHelper $roleHelper,
     ) {
     }
 
@@ -51,14 +49,12 @@ class RolePageAction
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $slug     The slug of the group, from the URI.
-     * @param Request  $request
-     * @param Response $response
+     * @param RoleInterface $role     The role to display, injected by middleware.
+     * @param Request       $request
+     * @param Response      $response
      */
-    public function __invoke(string $slug, Request $request, Response $response): Response
+    public function __invoke(RoleInterface $role, Request $request, Response $response): Response
     {
-        // Get the username from the URL
-        $role = ($this->roleHelper)($slug);
         $payload = $this->handle($role, $request);
 
         return $this->view->render($response, $this->template, $payload);

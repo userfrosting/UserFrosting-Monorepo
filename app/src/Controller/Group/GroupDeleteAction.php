@@ -23,7 +23,6 @@ use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
-use UserFrosting\Sprinkle\Admin\Controller\GroupHelper;
 use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
 use UserFrosting\Sprinkle\Admin\Exceptions\GroupException;
 use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
@@ -56,7 +55,6 @@ class GroupDeleteAction
         protected Connection $db,
         protected Translator $translator,
         protected UserActivityLogger $userActivityLogger,
-        protected GroupHelper $groupHelper,
     ) {
     }
 
@@ -64,13 +62,13 @@ class GroupDeleteAction
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $slug     The name of the user to delete, from the URI.
-     * @param Response $response
+     * @param GroupInterface $group    The group to delete, injected from middleware.
+     * @param Response       $response
      */
-    public function __invoke(string $slug, Response $response): Response
+    public function __invoke(GroupInterface $group, Response $response): Response
     {
         try {
-            $this->handle($slug);
+            $this->handle($group);
         } catch (UserMessageException $e) {
             $title = $this->translateExceptionPart($e->getTitle());
             $description = $this->translateExceptionPart($e->getDescription());
@@ -88,14 +86,11 @@ class GroupDeleteAction
     /**
      * Handle the request.
      *
-     * @param string $slug
+     * @param GroupInterface $group
      */
-    protected function handle(string $slug): void
+    protected function handle(GroupInterface $group): void
     {
-        // Get user to delete.
-        $group = $this->groupHelper->getGroup(['slug' => $slug]);
-
-        // Access-controlled page based on the user.
+        // Access-controlled page based on the group.
         $this->validateAccess($group);
 
         // Check that we are not deleting the default group

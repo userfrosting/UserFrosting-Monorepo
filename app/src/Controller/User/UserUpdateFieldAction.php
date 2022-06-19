@@ -28,7 +28,6 @@ use UserFrosting\Sprinkle\Account\Exceptions\AccountException;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
 use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
-use UserFrosting\Sprinkle\Admin\Controller\UserHelper;
 use UserFrosting\Sprinkle\Admin\Exceptions\MissingRequiredParamException;
 use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
@@ -62,7 +61,6 @@ class UserUpdateFieldAction
         protected Connection $db,
         protected Translator $translator,
         protected UserActivityLogger $userActivityLogger,
-        protected UserHelper $userHelper,
     ) {
     }
 
@@ -70,19 +68,19 @@ class UserUpdateFieldAction
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $user_name The name of the user to delete, from the URI.
-     * @param string   $field     The field to update.
-     * @param Request  $request
-     * @param Response $response
+     * @param UserInterface $user     The user, injected by the middleware.
+     * @param string        $field    The field to update.
+     * @param Request       $request
+     * @param Response      $response
      */
     public function __invoke(
-        string $user_name,
+        UserInterface $user,
         string $field,
         Request $request,
         Response $response
     ): Response {
         try {
-            $this->handle($user_name, $field, $request);
+            $this->handle($user, $field, $request);
         } catch (UserMessageException $e) {
             $title = $this->translateExceptionPart($e->getTitle());
             $description = $this->translateExceptionPart($e->getDescription());
@@ -100,18 +98,15 @@ class UserUpdateFieldAction
     /**
      * Handle the request.
      *
-     * @param string  $user_name The name of the user to delete, from the URI.
-     * @param string  $fieldName The field to update.
-     * @param Request $request
+     * @param UserInterface $user
+     * @param string        $fieldName
+     * @param Request       $request
      */
     protected function handle(
-        string $user_name,
+        UserInterface $user,
         string $fieldName,
         Request $request
     ): void {
-        // Get user to update.
-        $user = $this->userHelper->getUser(['user_name' => $user_name]);
-
         // Access-controlled resource - check that current User has permission
         // to edit the specified field for this user
         $this->validateAccess($user, $fieldName);

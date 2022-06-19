@@ -17,7 +17,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Admin\Controller\GroupHelper;
 use UserFrosting\Sprinkle\Admin\Sprunje\UserSprunje;
 
 /**
@@ -31,7 +30,6 @@ class GroupUsersSprunje
     public function __construct(
         protected Authenticator $authenticator,
         protected UserSprunje $sprunje,
-        protected GroupHelper $groupHelper,
     ) {
     }
 
@@ -39,14 +37,12 @@ class GroupUsersSprunje
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $slug     The slug of the group.
-     * @param Request  $request
-     * @param Response $response
+     * @param GroupInterface $group    The group to get the users for, injected by the Middleware.
+     * @param Request        $request
+     * @param Response       $response
      */
-    public function __invoke(string $slug, Request $request, Response $response): Response
+    public function __invoke(GroupInterface $group, Request $request, Response $response): Response
     {
-        // Get the username from the URL
-        $group = $this->groupHelper->getGroup(['slug' => $slug]);
         $this->validateAccess($group);
 
         // GET parameters and pass to Sprunje

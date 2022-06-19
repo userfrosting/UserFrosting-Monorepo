@@ -12,19 +12,13 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Admin\Middlewares;
 
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
-use Slim\Routing\RouteContext;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\PermissionInterface;
-use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Admin\Exceptions\PermissionNotFoundException;
 
 /**
- * Helper class when a permission is defined by id in the URL.
+ * Route middleware to inject a permission when it's id is passed via placeholder in the URL or request query.
  */
-class PermissionInjector implements MiddlewareInterface
+class PermissionInjector extends AbstractInjector
 {
     // Route placeholder
     protected string $placeholder = 'id';
@@ -41,49 +35,19 @@ class PermissionInjector implements MiddlewareInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {
-        $placeholder = $this->getPlaceholderFromRequest($request);
-        $instance = $this->getInstance($placeholder);
-        $request = $request->withAttribute($this->attribute, $instance);
-
-        return $handler->handle($request);
-    }
-
-    /**
-     * Get the permission's id from the request.
-     *
-     * @param ServerRequestInterface $request
-     *
-     * @return string
-     */
-    protected function getPlaceholderFromRequest(ServerRequestInterface $request): string
-    {
-        $routeContext = RouteContext::fromRequest($request);
-        $route = $routeContext->getRoute();
-
-        return $route?->getArgument($this->placeholder) ?? '';
-    }
-
-    /**
      * Returns the permission's instance.
      *
-     * @param string $id
+     * @param string|null $id
      *
      * @return PermissionInterface
      */
-    protected function getInstance(string $id): PermissionInterface
+    protected function getInstance(?string $id): PermissionInterface
     {
-        /** @var null|PermissionInterface */
-        $instance = $this->model->find($id);
-
-        // If the user doesn't exist, return 404
-        if ($instance === null) {
+        if ($id === null || ($instance = $this->model->find($id)) === null) {
             throw new PermissionNotFoundException();
         }
 
+        // @phpstan-ignore-next-line Role Interface is a model
         return $instance;
     }
 }

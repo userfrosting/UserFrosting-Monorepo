@@ -16,6 +16,7 @@ use UserFrosting\Config\Config;
 use UserFrosting\Session\Session;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\PermissionInterface;
+use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Permission;
 use UserFrosting\Sprinkle\Account\Database\Models\Role;
@@ -28,9 +29,9 @@ trait testUserTrait
     /**
      * Set user for tests.
      *
-     * @param UserInterface|null $user
-     * @param bool               $isMaster If true, will set user as master user (permission for everything).
-     * @param RoleInterface[]    $roles
+     * @param UserInterface   $user
+     * @param bool            $isMaster If true, will set user as master user (permission for everything).
+     * @param RoleInterface[] $roles
      * @param (PermissionInterface|string)[] $permissions Permission will be added through a new empty role.
      */
     protected function actAsUser(
@@ -57,6 +58,7 @@ trait testUserTrait
 
         // Assign permissions
         if (count($permissions) !== 0) {
+            /** @var Role */
             $role = Role::factory()->create();
             $user->roles()->attach($role);
 
@@ -83,6 +85,7 @@ trait testUserTrait
         parent::createApplication();
 
         // Make sure we have a session
+        /** @var Session */
         $session = $this->ci->get(Session::class);
         $session->start();
     }
@@ -93,6 +96,7 @@ trait testUserTrait
     protected function deleteApplication(): void
     {
         // Make sure to clean up the session before we delete the application.
+        /** @var Session */
         $session = $this->ci->get(Session::class);
         $session->destroy();
 

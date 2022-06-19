@@ -28,7 +28,6 @@ use UserFrosting\Sprinkle\Account\Exceptions\EmailNotUniqueException;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
 use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
-use UserFrosting\Sprinkle\Admin\Controller\UserHelper;
 use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
 
@@ -61,7 +60,6 @@ class UserEditAction
         protected Translator $translator,
         protected UserActivityLogger $userActivityLogger,
         protected UserInterface $userModel,
-        protected UserHelper $userHelper,
     ) {
     }
 
@@ -69,14 +67,14 @@ class UserEditAction
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $user_name The name of the user to delete, from the URI.
-     * @param Request  $request
-     * @param Response $response
+     * @param UserInterface $user     The user, injected by the middleware.
+     * @param Request       $request
+     * @param Response      $response
      */
-    public function __invoke(string $user_name, Request $request, Response $response): Response
+    public function __invoke(UserInterface $user, Request $request, Response $response): Response
     {
         try {
-            $this->handle($user_name, $request);
+            $this->handle($user, $request);
         } catch (UserMessageException $e) {
             $title = $this->translateExceptionPart($e->getTitle());
             $description = $this->translateExceptionPart($e->getDescription());
@@ -94,13 +92,11 @@ class UserEditAction
     /**
      * Handle the request.
      *
-     * @param Request $request
+     * @param UserInterface $user
+     * @param Request       $request
      */
-    protected function handle(string $user_name, Request $request): void
+    protected function handle(UserInterface $user, Request $request): void
     {
-        // Get the username from the URL
-        $user = $this->userHelper->getUser(['user_name' => $user_name]);
-
         // Get PUT parameters
         $params = (array) $request->getParsedBody();
 

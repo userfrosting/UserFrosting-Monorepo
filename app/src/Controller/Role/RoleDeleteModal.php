@@ -22,7 +22,6 @@ use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
-use UserFrosting\Sprinkle\Admin\Controller\RoleHelper;
 use UserFrosting\Sprinkle\Admin\Exceptions\RoleException;
 use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
 use UserFrosting\Support\Message\UserMessage;
@@ -46,7 +45,6 @@ class RoleDeleteModal
         protected Config $config,
         protected Twig $view,
         protected Translator $translator,
-        protected RoleHelper $roleHelper,
     ) {
     }
 
@@ -54,13 +52,13 @@ class RoleDeleteModal
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param Request  $request
-     * @param Response $response
+     * @param RoleInterface $role
+     * @param Response      $response
      */
-    public function __invoke(Request $request, Response $response): Response
+    public function __invoke(RoleInterface $role, Response $response): Response
     {
         try {
-            $payload = $this->handle($request);
+            $payload = $this->handle($role);
         } catch (UserMessageException $e) {
             $title = $this->translateExceptionPart($e->getTitle());
             $description = $this->translateExceptionPart($e->getDescription());
@@ -75,17 +73,13 @@ class RoleDeleteModal
     /**
      * Handle the request and return the payload.
      *
+     * @param RoleInterface $role
+     *
      * @return mixed[]
      */
-    protected function handle(Request $request): array
+    protected function handle(RoleInterface $role): array
     {
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        // Get role to delete.
-        $role = ($this->roleHelper)($params);
-
-        // Access-controlled page based on the user.
+        // Access-controlled page based on the role.
         $this->validateAccess($role);
 
         // TODO : Default role should be defined in the DB instead of config.

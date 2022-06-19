@@ -19,7 +19,6 @@ use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Admin\Controller\UserHelper;
 use UserFrosting\Sprinkle\Core\I18n\SiteLocaleInterface;
 
 /**
@@ -45,7 +44,6 @@ class UserPageAction
         protected SiteLocaleInterface $siteLocale,
         protected RouteParserInterface $routeParser,
         protected Twig $view,
-        protected UserHelper $userHelper,
     ) {
     }
 
@@ -53,15 +51,12 @@ class UserPageAction
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $user_name The name of the user to delete, from the URI.
-     * @param Request  $request
-     * @param Response $response
+     * @param UserInterface $user     The user to display, injected by the middleware.
+     * @param Response      $response
      */
-    public function __invoke(string $user_name, Request $request, Response $response): Response
+    public function __invoke(UserInterface $user, Response $response): Response
     {
-        // Get the username from the URL
-        $user = $this->userHelper->getUser(['user_name' => $user_name]);
-        $payload = $this->handle($user, $request);
+        $payload = $this->handle($user);
 
         return $this->view->render($response, $this->template, $payload);
     }
@@ -70,11 +65,10 @@ class UserPageAction
      * Handle the request and return the payload.
      *
      * @param UserInterface $user
-     * @param Request       $request
      *
      * @return mixed[]
      */
-    protected function handle(UserInterface $user, Request $request): array
+    protected function handle(UserInterface $user): array
     {
         // Access-controlled page
         if (!$this->authenticator->checkAccess('uri_user', [

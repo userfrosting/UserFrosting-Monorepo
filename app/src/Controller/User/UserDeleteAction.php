@@ -24,7 +24,6 @@ use UserFrosting\Sprinkle\Account\Exceptions\AccountException;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
 use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
-use UserFrosting\Sprinkle\Admin\Controller\UserHelper;
 use UserFrosting\Sprinkle\Admin\Exceptions\AccountNotFoundException;
 use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
@@ -59,7 +58,6 @@ class UserDeleteAction
         protected Connection $db,
         protected Translator $translator,
         protected UserActivityLogger $userActivityLogger,
-        protected UserHelper $userHelper,
     ) {
     }
 
@@ -67,13 +65,13 @@ class UserDeleteAction
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $user_name The name of the user to delete, from the URI.
-     * @param Response $response
+     * @param UserInterface $user     The user, injected by the middleware.
+     * @param Response      $response
      */
-    public function __invoke($user_name, Response $response): Response
+    public function __invoke(UserInterface $user, Response $response): Response
     {
         try {
-            $this->handle($user_name);
+            $this->handle($user);
         } catch (UserMessageException $e) {
             $title = $this->translateExceptionPart($e->getTitle());
             $description = $this->translateExceptionPart($e->getDescription());
@@ -91,13 +89,10 @@ class UserDeleteAction
     /**
      * Handle the request.
      *
-     * @param string $user_name
+     * @param UserInterface $user
      */
-    protected function handle(string $user_name): void
+    protected function handle(UserInterface $user): void
     {
-        // Get user to delete.
-        $user = $this->userHelper->getUser(['user_name' => $user_name]);
-
         // Access-controlled page based on the user.
         $this->validateAccess($user);
 

@@ -60,11 +60,11 @@ class GroupDeleteModalTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertJsonResponse([
-            'title'       => 'Validation error',
-            'description' => 'Please specify a value for <strong>Slug</strong>.',
-            'status'      => 400,
+            'title'       => 'Account Exception',
+            'description' => 'Group not found',
+            'status'      => 404,
         ], $response);
-        $this->assertResponseStatus(400, $response);
+        $this->assertResponseStatus(404, $response);
     }
 
     public function testPageForNoPermissions(): void

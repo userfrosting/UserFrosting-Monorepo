@@ -25,6 +25,7 @@ use UserFrosting\Sprinkle\Admin\Controller\Group\GroupEditModal;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupsPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupUsersSprunje;
+use UserFrosting\Sprinkle\Admin\Middlewares\GroupInjector;
 
 /*
  * Routes for administrative group management.
@@ -35,22 +36,22 @@ class GroupsRoute implements RouteDefinitionInterface
     {
         $app->group('/groups', function (RouteCollectorProxy $group) {
             $group->get('', GroupsPageAction::class)->setName('uri_groups');
-            $group->get('/g/{slug}', GroupPageAction::class);
+            $group->get('/g/{slug}', GroupPageAction::class)->add(GroupInjector::class);
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/api/groups', function (RouteCollectorProxy $group) {
-            $group->delete('/g/{slug}', GroupDeleteAction::class);
+            $group->delete('/g/{slug}', GroupDeleteAction::class)->add(GroupInjector::class);
             $group->get('', [GroupsPageAction::class, 'sprunje']);
             // $group->get('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getInfo');
-            $group->get('/g/{slug}/users', GroupUsersSprunje::class);
+            $group->get('/g/{slug}/users', GroupUsersSprunje::class)->add(GroupInjector::class);
             $group->post('', GroupCreateAction::class);
-            $group->put('/g/{slug}', GroupEditAction::class);
+            $group->put('/g/{slug}', GroupEditAction::class)->add(GroupInjector::class);
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/modals/groups', function (RouteCollectorProxy $group) {
-            $group->get('/confirm-delete', GroupDeleteModal::class)->setName('modal.groups.delete');
+            $group->get('/confirm-delete', GroupDeleteModal::class)->add(GroupInjector::class)->setName('modal.groups.delete');
             $group->get('/create', GroupCreateModal::class)->setName('modal.groups.create');
-            $group->get('/edit', GroupEditModal::class)->setName('modal.groups.edit');
+            $group->get('/edit', GroupEditModal::class)->add(GroupInjector::class)->setName('modal.groups.edit');
         })->add(AuthGuard::class); //->add(new NoCache());
     }
 }

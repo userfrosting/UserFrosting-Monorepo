@@ -19,7 +19,6 @@ use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Mail\PasswordResetEmail;
-use UserFrosting\Sprinkle\Admin\Controller\UserHelper;
 
 /**
  * Processes the request to send a user a password reset email.
@@ -42,7 +41,6 @@ class UserPasswordAction
         protected AlertStream $alert,
         protected Authenticator $authenticator,
         protected PasswordResetEmail $passwordEmail,
-        protected UserHelper $userHelper,
     ) {
     }
 
@@ -50,13 +48,12 @@ class UserPasswordAction
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $user_name The name of the user to delete, from the URI.
-     * @param Request  $request
-     * @param Response $response
+     * @param UserInterface $user     The user to delete, injected by the middleware.
+     * @param Response      $response
      */
-    public function __invoke(string $user_name, Request $request, Response $response): Response
+    public function __invoke(UserInterface $user, Response $response): Response
     {
-        $this->handle($user_name);
+        $this->handle($user);
         $payload = json_encode([], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
@@ -66,13 +63,10 @@ class UserPasswordAction
     /**
      * Handle the request.
      *
-     * @param string $user_name
+     * @param UserInterface $user
      */
-    protected function handle(string $user_name): void
+    protected function handle(UserInterface $user): void
     {
-        // Get user to delete.
-        $user = $this->userHelper->getUser(['user_name' => $user_name]);
-
         // Access-controlled page based on the user.
         $this->validateAccess($user);
 

@@ -24,7 +24,6 @@ use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
 use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
-use UserFrosting\Sprinkle\Admin\Controller\RoleHelper;
 use UserFrosting\Sprinkle\Admin\Exceptions\RoleException;
 use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
 use UserFrosting\Support\Message\UserMessage;
@@ -56,7 +55,6 @@ class RoleDeleteAction
         protected Connection $db,
         protected Translator $translator,
         protected UserActivityLogger $userActivityLogger,
-        protected RoleHelper $roleHelper,
     ) {
     }
 
@@ -64,13 +62,13 @@ class RoleDeleteAction
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $slug     The name of the user to delete, from the URI.
-     * @param Response $response
+     * @param RoleInterface $role     The role to delete, injected from middleware.
+     * @param Response      $response
      */
-    public function __invoke(string $slug, Response $response): Response
+    public function __invoke(RoleInterface $role, Response $response): Response
     {
         try {
-            $this->handle($slug);
+            $this->handle($role);
         } catch (UserMessageException $e) {
             $title = $this->translateExceptionPart($e->getTitle());
             $description = $this->translateExceptionPart($e->getDescription());
@@ -88,14 +86,11 @@ class RoleDeleteAction
     /**
      * Handle the request.
      *
-     * @param string $slug
+     * @param RoleInterface $role
      */
-    protected function handle(string $slug): void
+    protected function handle(RoleInterface $role): void
     {
-        // Get user to delete.
-        $role = ($this->roleHelper)($slug);
-
-        // Access-controlled page based on the user.
+        // Access-controlled page based on the role.
         $this->validateAccess($role);
 
         // TODO : Default role should be defined in the DB instead of config.

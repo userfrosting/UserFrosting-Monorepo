@@ -17,7 +17,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Admin\Controller\RoleHelper;
 use UserFrosting\Sprinkle\Admin\Sprunje\PermissionSprunje;
 
 /**
@@ -34,7 +33,6 @@ class RolePermissionsSprunje
     public function __construct(
         protected Authenticator $authenticator,
         protected PermissionSprunje $sprunje,
-        protected RoleHelper $roleHelper,
     ) {
     }
 
@@ -42,14 +40,13 @@ class RolePermissionsSprunje
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $slug     The slug of the group.
-     * @param Request  $request
-     * @param Response $response
+     * @param RoleInterface $role     The role to display for, injected by middleware.
+     * @param Request       $request
+     * @param Response      $response
      */
-    public function __invoke(string $slug, Request $request, Response $response): Response
+    public function __invoke(RoleInterface $role, Request $request, Response $response): Response
     {
-        // Get the username from the URL
-        $role = ($this->roleHelper)($slug);
+        // Access-controlled page based on the role.
         $this->validateAccess($role);
 
         // GET parameters and pass to Sprunje

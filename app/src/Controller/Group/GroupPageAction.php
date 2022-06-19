@@ -19,7 +19,6 @@ use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Admin\Controller\GroupHelper;
 use UserFrosting\Sprinkle\Core\I18n\SiteLocaleInterface;
 
 /**
@@ -45,7 +44,6 @@ class GroupPageAction
         protected SiteLocaleInterface $siteLocale,
         protected RouteParserInterface $routeParser,
         protected Twig $view,
-        protected GroupHelper $groupHelper,
     ) {
     }
 
@@ -53,15 +51,12 @@ class GroupPageAction
      * Receive the request, dispatch to the handler, and return the payload to
      * the response.
      *
-     * @param string   $slug     The slug of the group, from the URI.
-     * @param Request  $request
-     * @param Response $response
+     * @param GroupInterface $group    The group to display, injected by the middleware.
+     * @param Response       $response
      */
-    public function __invoke(string $slug, Request $request, Response $response): Response
+    public function __invoke(GroupInterface $group, Response $response): Response
     {
-        // Get the username from the URL
-        $group = $this->groupHelper->getGroup(['slug' => $slug]);
-        $payload = $this->handle($group, $request);
+        $payload = $this->handle($group);
 
         return $this->view->render($response, $this->template, $payload);
     }
@@ -70,11 +65,10 @@ class GroupPageAction
      * Handle the request and return the payload.
      *
      * @param GroupInterface $group
-     * @param Request        $request
      *
      * @return mixed[]
      */
-    protected function handle(GroupInterface $group, Request $request): array
+    protected function handle(GroupInterface $group): array
     {
         // Access-controlled page
         if (!$this->authenticator->checkAccess('uri_group', [

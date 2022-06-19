@@ -59,11 +59,11 @@ class UserDeleteModalTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertJsonResponse([
-            'title'       => 'Validation error',
-            'description' => 'Please specify a value for <strong>Username</strong>.',
-            'status'      => 400,
+            'title'       => 'Account Not Found',
+            'description' => 'This account does not exist. It may have been deleted.',
+            'status'      => 404,
         ], $response);
-        $this->assertResponseStatus(400, $response);
+        $this->assertResponseStatus(404, $response);
     }
 
     public function testPageForNoPermissions(): void
