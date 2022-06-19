@@ -26,7 +26,8 @@ class ActivitiesRoutes implements RouteDefinitionInterface
     public function register(App $app): void
     {
         $app->group('/activities', function (RouteCollectorProxy $group) {
-            $group->get('', ActivitiesPageAction::class)->setName('uri_activities');
+            $group->get('', ActivitiesPageAction::class)
+                  ->setName('uri_activities');
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/api/activities', function (RouteCollectorProxy $group) {

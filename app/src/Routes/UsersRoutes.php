@@ -31,6 +31,7 @@ use UserFrosting\Sprinkle\Admin\Controller\User\UserRoleSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserUpdateFieldAction;
 use UserFrosting\Sprinkle\Admin\Middlewares\UserInjector;
+use UserFrosting\Sprinkle\Admin\Middlewares\UserMessageExceptionHandler;
 
 /*
  * Routes for administrative user management.
@@ -40,29 +41,57 @@ class UsersRoutes implements RouteDefinitionInterface
     public function register(App $app): void
     {
         $app->group('/users', function (RouteCollectorProxy $group) {
-            $group->get('', UsersPageAction::class)->setName('uri_users');
-            $group->get('/u/{user_name}', UserPageAction::class)->add(UserInjector::class)->setName('page.user');
+            $group->get('', UsersPageAction::class)
+                  ->setName('uri_users');
+            $group->get('/u/{user_name}', UserPageAction::class)
+                  ->add(UserInjector::class)
+                  ->setName('page.user');
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/api/users', function (RouteCollectorProxy $group) {
-            $group->get('', [UsersPageAction::class, 'sprunje'])->setName('api_users');
-            $group->delete('/u/{user_name}', UserDeleteAction::class)->add(UserInjector::class)->setName('api.users.delete');
+            $group->get('', [UsersPageAction::class, 'sprunje'])
+                  ->setName('api_users');
+            $group->delete('/u/{user_name}', UserDeleteAction::class)
+                  ->add(UserInjector::class)
+                  ->add(UserMessageExceptionHandler::class)
+                  ->setName('api.users.delete');
             // $group->get('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getInfo');
-            $group->get('/u/{user_name}/activities', UserActivitySprunje::class)->add(UserInjector::class);
-            $group->get('/u/{user_name}/roles', UserRoleSprunje::class)->add(UserInjector::class);
+            $group->get('/u/{user_name}/activities', UserActivitySprunje::class)
+                  ->add(UserInjector::class);
+            $group->get('/u/{user_name}/roles', UserRoleSprunje::class)
+                  ->add(UserInjector::class);
             // $group->get('/u/{user_name}/permissions', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getPermissions');
-            $group->post('', UserCreateAction::class)->setName('api.users.create');
-            $group->post('/u/{user_name}/password-reset', UserPasswordAction::class)->add(UserInjector::class)->setName('api.users.password-reset');
-            $group->put('/u/{user_name}', UserEditAction::class)->add(UserInjector::class)->setName('api.users.edit');
-            $group->put('/u/{user_name}/{field}', UserUpdateFieldAction::class)->add(UserInjector::class)->setName('api.users.update-field');
+            $group->post('', UserCreateAction::class)
+                  ->add(UserMessageExceptionHandler::class)
+                  ->setName('api.users.create');
+            $group->post('/u/{user_name}/password-reset', UserPasswordAction::class)
+                  ->add(UserInjector::class)
+                  ->setName('api.users.password-reset');
+            $group->put('/u/{user_name}', UserEditAction::class)
+                  ->add(UserMessageExceptionHandler::class)
+                  ->add(UserInjector::class)
+                  ->setName('api.users.edit');
+            $group->put('/u/{user_name}/{field}', UserUpdateFieldAction::class)
+                  ->add(UserMessageExceptionHandler::class)
+                  ->add(UserInjector::class)
+                  ->setName('api.users.update-field');
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/modals/users', function (RouteCollectorProxy $group) {
-            $group->get('/confirm-delete', UserDeleteModal::class)->add(UserInjector::class)->setName('modal.users.delete');
-            $group->get('/create', UserCreateModal::class)->setName('modal.users.create');
-            $group->get('/edit', UserEditModal::class)->add(UserInjector::class)->setName('modal.users.edit');
-            $group->get('/password', UserPasswordModal::class)->add(UserInjector::class)->setName('modal.users.password');
-            $group->get('/roles', UserEditRolesModal::class)->add(UserInjector::class)->setName('modal.users.roles');
+            $group->get('/confirm-delete', UserDeleteModal::class)
+                  ->add(UserInjector::class)
+                  ->setName('modal.users.delete');
+            $group->get('/create', UserCreateModal::class)
+                  ->setName('modal.users.create');
+            $group->get('/edit', UserEditModal::class)
+                  ->add(UserInjector::class)
+                  ->setName('modal.users.edit');
+            $group->get('/password', UserPasswordModal::class)
+                  ->add(UserInjector::class)
+                  ->setName('modal.users.password');
+            $group->get('/roles', UserEditRolesModal::class)
+                  ->add(UserInjector::class)
+                  ->setName('modal.users.roles');
         })->add(AuthGuard::class); //->add(new NoCache());
     }
 }

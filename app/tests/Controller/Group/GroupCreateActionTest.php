@@ -128,6 +128,12 @@ class GroupCreateActionTest extends AdminTestCase
             'description' => 'Please specify a value for <strong>Slug</strong>. Slug must be between 1 and 255 characters in length.',
             'status'      => 400,
         ], $response);
+
+        // Test message
+        /** @var AlertStream */
+        $ms = $this->ci->get(AlertStream::class);
+        $messages = $ms->getAndClearMessages();
+        $this->assertSame('danger', array_reverse($messages)[0]['type']);
     }
 
     /**

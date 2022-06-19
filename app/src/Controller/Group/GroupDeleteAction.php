@@ -17,15 +17,12 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
-use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
-use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
 use UserFrosting\Sprinkle\Admin\Exceptions\GroupException;
-use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
 use UserFrosting\Support\Message\UserMessage;
 
 /**
@@ -43,8 +40,6 @@ use UserFrosting\Support\Message\UserMessage;
  */
 class GroupDeleteAction
 {
-    use TranslateExceptionPart;
-
     /**
      * Inject dependencies.
      */
@@ -53,7 +48,6 @@ class GroupDeleteAction
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $db,
-        protected Translator $translator,
         protected UserActivityLogger $userActivityLogger,
     ) {
     }
@@ -67,16 +61,7 @@ class GroupDeleteAction
      */
     public function __invoke(GroupInterface $group, Response $response): Response
     {
-        try {
-            $this->handle($group);
-        } catch (UserMessageException $e) {
-            $title = $this->translateExceptionPart($e->getTitle());
-            $description = $this->translateExceptionPart($e->getDescription());
-            $this->alert->addMessage('danger', "$title: $description");
-
-            throw $e;
-        }
-
+        $this->handle($group);
         $payload = json_encode([], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 

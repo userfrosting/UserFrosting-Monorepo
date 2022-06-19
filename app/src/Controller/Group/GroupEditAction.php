@@ -27,9 +27,7 @@ use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
-use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
 use UserFrosting\Sprinkle\Admin\Exceptions\GroupException;
-use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
 use UserFrosting\Support\Message\UserMessage;
 
@@ -46,8 +44,6 @@ use UserFrosting\Support\Message\UserMessage;
  */
 class GroupEditAction
 {
-    use TranslateExceptionPart;
-
     // Request schema for client side form validation
     protected string $schema = 'schema://requests/group/edit-info.yaml';
 
@@ -75,16 +71,7 @@ class GroupEditAction
      */
     public function __invoke(GroupInterface $group, Request $request, Response $response): Response
     {
-        try {
-            $this->handle($group, $request);
-        } catch (UserMessageException $e) {
-            $title = $this->translateExceptionPart($e->getTitle());
-            $description = $this->translateExceptionPart($e->getDescription());
-            $this->alert->addMessage('danger', "$title: $description");
-
-            throw $e;
-        }
-
+        $this->handle($group, $request);
         $payload = json_encode([], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 

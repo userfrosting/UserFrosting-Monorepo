@@ -15,15 +15,11 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Group;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
-use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
 use UserFrosting\Sprinkle\Admin\Exceptions\GroupException;
-use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
 use UserFrosting\Support\Message\UserMessage;
 
 /**
@@ -31,8 +27,6 @@ use UserFrosting\Support\Message\UserMessage;
  */
 class GroupDeleteModal
 {
-    use TranslateExceptionPart;
-
     /** @var string Page template */
     protected string $template = 'modals/confirm-delete-group.html.twig';
 
@@ -40,10 +34,8 @@ class GroupDeleteModal
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
         protected Authenticator $authenticator,
         protected Config $config,
-        protected Translator $translator,
         protected Twig $view,
     ) {
     }
@@ -57,15 +49,7 @@ class GroupDeleteModal
      */
     public function __invoke(GroupInterface $group, Response $response): Response
     {
-        try {
-            $payload = $this->handle($group);
-        } catch (UserMessageException $e) {
-            $title = $this->translateExceptionPart($e->getTitle());
-            $description = $this->translateExceptionPart($e->getDescription());
-            $this->alert->addMessage('danger', "$title: $description");
-
-            throw $e;
-        }
+        $payload = $this->handle($group);
 
         return $this->view->render($response, $this->template, $payload);
     }

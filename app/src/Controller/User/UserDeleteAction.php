@@ -17,15 +17,12 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
-use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\AccountException;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
-use UserFrosting\Sprinkle\Admin\Controller\Helpers\TranslateExceptionPart;
 use UserFrosting\Sprinkle\Admin\Exceptions\AccountNotFoundException;
-use UserFrosting\Sprinkle\Core\Exceptions\Contracts\UserMessageException;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
 
 /**
@@ -46,8 +43,6 @@ use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
  */
 class UserDeleteAction
 {
-    use TranslateExceptionPart;
-
     /**
      * Inject dependencies.
      */
@@ -56,7 +51,6 @@ class UserDeleteAction
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $db,
-        protected Translator $translator,
         protected UserActivityLogger $userActivityLogger,
     ) {
     }
@@ -70,16 +64,7 @@ class UserDeleteAction
      */
     public function __invoke(UserInterface $user, Response $response): Response
     {
-        try {
-            $this->handle($user);
-        } catch (UserMessageException $e) {
-            $title = $this->translateExceptionPart($e->getTitle());
-            $description = $this->translateExceptionPart($e->getDescription());
-            $this->alert->addMessage('danger', "$title: $description");
-
-            throw $e;
-        }
-
+        $this->handle($user);
         $payload = json_encode([], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 

@@ -26,8 +26,10 @@ class PermissionsRoutes implements RouteDefinitionInterface
     public function register(App $app): void
     {
         $app->group('/permissions', function (RouteCollectorProxy $group) {
-            $group->get('', PermissionsPageAction::class)->setName('uri_permissions');
-            $group->get('/p/{id}', PermissionPageAction::class)->add(PermissionInjector::class);
+            $group->get('', PermissionsPageAction::class)
+                  ->setName('uri_permissions');
+            $group->get('/p/{id}', PermissionPageAction::class)
+                  ->add(PermissionInjector::class);
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/api/permissions', function (RouteCollectorProxy $group) {
