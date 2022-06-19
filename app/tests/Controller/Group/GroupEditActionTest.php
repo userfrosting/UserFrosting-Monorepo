@@ -205,11 +205,11 @@ class GroupEditActionTest extends AdminTestCase
         /** @var Group */
         $group = Group::factory()->create();
         /** @var Group */
-        $duplicate = Group::factory()->create();
+        $duplicate = Group::factory()->create(['name' => 'The Foo']);
 
         // Set post payload
         $data = [
-            'name'        => $duplicate->name,
+            'name'        => 'The Foo',
             'slug'        => 'foo',
             'icon'        => 'fas fas-icon',
             'description' => 'Foo description',
