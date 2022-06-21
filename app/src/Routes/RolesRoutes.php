@@ -26,6 +26,7 @@ use UserFrosting\Sprinkle\Admin\Controller\Role\RoleEditPermissionsModal;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolePageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolePermissionsSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolesPageAction;
+use UserFrosting\Sprinkle\Admin\Controller\Role\RoleUpdateFieldAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleUsersSprunje;
 use UserFrosting\Sprinkle\Admin\Middlewares\RoleInjector;
 use UserFrosting\Sprinkle\Admin\Middlewares\UserMessageExceptionHandler;
@@ -58,7 +59,9 @@ class RolesRoutes implements RouteDefinitionInterface
             $group->put('/r/{slug}', RoleEditAction::class)
                   ->add(UserMessageExceptionHandler::class)
                   ->add(RoleInjector::class);
-            // $group->put('/r/{slug}/{field}', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:updateField');
+            $group->put('/r/{slug}/{field}', RoleUpdateFieldAction::class)
+                  ->add(UserMessageExceptionHandler::class)
+                  ->add(RoleInjector::class);
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/modals/roles', function (RouteCollectorProxy $group) {

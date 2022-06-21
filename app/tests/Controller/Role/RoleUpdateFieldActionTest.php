@@ -1,0 +1,235 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
+ *
+ * @link      https://github.com/userfrosting/sprinkle-admin
+ * @copyright Copyright (c) 2022 Alexander Weissman & Louis Charette
+ * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
+ */
+
+namespace UserFrosting\Sprinkle\Admin\Tests\Controller\Role;
+
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use UserFrosting\Alert\AlertStream;
+use UserFrosting\Sprinkle\Account\Database\Models\Permission;
+use UserFrosting\Sprinkle\Account\Database\Models\Role;
+use UserFrosting\Sprinkle\Account\Database\Models\User;
+use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
+use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
+use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
+
+class RoleUpdateFieldActionTest extends AdminTestCase
+{
+    use RefreshDatabase;
+    use testUserTrait;
+    use MockeryPHPUnitIntegration;
+
+    /**
+     * Setup test database for controller tests
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->refreshDatabase();
+    }
+
+    public function testPageForGuestUser(): void
+    {
+        // Create request with method and url and fetch response
+        $request = $this->createJsonRequest('PUT', '/api/roles/r/foo/permissions');
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse('Login Required', $response, 'title');
+        $this->assertResponseStatus(302, $response);
+
+        // Assert Event Redirect
+        $this->assertSame('/account/sign-in?redirect=%2Fapi%2Froles%2Fr%2Ffoo%2Fpermissions', $response->getHeaderLine('Location'));
+    }
+
+    public function testPageWithNotFoundUser(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user);
+
+        // Create request with method and url and fetch response
+        $request = $this->createJsonRequest('PUT', '/api/roles/r/foo/permissions');
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse([
+            'title'       => 'Account Exception',
+            'description' => 'Role not found',
+            'status'      => 404,
+        ], $response);
+        $this->assertResponseStatus(404, $response);
+    }
+
+    public function testPostForNoData(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user, isMaster: true);
+
+        /** @var Role */
+        $role = Role::factory()->create();
+
+        // Create request with method and url and fetch response
+        $request = $this->createJsonRequest('PUT', '/api/roles/r/' . $role->slug . '/name');
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse('Validation error', $response, 'title');
+        $this->assertJsonResponse('Please specify a value for <strong>name</strong>.', $response, 'description');
+        $this->assertResponseStatus(400, $response);
+    }
+
+    public function testPageForNoPermissions(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user);
+
+        /** @var Role */
+        $role = Role::factory()->create();
+
+        // Create request with method and url and fetch response
+        $data = ['permissions' => []];
+        $request = $this->createJsonRequest('PUT', '/api/roles/r/' . $role->slug . '/permissions', $data);
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse('Access Denied', $response, 'title');
+        $this->assertResponseStatus(403, $response);
+    }
+
+    public function testPostForName(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user, permissions: ['update_role_field']);
+
+        /** @var Role */
+        $role = Role::factory()->create();
+
+        // Create request with method and url and fetch response
+        $data = [
+            'name'  => 'New Foo',
+        ];
+        $request = $this->createJsonRequest('PUT', '/api/roles/r/' . $role->slug . '/name', $data);
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse([], $response);
+        $this->assertResponseStatus(200, $response);
+
+        // Make sure the role has the new name.
+        $role->refresh();
+        $this->assertSame('New Foo', $role->name);
+    }
+
+    public function testPostForPermission(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user, permissions: ['update_role_field']);
+
+        /** @var Role */
+        $role = Role::factory()->create();
+
+        /** @var Permission */
+        $permissions = Permission::factory()->count(2)->create();
+
+        /*
+        N.B.: Expected value format, passed from uf-collection :
+        value[0][permission_id]: 1
+        value[1][permission_id]: 2
+        value[2][permission_id]: 3
+        */
+
+        // @phpstan-ignore-next-line
+        $ids = $permissions->map(function ($item) {
+            return ['permission_id' => $item->id];
+        })->toArray();
+
+        // Create request with method and url and fetch response
+        $data = ['permissions' => $ids];
+        $request = $this->createJsonRequest('PUT', '/api/roles/r/' . $role->slug . '/permissions', $data);
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse([], $response);
+        $this->assertResponseStatus(200, $response);
+
+        // Make sure the role has the new permissions.
+        $role->refresh();
+        $this->assertCount(2, $role->permissions);
+
+        // Test message
+        /** @var AlertStream */
+        $ms = $this->ci->get(AlertStream::class);
+        $messages = $ms->getAndClearMessages();
+        $this->assertSame('success', array_reverse($messages)[0]['type']);
+        $this->assertSame('Permissions updated for role <strong>' . $role->name . '</strong>', array_reverse($messages)[0]['message']);
+    }
+
+    public function testPostForRemovingRoles(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user, permissions: ['update_role_field']);
+
+        /** @var Role */
+        $role = Role::factory()->has(Permission::factory())->create();
+        $this->assertCount(1, $role->permissions); // Default role above.
+
+        // Create request with method and url and fetch response
+        // uf-collection will pass no data when removing all roles_id.
+        $request = $this->createJsonRequest('PUT', '/api/roles/r/' . $role->slug . '/permissions');
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse([], $response);
+        $this->assertResponseStatus(200, $response);
+
+        // Make sure the user has the new roles.
+        $role->refresh();
+        $this->assertCount(0, $role->permissions);
+
+        // Test message
+        /** @var AlertStream */
+        $ms = $this->ci->get(AlertStream::class);
+        $messages = $ms->getAndClearMessages();
+        $this->assertSame('success', array_reverse($messages)[0]['type']);
+        $this->assertSame('Permissions updated for role <strong>' . $role->name . '</strong>', array_reverse($messages)[0]['message']);
+    }
+
+    public function testPageForFailedValidation(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user, permissions: ['update_role_field']);
+
+        /** @var Role */
+        $role = Role::factory()->create();
+
+        // Create request with method and url and fetch response
+        $data = ['permissions' => 'notAnArray'];
+        $request = $this->createJsonRequest('PUT', '/api/roles/r/' . $role->slug . '/permissions', $data);
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse('The values for <strong>permissions</strong> must be in an array.', $response, 'description');
+        $this->assertResponseStatus(400, $response);
+
+        // Test message
+        /** @var AlertStream */
+        $ms = $this->ci->get(AlertStream::class);
+        $messages = $ms->getAndClearMessages();
+        $this->assertSame('danger', array_reverse($messages)[0]['type']);
+    }
+}
