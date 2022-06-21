@@ -6,6 +6,7 @@
  *
  * Target page: /permissions/p/{id}
  */
+import { bindUserButtons } from "../widgets/users";
 
 $(document).ready(function() {
     $("#widget-permission-users").ufTable({

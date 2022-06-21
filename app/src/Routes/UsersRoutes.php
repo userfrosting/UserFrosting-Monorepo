@@ -27,6 +27,7 @@ use UserFrosting\Sprinkle\Admin\Controller\User\UserEditRolesModal;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPasswordAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPasswordModal;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserPermissionSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserRoleSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserUpdateFieldAction;
@@ -60,7 +61,8 @@ class UsersRoutes implements RouteDefinitionInterface
                   ->add(UserInjector::class);
             $group->get('/u/{user_name}/roles', UserRoleSprunje::class)
                   ->add(UserInjector::class);
-            // $group->get('/u/{user_name}/permissions', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getPermissions');
+            $group->get('/u/{user_name}/permissions', UserPermissionSprunje::class)
+                  ->add(UserInjector::class);
             $group->post('', UserCreateAction::class)
                   ->add(UserMessageExceptionHandler::class)
                   ->setName('api.users.create');

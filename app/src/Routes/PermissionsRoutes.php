@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * UserFrosting Admin Sprinkle (http://www.userfrosting.com)
  *
@@ -16,6 +18,7 @@ use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
 use UserFrosting\Sprinkle\Admin\Controller\Permission\PermissionPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Permission\PermissionsPageAction;
+use UserFrosting\Sprinkle\Admin\Controller\Permission\PermissionUserSprunje;
 use UserFrosting\Sprinkle\Admin\Middlewares\PermissionInjector;
 
 /*
@@ -35,7 +38,8 @@ class PermissionsRoutes implements RouteDefinitionInterface
         $app->group('/api/permissions', function (RouteCollectorProxy $group) {
             $group->get('', [PermissionsPageAction::class, 'sprunje']);
             // $group->get('/p/{id}', 'UserFrosting\Sprinkle\Admin\Controller\PermissionController:getInfo');
-            // $group->get('/p/{id}/users', 'UserFrosting\Sprinkle\Admin\Controller\PermissionController:getUsers');
+            $group->get('/p/{id}/users', PermissionUserSprunje::class)
+                  ->add(PermissionInjector::class);
         })->add(AuthGuard::class); //->add(new NoCache());
     }
 }

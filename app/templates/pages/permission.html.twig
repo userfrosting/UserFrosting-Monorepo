@@ -2,7 +2,7 @@
 
 {% block stylesheets_page %}
     <!-- Page-group-specific CSS asset bundle -->
-    {{ assets.css('css/form-widgets') | raw }}
+    {{ encore_entry_link_tags('page.permission') }}
 {% endblock %}
 
 {# Overrides blocks in head of base template #}
@@ -75,7 +75,7 @@
 
     // Add user name
     page = $.extend(
-        true,               // deep extend
+        true, // deep extend
         {
             "permission_id": "{{permission.id}}"
         },
@@ -83,9 +83,6 @@
     );
     </script>
 
-    <!-- Include form widgets JS -->
-    {{ assets.js('js/form-widgets') | raw }}
-
     <!-- Include page-specific JS -->
-    {{ assets.js('js/pages/permission') | raw }}
+    {{ encore_entry_script_tags('page.permission') }}
 {% endblock %}
