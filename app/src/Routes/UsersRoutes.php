@@ -56,7 +56,6 @@ class UsersRoutes implements RouteDefinitionInterface
                   ->add(UserInjector::class)
                   ->add(UserMessageExceptionHandler::class)
                   ->setName('api.users.delete');
-            // $group->get('/u/{user_name}', 'UserFrosting\Sprinkle\Admin\Controller\UserController:getInfo');
             $group->get('/u/{user_name}/activities', UserActivitySprunje::class)
                   ->add(UserInjector::class);
             $group->get('/u/{user_name}/roles', UserRoleSprunje::class)

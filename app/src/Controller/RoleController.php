@@ -30,53 +30,6 @@ use UserFrosting\Support\Exception\NotFoundException;
 class RoleController extends SimpleController
 {
     /**
-     * Returns info for a single role, along with associated permissions.
-     *
-     * This page requires authentication.
-     *
-     * Request type: GET
-     *
-     * @param Request  $request
-     * @param Response $response
-     * @param array    $args
-     *
-     * @throws ForbiddenException If user is not authorized to access page
-     * @throws NotFoundException  If role is not found
-     */
-    public function getInfo(Request $request, Response $response, $args)
-    {
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager */
-        $authorizer = $this->ci->authorizer;
-
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
-
-        // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'uri_roles')) {
-            throw new ForbiddenException();
-        }
-
-        $slug = $args['slug'];
-
-        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-        $classMapper = $this->ci->classMapper;
-
-        $role = $classMapper->getClassMapping('role')::where('slug', $slug)->first();
-
-        // If the role doesn't exist, return 404
-        if (!$role) {
-            throw new NotFoundException();
-        }
-
-        // Get role
-        $result = $role->load('permissions')->toArray();
-
-        // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
-        // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
-        return $response->withJson($result, 200, JSON_PRETTY_PRINT);
-    }
-
-    /**
      * Processes the request to update a specific field for an existing role, including permissions.
      *
      * Processes the request from the role update form, checking that:

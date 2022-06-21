@@ -47,7 +47,6 @@ class GroupsRoute implements RouteDefinitionInterface
                   ->add(UserMessageExceptionHandler::class)
                   ->add(GroupInjector::class);
             $group->get('', [GroupsPageAction::class, 'sprunje']);
-            // $group->get('/g/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\GroupController:getInfo');
             $group->get('/g/{slug}/users', GroupUsersSprunje::class)
                   ->add(GroupInjector::class);
             $group->post('', GroupCreateAction::class)

@@ -37,7 +37,6 @@ class PermissionsRoutes implements RouteDefinitionInterface
 
         $app->group('/api/permissions', function (RouteCollectorProxy $group) {
             $group->get('', [PermissionsPageAction::class, 'sprunje']);
-            // $group->get('/p/{id}', 'UserFrosting\Sprinkle\Admin\Controller\PermissionController:getInfo');
             $group->get('/p/{id}/users', PermissionUserSprunje::class)
                   ->add(PermissionInjector::class);
         })->add(AuthGuard::class); //->add(new NoCache());

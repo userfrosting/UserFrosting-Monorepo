@@ -49,7 +49,6 @@ class RolesRoutes implements RouteDefinitionInterface
                   ->add(UserMessageExceptionHandler::class)
                   ->add(RoleInjector::class);
             $group->get('', [RolesPageAction::class, 'sprunje']);
-            // $group->get('/r/{slug}', 'UserFrosting\Sprinkle\Admin\Controller\RoleController:getInfo');
             $group->get('/r/{slug}/permissions', RolePermissionsSprunje::class)
                   ->add(RoleInjector::class);
             $group->get('/r/{slug}/users', RoleUsersSprunje::class)
