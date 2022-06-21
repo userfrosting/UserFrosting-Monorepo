@@ -61,7 +61,6 @@ class UserPasswordModal
      * the response.
      *
      * @param UserInterface $user     The user, injected by the middleware.
-     * @param Request       $request
      * @param Response      $response
      */
     public function __invoke(UserInterface $user, Response $response): Response
