@@ -45,7 +45,7 @@ class UserPermissionSprunje extends Sprunje
      * WARNING : If using dependency injection, the user will be empty. To get
      * permissions for a specific user, consider manually creating the class and
      * passing the user ar constructor argument.
-     * eg.: new UserPermissionSprunje($myUser);
+     * eg.: new UserPermissionSprunje($myUser);.
      *
      * @param UserInterface $user The user to retrieve permissions for.
      */
