@@ -60,7 +60,7 @@ class GroupDeleteModalTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertJsonResponse([
-            'title'       => 'Account Exception',
+            'title'       => 'Not Found',
             'description' => 'Group not found',
             'status'      => 404,
         ], $response);

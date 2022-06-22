@@ -60,7 +60,7 @@ class RolePermissionsSprunjeTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertJsonResponse([
-            'title'       => 'Account Exception',
+            'title'       => 'Not Found',
             'description' => 'Role not found',
             'status'      => 404,
         ], $response);
