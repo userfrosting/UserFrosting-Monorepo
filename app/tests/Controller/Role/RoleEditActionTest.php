@@ -202,11 +202,11 @@ class RoleEditActionTest extends AdminTestCase
         /** @var Role */
         $role = Role::factory()->create();
         /** @var Group */
-        $duplicate = Role::factory()->create();
+        $duplicate = Role::factory()->create(['name' => 'The Foo']);
 
         // Set post payload
         $data = [
-            'name'        => $duplicate->name,
+            'name'        => 'The Foo',
             'slug'        => 'foo',
             'description' => 'Foo description',
         ];
