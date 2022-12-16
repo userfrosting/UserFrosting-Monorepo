@@ -22,10 +22,10 @@
     ],
     "require": {
         "php": "^8.0",
-        "userfrosting/framework": "^5.0.0@alpha",
-        "userfrosting/sprinkle-core": "^5.0.0@alpha",
-        "userfrosting/sprinkle-account": "^5.0.0@alpha",
-        "userfrosting/theme-adminlte": "^5.0.0@alpha"
+        "userfrosting/framework": "^5.0",
+        "userfrosting/sprinkle-core": "^5.0",
+        "userfrosting/sprinkle-account": "^5.0",
+        "userfrosting/theme-adminlte": "^5.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
@@ -40,6 +40,8 @@
         "slam/phpstan-extensions": "^6.0",
         "php-mock/php-mock-mockery": "^1.3"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "UserFrosting\\Sprinkle\\Admin\\": "app/src/"
@@ -50,7 +52,5 @@
             "UserFrosting\\Develop\\Admin\\": "develop/",
             "UserFrosting\\Sprinkle\\Admin\\Tests\\": "app/tests/"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

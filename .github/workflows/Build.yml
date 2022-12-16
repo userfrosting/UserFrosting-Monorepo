@@ -50,7 +50,7 @@ jobs:
       
       - name: Upload coverage to Codecov
         if: github.event_name != 'schedule'
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           file: ./_meta/coverage.xml
           fail_ci_if_error: true
@@ -120,7 +120,7 @@ jobs:
     
     - name: Upload coverage to Codecov
       if: github.event_name != 'schedule'
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v3
       with:
         file: ./_meta/coverage.xml
         fail_ci_if_error: true
@@ -173,7 +173,7 @@ jobs:
       
       - name: Upload coverage to Codecov
         if: github.event_name != 'schedule'
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           file: ./_meta/coverage.xml
           fail_ci_if_error: true
@@ -232,7 +232,7 @@ jobs:
       
       - name: Upload coverage to Codecov
         if: github.event_name != 'schedule'
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           file: ./_meta/coverage.xml
           fail_ci_if_error: true
@@ -284,7 +284,7 @@ jobs:
         vendor/bin/phpunit
     
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v3
       with:
         file: ./_meta/coverage.xml
         fail_ci_if_error: true
