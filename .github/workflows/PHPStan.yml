@@ -10,8 +10,13 @@ on:
 jobs:
   PHPStan:
 
+    strategy:
+      fail-fast: false
+      matrix:
+        php_versions: ['8.0', '8.1', '8.2']
+
     runs-on: ubuntu-latest
-    name: PHPStan
+    name: PHPStan - ${{ matrix.php_versions }}
 
     steps:
     - uses: actions/checkout@v2
@@ -19,7 +24,7 @@ jobs:
     - name: Setup PHP,with composer and extensions
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '8.2'
+        php-version: ${{ matrix.php_versions }}
 
     - name: Install Dependencies
       run: composer update --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
