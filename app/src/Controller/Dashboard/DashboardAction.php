@@ -91,13 +91,13 @@ class DashboardAction
     protected function handle(Request $request): array
     {
         return [
-            'counter' => [
+            'counter'   => [
                 'users'  => $this->userModel::count(),
                 'roles'  => $this->roleModel::count(),
                 'groups' => $this->groupModel::count(),
             ],
-            'info' => [
-                'version' => [
+            'info'      => [
+                'version'     => [
                     'framework' => (string) \Composer\InstalledVersions::getPrettyVersion('userfrosting/framework'),
                     'php'       => phpversion(),
                 ],

@@ -69,7 +69,7 @@ class UserActivitySprunje
     protected function validateAccess(UserInterface $user): void
     {
         if (!$this->authenticator->checkAccess('view_user_field', [
-            'user' => $user,
+            'user'     => $user,
             'property' => 'activities',
         ])) {
             throw new ForbiddenException();

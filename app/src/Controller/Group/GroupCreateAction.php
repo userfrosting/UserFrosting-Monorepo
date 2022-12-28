@@ -107,7 +107,6 @@ class GroupCreateAction
         // All checks passed!  log events/activities and create group
         // Begin transaction - DB will be rolled back if an exception occurs
         $this->db->transaction(function () use ($data, $currentUser) {
-
             // Create the group
             $group = new $this->groupModel($data);
             $group->save();

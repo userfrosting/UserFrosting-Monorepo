@@ -14,16 +14,16 @@ namespace UserFrosting\Sprinkle\Admin\Tests\Integration\Listeners;
 
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Account\Event\UserRedirectedAfterLoginEvent;
+use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
 use UserFrosting\Sprinkle\Admin\Listener\UserRedirectedToSettings;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
-use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 use UserFrosting\Theme\AdminLTE\Listener\UserRedirectedToIndex;
 
 class UserRedirectedToSettingsTest extends AdminTestCase
 {
     use RefreshDatabase;
-    use testUserTrait;
+    use WithTestUser;
 
     /**
      * Setup test database for controller tests

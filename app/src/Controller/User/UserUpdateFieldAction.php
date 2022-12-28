@@ -249,7 +249,7 @@ class UserUpdateFieldAction
     protected function validateAccess(UserInterface $user, string $fieldName): void
     {
         if (!$this->authenticator->checkAccess('update_user_field', [
-            'user' => $user,
+            'user'   => $user,
             'fields' => [$fieldName],
         ])) {
             throw new ForbiddenException();

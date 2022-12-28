@@ -88,7 +88,7 @@ class RolePageAction
         // Determine which fields should be hidden
         foreach ($fieldNames as $field) {
             if (!$this->authenticator->checkAccess('view_role_field', [
-                'role' => $role,
+                'role'     => $role,
                 'property' => $field,
             ])) {
                 $fields['hidden'][] = $field;
@@ -101,7 +101,7 @@ class RolePageAction
         ];
 
         if (!$this->authenticator->checkAccess('update_role_field', [
-            'role' => $role,
+            'role'   => $role,
             'fields' => ['name', 'slug', 'description'],
         ])) {
             $editButtons['hidden'][] = 'edit';

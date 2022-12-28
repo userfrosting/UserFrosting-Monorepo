@@ -113,7 +113,7 @@ class GroupEditAction
 
         // Access-controlled resource - check that currentUser has permission to edit submitted fields for this user
         if (!$this->authenticator->checkAccess('update_group_field', [
-            'group' => $group,
+            'group'  => $group,
             'fields' => array_values(array_unique($fieldNames)),
         ])) {
             throw new ForbiddenException();

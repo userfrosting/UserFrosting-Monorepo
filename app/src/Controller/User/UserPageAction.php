@@ -88,7 +88,7 @@ class UserPageAction
         // Determine which fields should be hidden
         foreach ($fieldNames as $field) {
             if (!$this->authenticator->checkAccess('view_user_field', [
-                'user' => $user,
+                'user'     => $user,
                 'property' => $field,
             ])) {
                 $fields['hidden'][] = $field;
@@ -107,35 +107,35 @@ class UserPageAction
         ];
 
         if (!$this->authenticator->checkAccess('update_user_field', [
-            'user' => $user,
+            'user'   => $user,
             'fields' => ['name', 'email', 'locale'],
         ])) {
             $editButtons['hidden'][] = 'edit';
         }
 
         if (!$this->authenticator->checkAccess('update_user_field', [
-            'user' => $user,
+            'user'   => $user,
             'fields' => ['flag_enabled'],
         ])) {
             $editButtons['hidden'][] = 'enable';
         }
 
         if (!$this->authenticator->checkAccess('update_user_field', [
-            'user' => $user,
+            'user'   => $user,
             'fields' => ['flag_verified'],
         ])) {
             $editButtons['hidden'][] = 'activate';
         }
 
         if (!$this->authenticator->checkAccess('update_user_field', [
-            'user' => $user,
+            'user'   => $user,
             'fields' => ['password'],
         ])) {
             $editButtons['hidden'][] = 'password';
         }
 
         if (!$this->authenticator->checkAccess('update_user_field', [
-            'user' => $user,
+            'user'   => $user,
             'fields' => ['roles'],
         ])) {
             $editButtons['hidden'][] = 'roles';
@@ -153,14 +153,14 @@ class UserPageAction
         ];
 
         if (!$this->authenticator->checkAccess('view_user_field', [
-            'user' => $user,
+            'user'     => $user,
             'property' => 'permissions',
         ])) {
             $widgets['hidden'][] = 'permissions';
         }
 
         if (!$this->authenticator->checkAccess('view_user_field', [
-            'user' => $user,
+            'user'     => $user,
             'property' => 'activities',
         ])) {
             $widgets['hidden'][] = 'activities';

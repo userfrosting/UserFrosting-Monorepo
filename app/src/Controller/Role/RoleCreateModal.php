@@ -92,7 +92,7 @@ class RoleCreateModal
                 'fields'      => $fields,
                 'submit_text' => $this->translator->translate('CREATE'),
             ],
-            'page' => [
+            'page'    => [
                 'validators' => $validatorRegister->rules('json', false),
             ],
         ];

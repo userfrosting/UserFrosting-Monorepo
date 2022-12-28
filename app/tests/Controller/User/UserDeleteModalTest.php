@@ -14,14 +14,14 @@ namespace UserFrosting\Sprinkle\Admin\Tests\Controller\User;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
+use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
-use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
 class UserDeleteModalTest extends AdminTestCase
 {
     use RefreshDatabase;
-    use testUserTrait;
+    use WithTestUser;
     use MockeryPHPUnitIntegration;
 
     /**

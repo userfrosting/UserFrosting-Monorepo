@@ -84,7 +84,7 @@ class UserEditModal
         // to edit basic fields "name", "email", "locale" for this user
         $fieldNames = ['name', 'email', 'locale'];
         if (!$this->authenticator->checkAccess('update_user_field', [
-            'user' => $user,
+            'user'   => $user,
             'fields' => $fieldNames,
         ])) {
             throw new ForbiddenException();
@@ -104,7 +104,7 @@ class UserEditModal
 
         // Disable group field if currentUser doesn't have permission to modify group
         if (!$this->authenticator->checkAccess('update_user_field', [
-            'user' => $user,
+            'user'   => $user,
             'fields' => ['group'],
         ])) {
             $fields['disabled'][] = 'group';
@@ -129,7 +129,7 @@ class UserEditModal
                 'fields'      => $fields,
                 'submit_text' => $this->translator->translate('UPDATE'),
             ],
-            'page' => [
+            'page'    => [
                 'validators' => $validator->rules('json', false),
             ],
         ];

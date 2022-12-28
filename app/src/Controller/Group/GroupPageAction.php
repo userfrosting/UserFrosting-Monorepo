@@ -88,7 +88,7 @@ class GroupPageAction
         // Determine which fields should be hidden
         foreach ($fieldNames as $field) {
             if (!$this->authenticator->checkAccess('view_group_field', [
-                'group' => $group,
+                'group'    => $group,
                 'property' => $field,
             ])) {
                 $fields['hidden'][] = $field;
@@ -101,7 +101,7 @@ class GroupPageAction
         ];
 
         if (!$this->authenticator->checkAccess('update_group_field', [
-            'group' => $group,
+            'group'  => $group,
             'fields' => ['name', 'slug', 'icon', 'description'],
         ])) {
             $editButtons['hidden'][] = 'edit';

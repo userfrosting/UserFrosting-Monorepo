@@ -153,7 +153,6 @@ class UserCreateAction
 
         // Ready to save
         $this->db->transaction(function () use ($user, $data, $currentUser) {
-
             // Store new user to database
             $user->save();
 

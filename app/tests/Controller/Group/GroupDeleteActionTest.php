@@ -17,14 +17,14 @@ use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Database\Models\Group;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
+use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
-use UserFrosting\Sprinkle\Admin\Tests\testUserTrait;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
 class GroupDeleteActionTest extends AdminTestCase
 {
     use RefreshDatabase;
-    use testUserTrait;
+    use WithTestUser;
     use MockeryPHPUnitIntegration;
 
     /**

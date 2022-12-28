@@ -82,7 +82,7 @@ class RoleEditPermissionsModal
     protected function validateAccess(RoleInterface $role): void
     {
         if (!$this->authenticator->checkAccess('update_role_field', [
-            'role' => $role,
+            'role'   => $role,
             'fields' => ['permissions'],
         ])) {
             throw new ForbiddenException();

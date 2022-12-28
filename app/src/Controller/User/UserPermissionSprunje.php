@@ -67,7 +67,7 @@ class UserPermissionSprunje
     protected function validateAccess(UserInterface $user): void
     {
         if (!$this->authenticator->checkAccess('view_user_field', [
-            'user' => $user,
+            'user'     => $user,
             'property' => 'permissions',
         ])) {
             throw new ForbiddenException();

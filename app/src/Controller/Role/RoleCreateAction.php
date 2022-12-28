@@ -107,7 +107,6 @@ class RoleCreateAction
         // All checks passed!  log events/activities and create role
         // Begin transaction - DB will be rolled back if an exception occurs
         $this->db->transaction(function () use ($data, $currentUser) {
-
             // Create the role
             $role = new $this->roleModel($data);
             $role->save();

@@ -79,7 +79,7 @@ class GroupEditModal
         // to edit basic fields "name", "slug", "icon", "description" for this group
         $fieldNames = ['name', 'slug', 'icon', 'description'];
         if (!$this->authenticator->checkAccess('update_group_field', [
-            'group' => $group,
+            'group'  => $group,
             'fields' => $fieldNames,
         ])) {
             throw new ForbiddenException();
@@ -103,7 +103,7 @@ class GroupEditModal
                 'fields'      => $fields,
                 'submit_text' => $this->translator->translate('UPDATE'),
             ],
-            'page' => [
+            'page'    => [
                 'validators' => $validator->rules('json', false),
             ],
         ];

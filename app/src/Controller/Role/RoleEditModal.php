@@ -80,7 +80,7 @@ class RoleEditModal
         // to edit basic fields "name", "slug", "description" for this role
         $fieldNames = ['name', 'slug', 'description'];
         if (!$this->authenticator->checkAccess('update_role_field', [
-            'role' => $role,
+            'role'   => $role,
             'fields' => $fieldNames,
         ])) {
             throw new ForbiddenException();
@@ -104,7 +104,7 @@ class RoleEditModal
                 'fields'      => $fields,
                 'submit_text' => $this->translator->translate('UPDATE'),
             ],
-            'page' => [
+            'page'    => [
                 'validators' => $validator->rules('json', false),
             ],
         ];
