@@ -12,13 +12,13 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Admin\Exceptions;
 
-use UserFrosting\Sprinkle\Account\Exceptions\AccountException;
+use UserFrosting\Sprinkle\Core\Exceptions\UserFacingException;
 use UserFrosting\Support\Message\UserMessage;
 
 /**
  * Used when an the a model property is not found.
  */
-final class MissingRequiredParamException extends AccountException
+final class MissingRequiredParamException extends UserFacingException
 {
     protected string $title = 'VALIDATE.ERROR';
     protected string $param = '';

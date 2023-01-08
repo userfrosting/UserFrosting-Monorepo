@@ -12,12 +12,13 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Admin\Exceptions;
 
-use Exception;
+use UserFrosting\Sprinkle\Core\Exceptions\NotFoundException;
+use UserFrosting\Support\Message\UserMessage;
 
 /**
  * Group not found exception.
  */
 final class GroupNotFoundException extends NotFoundException
 {
-    protected string $description = 'GROUP.NOT_FOUND';
+    protected string|UserMessage $description = 'GROUP.NOT_FOUND';
 }

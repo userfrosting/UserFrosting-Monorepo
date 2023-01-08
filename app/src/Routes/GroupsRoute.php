@@ -26,7 +26,6 @@ use UserFrosting\Sprinkle\Admin\Controller\Group\GroupPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupsPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupUsersSprunje;
 use UserFrosting\Sprinkle\Admin\Middlewares\GroupInjector;
-use UserFrosting\Sprinkle\Admin\Middlewares\UserMessageExceptionHandler;
 
 /*
  * Routes for administrative group management.
@@ -44,21 +43,17 @@ class GroupsRoute implements RouteDefinitionInterface
 
         $app->group('/api/groups', function (RouteCollectorProxy $group) {
             $group->delete('/g/{slug}', GroupDeleteAction::class)
-                  ->add(UserMessageExceptionHandler::class)
                   ->add(GroupInjector::class);
             $group->get('', [GroupsPageAction::class, 'sprunje']);
             $group->get('/g/{slug}/users', GroupUsersSprunje::class)
                   ->add(GroupInjector::class);
-            $group->post('', GroupCreateAction::class)
-                  ->add(UserMessageExceptionHandler::class);
+            $group->post('', GroupCreateAction::class);
             $group->put('/g/{slug}', GroupEditAction::class)
-                  ->add(UserMessageExceptionHandler::class)
                   ->add(GroupInjector::class);
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/modals/groups', function (RouteCollectorProxy $group) {
             $group->get('/confirm-delete', GroupDeleteModal::class)
-                  ->add(UserMessageExceptionHandler::class)
                   ->add(GroupInjector::class)
                   ->setName('modal.groups.delete');
             $group->get('/create', GroupCreateModal::class)

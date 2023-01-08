@@ -29,7 +29,6 @@ use UserFrosting\Sprinkle\Admin\Controller\Role\RolesPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleUpdateFieldAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleUsersSprunje;
 use UserFrosting\Sprinkle\Admin\Middlewares\RoleInjector;
-use UserFrosting\Sprinkle\Admin\Middlewares\UserMessageExceptionHandler;
 
 /*
  * Routes for administrative role management.
@@ -47,26 +46,21 @@ class RolesRoutes implements RouteDefinitionInterface
 
         $app->group('/api/roles', function (RouteCollectorProxy $group) {
             $group->delete('/r/{slug}', RoleDeleteAction::class)
-                  ->add(UserMessageExceptionHandler::class)
                   ->add(RoleInjector::class);
             $group->get('', [RolesPageAction::class, 'sprunje']);
             $group->get('/r/{slug}/permissions', RolePermissionsSprunje::class)
                   ->add(RoleInjector::class);
             $group->get('/r/{slug}/users', RoleUsersSprunje::class)
                   ->add(RoleInjector::class);
-            $group->post('', RoleCreateAction::class)
-                  ->add(UserMessageExceptionHandler::class);
+            $group->post('', RoleCreateAction::class);
             $group->put('/r/{slug}', RoleEditAction::class)
-                  ->add(UserMessageExceptionHandler::class)
                   ->add(RoleInjector::class);
             $group->put('/r/{slug}/{field}', RoleUpdateFieldAction::class)
-                  ->add(UserMessageExceptionHandler::class)
                   ->add(RoleInjector::class);
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/modals/roles', function (RouteCollectorProxy $group) {
             $group->get('/confirm-delete', RoleDeleteModal::class)
-                  ->add(UserMessageExceptionHandler::class)
                   ->add(RoleInjector::class)
                   ->setName('modal.roles.delete');
             $group->get('/create', RoleCreateModal::class)

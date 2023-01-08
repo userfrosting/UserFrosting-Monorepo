@@ -32,7 +32,6 @@ use UserFrosting\Sprinkle\Admin\Controller\User\UserRoleSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserUpdateFieldAction;
 use UserFrosting\Sprinkle\Admin\Middlewares\UserInjector;
-use UserFrosting\Sprinkle\Admin\Middlewares\UserMessageExceptionHandler;
 
 /*
  * Routes for administrative user management.
@@ -54,7 +53,6 @@ class UsersRoutes implements RouteDefinitionInterface
                   ->setName('api_users');
             $group->delete('/u/{user_name}', UserDeleteAction::class)
                   ->add(UserInjector::class)
-                  ->add(UserMessageExceptionHandler::class)
                   ->setName('api.users.delete');
             $group->get('/u/{user_name}/activities', UserActivitySprunje::class)
                   ->add(UserInjector::class);
@@ -63,17 +61,14 @@ class UsersRoutes implements RouteDefinitionInterface
             $group->get('/u/{user_name}/permissions', UserPermissionSprunje::class)
                   ->add(UserInjector::class);
             $group->post('', UserCreateAction::class)
-                  ->add(UserMessageExceptionHandler::class)
                   ->setName('api.users.create');
             $group->post('/u/{user_name}/password-reset', UserPasswordAction::class)
                   ->add(UserInjector::class)
                   ->setName('api.users.password-reset');
             $group->put('/u/{user_name}', UserEditAction::class)
-                  ->add(UserMessageExceptionHandler::class)
                   ->add(UserInjector::class)
                   ->setName('api.users.edit');
             $group->put('/u/{user_name}/{field}', UserUpdateFieldAction::class)
-                  ->add(UserMessageExceptionHandler::class)
                   ->add(UserInjector::class)
                   ->setName('api.users.update-field');
         })->add(AuthGuard::class); //->add(new NoCache());

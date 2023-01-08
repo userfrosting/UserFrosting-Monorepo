@@ -12,13 +12,13 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Admin\Exceptions;
 
-use UserFrosting\Sprinkle\Account\Exceptions\AccountException;
+use UserFrosting\Sprinkle\Core\Exceptions\UserFacingException;
 use UserFrosting\Support\Message\UserMessage;
 
 /**
  * Group related exceptions. The description is expected to be set by the controller.
  */
-final class GroupException extends AccountException
+final class GroupException extends UserFacingException
 {
     protected string $title = 'GROUP.EXCEPTION';
     protected string|UserMessage $description = 'GROUP.EXCEPTION';

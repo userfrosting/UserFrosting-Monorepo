@@ -12,12 +12,13 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Admin\Exceptions;
 
-use Exception;
+use UserFrosting\Sprinkle\Core\Exceptions\NotFoundException;
+use UserFrosting\Support\Message\UserMessage;
 
 /**
  * Role not found exception.
  */
 final class RoleNotFoundException extends NotFoundException
 {
-    protected string $description = 'ROLE.NOT_FOUND';
+    protected string|UserMessage $description = 'ROLE.NOT_FOUND';
 }
