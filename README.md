@@ -1,6 +1,6 @@
 # UserFrosting 5.0 Admin Sprinkle
 
-[![Version](https://img.shields.io/badge/Version-5.0.x-blue.svg)](https://github.com/userfrosting/sprinkle-admin/releases)
+[![Version](https://img.shields.io/github/v/release/userfrosting/sprinkle-admin?include_prereleases)](https://github.com/userfrosting/sprinkle-admin/releases)
 ![PHP Version](https://img.shields.io/badge/php-%5E8.0-brightgreen)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
 [![Build](https://img.shields.io/github/actions/workflow/status/userfrosting/sprinkle-admin/Build.yml?branch=5.0&logo=github)](https://github.com/userfrosting/sprinkle-admin/actions)
