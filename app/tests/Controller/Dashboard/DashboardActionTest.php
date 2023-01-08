@@ -17,6 +17,7 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
+use UserFrosting\Sprinkle\Admin\Controller\Dashboard\DashboardAction;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
@@ -83,14 +84,22 @@ class DashboardActionTest extends AdminTestCase
     {
         // Mock PDO
         $pdo = Mockery::mock(\PDO::class)
-            ->shouldReceive('getAttribute')->with(\PDO::ATTR_DRIVER_NAME)->andThrow(new \PDOException())
-            ->shouldReceive('getAttribute')->with(\PDO::ATTR_SERVER_VERSION)->andThrow(new \PDOException())
+            ->shouldReceive('getAttribute')->with(\PDO::ATTR_DRIVER_NAME)->andThrow(new \PDOException())->once()
+            ->shouldReceive('getAttribute')->with(\PDO::ATTR_SERVER_VERSION)->andThrow(new \PDOException())->once()
             ->getMock();
+
+        // Mock Connection
+        /** @var Connection */
         $connection = Mockery::mock(Connection::class)
             ->shouldReceive('getDatabaseName')->andReturn('database name')
             ->shouldReceive('getPdo')->andReturn($pdo)
             ->getMock();
-        $this->ci->set(Connection::class, $connection);
+
+        // Create fake controller, inject mocked connection and set it in container
+        $controller = $this->ci->make(DashboardAction::class, [
+            'dbConnection' => $connection,
+        ]);
+        $this->ci->set(DashboardAction::class, $controller);
 
         /** @var User */
         $user = User::factory()->create();

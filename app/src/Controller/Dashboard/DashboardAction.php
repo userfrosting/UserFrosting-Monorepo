@@ -13,9 +13,9 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Controller\Dashboard;
 
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Database\Connection;
 use PDO;
+use PDOException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
@@ -150,13 +150,13 @@ class DashboardAction
 
         try {
             $results['type'] = strval($pdo->getAttribute(PDO::ATTR_DRIVER_NAME));
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
             $results['type'] = 'Unknown';
         }
 
         try {
             $results['version'] = strval($pdo->getAttribute(PDO::ATTR_SERVER_VERSION));
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
             $results['version'] = '';
         }
 
