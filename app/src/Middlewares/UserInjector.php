@@ -14,6 +14,7 @@ namespace UserFrosting\Sprinkle\Admin\Middlewares;
 
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Admin\Exceptions\AccountNotFoundException;
+use UserFrosting\Sprinkle\Core\Middlewares\Injector\AbstractInjector;
 
 /**
  * Route middleware to inject user when it's user_name is passed via placeholder in the URL or request query.

@@ -14,6 +14,7 @@ namespace UserFrosting\Sprinkle\Admin\Middlewares;
 
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Admin\Exceptions\GroupNotFoundException;
+use UserFrosting\Sprinkle\Core\Middlewares\Injector\AbstractInjector;
 
 /**
  * Route middleware to inject group when it's slug is passed via placeholder in the URL or request query.
