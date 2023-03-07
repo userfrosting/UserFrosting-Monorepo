@@ -19,23 +19,21 @@ use UserFrosting\Alert\AlertStream;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
+use UserFrosting\Sprinkle\Core\Bakery\ClearCacheCommand;
 
 /**
  * Controller class for clear cache api.
  */
 class CacheApiAction
 {
-    /** @var string Page template */
-    protected string $template = 'modals/confirm-clear-cache.html.twig';
-
     /**
      * Inject dependencies.
      */
     public function __construct(
         protected AlertStream $alerts,
-        protected Cache $cache,
         protected AuthorizationManager $authorizer,
         protected Authenticator $authenticator,
+        protected ClearCacheCommand $clearCacheCommand,
     ) {
     }
 
@@ -49,7 +47,9 @@ class CacheApiAction
     public function __invoke(Request $request, Response $response): Response
     {
         $this->validateAccess();
-        $this->cache->flush(); // @phpstan-ignore-line False positive, Laravel magic method.
+        $this->clearCacheCommand->clearIlluminateCache();
+        $this->clearCacheCommand->clearTwigCache();
+        $this->clearCacheCommand->clearRouterCache();
         $this->alerts->addMessageTranslated('success', 'CACHE.CLEARED');
 
         // Write empty response
