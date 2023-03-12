@@ -25,7 +25,9 @@ use UserFrosting\Sprinkle\Core\Core;
 use UserFrosting\Sprinkle\SprinkleRecipe;
 use UserFrosting\Theme\AdminLTE\AdminLTE;
 
-class Admin implements SprinkleRecipe, EventListenerRecipe
+class Admin implements
+    SprinkleRecipe,
+    EventListenerRecipe
 {
     /**
      * {@inheritdoc}
@@ -41,16 +43,6 @@ class Admin implements SprinkleRecipe, EventListenerRecipe
     public function getPath(): string
     {
         return __DIR__ . '/../';
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @codeCoverageIgnore
-     */
-    public function getBakeryCommands(): array
-    {
-        return [];
     }
 
     /**
@@ -84,14 +76,6 @@ class Admin implements SprinkleRecipe, EventListenerRecipe
      * {@inheritDoc}
      */
     public function getServices(): array
-    {
-        return [];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getMiddlewares(): array
     {
         return [];
     }
