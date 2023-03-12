@@ -10,6 +10,9 @@ _meta/
 # Ignore personal config files (dev)
 develop/.env
 
+# Ignore lock files
+composer.lock
+
 # Ignore log, cache, sessions and storage directories
 develop/cache/*
 develop/database/*
