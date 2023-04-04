@@ -9,7 +9,7 @@
     {% if checkAccess('uri_users') %}
     <div class="row">
         <div class="col-md-4 col-sm-6 col-xs-12">
-          <a href="{{site.uri.public}}/users"> {# TODO #}
+          <a href="{{ urlFor('uri_users') }}">
             <div class="info-box">
               <span class="info-box-icon bg-aqua"><i class="fas fa-user fa-fw"></i></span>
               <div class="info-box-content">
@@ -24,7 +24,7 @@
         <!-- /.col -->
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-          <a href="{{site.uri.public}}/roles"> {# TODO #}
+          <a href="{{ urlFor('uri_roles') }}">
             <div class="info-box">
               <span class="info-box-icon bg-red"><i class="fas fa-id-card"></i></span>
               <div class="info-box-content">
@@ -39,7 +39,7 @@
         <!-- /.col -->
 
         <div class="col-md-4 col-sm-6 col-xs-12">
-          <a href="{{site.uri.public}}/groups"> {# TODO #}
+          <a href="{{ urlFor('uri_groups') }}">
             <div class="info-box">
               <span class="info-box-icon bg-green"><i class="fas fa-users"></i></span>
               <div class="info-box-content">
@@ -103,8 +103,10 @@
                       <ul class="users-list clearfix">
                         {% for user in users %}
                         <li>
-                          <img src="{{ user.avatar }}" alt="User Image">
-                          <a class="users-list-name" href="{{site.uri.public}}/users/u/{{user.user_name}}">{{user.first_name}} {{user.last_name}}</a> {# TODO #}
+                          <a class="users-list-name" href="{{ urlFor('page.user', {'user_name': user.user_name}) }}">
+                            <img src="{{ user.avatar }}" alt="User Image">
+                            <div>{{user.first_name}} {{user.last_name}}</div>
+                          </a>
                           <span class="users-list-date">{{ user.registered }}</span>
                         </li>
                         {% endfor %}
@@ -113,7 +115,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer text-center">
-                      <a href="{{site.uri.public}}/users" class="uppercase">{{translate("USER.VIEW_ALL")}}</a> {# TODO #}
+                      <a href="{{ urlFor('uri_users') }}" class="uppercase">{{translate("USER.VIEW_ALL")}}</a>
                     </div>
                     <!-- /.box-footer -->
                   </div>

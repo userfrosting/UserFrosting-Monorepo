@@ -38,7 +38,8 @@ class GroupsRoute implements RouteDefinitionInterface
             $group->get('', GroupsPageAction::class)
                   ->setName('uri_groups');
             $group->get('/g/{slug}', GroupPageAction::class)
-                  ->add(GroupInjector::class);
+                  ->add(GroupInjector::class)
+                  ->setName('page.group');
         })->add(AuthGuard::class); //->add(new NoCache());
 
         $app->group('/api/groups', function (RouteCollectorProxy $group) {
