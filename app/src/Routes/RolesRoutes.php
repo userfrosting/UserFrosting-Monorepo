@@ -29,6 +29,7 @@ use UserFrosting\Sprinkle\Admin\Controller\Role\RolesPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleUpdateFieldAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleUsersSprunje;
 use UserFrosting\Sprinkle\Admin\Middlewares\RoleInjector;
+use UserFrosting\Sprinkle\Core\Middlewares\NoCache;
 
 /*
  * Routes for administrative role management.
@@ -42,7 +43,7 @@ class RolesRoutes implements RouteDefinitionInterface
                   ->setName('uri_roles');
             $group->get('/r/{slug}', RolePageAction::class)
                   ->add(RoleInjector::class);
-        })->add(AuthGuard::class); //->add(new NoCache());
+        })->add(AuthGuard::class)->add(NoCache::class);
 
         $app->group('/api/roles', function (RouteCollectorProxy $group) {
             $group->delete('/r/{slug}', RoleDeleteAction::class)
@@ -57,7 +58,7 @@ class RolesRoutes implements RouteDefinitionInterface
                   ->add(RoleInjector::class);
             $group->put('/r/{slug}/{field}', RoleUpdateFieldAction::class)
                   ->add(RoleInjector::class);
-        })->add(AuthGuard::class); //->add(new NoCache());
+        })->add(AuthGuard::class)->add(NoCache::class);
 
         $app->group('/modals/roles', function (RouteCollectorProxy $group) {
             $group->get('/confirm-delete', RoleDeleteModal::class)
@@ -71,6 +72,6 @@ class RolesRoutes implements RouteDefinitionInterface
             $group->get('/permissions', RoleEditPermissionsModal::class)
                   ->add(RoleInjector::class)
                   ->setName('modal.roles.permissions');
-        })->add(AuthGuard::class); //->add(new NoCache());
+        })->add(AuthGuard::class)->add(NoCache::class);
     }
 }

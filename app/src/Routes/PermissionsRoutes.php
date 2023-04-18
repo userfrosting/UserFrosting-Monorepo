@@ -20,6 +20,7 @@ use UserFrosting\Sprinkle\Admin\Controller\Permission\PermissionPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Permission\PermissionsPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Permission\PermissionUserSprunje;
 use UserFrosting\Sprinkle\Admin\Middlewares\PermissionInjector;
+use UserFrosting\Sprinkle\Core\Middlewares\NoCache;
 
 /*
  * Routes for administrative permission management.
@@ -33,12 +34,12 @@ class PermissionsRoutes implements RouteDefinitionInterface
                   ->setName('uri_permissions');
             $group->get('/p/{id}', PermissionPageAction::class)
                   ->add(PermissionInjector::class);
-        })->add(AuthGuard::class); //->add(new NoCache());
+        })->add(AuthGuard::class)->add(NoCache::class);
 
         $app->group('/api/permissions', function (RouteCollectorProxy $group) {
             $group->get('', [PermissionsPageAction::class, 'sprunje']);
             $group->get('/p/{id}/users', PermissionUserSprunje::class)
                   ->add(PermissionInjector::class);
-        })->add(AuthGuard::class); //->add(new NoCache());
+        })->add(AuthGuard::class)->add(NoCache::class);
     }
 }

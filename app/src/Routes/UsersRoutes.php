@@ -32,6 +32,7 @@ use UserFrosting\Sprinkle\Admin\Controller\User\UserRoleSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserUpdateFieldAction;
 use UserFrosting\Sprinkle\Admin\Middlewares\UserInjector;
+use UserFrosting\Sprinkle\Core\Middlewares\NoCache;
 
 /*
  * Routes for administrative user management.
@@ -46,7 +47,7 @@ class UsersRoutes implements RouteDefinitionInterface
             $group->get('/u/{user_name}', UserPageAction::class)
                   ->add(UserInjector::class)
                   ->setName('page.user');
-        })->add(AuthGuard::class); //->add(new NoCache());
+        })->add(AuthGuard::class)->add(NoCache::class);
 
         $app->group('/api/users', function (RouteCollectorProxy $group) {
             $group->get('', [UsersPageAction::class, 'sprunje'])
@@ -71,7 +72,7 @@ class UsersRoutes implements RouteDefinitionInterface
             $group->put('/u/{user_name}/{field}', UserUpdateFieldAction::class)
                   ->add(UserInjector::class)
                   ->setName('api.users.update-field');
-        })->add(AuthGuard::class); //->add(new NoCache());
+        })->add(AuthGuard::class)->add(NoCache::class);
 
         $app->group('/modals/users', function (RouteCollectorProxy $group) {
             $group->get('/confirm-delete', UserDeleteModal::class)
@@ -88,6 +89,6 @@ class UsersRoutes implements RouteDefinitionInterface
             $group->get('/roles', UserEditRolesModal::class)
                   ->add(UserInjector::class)
                   ->setName('modal.users.roles');
-        })->add(AuthGuard::class); //->add(new NoCache());
+        })->add(AuthGuard::class)->add(NoCache::class);
     }
 }

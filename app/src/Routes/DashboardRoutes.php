@@ -18,6 +18,7 @@ use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
 use UserFrosting\Sprinkle\Admin\Controller\Dashboard\CacheApiAction;
 use UserFrosting\Sprinkle\Admin\Controller\Dashboard\CacheModalAction;
 use UserFrosting\Sprinkle\Admin\Controller\Dashboard\DashboardAction;
+use UserFrosting\Sprinkle\Core\Middlewares\NoCache;
 
 /*
  * Routes for dashboard page.
@@ -28,12 +29,12 @@ class DashboardRoutes implements RouteDefinitionInterface
     {
         $app->get('/dashboard', DashboardAction::class)
             ->setName('dashboard')
-            ->add(AuthGuard::class); // ->add(new NoCache());
+            ->add(AuthGuard::class)->add(NoCache::class);
 
         $app->post('/api/dashboard/clear-cache', CacheApiAction::class)
-            ->add(AuthGuard::class); // ->add(new NoCache());
+            ->add(AuthGuard::class)->add(NoCache::class);
 
         $app->get('/modals/dashboard/clear-cache', CacheModalAction::class)
-            ->add(AuthGuard::class); // ->add(new NoCache());
+            ->add(AuthGuard::class)->add(NoCache::class);
     }
 }
