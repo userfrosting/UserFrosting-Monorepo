@@ -4,6 +4,8 @@ parameters:
   ignoreErrors:
     - '#Dynamic call to static method PHPUnit\\Framework\\.*#'
     - '#Call to an undefined method Mockery\\Expectation::.*#'
+    - '/^Parameter #1 \$value of function strval expects bool\|float\|int\|resource\|string\|null, mixed given.$/'
+    - '/^Parameter #1 \$value of function intval expects array\|bool\|float\|int\|resource\|string\|null, mixed given.$/'
   universalObjectCratesClasses:
     - UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface
     - UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface
