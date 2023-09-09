@@ -20,7 +20,7 @@ jobs:
     name: PHPUnit - PHP ${{ matrix.php_versions }} - Memory SQLite
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2
@@ -30,9 +30,9 @@ jobs:
           coverage: xdebug
           tools: pecl, composer
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 18
       
       - name: Install Dependencies
         run: composer update --prefer-dist --no-progress
@@ -73,7 +73,7 @@ jobs:
       DB_NAME: userfrosting
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     
     - name: Setup PHP, with composer and extensions
       uses: shivammathur/setup-php@v2
@@ -83,9 +83,9 @@ jobs:
         coverage: xdebug
         tools: pecl, composer
 
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@v3
       with:
-        node-version: 14
+        node-version: 18
     
     - name: Shutdown Ubuntu MySQL (SUDO)
       run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
@@ -140,7 +140,7 @@ jobs:
         DB_NAME: database.sqlite
 
       steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2
@@ -150,9 +150,9 @@ jobs:
           coverage: xdebug
           tools: pecl, composer
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 18
             
       - name: Install Dependencies
         run: composer update --prefer-dist --no-progress
@@ -195,7 +195,7 @@ jobs:
         DB_NAME: userfrosting
 
       steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2
@@ -212,9 +212,9 @@ jobs:
           postgresql user: 'userfrosting'
           postgresql password: 'password'
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 18
       
       - name: Install Dependencies
         run: composer update --prefer-dist --no-progress
@@ -252,7 +252,7 @@ jobs:
       DB_NAME: database.sqlite
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     
     - name: Setup PHP, with composer and extensions
       uses: shivammathur/setup-php@v2
@@ -262,9 +262,9 @@ jobs:
         coverage: xdebug
         tools: pecl, composer
 
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@v3
       with:
-        node-version: 14
+        node-version: 18
     
     - name: Install Dependencies
       run: composer update --prefer-dist --no-progress
