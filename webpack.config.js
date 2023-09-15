@@ -1,5 +1,17 @@
 const Encore = require('@symfony/webpack-encore');
 
+// List dependent sprinkles and local entries files
+const sprinkles = {
+    AdminLTE: require('theme-adminlte/webpack.entries'),
+    Admin: require('./webpack.entries')
+}
+
+// Merge dependent Sprinkles entries with local entries
+let entries = {}
+Object.values(sprinkles).forEach(sprinkle => {
+    entries = Object.assign(entries, sprinkle);
+});
+
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
@@ -9,24 +21,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 Encore
     .setOutputPath('public/assets')
     .setPublicPath('/assets/')
-    .addEntry('app', './app/assets/main.js')
-    .addEntry('dashboard', './app/assets/dashboard.js')
-    .addEntry('page.dashboard', './app/assets/page.dashboard.js')
-    .addEntry('page.activities', './app/assets/page.activities.js')
-    .addEntry('page.group', './app/assets/page.group.js')
-    .addEntry('page.groups', './app/assets/page.groups.js')
-    .addEntry('page.role', './app/assets/page.role.js')
-    .addEntry('page.roles', './app/assets/page.roles.js')
-    .addEntry('page.permission', './app/assets/page.permission.js')
-    .addEntry('page.permissions', './app/assets/page.permissions.js')
-    .addEntry('page.user', './app/assets/page.user.js')
-    .addEntry('page.users', './app/assets/page.users.js')
-    .addEntry('page.register', 'theme-adminlte/app/assets/register.js')
-    .addEntry('page.sign-in', 'theme-adminlte/app/assets/sign-in.js')
-    .addEntry('page.forgot-password', 'theme-adminlte/app/assets/forgot-password.js')
-    .addEntry('page.resend-verification', 'theme-adminlte/app/assets/resend-verification.js')
-    .addEntry('page.set-or-reset-password', 'theme-adminlte/app/assets/set-or-reset-password.js')
-    .addEntry('page.account-settings', 'theme-adminlte/app/assets/account-settings.js')
+    .addEntries(entries)
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
     .cleanupOutputBeforeBuild()
