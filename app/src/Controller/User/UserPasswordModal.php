@@ -89,7 +89,7 @@ class UserPasswordModal
         return [
             'user'    => $user,
             'page'    => [
-                'validators' => $validator->rules('json', false),
+                'validators' => $validator->rules(),
             ],
         ];
     }

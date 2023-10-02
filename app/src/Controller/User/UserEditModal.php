@@ -130,7 +130,7 @@ class UserEditModal
                 'submit_text' => $this->translator->translate('UPDATE'),
             ],
             'page'    => [
-                'validators' => $validator->rules('json', false),
+                'validators' => $validator->rules(),
             ],
         ];
     }

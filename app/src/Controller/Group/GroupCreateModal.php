@@ -99,7 +99,7 @@ class GroupCreateModal
                 'submit_text' => $this->translator->translate('CREATE'),
             ],
             'page'    => [
-                'validators' => $validatorRegister->rules('json', false),
+                'validators' => $validatorRegister->rules(),
             ],
         ];
     }
