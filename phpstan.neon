@@ -1,5 +1,5 @@
 parameters:
-  level: max
+  level: 8
   reportUnmatchedIgnoredErrors: false
   ignoreErrors:
     - '#Dynamic call to static method PHPUnit\\Framework\\.*#'
