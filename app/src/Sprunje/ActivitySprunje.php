@@ -48,7 +48,7 @@ class ActivitySprunje extends Sprunje
      * Set the initial query used by your Sprunje.
      * {@inheritDoc}
      */
-    protected function baseQuery(): EloquentBuilder|QueryBuilder|Relation|Model
+    protected function baseQuery()
     {
         // @phpstan-ignore-next-line Activity interface mixin Model and non-static method.
         return $this->activityModel->joinUser();
@@ -62,7 +62,7 @@ class ActivitySprunje extends Sprunje
      *
      * @return static
      */
-    protected function filterUser(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
+    protected function filterUser($query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -85,7 +85,7 @@ class ActivitySprunje extends Sprunje
      *
      * @return static
      */
-    protected function sortUser(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
+    protected function sortUser($query, string $direction): static
     {
         $query->orderBy('users.last_name', $direction);
 
@@ -100,7 +100,7 @@ class ActivitySprunje extends Sprunje
      *
      * @return static
      */
-    protected function sortOccurredAt(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
+    protected function sortOccurredAt($query, string $direction): static
     {
         $query->orderBy('activities.occurred_at', $direction)
               ->orderby('activities.id', $direction);

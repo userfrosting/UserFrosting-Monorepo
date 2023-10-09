@@ -50,7 +50,7 @@ class PermissionSprunje extends Sprunje
     /**
      * {@inheritdoc}
      */
-    protected function baseQuery(): EloquentBuilder|QueryBuilder|Relation|Model
+    protected function baseQuery()
     {
         // @phpstan-ignore-next-line Model implement Model.
         return $this->model;
@@ -64,7 +64,7 @@ class PermissionSprunje extends Sprunje
      *
      * @return static
      */
-    protected function filterInfo(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
+    protected function filterInfo($query, string $value): static
     {
         return $this->filterProperties($query, $value);
     }
@@ -78,7 +78,7 @@ class PermissionSprunje extends Sprunje
      *
      * @return static
      */
-    protected function filterProperties(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
+    protected function filterProperties($query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -101,7 +101,7 @@ class PermissionSprunje extends Sprunje
      *
      * @return static
      */
-    protected function sortProperties(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
+    protected function sortProperties($query, string $direction): static
     {
         $query->orderBy('slug', $direction);
 

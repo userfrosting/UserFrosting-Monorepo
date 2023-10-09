@@ -12,10 +12,7 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Admin\Sprunje;
 
-use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Database\Query\Builder as QueryBuilder;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Core\Sprunje\Sprunje;
 
@@ -45,7 +42,7 @@ class GroupSprunje extends Sprunje
     /**
      * {@inheritdoc}
      */
-    protected function baseQuery(): EloquentBuilder|QueryBuilder|Relation|Model
+    protected function baseQuery()
     {
         // @phpstan-ignore-next-line Model implement Model.
         return $this->model;

@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Sprunje;
 
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use UserFrosting\I18n\Translator;
@@ -59,7 +58,7 @@ class PermissionUserSprunje extends Sprunje
     /**
      * {@inheritdoc}
      */
-    protected function baseQuery(): EloquentBuilder|QueryBuilder|Relation|Model
+    protected function baseQuery()
     {
         return $this->permission->users()->withVia('roles_via');
     }
@@ -72,7 +71,7 @@ class PermissionUserSprunje extends Sprunje
      *
      * @return static
      */
-    protected function filterName(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
+    protected function filterName($query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -95,7 +94,7 @@ class PermissionUserSprunje extends Sprunje
      *
      * @return static
      */
-    protected function filterStatus(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
+    protected function filterStatus($query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -147,7 +146,7 @@ class PermissionUserSprunje extends Sprunje
      *
      * @return static
      */
-    protected function sortName(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
+    protected function sortName($query, string $direction): static
     {
         $query->orderBy('last_name', $direction);
 
@@ -162,7 +161,7 @@ class PermissionUserSprunje extends Sprunje
      *
      * @return static
      */
-    protected function sortStatus(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
+    protected function sortStatus($query, string $direction): static
     {
         $query->orderBy('flag_enabled', $direction)->orderBy('flag_verified', $direction);
 

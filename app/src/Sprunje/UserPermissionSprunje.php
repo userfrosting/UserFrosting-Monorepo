@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Sprunje;
 
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -58,7 +57,7 @@ class UserPermissionSprunje extends Sprunje
     /**
      * {@inheritdoc}
      */
-    protected function baseQuery(): EloquentBuilder|QueryBuilder|Relation|Model
+    protected function baseQuery()
     {
         return $this->user->permissions()->withVia('roles_via');
     }
@@ -71,7 +70,7 @@ class UserPermissionSprunje extends Sprunje
      *
      * @return static
      */
-    protected function filterInfo(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
+    protected function filterInfo($query, string $value): static
     {
         return $this->filterProperties($query, $value);
     }
@@ -85,7 +84,7 @@ class UserPermissionSprunje extends Sprunje
      *
      * @return static
      */
-    protected function filterProperties(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
+    protected function filterProperties($query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -108,7 +107,7 @@ class UserPermissionSprunje extends Sprunje
      *
      * @return static
      */
-    protected function sortProperties(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
+    protected function sortProperties($query, string $direction): static
     {
         $query->orderBy('slug', $direction);
 

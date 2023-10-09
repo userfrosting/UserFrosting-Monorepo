@@ -50,7 +50,7 @@ class RoleSprunje extends Sprunje
     /**
      * {@inheritdoc}
      */
-    protected function baseQuery(): EloquentBuilder|QueryBuilder|Relation|Model
+    protected function baseQuery()
     {
         // @phpstan-ignore-next-line RoleInterface is a Model
         return $this->model;
@@ -64,7 +64,7 @@ class RoleSprunje extends Sprunje
      *
      * @return static
      */
-    protected function filterInfo(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
+    protected function filterInfo($query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);

@@ -73,7 +73,7 @@ class UserSprunje extends Sprunje
      *
      * @return static
      */
-    protected function filterLastActivity(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
+    protected function filterLastActivity($query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -94,7 +94,7 @@ class UserSprunje extends Sprunje
      *
      * @return static
      */
-    protected function filterName(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
+    protected function filterName($query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -117,7 +117,7 @@ class UserSprunje extends Sprunje
      *
      * @return static
      */
-    protected function filterStatus(EloquentBuilder|QueryBuilder|Relation $query, string $value): static
+    protected function filterStatus($query, string $value): static
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
@@ -169,7 +169,7 @@ class UserSprunje extends Sprunje
      *
      * @return static
      */
-    protected function sortLastActivity(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
+    protected function sortLastActivity($query, string $direction): static
     {
         $query->orderBy('last_activity', $direction);
 
@@ -184,7 +184,7 @@ class UserSprunje extends Sprunje
      *
      * @return static
      */
-    protected function sortName(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
+    protected function sortName($query, string $direction): static
     {
         $query->orderBy('last_name', $direction);
 
@@ -199,7 +199,7 @@ class UserSprunje extends Sprunje
      *
      * @return static
      */
-    protected function sortStatus(EloquentBuilder|QueryBuilder|Relation $query, string $direction): static
+    protected function sortStatus($query, string $direction): static
     {
         $query->orderBy('flag_enabled', $direction)->orderBy('flag_verified', $direction);
 
@@ -214,7 +214,7 @@ class UserSprunje extends Sprunje
      *
      * {@inheritdoc}
      */
-    protected function count(EloquentBuilder|QueryBuilder|Relation $query): int
+    protected function count($query): int
     {
         $countQuery = "select count(*) as aggregate from ({$query->toSql()}) c";
 
@@ -228,7 +228,7 @@ class UserSprunje extends Sprunje
      * Count needs to be done without the joined query.
      * {@inheritdoc}
      */
-    protected function countFiltered(EloquentBuilder|QueryBuilder|Relation $query): int
+    protected function countFiltered($query): int
     {
         return $this->count($query);
     }
