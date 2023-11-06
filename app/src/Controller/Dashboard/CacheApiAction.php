@@ -17,7 +17,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use UserFrosting\Alert\AlertStream;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
-use UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Core\Bakery\ClearCacheCommand;
 
@@ -31,7 +30,6 @@ class CacheApiAction
      */
     public function __construct(
         protected AlertStream $alerts,
-        protected AuthorizationManager $authorizer,
         protected Authenticator $authenticator,
         protected ClearCacheCommand $clearCacheCommand,
     ) {
@@ -66,7 +64,7 @@ class CacheApiAction
      */
     protected function validateAccess(): void
     {
-        if (!$this->authorizer->checkAccess($this->authenticator->user(), 'clear_cache')) {
+        if (!$this->authenticator->checkAccess('clear_cache')) {
             throw new ForbiddenException();
         }
     }

@@ -16,7 +16,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
-use UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 
 /**
@@ -32,7 +31,6 @@ class CacheModalAction
      */
     public function __construct(
         protected Twig $view,
-        protected AuthorizationManager $authorizer,
         protected Authenticator $authenticator,
     ) {
     }
@@ -59,7 +57,7 @@ class CacheModalAction
      */
     protected function validateAccess(): void
     {
-        if (!$this->authorizer->checkAccess($this->authenticator->user(), 'clear_cache')) {
+        if (!$this->authenticator->checkAccess('clear_cache')) {
             throw new ForbiddenException();
         }
     }

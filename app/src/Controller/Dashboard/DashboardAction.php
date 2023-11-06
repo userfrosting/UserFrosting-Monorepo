@@ -21,7 +21,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
 use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
-use UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -42,7 +41,6 @@ class DashboardAction
      */
     public function __construct(
         protected Twig $view,
-        protected AuthorizationManager $authorizer,
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $dbConnection,
@@ -76,7 +74,7 @@ class DashboardAction
      */
     protected function validateAccess(): void
     {
-        if (!$this->authorizer->checkAccess($this->authenticator->user(), 'uri_dashboard')) {
+        if (!$this->authenticator->checkAccess('uri_dashboard')) {
             throw new ForbiddenException();
         }
     }
