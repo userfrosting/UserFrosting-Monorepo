@@ -36,7 +36,6 @@ class UserRedirectedToSettings
         if ($this->authenticator->checkAccess('uri_account_settings')) {
             $path = $this->routeParser->urlFor('settings');
             $event->setRedirect($path);
-            $event->isPropagationStopped();
         }
     }
 }

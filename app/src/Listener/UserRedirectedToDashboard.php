@@ -36,7 +36,6 @@ class UserRedirectedToDashboard
         if ($this->authenticator->checkAccess('uri_dashboard')) {
             $path = $this->routeParser->urlFor('dashboard');
             $event->setRedirect($path);
-            $event->isPropagationStopped();
         }
     }
 }
