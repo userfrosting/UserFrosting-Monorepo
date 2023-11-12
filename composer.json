@@ -2,7 +2,7 @@
     "name": "userfrosting/sprinkle-admin",
     "type": "userfrosting-sprinkle",
     "description": "Administrative management module for UserFrosting.",
-    "keywords": ["php user management", "usercake", "bootstrap"],
+    "keywords": ["php user management", "userfrosting", "sprinkle", "userfrosting-sprinkle", "admin-dashboard", "admin-panel", "php", "user-management"],
     "homepage": "https://github.com/userfrosting/UserFrosting",
     "license" : "MIT",
     "authors" : [
