@@ -25,7 +25,7 @@
     "url": "https://github.com/userfrosting/UserFrosting/issues"
   },
   "dependencies": {
-    "@userfrosting/theme-adminlte": "^5.0.0-rc.1"
+    "@userfrosting/theme-adminlte": "^5.0.0"
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^4.4.0",
