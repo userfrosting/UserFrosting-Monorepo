@@ -40,8 +40,6 @@
         "slam/phpstan-extensions": "^6.0",
         "php-mock/php-mock-mockery": "^1.3"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "UserFrosting\\Sprinkle\\Admin\\": "app/src/"

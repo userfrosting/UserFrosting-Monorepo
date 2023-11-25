@@ -8,10 +8,8 @@
 [![StyleCI](https://github.styleci.io/repos/487673317/shield?branch=5.0&style=flat)](https://github.styleci.io/repos/487673317)
 [![PHPStan](https://img.shields.io/github/actions/workflow/status/userfrosting/sprinkle-admin/PHPStan.yml?branch=5.0&label=PHPStan)](https://github.com/userfrosting/sprinkle-admin/actions/workflows/PHPStan.yml)
 [![Join the chat](https://img.shields.io/badge/Chat-UserFrosting-brightgreen?logo=Rocket.Chat)](https://chat.userfrosting.com)
-[[![Donate](https://img.shields.io/badge/Open_Collective-Donate-blue?logo=Open%20Collective
-)](https://opencollective.com/userfrosting#backer)
-[![Donate](https://img.shields.io/badge/Ko--fi-Donate-blue?logo=ko-fi&logoColor=white
-)](https://ko-fi.com/lcharette)
+[![Donate](https://img.shields.io/badge/Open_Collective-Donate-blue?logo=Open%20Collective)](https://opencollective.com/userfrosting#backer)
+[![Donate](https://img.shields.io/badge/Ko--fi-Donate-blue?logo=ko-fi&logoColor=white)](https://ko-fi.com/lcharette)
 
 ## By [Alex Weissman](https://alexanderweissman.com) and [Louis Charette](https://bbqsoftwares.com)
 

@@ -1,6 +1,6 @@
 {
   "name": "@userfrosting/sprinkle-admin",
-  "version": "5.0.0-rc.1",
+  "version": "5.0.0",
   "description": "Admin Sprinkle for UserFrosting 5",
   "funding": "https://opencollective.com/userfrosting",
   "main": "app/assets/main.js",
