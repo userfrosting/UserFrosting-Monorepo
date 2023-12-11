@@ -143,6 +143,7 @@ return [
             'CHANGE_PASSWORD'    => 'Change User Password',
             'SEND_PASSWORD_LINK' => 'Send the user a link that will allow them to choose their own password',
             'SET_PASSWORD'       => "Set the user's password as",
+            'PASSWORD_RESET'     => 'A password reset link will be sent to <strong>{{email}}</strong>.',
         ],
 
         'ACTIVATE'          => 'Activate user',

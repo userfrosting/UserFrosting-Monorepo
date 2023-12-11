@@ -71,10 +71,9 @@ class UserPasswordAction
         $this->validateAccess($user);
 
         // Send password reset email.
-        // TODO : Mail template
         $this->passwordEmail->send($user, 'mail/password-reset.html.twig');
 
-        $this->alert->addMessageTranslated('success', 'PASSWORD.FORGET.REQUEST_SENT', [
+        $this->alert->addMessageTranslated('success', 'USER.ADMIN.PASSWORD_RESET', [
             'email' => $user->email,
         ]);
     }
