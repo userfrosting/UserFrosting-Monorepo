@@ -37,5 +37,5 @@ node_modules/
 public/assets/
 
 # Ignore dev utils cache
-.phpunit.result.cache
+.phpunit.cache
 .php_cs.cache

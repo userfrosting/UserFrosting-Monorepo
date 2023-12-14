@@ -26,7 +26,7 @@ class GroupSprunjeTest extends AdminTestCase
 {
     use RefreshDatabase;
 
-    protected EloquentCollection $roles;
+    protected EloquentCollection $groups;
 
     public function setUp(): void
     {
