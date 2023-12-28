@@ -48,7 +48,7 @@ class CacheApiAction
         $this->clearCacheCommand->clearIlluminateCache();
         $this->clearCacheCommand->clearTwigCache();
         $this->clearCacheCommand->clearRouterCache();
-        $this->alerts->addMessageTranslated('success', 'CACHE.CLEARED');
+        $this->alerts->addMessage('success', 'CACHE.CLEARED');
 
         // Write empty response
         $payload = json_encode([], JSON_THROW_ON_ERROR);

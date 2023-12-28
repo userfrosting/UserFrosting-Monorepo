@@ -108,7 +108,7 @@ class UserDeleteAction
             ]);
         });
 
-        $this->alert->addMessageTranslated('success', 'DELETION_SUCCESSFUL', [
+        $this->alert->addMessage('success', 'DELETION_SUCCESSFUL', [
             'user_name' => $username,
         ]);
     }

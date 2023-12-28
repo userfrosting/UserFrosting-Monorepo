@@ -139,7 +139,7 @@ class GroupEditAction
             ]);
         });
 
-        $this->alert->addMessageTranslated('success', 'GROUP.UPDATE', [
+        $this->alert->addMessage('success', 'GROUP.UPDATE', [
             'name' => $group->name,
         ]);
     }

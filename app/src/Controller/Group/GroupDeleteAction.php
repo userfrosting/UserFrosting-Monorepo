@@ -113,7 +113,7 @@ class GroupDeleteAction
             ]);
         });
 
-        $this->alert->addMessageTranslated('success', 'GROUP.DELETION_SUCCESSFUL', [
+        $this->alert->addMessage('success', 'GROUP.DELETION_SUCCESSFUL', [
             'name' => $group->name,
         ]);
     }

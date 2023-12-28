@@ -116,7 +116,7 @@ class RoleDeleteAction
             ]);
         });
 
-        $this->alert->addMessageTranslated('success', 'ROLE.DELETION_SUCCESSFUL', [
+        $this->alert->addMessage('success', 'ROLE.DELETION_SUCCESSFUL', [
             'name' => $role->name,
         ]);
     }

@@ -117,7 +117,7 @@ class GroupCreateAction
                 'user_id' => $currentUser->id,
             ]);
 
-            $this->alert->addMessageTranslated('success', 'GROUP.CREATION_SUCCESSFUL', $data);
+            $this->alert->addMessage('success', 'GROUP.CREATION_SUCCESSFUL', $data);
         });
     }
 

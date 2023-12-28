@@ -153,11 +153,11 @@ class RoleUpdateFieldAction
 
         // Add success messages
         if ($fieldName === 'permissions') {
-            $this->alert->addMessageTranslated('success', 'ROLE.PERMISSIONS_UPDATED', [
+            $this->alert->addMessage('success', 'ROLE.PERMISSIONS_UPDATED', [
                 'name' => $role->name,
             ]);
         } else {
-            $this->alert->addMessageTranslated('success', 'ROLE.UPDATED', [
+            $this->alert->addMessage('success', 'ROLE.UPDATED', [
                 'name' => $role->name,
             ]);
         }

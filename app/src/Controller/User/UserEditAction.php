@@ -162,7 +162,7 @@ class UserEditAction
             ]);
         });
 
-        $this->alert->addMessageTranslated('success', 'DETAILS_UPDATED', [
+        $this->alert->addMessage('success', 'DETAILS_UPDATED', [
             'user_name' => $user->user_name,
         ]);
     }

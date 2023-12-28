@@ -139,7 +139,7 @@ class RoleEditAction
             ]);
         });
 
-        $this->alert->addMessageTranslated('success', 'ROLE.UPDATED', [
+        $this->alert->addMessage('success', 'ROLE.UPDATED', [
             'name' => $role->name,
         ]);
     }

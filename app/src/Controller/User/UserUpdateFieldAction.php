@@ -190,19 +190,19 @@ class UserUpdateFieldAction
 
         // Add success messages
         if ($fieldName === 'flag_enabled' && $fieldValue === '1') {
-            $this->alert->addMessageTranslated('success', 'ENABLE_SUCCESSFUL', [
+            $this->alert->addMessage('success', 'ENABLE_SUCCESSFUL', [
                 'user_name' => $user->user_name,
             ]);
         } elseif ($fieldName === 'flag_enabled') {
-            $this->alert->addMessageTranslated('success', 'DISABLE_SUCCESSFUL', [
+            $this->alert->addMessage('success', 'DISABLE_SUCCESSFUL', [
                 'user_name' => $user->user_name,
             ]);
         } elseif ($fieldName == 'flag_verified') {
-            $this->alert->addMessageTranslated('success', 'MANUALLY_ACTIVATED', [
+            $this->alert->addMessage('success', 'MANUALLY_ACTIVATED', [
                 'user_name' => $user->user_name,
             ]);
         } else {
-            $this->alert->addMessageTranslated('success', 'DETAILS_UPDATED', [
+            $this->alert->addMessage('success', 'DETAILS_UPDATED', [
                 'user_name' => $user->user_name,
             ]);
         }

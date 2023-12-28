@@ -171,7 +171,7 @@ class UserCreateAction
                 $this->passwordEmail->send($user);
             }
 
-            $this->alert->addMessageTranslated('success', 'USER.CREATED');
+            $this->alert->addMessage('success', 'USER.CREATED');
         });
     }
 

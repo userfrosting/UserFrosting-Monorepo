@@ -117,7 +117,7 @@ class RoleCreateAction
                 'user_id' => $currentUser->id,
             ]);
 
-            $this->alert->addMessageTranslated('success', 'ROLE.CREATION_SUCCESSFUL', $data);
+            $this->alert->addMessage('success', 'ROLE.CREATION_SUCCESSFUL', $data);
         });
     }
 
