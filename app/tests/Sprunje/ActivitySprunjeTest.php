@@ -25,6 +25,7 @@ class ActivitySprunjeTest extends AdminTestCase
 {
     use RefreshDatabase;
 
+    /** @var EloquentCollection<int, User> */
     protected EloquentCollection $users;
 
     public function setUp(): void

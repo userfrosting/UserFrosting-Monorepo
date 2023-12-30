@@ -32,6 +32,7 @@ class PermissionUserSprunjeTest extends AdminTestCase
 {
     use RefreshDatabase;
 
+    /** @var EloquentCollection<int, User> */
     protected EloquentCollection $users;
     protected RoleInterface $role;
     protected PermissionInterface $permission;

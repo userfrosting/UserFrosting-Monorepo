@@ -25,6 +25,7 @@ class PermissionSprunjeTest extends AdminTestCase
 {
     use RefreshDatabase;
 
+    /** @var EloquentCollection<int, Permission> */
     protected EloquentCollection $permissions;
 
     public function setUp(): void

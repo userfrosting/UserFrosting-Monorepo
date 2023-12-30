@@ -25,6 +25,7 @@ class RoleSprunjeTest extends AdminTestCase
 {
     use RefreshDatabase;
 
+    /** @var EloquentCollection<int, Role> */
     protected EloquentCollection $roles;
 
     public function setUp(): void
