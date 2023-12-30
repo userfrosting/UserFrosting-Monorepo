@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Controller\Role;
 
 use Illuminate\Database\Connection;
+use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use UserFrosting\Alert\AlertStream;
@@ -137,7 +138,8 @@ class RoleUpdateFieldAction
         // Begin transaction - DB will be rolled back if an exception occurs
         $this->db->transaction(function () use ($fieldName, $fieldValue, $role, $currentUser) {
             if ($fieldName === 'permissions') {
-                $newPermissions = collect($fieldValue)->pluck('permission_id')->all();
+                $collection = new Collection($fieldValue);
+                $newPermissions = $collection->pluck('permission_id')->all();
                 $role->permissions()->sync($newPermissions);
             } else {
                 $role->$fieldName = $fieldValue; // @phpstan-ignore-line Variable property is ok here.
