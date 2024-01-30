@@ -108,7 +108,7 @@ class RoleUpdateFieldAction
         if (isset($put[$fieldName])) {
             $fieldData = $put[$fieldName];
         } elseif ($fieldName === 'permissions') {
-            $fieldData = [];
+            $fieldData = $put['value'];
         } else {
             $e = new MissingRequiredParamException();
             $e->setParam($fieldName);
