@@ -177,7 +177,39 @@ class RoleUpdateFieldActionTest extends AdminTestCase
         $this->assertSame('Permissions updated for role <strong>' . $role->name . '</strong>', array_reverse($messages)[0]['message']);
     }
 
-    public function testPostForRemovingRoles(): void
+    public function testPostForRemovingAllRoles(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user, permissions: ['update_role_field']);
+
+        /** @var Role */
+        $role = Role::factory()->has(Permission::factory())->create();
+        $this->assertCount(1, $role->permissions); // Default role above.
+
+        // Create request with method and url and fetch response
+        // uf-collection will pass no data when removing all roles_id.
+        $data = ['permissions' => []];
+        $request = $this->createJsonRequest('PUT', '/api/roles/r/' . $role->slug . '/permissions', $data);
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse([], $response);
+        $this->assertResponseStatus(200, $response);
+
+        // Make sure the user has the new roles.
+        $role->refresh();
+        $this->assertCount(0, $role->permissions);
+
+        // Test message
+        /** @var AlertStream */
+        $ms = $this->ci->get(AlertStream::class);
+        $messages = $ms->getAndClearMessages();
+        $this->assertSame('success', array_reverse($messages)[0]['type']);
+        $this->assertSame('Permissions updated for role <strong>' . $role->name . '</strong>', array_reverse($messages)[0]['message']);
+    }
+
+    public function testPostForMissingValueArgument(): void
     {
         /** @var User */
         $user = User::factory()->create();
