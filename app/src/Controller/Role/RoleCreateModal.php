@@ -15,7 +15,7 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Role;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
-use UserFrosting\Fortress\Adapter\JqueryValidationAdapter;
+use UserFrosting\Fortress\Adapter\JqueryValidationArrayAdapter;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\I18n\Translator;
@@ -47,6 +47,7 @@ class RoleCreateModal
         protected RoleInterface $roleModel,
         protected Translator $translator,
         protected Twig $view,
+        protected JqueryValidationArrayAdapter $adapter,
     ) {
     }
 
@@ -76,7 +77,6 @@ class RoleCreateModal
 
         // Load the request schema & validator
         $schema = $this->getSchema();
-        $validatorRegister = new JqueryValidationAdapter($schema, $this->translator);
 
         // Determine form fields to hide/disable
         $fields = [
@@ -93,7 +93,7 @@ class RoleCreateModal
                 'submit_text' => $this->translator->translate('CREATE'),
             ],
             'page'    => [
-                'validators' => $validatorRegister->rules(),
+                'validators' => $this->adapter->rules($schema),
             ],
         ];
     }

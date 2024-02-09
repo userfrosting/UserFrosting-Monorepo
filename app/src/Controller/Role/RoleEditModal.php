@@ -15,7 +15,7 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Role;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
-use UserFrosting\Fortress\Adapter\JqueryValidationAdapter;
+use UserFrosting\Fortress\Adapter\JqueryValidationArrayAdapter;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\I18n\Translator;
@@ -50,6 +50,7 @@ class RoleEditModal
         protected SiteLocaleInterface $siteLocale,
         protected Translator $translator,
         protected Twig $view,
+        protected JqueryValidationArrayAdapter $adapter,
     ) {
     }
 
@@ -94,7 +95,6 @@ class RoleEditModal
 
         // Load validation rules
         $schema = $this->getSchema();
-        $validator = new JqueryValidationAdapter($schema, $this->translator);
 
         return [
             'role'    => $role,
@@ -105,7 +105,7 @@ class RoleEditModal
                 'submit_text' => $this->translator->translate('UPDATE'),
             ],
             'page'    => [
-                'validators' => $validator->rules(),
+                'validators' => $this->adapter->rules($schema),
             ],
         ];
     }

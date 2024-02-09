@@ -16,10 +16,9 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
 use UserFrosting\Config\Config;
-use UserFrosting\Fortress\Adapter\JqueryValidationAdapter;
+use UserFrosting\Fortress\Adapter\JqueryValidationArrayAdapter;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
-use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -50,9 +49,9 @@ class UserPasswordModal
         protected Config $config,
         protected GroupInterface $groupModel,
         protected SiteLocaleInterface $siteLocale,
-        protected Translator $translator,
         protected Twig $view,
         protected UserInterface $userModel,
+        protected JqueryValidationArrayAdapter $adapter,
     ) {
     }
 
@@ -84,12 +83,11 @@ class UserPasswordModal
 
         // Load the request schema
         $schema = $this->getSchema();
-        $validator = new JqueryValidationAdapter($schema, $this->translator);
 
         return [
             'user'    => $user,
             'page'    => [
-                'validators' => $validator->rules(),
+                'validators' => $this->adapter->rules($schema),
             ],
         ];
     }

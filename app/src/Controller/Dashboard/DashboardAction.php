@@ -139,7 +139,7 @@ class DashboardAction
      */
     protected function getDatabaseInfo(): array
     {
-        $database = $this->config->getString('db.default');
+        $database = $this->config->getString('db.default', '');
         $pdo = $this->dbConnection->getPdo();
         $results = [
             'connection' => $database,

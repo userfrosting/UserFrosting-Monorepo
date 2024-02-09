@@ -43,7 +43,7 @@ class PasswordEmail
     public function send(UserInterface $user, string $template = 'mail/password-create.html.twig'): void
     {
         // Try to generate a new verification request
-        $timeout = $this->config->getInt('password_reset.timeouts.create');
+        $timeout = $this->config->getInt('password_reset.timeouts.create', 86400);
         $verification = $this->repoPasswordReset->create($user, $timeout);
 
         // Create and send verification email
@@ -54,7 +54,7 @@ class PasswordEmail
                 ->addEmailRecipient(new EmailRecipient($user->email, $user->full_name))
                 ->addParams([
                     'user'                       => $user,
-                    'create_password_expiration' => $this->config->getInt('password_reset.timeouts.create') / 3600 . ' hours',
+                    'create_password_expiration' => $timeout / 3600 . ' hours',
                     'token'                      => $verification->getToken(),
                     'request_date'               => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);

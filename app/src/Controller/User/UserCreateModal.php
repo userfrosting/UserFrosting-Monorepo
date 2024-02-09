@@ -16,7 +16,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
 use UserFrosting\Config\Config;
-use UserFrosting\Fortress\Adapter\JqueryValidationAdapter;
+use UserFrosting\Fortress\Adapter\JqueryValidationArrayAdapter;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\I18n\Translator;
@@ -57,6 +57,7 @@ class UserCreateModal
         protected Translator $translator,
         protected Twig $view,
         protected UserInterface $userModel,
+        protected JqueryValidationArrayAdapter $adapter,
     ) {
     }
 
@@ -84,9 +85,6 @@ class UserCreateModal
     {
         // Load the request schema
         $schema = $this->getSchema();
-
-        // Get validator
-        $validatorRegister = new JqueryValidationAdapter($schema, $this->translator);
 
         // Determine form fields to hide/disable
         $fields = [
@@ -130,7 +128,7 @@ class UserCreateModal
                 'submit_text' => $this->translator->translate('CREATE'),
             ],
             'page'    => [
-                'validators' => $validatorRegister->rules(),
+                'validators' => $this->adapter->rules($schema),
             ],
         ];
     }

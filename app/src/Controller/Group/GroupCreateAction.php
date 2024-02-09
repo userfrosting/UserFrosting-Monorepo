@@ -16,11 +16,10 @@ use Illuminate\Database\Connection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use UserFrosting\Alert\AlertStream;
-use UserFrosting\Fortress\RequestDataTransformer;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
-use UserFrosting\Fortress\ServerSideValidator;
-use UserFrosting\I18n\Translator;
+use UserFrosting\Fortress\Transformer\RequestDataTransformer;
+use UserFrosting\Fortress\Validator\ServerSideValidator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -56,8 +55,9 @@ class GroupCreateAction
         protected Authenticator $authenticator,
         protected Connection $db,
         protected GroupInterface $groupModel,
-        protected Translator $translator,
         protected UserActivityLogger $userActivityLogger,
+        protected RequestDataTransformer $transformer,
+        protected ServerSideValidator $validator,
     ) {
     }
 
@@ -92,8 +92,7 @@ class GroupCreateAction
         $schema = $this->getSchema();
 
         // Whitelist and set parameter defaults
-        $transformer = new RequestDataTransformer($schema);
-        $data = $transformer->transform($params);
+        $data = $this->transformer->transform($schema, $params);
 
         // Validate request data
         $this->validateData($schema, $data);
@@ -153,10 +152,10 @@ class GroupCreateAction
      */
     protected function validateData(RequestSchemaInterface $schema, array $data): void
     {
-        $validator = new ServerSideValidator($schema, $this->translator);
-        if ($validator->validate($data) === false && is_array($validator->errors())) {
+        $errors = $this->validator->validate($schema, $data);
+        if (count($errors) !== 0) {
             $e = new ValidationException();
-            $e->addErrors($validator->errors());
+            $e->addErrors($errors);
 
             throw $e;
         }
