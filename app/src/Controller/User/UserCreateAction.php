@@ -33,7 +33,7 @@ use UserFrosting\Sprinkle\Account\Validators\UserValidation;
 use UserFrosting\Sprinkle\Admin\Mail\PasswordEmail;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
 use UserFrosting\Sprinkle\Core\I18n\SiteLocaleInterface;
-use UserFrosting\Sprinkle\Core\Log\DebugLogger;
+use UserFrosting\Sprinkle\Core\Log\DebugLoggerInterface;
 
 /**
  * Processes the request to create a new user (from the admin controls).
@@ -70,7 +70,7 @@ class UserCreateAction
         protected PasswordEmail $passwordEmail,
         protected UserInterface $userModel,
         protected UserValidation $userValidation,
-        protected DebugLogger $debugLogger,
+        protected DebugLoggerInterface $debugLogger,
         protected RequestDataTransformer $transformer,
         protected ServerSideValidator $validator,
     ) {
