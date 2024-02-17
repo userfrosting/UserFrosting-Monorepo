@@ -54,9 +54,7 @@ class App implements SprinkleRecipe
      */
     public function getRoutes(): array
     {
-        return [
-            Routes::class,
-        ];
+        return [];
     }
 
     /**

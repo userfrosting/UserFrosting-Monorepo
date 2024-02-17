@@ -13,9 +13,9 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Listener;
 
 use Psr\EventDispatcher\StoppableEventInterface;
-use Slim\Interfaces\RouteParserInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Core\Event\Contract\RedirectingEventInterface;
+use UserFrosting\Sprinkle\Core\Util\RouteParserInterface;
 
 /**
  * Set redirect to dashboard.

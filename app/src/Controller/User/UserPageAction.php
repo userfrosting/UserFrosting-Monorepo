@@ -14,12 +14,12 @@ namespace UserFrosting\Sprinkle\Admin\Controller\User;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Interfaces\RouteParserInterface;
 use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Core\I18n\SiteLocaleInterface;
+use UserFrosting\Sprinkle\Core\Util\RouteParserInterface;
 
 /**
  * Renders a page displaying a user's information, in read-only mode.

@@ -28,7 +28,7 @@
       <header class="main-header">
         <!-- Logo -->
         {% block navbar_logo %}
-        <a href="{{ urlFor('index') }}" class="logo">
+        <a href="{{ urlFor('index', [], [], '/') }}" class="logo">
             <i class="fas fa-home"></i>
             {{site.title}}
         </a>
