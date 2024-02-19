@@ -8,24 +8,24 @@
 _meta/
 
 # Ignore personal config files (dev)
-develop/.env
+app/.env
 
 # Ignore lock files
 composer.lock
 
 # Ignore log, cache, sessions and storage directories
-develop/cache/*
-develop/database/*
-develop/logs/*
-develop/sessions/*
-develop/storage/*
+app/cache/*
+app/database/*
+app/logs/*
+app/sessions/*
+app/storage/*
 
 # Unignore log, cache, sessions and storage .gitkeeps
-!develop/cache/.gitkeep
-!develop/database/.gitkeep
-!develop/logs/.gitkeep
-!develop/sessions/.gitkeep
-!develop/storage/.gitkeep
+!app/cache/.gitkeep
+!app/database/.gitkeep
+!app/logs/.gitkeep
+!app/sessions/.gitkeep
+!app/storage/.gitkeep
 
 # Ignore Composer vendor
 vendor/

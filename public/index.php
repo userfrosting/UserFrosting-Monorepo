@@ -15,8 +15,8 @@
 // First off, we'll grab the Composer dependencies
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use UserFrosting\Develop\Admin\App;
+use UserFrosting\Sprinkle\Admin\Admin;
 use UserFrosting\UserFrosting;
 
-$uf = new UserFrosting(App::class);
+$uf = new UserFrosting(Admin::class);
 $uf->run();

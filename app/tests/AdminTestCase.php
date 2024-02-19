@@ -10,7 +10,7 @@
 
 namespace UserFrosting\Sprinkle\Admin\Tests;
 
-use UserFrosting\Develop\Admin\App;
+use UserFrosting\Sprinkle\Admin\Admin;
 use UserFrosting\Testing\TestCase;
 
 /**
@@ -18,5 +18,5 @@ use UserFrosting\Testing\TestCase;
  */
 class AdminTestCase extends TestCase
 {
-    protected string $mainSprinkle = App::class;
+    protected string $mainSprinkle = Admin::class;
 }
