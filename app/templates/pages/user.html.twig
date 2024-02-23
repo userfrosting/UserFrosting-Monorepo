@@ -28,11 +28,13 @@
                                         </button>
                                         <ul class="dropdown-menu box-tool-menu">
                                             {% block tools %}
-                                                <li>
-                                                    <a href="#" class="js-user-edit" data-user_name="{{user.user_name}}">
-                                                        <i class="fas fa-edit fa-fw"></i> {{translate('EDIT')}}
-                                                    </a>
-                                                </li>
+                                                {% if 'edit' not in tools.hidden %}
+                                                    <li>
+                                                        <a href="#" class="js-user-edit" data-user_name="{{user.user_name}}">
+                                                            <i class="fas fa-edit fa-fw"></i> {{translate('EDIT')}}
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
                                                 {% if 'password' not in tools.hidden %}
                                                     <li>
                                                         <a href="#" class="js-user-password" data-user_name="{{user.user_name}}">
