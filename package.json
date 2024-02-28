@@ -31,7 +31,7 @@
     "webpack.entries.js"
   ],
   "dependencies": {
-    "@userfrosting/theme-adminlte": "^5.0.0"
+    "@userfrosting/theme-adminlte": "github:userfrosting/theme-adminlte#5.1"
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^4.4.0",

@@ -40,7 +40,7 @@ class GroupCreateModal
     protected string $schema = 'schema://requests/group/create.yaml';
 
     // Default group icon
-    protected string $defaultIcon = 'fas fa-user';
+    protected string $defaultIcon = 'fa-solid fa-user';
 
     /**
      * Inject dependencies.

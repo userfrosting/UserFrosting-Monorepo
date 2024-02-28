@@ -1,38 +1,38 @@
 {% block navigation %}
     {% if checkAccess('uri_dashboard') %}
     <li>
-        <a href="{{ urlFor('dashboard') }}"><i class="fas fa-tachometer-alt fa-fw"></i> <span>{{ translate("DASHBOARD") }}</span></a>
+        <a href="{{ urlFor('dashboard') }}"><i class="fa-solid fa-tachometer-alt fa-fw"></i> <span>{{ translate("DASHBOARD") }}</span></a>
     </li>
     {% endif %}
     {% if checkAccess('uri_users') %}
     <li>
-        <a href="{{ urlFor('uri_users') }}"><i class="fas fa-user fa-fw"></i> <span>{{ translate("USER", 2) }}</span></a>
+        <a href="{{ urlFor('uri_users') }}"><i class="fa-solid fa-user fa-fw"></i> <span>{{ translate("USER", 2) }}</span></a>
     </li>
     {% elseif checkAccess('uri_group', {
         'group': current_user.group
     }) %}
     <li>
-        <a href="{{ urlFor('page.group', {'slug': current_user.group.slug}) }}"><i class="fas {{current_user.group.icon}} fa-fw"></i> <span>{{ translate("GROUP.MANAGE") }}</span></a>
+        <a href="{{ urlFor('page.group', {'slug': current_user.group.slug}) }}"><i class="fa-solid {{current_user.group.icon}} fa-fw"></i> <span>{{ translate("GROUP.MANAGE") }}</span></a>
     </li>
     {% endif %}
     {% if checkAccess('uri_activities') %}
     <li>
-        <a href="{{ urlFor('uri_activities') }}"><i class="fas fa-tasks fa-fw"></i> <span>{{ translate("ACTIVITY", 2) }}</span></a>
+        <a href="{{ urlFor('uri_activities') }}"><i class="fa-solid fa-tasks fa-fw"></i> <span>{{ translate("ACTIVITY", 2) }}</span></a>
     </li>
     {% endif %}
     {% if checkAccess('uri_roles') %}
     <li>
-        <a href="{{ urlFor('uri_roles') }}"><i class="fas fa-id-card fa-fw"></i> <span>{{ translate("ROLE", 2) }}</span></a>
+        <a href="{{ urlFor('uri_roles') }}"><i class="fa-solid fa-id-card fa-fw"></i> <span>{{ translate("ROLE", 2) }}</span></a>
     </li>
     {% endif %}
     {% if checkAccess('uri_permissions') %}
     <li>
-        <a href="{{ urlFor('uri_permissions') }}"><i class="fas fa-key fa-fw"></i> <span>{{ translate("PERMISSION", 2) }}</span></a>
+        <a href="{{ urlFor('uri_permissions') }}"><i class="fa-solid fa-key fa-fw"></i> <span>{{ translate("PERMISSION", 2) }}</span></a>
     </li>
     {% endif %}
     {% if checkAccess('uri_groups') %}
     <li>
-        <a href="{{ urlFor('uri_groups') }}"><i class="fas fa-users fa-fw"></i> <span>{{ translate("GROUP", 2) }}</span></a>
+        <a href="{{ urlFor('uri_groups') }}"><i class="fa-solid fa-users fa-fw"></i> <span>{{ translate("GROUP", 2) }}</span></a>
     </li>
     {% endif %}
 {% endblock %}
