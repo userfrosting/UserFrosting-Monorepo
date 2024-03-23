@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Update to Laravel 10
 - Update to PHPUnit 10
 - Test against MariaDB [#1238](https://github.com/userfrosting/UserFrosting/issues/1238)
+- Update FontAwesome 6 references
 
 ## [5.0.2](https://github.com/userfrosting/sprinkle-admin/compare/5.0.1...5.0.2)
 - Fix editing a role permissions erase all permissions - Fix [#1240](https://github.com/userfrosting/UserFrosting/issues/1240)

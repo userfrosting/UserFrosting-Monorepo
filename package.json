@@ -1,6 +1,6 @@
 {
   "name": "@userfrosting/sprinkle-admin",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Admin Sprinkle for UserFrosting 5",
   "funding": "https://opencollective.com/userfrosting",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "webpack.entries.js"
   ],
   "dependencies": {
-    "@userfrosting/theme-adminlte": "github:userfrosting/theme-adminlte#5.1"
+    "@userfrosting/theme-adminlte": "~5.1.0"
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^4.4.0",
