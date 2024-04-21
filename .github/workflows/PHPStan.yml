@@ -19,7 +19,7 @@ jobs:
     name: PHPStan - ${{ matrix.php_versions }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Setup PHP, with composer and extensions
       uses: shivammathur/setup-php@v2
@@ -30,4 +30,4 @@ jobs:
       run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
     - name: Run PHPStan
-      run: vendor/bin/phpstan analyse src/ tests/
+      run: vendor/bin/phpstan analyse

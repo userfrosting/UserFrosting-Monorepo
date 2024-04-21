@@ -1,5 +1,8 @@
 parameters:
   level: 8
+  paths:
+    - src
+    - tests
   reportUnmatchedIgnoredErrors: false
   ignoreErrors:
     - '#Dynamic call to static method PHPUnit\\Framework\\.*#'
