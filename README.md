@@ -25,13 +25,13 @@ UserFrosting is a secure, modern user management system written in PHP and built
 ## Features
 
 ### User login screen
-![User login script](.github/screenshots/login.png)
+![User login script](https://raw.githubusercontent.com/userfrosting/.github/main/screenshots/login.png)
 
 ### User management page
-![PHP user management script](.github/screenshots/users.png)
+![PHP user management script](https://raw.githubusercontent.com/userfrosting/.github/main/screenshots/users.png)
 
 ### Permissions management page
-![UserFrosting permissions management](.github/screenshots/permissions.png)
+![UserFrosting permissions management](https://raw.githubusercontent.com/userfrosting/.github/main/screenshots/permissions.png)
 
 ## [Demo](https://demo.userfrosting.com)
 
@@ -72,7 +72,7 @@ Alex is the founder and co-owner of two companies, one that does [math tutoring 
 
 ### Louis Charette
 
-Louis's a civil engineer in Montréal, Québec who also has a passion for coding. He is one of the main contributors for SimpsonsCity.com and likes to share his knowledge by helping others the same way he was helped when he first started coding.
+Louis's a civil engineer in Montréal, Québec who also has a passion for coding. He was one of the main contributors for SimpsonsCity.com and likes to share his knowledge by helping others the same way he was helped when he first started coding.
 
 ### Jordan Mele
 
@@ -88,7 +88,7 @@ Srinivas's a web applications architect, with a passion for open source technolo
 
 ## Contributing
 
-This project exists thanks to all the people who contribute. If you're interested in contributing to the UserFrosting codebase, please see our [contributing guidelines](.github/CONTRIBUTING.md) as well as our [style guidelines](.github/STYLE-GUIDE.md).
+This project exists thanks to all the people who contribute. If you're interested in contributing to the UserFrosting codebase, please see our [contributing guidelines](https://github.com/userfrosting/.github/blob/main/.github/CONTRIBUTING.md) as well as our [style guidelines](https://github.com/userfrosting/.github/blob/main/.github/STYLE-GUIDE.md).
 
 [![](https://opencollective.com/userfrosting/contributors.svg?width=890&button=false)](https://github.com/userfrosting/UserFrosting/graphs/contributors)
 
@@ -122,5 +122,5 @@ Backers help us continue to develop UserFrosting by pledging a regular monthly c
 
 Support this project by becoming a sponsor. Sponsors have contributed a total of $500 or more to UserFrosting (either as an ongoing backer or one-time contributions). Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/userfrosting#sponsor)]
 
-[![USOR Games](.github/sponsors/usor.png)](https://usorgames.com)
-[![Next Generation Internet](.github/sponsors/nextgi.png)](https://nextgi.com)
+[![USOR Games](https://raw.githubusercontent.com/userfrosting/.github/main/sponsors/usor.png)](https://usorgames.com)
+[![Next Generation Internet](https://raw.githubusercontent.com/userfrosting/.github/main/sponsors/nextgi.png)](https://nextgi.com)
