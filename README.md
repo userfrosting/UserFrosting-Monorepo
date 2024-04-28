@@ -46,10 +46,10 @@ See main [UserFrosting Documentation](https://learn.userfrosting.com) for more i
 - [Changelog](CHANGELOG.md)
 - [Issues](https://github.com/userfrosting/UserFrosting/issues)
 - [License](LICENSE.md)
-- [Style Guide](STYLE-GUIDE.md)
+- [Style Guide](https://github.com/userfrosting/.github/blob/main/.github/STYLE-GUIDE.md)
 
 ## Contributing
 
-This project exists thanks to all the people who contribute. If you're interested in contributing to the UserFrosting codebase, please see our [contributing guidelines](https://github.com/userfrosting/UserFrosting/blob/5.1/.github/CONTRIBUTING.md) as well as our [style guidelines](.github/STYLE-GUIDE.md).
+This project exists thanks to all the people who contribute. If you're interested in contributing to the UserFrosting codebase, please see our [contributing guidelines](https://github.com/userfrosting/.github/blob/main/.github/CONTRIBUTING.md) as well as our [style guidelines](https://github.com/userfrosting/.github/blob/main/.github/STYLE-GUIDE.md).
 
 [![](https://opencollective.com/userfrosting/contributors.svg?width=890&button=true)](https://github.com/userfrosting/sprinkle-core/graphs/contributors)
