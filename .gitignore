@@ -1,8 +1,3 @@
-# Ignores text editor metadata
-*.komodoproject
-.editorconfig
-.vscode
-
 # Ignores Mac metadata.  You can configure this globally if you use a Mac: http://islegend.com/development/setting-global-gitignore-mac-windows/
 .DS_Store
 
