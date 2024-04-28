@@ -26,6 +26,13 @@
             "problemMatcher": [],
         },
         {
+            "label": "Bake",
+            "type": "shell",
+            "options": {},
+            "command": "php bakery bake",
+            "problemMatcher": [],
+        },
+        {
             "label": "Serve",
             "type": "shell",
             "options": {},
