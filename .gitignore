@@ -6,10 +6,8 @@ _meta
 .phpunit.cache
 .phpdoc
 
-# OS & Editors
+# OS
 .DS_Store
-*.komodoproject
-.vscode
 
 # Testing artifacts
 tests/Cache/store

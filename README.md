@@ -32,6 +32,6 @@ See main [UserFrosting Documentation](https://learn.userfrosting.com) and docume
 
 ## [License](LICENSE.md)
 
-## [Style Guide](STYLE-GUIDE.md)
+## [Style Guide](https://github.com/userfrosting/.github/blob/main/.github/STYLE-GUIDE.md)
 
 ## [Testing](RUNNING_TESTS.md)
