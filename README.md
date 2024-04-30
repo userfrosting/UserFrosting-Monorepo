@@ -5,6 +5,7 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/userfrosting/UserFrosting/Build.yml?branch=5.1&logo=github)](https://github.com/userfrosting/UserFrosting/actions)
 [![Codecov](https://codecov.io/gh/userfrosting/userfrosting/branch/5.1/graph/badge.svg)](https://codecov.io/gh/userfrosting/userfrosting)
 [![Style](https://github.styleci.io/repos/18148206/shield?branch=5.1&style=flat)](https://github.styleci.io/repos/18148206)
+[![PHPStan](https://img.shields.io/github/actions/workflow/status/userfrosting/userfrosting/PHPStan.yml?branch=5.1&label=PHPStan)](https://github.com/userfrosting/userfrosting/actions/workflows/PHPStan.yml)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
 [![Join the chat](https://img.shields.io/badge/Chat-UserFrosting-brightgreen?logo=Rocket.Chat)](https://chat.userfrosting.com/channel/support)
 [![Backers on Open Collective](https://img.shields.io/opencollective/backers/userfrosting?logo=opencollective)](#backers)
