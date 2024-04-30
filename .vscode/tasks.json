@@ -57,7 +57,7 @@
             "label": "npm run encore watch",
             "type": "shell",
             "options": {},
-            "command": "npm run dev --watch",
+            "command": "npm run watch",
             "problemMatcher": [],
         },
         {
