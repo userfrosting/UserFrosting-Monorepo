@@ -2,9 +2,9 @@ name: PHPStan
 
 on:
   push:
-    branches: [5.0]
+    branches: [5.1]
   pull_request:
-    branches: [5.0]
+    branches: [5.1]
   workflow_dispatch:
 
 jobs:
