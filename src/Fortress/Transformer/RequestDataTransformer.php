@@ -53,7 +53,7 @@ final class RequestDataTransformer implements RequestDataTransformerInterface
 
         // 1. If we skip or error on unexpected var, purge unwanted fields
         if ($onUnexpectedVar === 'skip' || $onUnexpectedVar === 'error') {
-            $data = $this->purge($schemaFields, $data, ($onUnexpectedVar === 'error'));
+            $data = $this->purge($schemaFields, $data, $onUnexpectedVar === 'error');
         }
 
         // 2° Apply each transformation rules. Skip we field as no transformation rules
@@ -176,7 +176,8 @@ final class RequestDataTransformer implements RequestDataTransformerInterface
      * @param bool                   $throw        If true, a FortressException will be thrown if something to purge is found
      *
      * @throws FortressException If $throw is true and we found something to purge
-     * @return mixed[]           The purged data
+     *
+     * @return mixed[] The purged data
      */
     protected function purge(array $schemaFields, array $data, bool $throw = false): array
     {
@@ -223,8 +224,8 @@ final class RequestDataTransformer implements RequestDataTransformerInterface
      * Purge a set of nested keys.
      *
      * @param string[] $keys Nested keys. Dot notation keys (eg. 'foo.bar')
-     *                        represented as an array (eg. array('foo', 'bar'))
-     * @param mixed[]  $data  The data to purge from
+     *                       represented as an array (eg. array('foo', 'bar'))
+     * @param mixed[]  $data The data to purge from
      *
      * @return mixed[] The purged data
      */
@@ -354,6 +355,7 @@ final class RequestDataTransformer implements RequestDataTransformerInterface
     /**
      * Applies the callback to the elements of the given arrays recursively.
      * Required to apply transformation on multidimensional arrays.
+     *
      * @see https://stackoverflow.com/a/39637749/445757
      *
      * @param callable $callback
