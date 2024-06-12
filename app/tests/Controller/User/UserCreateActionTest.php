@@ -300,6 +300,65 @@ class UserCreateActionTest extends AdminTestCase
     }
 
     /**
+     * When a Group Administrator without the create_user_field permission
+     * creates a new user, the new user SHOULD inherit the admin's group.
+     * Same as previous test, however, `group_id` is not set in the data payload.
+     *
+     * @see https://github.com/userfrosting/UserFrosting/issues/1256
+     */
+    public function testPostForGroupIsSetAs(): void
+    {
+        /** @var Group */
+        $group = Group::factory()->create();
+
+        /** @var User */
+        $user = User::factory()->for($group)->create();
+        $this->actAsUser($user, permissions: ['create_user']);
+
+        /** @var Config */
+        $config = $this->ci->get(Config::class);
+
+        // Force locale config.
+        $config->set('site.registration.user_defaults.locale', 'en_US');
+        $config->set('site.locales.available', ['en_US' => true]);
+
+        /** @var Mailer */
+        $mailer = Mockery::mock(Mailer::class)
+            ->makePartial()
+            ->shouldReceive('send')->once()
+            ->getMock();
+        $this->ci->set(Mailer::class, $mailer);
+
+        // Set post payload
+        $data = [
+            'user_name'  => 'foo',
+            'first_name' => 'Foo',
+            'last_name'  => 'Bar',
+            'email'      => 'foo@bar.com',
+        ];
+
+        // Create request with method and url and fetch response
+        $request = $this->createJsonRequest('POST', '/api/users', $data);
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertResponseStatus(200, $response);
+        $this->assertJsonResponse([], $response);
+
+        // Make sure the user is added to the db by querying it
+        /** @var User */
+        $user = User::where('email', 'foo@bar.com')->first();
+        $this->assertSame($group->id, $user->group?->id);
+        $this->assertSame('en_US', $user['locale']); // Locale will be default :)
+
+        // Test message
+        /** @var AlertStream */
+        $ms = $this->ci->get(AlertStream::class);
+        $messages = $ms->getAndClearMessages();
+        $this->assertSame('success', array_reverse($messages)[0]['type']);
+    }
+
+    /**
      * @depends testPost
      */
     public function testPostForFailedValidation(): void
