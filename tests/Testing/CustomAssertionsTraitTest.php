@@ -17,6 +17,7 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
 use UserFrosting\Testing\CustomAssertionsTrait;
 
 /**
@@ -34,9 +35,14 @@ class CustomAssertionsTraitTest extends TestCase
 
     public function testAssertResponse(): void
     {
+        /** @var StreamInterface $stream */
+        $stream = Mockery::mock(StreamInterface::class)
+           ->shouldReceive('__toString')->andReturn('foo bar')
+           ->getMock();
+
         /** @var ResponseInterface $response */
         $response = Mockery::mock(ResponseInterface::class)
-            ->shouldReceive('getBody')->once()->andReturn('foo bar')
+            ->shouldReceive('getBody')->once()->andReturn($stream)
             ->getMock();
 
         $this->assertResponse('foo bar', $response);
@@ -55,9 +61,14 @@ class CustomAssertionsTraitTest extends TestCase
     /** @depends testAssertJsonEquals */
     public function testAssertJsonResponse(): void
     {
+        /** @var StreamInterface $stream */
+        $stream = Mockery::mock(StreamInterface::class)
+           ->shouldReceive('__toString')->andReturn($this->json)
+           ->getMock();
+
         /** @var ResponseInterface $response */
         $response = Mockery::mock(ResponseInterface::class)
-            ->shouldReceive('getBody')->times(2)->andReturn($this->json)
+            ->shouldReceive('getBody')->times(2)->andReturn($stream)
             ->getMock();
 
         $array = ['result' => ['foo' => true, 'bar' => false, 'list' => ['foo', 'bar']]];
@@ -68,9 +79,14 @@ class CustomAssertionsTraitTest extends TestCase
     /** @depends testAssertJsonNotEquals */
     public function testAssertNotJsonResponse(): void
     {
+        /** @var StreamInterface $stream */
+        $stream = Mockery::mock(StreamInterface::class)
+           ->shouldReceive('__toString')->andReturn($this->json)
+           ->getMock();
+
         /** @var ResponseInterface $response */
         $response = Mockery::mock(ResponseInterface::class)
-            ->shouldReceive('getBody')->times(3)->andReturn($this->json)
+            ->shouldReceive('getBody')->times(3)->andReturn($stream)
             ->getMock();
 
         $this->assertNotJsonResponse(['foo'], $response);
@@ -96,9 +112,14 @@ class CustomAssertionsTraitTest extends TestCase
 
     public function testAssertJsonEqualsWithResponse(): void
     {
+        /** @var StreamInterface $stream */
+        $stream = Mockery::mock(StreamInterface::class)
+           ->shouldReceive('__toString')->andReturn($this->json)
+           ->getMock();
+
         /** @var ResponseInterface $response */
         $response = Mockery::mock(ResponseInterface::class)
-            ->shouldReceive('getBody')->times(3)->andReturn($this->json)
+            ->shouldReceive('getBody')->times(3)->andReturn($stream)
             ->getMock();
 
         $array = ['result' => ['foo' => true, 'bar' => false, 'list' => ['foo', 'bar']]];
@@ -116,9 +137,14 @@ class CustomAssertionsTraitTest extends TestCase
 
     public function testAssertJsonStructureWithResponse(): void
     {
+        /** @var StreamInterface $stream */
+        $stream = Mockery::mock(StreamInterface::class)
+           ->shouldReceive('__toString')->andReturn($this->json)
+           ->getMock();
+
         /** @var ResponseInterface $response */
         $response = Mockery::mock(ResponseInterface::class)
-            ->shouldReceive('getBody')->times(2)->andReturn($this->json)
+            ->shouldReceive('getBody')->times(2)->andReturn($stream)
             ->getMock();
 
         $this->assertJsonStructure(['result'], $response);
@@ -140,9 +166,14 @@ class CustomAssertionsTraitTest extends TestCase
 
     public function testAssertJsonCountWithResponse(): void
     {
+        /** @var StreamInterface $stream */
+        $stream = Mockery::mock(StreamInterface::class)
+           ->shouldReceive('__toString')->andReturn($this->json)
+           ->getMock();
+
         /** @var ResponseInterface $response */
         $response = Mockery::mock(ResponseInterface::class)
-            ->shouldReceive('getBody')->times(3)->andReturn($this->json)
+            ->shouldReceive('getBody')->times(3)->andReturn($stream)
             ->getMock();
 
         $this->assertJsonCount(1, $response);
@@ -169,9 +200,14 @@ class CustomAssertionsTraitTest extends TestCase
     {
         $html = '<html><div>One</div><div>Two</div><span>Not You</span><div>Three</div></html>';
 
+        /** @var StreamInterface $stream */
+        $stream = Mockery::mock(StreamInterface::class)
+           ->shouldReceive('__toString')->andReturn($html)
+           ->getMock();
+
         /** @var ResponseInterface $response */
         $response = Mockery::mock(ResponseInterface::class)
-            ->shouldReceive('getBody')->times(4)->andReturn($html)
+            ->shouldReceive('getBody')->times(4)->andReturn($stream)
             ->getMock();
 
         $this->assertHtmlTagCount(3, $response, 'div');
