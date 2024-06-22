@@ -128,14 +128,6 @@ class UserCreateAction
         $data['flag_verified'] = true;
         $data['flag_enabled'] = true;
 
-        // Now that we check the form, we can try to register the actual user
-        $user = new $this->userModel($data);
-
-        // Try registration. Exceptions will be thrown if it fails.
-        // No need to catch, as this kind of exception will automatically
-        // handled by the error handlers.
-        $this->userValidation->validate($user);
-
         // Determine if currentUser has permission to modify the group.  If so, show the 'group' dropdown.
         // Otherwise, set to the currentUser's group and disable the dropdown.
         if ($this->authenticator->checkAccess('create_user_field', ['fields' => ['group']]) === false) {
@@ -149,6 +141,14 @@ class UserCreateAction
         if (!isset($data['group_id'])) {
             $data['group_id'] = $currentUser->group_id;
         }
+
+        // Now that we check the form, we can try to register the actual user
+        $user = new $this->userModel($data);
+
+        // Try registration. Exceptions will be thrown if it fails.
+        // No need to catch, as this kind of exception will automatically
+        // handled by the error handlers.
+        $this->userValidation->validate($user);
 
         // Ready to save
         $this->db->transaction(function () use ($user, $data, $currentUser) {

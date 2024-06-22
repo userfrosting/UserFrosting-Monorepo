@@ -1,6 +1,7 @@
 # UserFrosting 5.2 Admin Sprinkle
 
 [![Version](https://img.shields.io/github/v/release/userfrosting/sprinkle-admin?include_prereleases)](https://github.com/userfrosting/sprinkle-admin/releases)
+[![NPM Version](https://img.shields.io/npm/v/%40userfrosting%2Fsprinkle-admin)](https://www.npmjs.com/package/@userfrosting/sprinkle-admin)
 ![PHP Version](https://img.shields.io/badge/php-%5E8.1-brightgreen)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
 [![Build](https://img.shields.io/github/actions/workflow/status/userfrosting/sprinkle-admin/Build.yml?branch=5.2&logo=github)](https://github.com/userfrosting/sprinkle-admin/actions)
@@ -46,7 +47,7 @@ See main [UserFrosting Documentation](https://learn.userfrosting.com) for more i
 - [Changelog](CHANGELOG.md)
 - [Issues](https://github.com/userfrosting/UserFrosting/issues)
 - [License](LICENSE.md)
-- [Style Guide](STYLE-GUIDE.md)
+- [Style Guide](https://github.com/userfrosting/.github/blob/main/.github/STYLE-GUIDE.md)
 
 ## Contributing
 
