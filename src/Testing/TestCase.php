@@ -34,6 +34,8 @@ class TestCase extends BaseTestCase
 
     /**
      * The Slim App Instance.
+     *
+     * @var App<\DI\Container>
      */
     protected App $app;
 

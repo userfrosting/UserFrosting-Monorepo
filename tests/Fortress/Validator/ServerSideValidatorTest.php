@@ -20,11 +20,13 @@ use UserFrosting\Tests\Fortress\DictionaryStub;
 
 class ServerSideValidatorTest extends TestCase
 {
+    protected string $basePath;
     protected Translator $translator;
     protected ServerSideValidator $validator;
 
     public function setUp(): void
     {
+        $this->basePath = __DIR__.'/../data';
         $this->translator = new Translator(new DictionaryStub());
         $this->validator = new ServerSideValidator($this->translator);
     }
@@ -926,5 +928,119 @@ class ServerSideValidatorTest extends TestCase
         ]);
         $this->assertNotEmpty($errors);
         $this->assertSame(['User Name Invalid'], $errors['user_name']);
+    }
+
+    public function testInputArray(): void
+    {
+        // Get schema
+        $schema = new RequestSchema($this->basePath.'/InputArray.yaml');
+
+        // Test no errors
+        $errors = $this->validator->validate($schema, [
+            'InputArray' => [20, 73]
+        ]);
+        $this->assertEmpty($errors);
+
+        // Test each element must be integer
+        $errors = $this->validator->validate($schema, [
+            'InputArray' => [20, 'string']
+        ]);
+        $this->assertNotEmpty($errors);
+        $this->assertSame(['Input elements must be integers.'], $errors['InputArray.*']);
+
+        // Test the input itself is required
+        $errors = $this->validator->validate($schema, []);
+        $this->assertNotEmpty($errors);
+        $this->assertSame(['InputArray is required', 'InputArray must be an array'], $errors['InputArray']);
+
+        // Test the input itself must be an array
+        $errors = $this->validator->validate($schema, [
+            'InputArray' => 20
+        ]);
+        $this->assertNotEmpty($errors);
+        $this->assertSame(['InputArray must be an array'], $errors['InputArray']);
+    }
+
+    public function testMultidimensional(): void
+    {
+        // Get schema
+        $schema = new RequestSchema($this->basePath.'/Multidimensional.yaml');
+
+        // String threshold
+        $errors = $this->validator->validate($schema, [
+            'Settings' => [
+                [
+                    'name'      => 'Foo',
+                    'threshold' => 'eleven', // Bad
+                ],
+                [
+                    'name'      => 'Bar',
+                    'threshold' => 73,
+                ],
+            ]
+        ]);
+        $this->assertCount(1, $errors);
+        $this->assertSame(['Value must be max 100', 'Input elements must be integers'], $errors['Settings.*.threshold']);
+
+        // Max threshold
+        $errors = $this->validator->validate($schema, [
+            'Settings' => [
+                [
+                    'name'      => 'Foo',
+                    'threshold' => 11,
+                ],
+                [
+                    'name'      => 'Bar',
+                    'threshold' => 730, // Bad, to high
+                ],
+            ]
+        ]);
+        $this->assertCount(1, $errors);
+        $this->assertSame(['Value must be max 100'], $errors['Settings.*.threshold']);
+
+        // String int are accepted
+        $errors = $this->validator->validate($schema, [
+            'Settings' => [
+                [
+                    'name'      => 'Foo',
+                    'threshold' => '11', // Actually good
+                ],
+                [
+                    'name'      => 'Bar',
+                    'threshold' => '73', // Actually good
+                ],
+            ]
+        ]);
+        $this->assertCount(0, $errors);
+
+        // Required name, but Threshold is optional
+        $errors = $this->validator->validate($schema, [
+            'Settings' => [
+                [
+                    'name'      => 'Foo',
+                    'threshold' => 11,
+                ],
+                [
+                    'threshold' => 73, // Bad, missing name
+                ],
+                [
+                    'name'      => 'Foo Bar',
+                ],
+            ]
+        ]);
+        $this->assertCount(1, $errors);
+        $this->assertSame(['Each settings must have a name'], $errors['Settings.*.name']);
+
+        // Test the Settings input itself is required
+        $errors = $this->validator->validate($schema, []);
+        $this->assertNotEmpty($errors);
+        $this->assertSame(['Settings array is required', 'Settings must be an input array'], $errors['Settings']);
+
+        // Test the input itself must be an array
+        $errors = $this->validator->validate($schema, [
+            'Settings' => 20
+        ]);
+        $this->assertNotEmpty($errors);
+        $this->assertSame(['Settings must be an input array'], $errors['Settings']);
     }
 }

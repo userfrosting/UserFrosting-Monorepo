@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [5.2.0](https://github.com/userfrosting/framework/compare/5.0.1...5.2.0)
 
+## [5.1.2](https://github.com/userfrosting/framework/compare/5.1.1...5.1.2)
+- Add Slim [type hinting](https://github.com/slimphp/Slim/releases/tag/4.14.0) & bump minimum slim version
+
+## [5.1.1](https://github.com/userfrosting/framework/compare/5.1.0...5.1.1)
+- Fix InputArray in Fortress (See https://github.com/userfrosting/UserFrosting/issues/1251)
+- Update PHPStan config
+- Add VSCode config
+
 ## [5.1.0](https://github.com/userfrosting/framework/compare/5.0.0...5.1.0)
 - Removed Assets
 - Drop PHP 8.1 support, add PHP 8.3 support

@@ -35,11 +35,31 @@ class RequestDataTransformerTest extends TestCase
         $this->transformer = new RequestDataTransformer();
     }
 
-    public function testTransformFieldForNotInSchema(): void
+    public function testTransformField(): void
     {
         $schema = new RequestSchema([
-            'email'       => [],
+            'email' => [
+                'transformations' => ['purge', 'trim'],
+            ],
         ]);
+
+        $result = $this->transformer->transformField($schema, 'email', '   <b>foo@bar.com</b>   ');
+        $this->assertSame('foo@bar.com', $result);
+    }
+
+    public function testTransformFieldButNoRules(): void
+    {
+        $schema = new RequestSchema([
+            'email' => [],
+        ]);
+
+        $result = $this->transformer->transformField($schema, 'email', '   <b>foo@bar.com</b>   ');
+        $this->assertSame('   <b>foo@bar.com</b>   ', $result);
+    }
+
+    public function testTransformFieldForNotInSchema(): void
+    {
+        $schema = new RequestSchema([]);
 
         $result = $this->transformer->transformField($schema, 'foo', 'bar');
         $this->assertSame('bar', $result);
@@ -121,7 +141,7 @@ class RequestDataTransformerTest extends TestCase
 
         // Set expectations
         $this->expectException(Exception::class);
-        $this->expectExceptionMessage("The field 'admin' is not a valid input field.");
+        $this->expectExceptionMessage("The fields 'admin' are not a valid input field.");
 
         // Act
         $this->transformer->transform($schema, $rawInput, 'error');
@@ -142,7 +162,7 @@ class RequestDataTransformerTest extends TestCase
         // Assert
         $transformedData = [
             'display_name' => 'THE GREATEST',
-            'email'        => 'david@owlfancy.com',
+            'email'        => 'david@owlfancy.com', // Default value
         ];
 
         $this->assertSame($transformedData, $result);
@@ -277,6 +297,24 @@ class RequestDataTransformerTest extends TestCase
         $this->assertSame($transformedData, $result);
     }
 
+    public function testPurifyForNonString(): void
+    {
+        // Act
+        $rawInput = [
+            'puppies' => true,
+        ];
+
+        $result = $this->transformer->transform($this->schema, $rawInput, 'skip');
+
+        // Assert
+        $transformedData = [
+            'puppies' => true,
+            'email'   => 'david@owlfancy.com',
+        ];
+
+        $this->assertSame($transformedData, $result);
+    }
+
     /**
      * default transformer.
      */
@@ -293,6 +331,323 @@ class RequestDataTransformerTest extends TestCase
         $transformedData = [
             'kitties' => '<b>My Super-Important Test</b>',
             'email'   => 'david@owlfancy.com',
+        ];
+
+        $this->assertSame($transformedData, $result);
+    }
+
+    public function testInputArray(): void
+    {
+        // Data
+        $rawInput = [
+            'InputArray' => [
+                20,
+                '>10< <br />',
+                '     whitespace     ',
+            ]
+        ];
+
+        // Schema
+        $schema = new RequestSchema($this->basePath . '/InputArray.yaml');
+
+        // Act
+        $result = $this->transformer->transform($schema, $rawInput);
+
+        // Set expectations
+        $transformedData = [
+            'InputArray' => [
+                20,
+                '>10<',
+                'whitespace',
+            ]
+        ];
+
+        $this->assertSame($transformedData, $result);
+    }
+
+    public function testMultidimensional(): void
+    {
+        // Data
+        $rawInput = [
+            'Settings' => [
+                [
+                    'name'      => '   Foo   ',
+                    'threshold' => '   20    ',
+                ],
+                [
+                    'name'      => 'Bar <br />',
+                    'threshold' => '73<br />',
+                ],
+            ]
+        ];
+
+        // Schema
+        $schema = new RequestSchema($this->basePath . '/Multidimensional.yaml');
+
+        // Act
+        $result = $this->transformer->transform($schema, $rawInput);
+
+        // Set expectations
+        // - threshold has Trim
+        // - name has purge
+        $transformedData = [
+            'Settings' => [
+                [
+                    'name'      => '   Foo   ',
+                    'threshold' => '20', // Only threshold is trimmed
+                ],
+                [
+                    'name'      => 'Bar ', // Only name is purged, but since we don't trim, the space will stay !
+                    'threshold' => '73<br />',
+                ],
+            ]
+        ];
+        $this->assertSame($transformedData, $result);
+    }
+
+    /**
+     * Same as previous test, but the transformation are at the root "Settings".
+     * Per element rules will be overwritten by the root version. Everything
+     * will be purged & trimmed.
+     */
+    public function testMultidimensionalRootLevel(): void
+    {
+        // Data
+        $rawInput = [
+            'Settings' => [
+                [
+                    'name'      => '   Foo   ',
+                    'threshold' => '   20    ',
+                ],
+                [
+                    'name'      => 'Bar <br />',
+                    'threshold' => '73<br />',
+                ],
+            ]
+        ];
+
+        // Schema
+        $schema = new RequestSchema([
+            'Settings' => [
+                'transformations' => ['purge', 'trim'],
+            ],
+            'Settings.*.threshold' => [
+                'transformations' => ['trim'],
+            ],
+            'Settings.*.name' => [
+                'transformations' => ['purge'],
+            ],
+        ]);
+
+        // Act
+        $result = $this->transformer->transform($schema, $rawInput);
+
+        // Set expectations
+        $transformedData = [
+            'Settings' => [
+                [
+                    'name'      => 'Foo',
+                    'threshold' => '20',
+                ],
+                [
+                    'name'      => 'Bar',
+                    'threshold' => '73',
+                ],
+            ]
+        ];
+        $this->assertSame($transformedData, $result);
+    }
+
+    public function testMultidimensionalPurge(): void
+    {
+        // Schema - Use two multidimensional field : Named has a name only,
+        // Colored has color only.
+        $schema = new RequestSchema([
+            'Named'            => [],
+            'Named.*.name'     => [],
+            'Colored.*.color'  => [],
+        ]);
+
+        // Data
+        $rawInput = [
+            'Named' => [
+                [
+                    'name'  => 'Joe',
+                    'color' => 'blue',
+                ],
+                [
+                    'name'        => 'Kathy',
+                    'color'       => 'pink',
+                    'description' => 'Something',
+                ],
+            ],
+            'Colored' => [
+                [
+                    'name'  => 'John',
+                    'color' => 'red',
+                ]
+                ],
+        ];
+
+        // Act
+        $result = $this->transformer->transform($schema, $rawInput);
+
+        // Set expectations - Again, Named has a name only, Colored has color only
+        $transformedData = [
+            'Named' => [
+                ['name' => 'Joe'],
+                ['name' => 'Kathy'],
+            ],
+            'Colored' => [
+                ['color' => 'red']
+            ],
+        ];
+        $this->assertSame($transformedData, $result);
+    }
+
+    /**
+     * Same as the previous test, but 'Named' doesn't have a root field in the
+     * schema, to prove both situation are the same
+     */
+    public function testMultidimensionalPurgeNoRoot(): void
+    {
+        $schema = new RequestSchema([
+            'Named.*.name'     => [],
+            'Colored.*.color'  => [],
+        ]);
+
+        // Data
+        $rawInput = [
+            'Named' => [
+                [
+                    'name'  => 'Joe',
+                    'color' => 'blue',
+                ],
+                [
+                    'name'        => 'Kathy',
+                    'color'       => 'pink',
+                    'description' => 'Something',
+                ],
+            ],
+            'Colored' => [
+                [
+                    'name'  => 'John',
+                    'color' => 'red',
+                ]
+                ],
+        ];
+
+        // Act
+        $result = $this->transformer->transform($schema, $rawInput);
+
+        // Set expectations - Again, Named has a name only, Colored has color only
+        $transformedData = [
+            'Named' => [
+                ['name' => 'Joe'],
+                ['name' => 'Kathy'],
+            ],
+            'Colored' => [
+                ['color' => 'red']
+            ],
+        ];
+        $this->assertSame($transformedData, $result);
+    }
+
+    public function testPurgeNotInSchema(): void
+    {
+        // Use empty schema - All input will be purged
+        $schema = new RequestSchema([]);
+
+        // Data
+        $rawInput = [
+            'Named' => [
+                [
+                    'name'  => 'Joe',
+                    'color' => 'blue',
+                ],
+                [
+                    'name'        => 'Kathy',
+                    'color'       => 'pink',
+                    'description' => 'Something',
+                ],
+            ],
+            'Colored' => [
+                [
+                    'name'  => 'John',
+                    'color' => 'red',
+                ]
+            ],
+            'FooBar'      => true, // Will be purged
+            'FooBarArray' => [true, false], // Will be purged
+        ];
+
+        // Act and assert
+        $result = $this->transformer->transform($schema, $rawInput);
+        $this->assertSame([], $result);
+    }
+
+    public function testInputArrayPurge(): void
+    {
+        // Schema
+        $schema = new RequestSchema([
+            'InputArray.*' => [],
+        ]);
+
+        // Data
+        $rawInput = [
+            'InputArray' => [
+                '10',
+                20,
+                true,
+            ],
+            'Foo' => true // Will be purged
+        ];
+
+        // Act
+        $result = $this->transformer->transform($schema, $rawInput);
+
+        // Set expectations
+        $transformedData = [
+            'InputArray' => [
+                '10',
+                20,
+                true,
+            ]
+        ];
+
+        $this->assertSame($transformedData, $result);
+    }
+
+    /**
+     * Same as previous, but without the '*' wildcard
+     */
+    public function testInputArrayRootPurge(): void
+    {
+        // Schema
+        $schema = new RequestSchema([
+            'InputArray' => [],
+        ]);
+
+        // Data
+        $rawInput = [
+            'InputArray' => [
+                '10',
+                20,
+                true,
+            ],
+            'Foo' => true // Will be purged
+        ];
+
+        // Act
+        $result = $this->transformer->transform($schema, $rawInput);
+
+        // Set expectations
+        $transformedData = [
+            'InputArray' => [
+                '10',
+                20,
+                true,
+            ]
         ];
 
         $this->assertSame($transformedData, $result);

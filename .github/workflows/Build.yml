@@ -22,7 +22,7 @@ jobs:
     name: PHPUnit Tests - ${{ matrix.php_versions }} - ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Setup PHP, with composer and extensions
       uses: shivammathur/setup-php@v2
@@ -53,7 +53,7 @@ jobs:
 
     - name: Upload coverage to Codecov
       if: github.event_name != 'schedule'
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./_meta/coverage.xml

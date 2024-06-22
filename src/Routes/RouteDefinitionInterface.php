@@ -16,6 +16,8 @@ interface RouteDefinitionInterface
 {
     /**
      * Register routes to the Slim App.
+     *
+     * @param App<\DI\Container> $app
      */
     public function register(App $app): void;
 }

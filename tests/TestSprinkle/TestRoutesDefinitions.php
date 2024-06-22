@@ -15,6 +15,9 @@ use UserFrosting\Routes\RouteDefinitionInterface;
 
 class TestRoutesDefinitions implements RouteDefinitionInterface
 {
+    /**
+     * @param App<\DI\Container> $app
+     */
     public function register(App $app): void
     {
         $app->get('/foo', [TestController::class, 'index']);

@@ -1,0 +1,15 @@
+InputArray:
+  validators:
+    required:
+      message: InputArray is required
+    array:
+      message: InputArray must be an array
+
+InputArray.*:
+  validators:
+    integer:
+      message: Input elements must be integers.
+  transformations:
+  - purge
+  - trim
+      

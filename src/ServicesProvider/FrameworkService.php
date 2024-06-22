@@ -77,7 +77,7 @@ final class FrameworkService implements ServicesProviderInterface
     /**
      * Load and register all routes.
      *
-     * @param SlimApp                  $app
+     * @param SlimApp<\DI\Container>   $app
      * @param SprinkleRoutesRepository $routesRepository
      */
     protected function registerRoutes(SlimApp $app, SprinkleRoutesRepository $routesRepository): void
@@ -91,7 +91,7 @@ final class FrameworkService implements ServicesProviderInterface
      * Load and register all middlewares.
      * Last registered middleware is executed first.
      *
-     * @param SlimApp                      $app
+     * @param SlimApp<\DI\Container>       $app
      * @param SprinkleMiddlewareRepository $middlewareRepository
      */
     protected function registerMiddlewares(SlimApp $app, SprinkleMiddlewareRepository $middlewareRepository): void

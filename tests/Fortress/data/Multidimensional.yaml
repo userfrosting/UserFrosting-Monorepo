@@ -1,0 +1,25 @@
+Settings:
+  validators:
+    required:
+      message: Settings array is required
+    array:
+      message: Settings must be an input array
+
+Settings.*.threshold:
+  validators:
+    range:
+      max: 100
+      message: Value must be max 100
+    integer:
+      message: Input elements must be integers
+  transformations:
+  - trim
+      
+Settings.*.name:
+  validators:
+    required:
+      message: Each settings must have a name
+    string:
+      message: Name elements must be string
+  transformations:
+  - purge
