@@ -163,7 +163,7 @@ interface StreamInterface
      *
      * @see http://php.net/manual/streamwrapper.stream-read.php
      *
-     * @param int<0, max> $count How many bytes of data from the current position should be returned.
+     * @param int<1, max> $count How many bytes of data from the current position should be returned.
      *
      * @return string|false If there are less than count bytes available, return as many as are available. If no more data is available, return either false or an empty string.
      */

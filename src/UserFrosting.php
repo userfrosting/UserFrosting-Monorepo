@@ -23,14 +23,14 @@ use UserFrosting\Event\EventDispatcher;
 final class UserFrosting extends Cupcake
 {
     /**
-     * @var App The Slim application instance.
+     * @var App<\DI\Container> The Slim application instance.
      */
     protected App $app;
 
     /**
      * Return the underlying Slim App instance, if available.
      *
-     * @return App
+     * @return App<\DI\Container>
      */
     public function getApp(): App
     {
@@ -42,7 +42,7 @@ final class UserFrosting extends Cupcake
      */
     protected function initiateApp(): void
     {
-        /** @var App */
+        /** @var App<\DI\Container> */
         $app = $this->ci->get(App::class);
 
         // Dispatch AppInitiatedEvent

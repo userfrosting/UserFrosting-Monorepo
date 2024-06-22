@@ -441,7 +441,7 @@ class BuildingLocatorTest extends TestCase
         $filesize = filesize($filename);
         $this->assertNotFalse($filesize);
 
-        $contents = fread($handle, $filesize);
+        $contents = fread($handle, $filesize); // @phpstan-ignore-line
 
         $this->assertNotEquals('', $contents);
         $this->assertSame('Tesla', json_decode($contents, true)['cars'][1]['make']); // @phpstan-ignore-line

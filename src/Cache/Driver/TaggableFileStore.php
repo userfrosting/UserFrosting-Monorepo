@@ -74,7 +74,7 @@ class TaggableFileStore extends FileStore
             $hash = $key;
             $parts = [];
         } else {
-            $parts = array_slice(str_split($hash = sha1((string) $key), 2), 0, 2);
+            $parts = array_slice(str_split($hash = sha1($key), 2), 0, 2);
         }
 
         return $this->directory . $this->ds . $folder . (count($parts) > 0 ? implode($this->ds, $parts) . $this->ds : '') . $hash;

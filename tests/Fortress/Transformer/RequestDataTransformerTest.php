@@ -460,7 +460,7 @@ class RequestDataTransformerTest extends TestCase
 
     public function testMultidimensionalPurge(): void
     {
-        // Schema - Use two multidimensional field : Named has a name only, 
+        // Schema - Use two multidimensional field : Named has a name only,
         // Colored has color only.
         $schema = new RequestSchema([
             'Named'            => [],
@@ -506,7 +506,7 @@ class RequestDataTransformerTest extends TestCase
     }
 
     /**
-     * Same as the previous test, but 'Named' doesn't have a root field in the 
+     * Same as the previous test, but 'Named' doesn't have a root field in the
      * schema, to prove both situation are the same
      */
     public function testMultidimensionalPurgeNoRoot(): void
