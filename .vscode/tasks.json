@@ -62,15 +62,15 @@
             "label": "webpack:dev",
             "type": "shell",
             "options": {},
-            "command": "npm run dev",
+            "command": "npm run webpack:dev",
             "problemMatcher": [],
             "group": "build"
         },
         {
-            "label": "webpack:dev-server (HMR)",
+            "label": "webpack:server (HMR)",
             "type": "shell",
             "options": {},
-            "command": "npm run dev-server",
+            "command": "npm run webpack:server",
             "problemMatcher": [],
             "group": "build"
         },
@@ -78,14 +78,14 @@
             "label": "webpack:watch",
             "type": "shell",
             "options": {},
-            "command": "npm run watch",
+            "command": "npm run webpack:watch",
             "problemMatcher": []
         },
         {
             "label": "webpack:build",
             "type": "shell",
             "options": {},
-            "command": "npm run build",
+            "command": "npm run webpack:build",
             "problemMatcher": []
         },
         {
@@ -114,13 +114,6 @@
             "type": "shell",
             "options": {},
             "command": "npm run vite:build",
-            "problemMatcher": []
-        },
-        {
-            "label": "vite:preview",
-            "type": "shell",
-            "options": {},
-            "command": "npm run vite:preview",
             "problemMatcher": []
         }
     ]

@@ -35,14 +35,13 @@
         "webpack-notifier": "^1.15.0"
     },
     "scripts": {
-        "dev-server": "encore dev-server --port 9000",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress",
-        "lint": "eslint app/assets/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-        "format": "prettier --write app/assets/",
+        "webpack:server": "encore dev-server --port 9000",
+        "webpack:dev": "encore dev",
+        "webpack:watch": "encore dev --watch",
+        "webpack:build": "encore production --progress",
         "vite:dev": "vite",
         "vite:build": "vue-tsc && vite build",
-        "vite:preview": "vite preview"
+        "lint": "eslint app/assets/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+        "format": "prettier --write app/assets/"
     }
 }
