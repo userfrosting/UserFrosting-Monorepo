@@ -20,6 +20,7 @@ class ConfigTest extends TestCase
         'string' => 'foobar',
         'int'    => 92,
         'array'  => ['foo', 'bar'],
+        'null'   => null,
     ];
 
     public function testGetBool(): void
@@ -30,6 +31,12 @@ class ConfigTest extends TestCase
         $this->assertSame(false, $repo->getBool('missing', false));
         $this->assertSame(null, $repo->getBool('missing'));
         $this->assertSame($repo->get('missing'), $repo->getBool('missing')); // Same default behavior as "get"
+
+        // Value is null, but not the default. Default should still be used.
+        $this->assertSame(null, $repo->getBool('null'));
+        $this->assertSame(false, $repo->getBool('null', false));
+
+        // Exception
         $this->expectException(TypeException::class);
         $repo->getBool('string');
     }
@@ -42,6 +49,12 @@ class ConfigTest extends TestCase
         $this->assertSame('barfoo', $repo->getString('missing', 'barfoo'));
         $this->assertSame(null, $repo->getString('missing'));
         $this->assertSame($repo->get('missing'), $repo->getString('missing')); // Same default behavior as "get"
+
+        // Value is null, but not the default. Default should still be used.
+        $this->assertSame(null, $repo->getString('null'));
+        $this->assertSame('non-null', $repo->getString('null', 'non-null'));
+
+        // Exception
         $this->expectException(TypeException::class);
         $repo->getString('bool');
     }
@@ -54,6 +67,12 @@ class ConfigTest extends TestCase
         $this->assertSame(29, $repo->getInt('missing', 29));
         $this->assertSame(null, $repo->getInt('missing'));
         $this->assertSame($repo->get('missing'), $repo->getInt('missing')); // Same default behavior as "get"
+
+        // Value is null, but not the default. Default should still be used.
+        $this->assertSame(null, $repo->getInt('null'));
+        $this->assertSame(123, $repo->getInt('null', 123));
+
+        // Exception
         $this->expectException(TypeException::class);
         $repo->getInt('string');
     }
@@ -66,6 +85,12 @@ class ConfigTest extends TestCase
         $this->assertSame(['bar', 'foo'], $repo->getArray('missing', ['bar', 'foo']));
         $this->assertSame(null, $repo->getArray('missing'));
         $this->assertSame($repo->get('missing'), $repo->getArray('missing')); // Same default behavior as "get"
+
+        // Value is null, but not the default. Default should still be used.
+        $this->assertSame(null, $repo->getArray('null'));
+        $this->assertSame(['non-null'], $repo->getArray('null', ['non-null']));
+
+        // Exception
         $this->expectException(TypeException::class);
         $repo->getArray('string');
     }
