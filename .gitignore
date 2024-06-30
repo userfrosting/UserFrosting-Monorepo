@@ -32,10 +32,7 @@ node_modules/
 
 # Ignore compiled assets
 public/assets/
-
-# Ignore Vagrant & Homestead VM
-vagrant/Homestead/
-.vagrant/
+public/.vite/
 
 # Ignore dev utility cache
 .phpunit.cache
