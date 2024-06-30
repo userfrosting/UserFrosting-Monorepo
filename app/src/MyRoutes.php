@@ -18,9 +18,6 @@ class MyRoutes implements RouteDefinitionInterface
 {
     public function register(App $app): void
     {
-        $app->get('/', [AppController::class, 'pageIndex'])->setName('index');
-        $app->get('/about', [AppController::class, 'pageAbout'])->setName('about');
-        $app->get('/legal', [AppController::class, 'pageLegal'])->setName('legal');
-        $app->get('/privacy', [AppController::class, 'pagePrivacy'])->setName('privacy');
+        $app->get('/[{path:.*}]', [AppController::class, 'pageIndex'])->setName('index');
     }
 }

@@ -1,10 +1,13 @@
-const Encore = require('@symfony/webpack-encore');
+import Encore from '@symfony/webpack-encore'
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin'
+import webpack from 'webpack'
+import App from './webpack.entries.js'
 
 // List dependent sprinkles and local entries files
 const sprinkles = {
-    AdminLTE: require('@userfrosting/theme-adminlte/webpack.entries'),
-    Admin: require('@userfrosting/sprinkle-admin/webpack.entries'),
-    App: require('./webpack.entries')
+    // AdminLTE: require('@userfrosting/theme-adminlte/webpack.entries'),
+    // Admin: require('@userfrosting/sprinkle-admin/webpack.entries'),
+    App
 }
 
 // Merge dependent Sprinkles entries with local entries
@@ -55,32 +58,35 @@ Encore
      */
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
+    .enableTypeScriptLoader()
+
+    // Allow typescript to parse vue components imported from source
+    // eg.: @userfrosting/theme-pink-cupcake-example/src/views/DashboardAlerts.vue
+    .configureLoaderRule('typescript', loaderRule => {
+        loaderRule.exclude = undefined
+    })
     .enableSourceMaps(!Encore.isProduction())
 
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
-
-    // enables @babel/preset-env polyfills
-    .configureBabelPresetEnv((config) => {
-        config.useBuiltIns = 'usage';
-        config.corejs = 3;
+    .enableVueLoader(() => {}, { 
+        runtimeCompilerBuild: false
     })
+    .enableLessLoader()
+    .addPlugin(new webpack.DefinePlugin({
+        __VUE_OPTIONS_API__: true,
+        __VUE_PROD_DEVTOOLS__: false,
+        __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false
+    }))
+    .addPlugin(new ForkTsCheckerWebpackPlugin())
 
-    // enables Sass/SCSS support
-    .enableSassLoader()
-
-    // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
-
-    // uncomment to get integrity="..." attributes on your script & link tags
-    // requires WebpackEncoreBundle 1.4 or higher
-    //.enableIntegrityHashes(Encore.isProduction())
-
-    // uncomment if you're having problems with a jQuery plugin
-    .autoProvidejQuery()
-
-    // uncomment if you use React
-    //.enableReactPreset()
+    // Disable client overlay
+    // @see https://github.com/vuejs/vue-cli/issues/7431#issuecomment-1804682832
+    .configureDevServerOptions(options => {
+        options.client = {
+            overlay: false
+        }
+    })
 ;
 
-module.exports = Encore.getWebpackConfig();
+export default Encore.getWebpackConfig();

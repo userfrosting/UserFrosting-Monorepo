@@ -21,9 +21,8 @@
         {
             "label": "PHP CS Fixer",
             "type": "shell",
-            "options": {},
             "command": "vendor/bin/php-cs-fixer fix",
-            "problemMatcher": [],
+            "problemMatcher": []
         },
         {
             "label": "Bake",
@@ -33,37 +32,95 @@
             "problemMatcher": [],
         },
         {
+            "label": "PHPStan",
+            "type": "shell",
+            "command": "vendor/bin/phpstan analyse app/src/ app/tests/ --memory-limit=4G",
+            "problemMatcher": []
+        },
+        {
             "label": "Serve",
             "type": "shell",
             "options": {},
             "command": "php bakery serve",
-            "problemMatcher": [],
+            "problemMatcher": []
+        },
+        {
+            "label": "npm install",
+            "type": "shell",
+            "options": {},
+            "command": "npm install",
+            "problemMatcher": []
         },
         {
             "label": "npm update",
             "type": "shell",
             "options": {},
             "command": "npm update",
-            "problemMatcher": [],
+            "problemMatcher": []
         },
         {
-            "label": "npm run encore dev",
+            "label": "webpack:dev",
             "type": "shell",
             "options": {},
             "command": "npm run dev",
             "problemMatcher": [],
+            "group": "build"
         },
         {
-            "label": "npm run encore watch",
+            "label": "webpack:dev-server (HMR)",
+            "type": "shell",
+            "options": {},
+            "command": "npm run dev-server",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "webpack:watch",
             "type": "shell",
             "options": {},
             "command": "npm run watch",
-            "problemMatcher": [],
+            "problemMatcher": []
         },
         {
-            "label": "PHPStan",
+            "label": "webpack:build",
             "type": "shell",
-            "command": "vendor/bin/phpstan analyse",
+            "options": {},
+            "command": "npm run build",
+            "problemMatcher": []
+        },
+        {
+            "label": "lint",
+            "type": "shell",
+            "options": {},
+            "command": "npm run lint",
+            "problemMatcher": []
+        },
+        {
+            "label": "format",
+            "type": "shell",
+            "options": {},
+            "command": "npm run format",
+            "problemMatcher": []
+        },
+        {
+            "label": "vite:dev",
+            "type": "shell",
+            "options": {},
+            "command": "npm run vite:dev",
+            "problemMatcher": []
+        },
+        {
+            "label": "vite:build",
+            "type": "shell",
+            "options": {},
+            "command": "npm run vite:build",
+            "problemMatcher": []
+        },
+        {
+            "label": "vite:preview",
+            "type": "shell",
+            "options": {},
+            "command": "npm run vite:preview",
             "problemMatcher": []
         }
     ]

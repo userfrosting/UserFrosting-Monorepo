@@ -33,42 +33,6 @@ class AppController
      */
     public function pageIndex(Response $response, Twig $view): Response
     {
-        return $view->render($response, 'pages/index.html.twig');
-    }
-
-    /**
-     * Renders a sample "about" page for UserFrosting.
-     * Request type: GET.
-     *
-     * @param Response $response
-     * @param Twig     $view
-     */
-    public function pageAbout(Response $response, Twig $view): Response
-    {
-        return $view->render($response, 'pages/about.html.twig');
-    }
-
-    /**
-     * Renders terms of service page.
-     * Request type: GET.
-     *
-     * @param Response $response
-     * @param Twig     $view
-     */
-    public function pageLegal(Response $response, Twig $view): Response
-    {
-        return $view->render($response, 'pages/legal.html.twig');
-    }
-
-    /**
-     * Renders privacy page.
-     * Request type: GET.
-     *
-     * @param Response $response
-     * @param Twig     $view
-     */
-    public function pagePrivacy(Response $response, Twig $view): Response
-    {
-        return $view->render($response, 'pages/privacy.html.twig');
+        return $view->render($response, 'pages/spa.html.twig');
     }
 }

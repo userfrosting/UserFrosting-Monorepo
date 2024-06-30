@@ -8,6 +8,6 @@
  * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
  */
 
-module.exports = {
-    app: "./app/assets/app.js",
+export default {
+    app: "./app/assets/main.ts",
 };
