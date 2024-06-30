@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [5.1.3](https://github.com/userfrosting/framework/compare/5.1.2...5.1.3)
+- [Config] Fix issue with `getBool`, `getString`, `getInt` and `getArray` where a null value could be returned even if a default parameter was provided when the data did in fact return `null`, making the return value not type safe as it should be.
+
 ## [5.1.2](https://github.com/userfrosting/framework/compare/5.1.1...5.1.2)
 - Add Slim [type hinting](https://github.com/slimphp/Slim/releases/tag/4.14.0) & bump minimum slim version
 
