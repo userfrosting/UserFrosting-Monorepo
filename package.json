@@ -11,9 +11,11 @@
         "webpack-notifier": "^1.14.1"
     },
     "scripts": {
-        "dev-server": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress"
+        "webpack:server": "encore dev-server --port 9000",
+        "webpack:dev": "encore dev",
+        "webpack:watch": "encore dev --watch",
+        "webpack:build": "encore production --progress",
+        "vite:dev": "vite",
+        "vite:build": "vite build"
     }
 }
