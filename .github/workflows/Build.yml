@@ -2,9 +2,9 @@ name: Build
 
 on:
   push:
-    branches: [5.0, 5.1, 5.2]
+    branches: ['*']
   pull_request:
-    branches: [5.0, 5.1, 5.2]
+    branches: ['*']
   schedule:
     - cron: "0 0 * * 5"
   workflow_dispatch:
