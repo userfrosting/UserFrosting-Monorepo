@@ -47,10 +47,10 @@ jobs:
         run: composer install --prefer-dist --no-progress
       
       - name: Npm Install
-        run: npm install
+        run: npm ci
       
       - name: Run Webpack
-        run: npm run dev
+        run: npm run webpack:dev
 
       - name: Execute tests
         run: | 
@@ -126,10 +126,10 @@ jobs:
       run: composer install --prefer-dist --no-progress
       
     - name: Npm Install
-      run: npm install
+      run: npm ci
     
     - name: Run Webpack
-      run: npm run dev
+      run: npm run webpack:dev
 
     - name: Execute tests
       run: | 
@@ -198,10 +198,10 @@ jobs:
       run: composer install --prefer-dist --no-progress
       
     - name: Npm Install
-      run: npm install
+      run: npm ci
     
     - name: Run Webpack
-      run: npm run dev
+      run: npm run webpack:dev
 
     - name: Execute tests
       run: | 
@@ -257,10 +257,10 @@ jobs:
         run: composer install --prefer-dist --no-progress
       
       - name: Npm Install
-        run: npm install
+        run: npm ci
       
       - name: Run Webpack
-        run: npm run dev
+        run: npm run webpack:dev
       
       - name: Create SQLite Database
         run: touch database.sqlite
@@ -328,10 +328,10 @@ jobs:
         run: composer install --prefer-dist --no-progress
       
       - name: Npm Install
-        run: npm install
+        run: npm ci
       
       - name: Run Webpack
-        run: npm run dev
+        run: npm run webpack:dev
 
       - name: Execute tests
         run: | 
@@ -379,10 +379,10 @@ jobs:
       run: composer install --prefer-dist --no-progress
       
     - name: Npm Install
-      run: npm install
+      run: npm ci
     
     - name: Run Webpack
-      run: npm run dev
+      run: npm run webpack:dev
     
     - name: Create SQLite Database
       run: touch database.sqlite
