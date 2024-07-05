@@ -10,8 +10,10 @@ export default defineConfig({
         origin: 'http://localhost:3000'
     },
     root: 'app/assets/',
+    base: '/assets/',
     build: {
-        outDir: '../../public',
+        outDir: '../../public/assets',
+        assetsDir: '',
         emptyOutDir: true,
         manifest: true,
         rollupOptions: {
