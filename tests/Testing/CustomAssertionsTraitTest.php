@@ -86,21 +86,33 @@ class CustomAssertionsTraitTest extends TestCase
 
         /** @var ResponseInterface $response */
         $response = Mockery::mock(ResponseInterface::class)
-            ->shouldReceive('getBody')->times(3)->andReturn($stream)
+            ->shouldReceive('getBody')->times(4)->andReturn($stream)
             ->getMock();
 
         $this->assertNotJsonResponse(['foo'], $response);
         $this->assertNotJsonResponse(['foo'], $response, 'result.list');
         $this->assertJsonNotEquals(['foo'], $response);
+        $this->assertJsonNotSame(['foo'], $response);
     }
 
     public function testAssertJsonEquals(): void
     {
-        $array = ['result' => ['foo' => true, 'bar' => false, 'list' => ['foo', 'bar']]];
+        // N.B.: Array is in the reverse order, which is equals
+        $array = ['result' => ['list' => ['foo', 'bar'], 'bar' => false, 'foo' => true]];
 
         $this->assertJsonEquals($array, $this->json);
         $this->assertJsonEquals(['foo', 'bar'], $this->json, 'result.list');
         $this->assertJsonEquals(true, $this->json, 'result.foo');
+    }
+
+    public function testAssertJsonSame(): void
+    {
+        // N.B.: Array order is important with same
+        $array = ['result' => ['foo' => true, 'bar' => false, 'list' => ['foo', 'bar']]];
+
+        $this->assertJsonSame($array, $this->json);
+        $this->assertJsonSame(['foo', 'bar'], $this->json, 'result.list');
+        $this->assertJsonSame(true, $this->json, 'result.foo');
     }
 
     public function testAssertJsonNotEquals(): void
@@ -110,7 +122,18 @@ class CustomAssertionsTraitTest extends TestCase
         $this->assertJsonNotEquals(false, $this->json, 'result.foo');
     }
 
-    public function testAssertJsonEqualsWithResponse(): void
+    public function testAssertJsonNotSame(): void
+    {
+        // Use reversed array
+        $array = ['result' => ['list' => ['foo', 'bar'], 'bar' => false, 'foo' => true]];
+
+        $this->assertJsonNotSame($array, $this->json);
+        $this->assertJsonNotSame(['foo'], $this->json);
+        $this->assertJsonNotSame(['foo'], $this->json, 'result.list');
+        $this->assertJsonNotSame(false, $this->json, 'result.foo');
+    }
+
+    public function testAssertJsonEqualsAndSameWithResponse(): void
     {
         /** @var StreamInterface $stream */
         $stream = Mockery::mock(StreamInterface::class)
@@ -119,14 +142,19 @@ class CustomAssertionsTraitTest extends TestCase
 
         /** @var ResponseInterface $response */
         $response = Mockery::mock(ResponseInterface::class)
-            ->shouldReceive('getBody')->times(3)->andReturn($stream)
+            ->shouldReceive('getBody')->times(4)->andReturn($stream)
             ->getMock();
 
-        $array = ['result' => ['foo' => true, 'bar' => false, 'list' => ['foo', 'bar']]];
+        // N.B.: Array is in the reverse order, which is equals
+        $array = ['result' => ['list' => ['foo', 'bar'], 'bar' => false, 'foo' => true]];
 
         $this->assertJsonEquals($array, $response);
         $this->assertJsonEquals(['foo', 'bar'], $response, 'result.list');
         $this->assertJsonEquals(true, $response, 'result.foo');
+
+        // N.B.: Array order is important with same. Change and retest same.
+        $array = ['result' => ['foo' => true, 'bar' => false, 'list' => ['foo', 'bar']]];
+        $this->assertJsonSame($array, $response);
     }
 
     public function testAssertJsonStructure(): void

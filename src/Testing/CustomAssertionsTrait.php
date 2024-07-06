@@ -84,17 +84,51 @@ trait CustomAssertionsTrait
         }
 
         $this->assertJson($json);
+        $this->assertEquals($expected, $this->decodeJson($json, $key));
+    }
+
+    /**
+     * Asserts json is the same as something expected.
+     *
+     * @param mixed                    $expected Expected structure
+     * @param string|ResponseInterface $json     The json string
+     * @param string|null              $key      Scope to the key if required. Support dot notation.
+     */
+    protected function assertJsonSame(mixed $expected, string|ResponseInterface $json, ?string $key = null): void
+    {
+        if ($json instanceof ResponseInterface) {
+            $json = (string) $json->getBody();
+        }
+
+        $this->assertJson($json);
         $this->assertSame($expected, $this->decodeJson($json, $key));
     }
 
     /**
-     * Asserts json is equals to something.
+     * Asserts json is not equals to something.
      *
      * @param mixed                    $expected Expected structure
      * @param string|ResponseInterface $json     The json string
      * @param string|null              $key      Scope to the key if required. Support dot notation.
      */
     protected function assertJsonNotEquals(mixed $expected, string|ResponseInterface $json, ?string $key = null): void
+    {
+        if ($json instanceof ResponseInterface) {
+            $json = (string) $json->getBody();
+        }
+
+        $this->assertJson($json);
+        $this->assertNotEquals($expected, $this->decodeJson($json, $key));
+    }
+
+    /**
+     * Asserts json is not the same as something else.
+     *
+     * @param mixed                    $expected Expected structure
+     * @param string|ResponseInterface $json     The json string
+     * @param string|null              $key      Scope to the key if required. Support dot notation.
+     */
+    protected function assertJsonNotSame(mixed $expected, string|ResponseInterface $json, ?string $key = null): void
     {
         if ($json instanceof ResponseInterface) {
             $json = (string) $json->getBody();
