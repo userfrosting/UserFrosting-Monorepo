@@ -1,17 +1,12 @@
 <script setup lang="ts">
-interface User {
-    firstName: string
-    lastName: string
-    role: string
-}
+import { computed } from 'vue'
+import { useAuthStore } from '@userfrosting/sprinkle-account/stores'
 
-const user: User = {
-    firstName: 'Angela',
-    lastName: 'Davis',
-    role: 'Professor'
-}
+const auth = useAuthStore()
 
-const helloMsg: string = 'Hello ' + user.firstName + ' ' + user.lastName + '!'
+const helloMsg = computed(() => {
+    return (auth.isAuthenticated) ? 'Hello ' + auth.user?.full_name + '!' : 'Hello guest !'
+})
 </script>
 
 <template>
@@ -20,8 +15,8 @@ const helloMsg: string = 'Hello ' + user.firstName + ' ' + user.lastName + '!'
             <a class="uk-link-reset" href="#">{{ helloMsg }}</a>
         </h1>
         <p class="uk-article-meta">
-            Written by <a href="#">{{ user.firstName }} {{ user.lastName }}</a
-            >, {{ user.role }} on 29 September 2018.
+            Written by <a href="#">Angela Davis</a
+            >, Professor on 29 September 2018.
         </p>
         <p class="uk-text-lead">
             This is a demo of UserFrosting using a custom UiKit based template built using Vue
