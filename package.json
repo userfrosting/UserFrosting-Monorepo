@@ -3,7 +3,7 @@
     "type": "module",
     "dependencies": {
         "@userfrosting/theme-pink-cupcake": "^0.2.0",
-        "@userfrosting/theme-pink-cupcake-example": "git+https://github.com/userfrosting/theme-pink-cupcake-example.git",
+        "@userfrosting/sprinkle-account": "git+https://github.com/userfrosting/sprinkle-account.git#6.0",
         "axios": "^1.5.0",
         "pinia": "^2.1.6",
         "pinia-plugin-persistedstate": "^3.2.0",
