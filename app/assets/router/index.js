@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '@userfrosting/sprinkle-account/stores'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -22,6 +23,17 @@ const router = createRouter({
                     path: '/auth',
                     name: 'auth',
                     component: () => import('../views/AuthView.vue')
+                },
+                {
+                    path: '/login',
+                    name: 'login',
+                    component: () => import('../views/LoginView.vue'),
+                    beforeEnter: () => {
+                        const auth = useAuthStore()
+                        if (auth.isAuthenticated) {
+                            return { name: 'home' }
+                        }
+                    }
                 }
             ]
         }

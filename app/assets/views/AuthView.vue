@@ -1,6 +1,5 @@
 <script setup>
 import AuthCheck from '../components/Auth/AuthCheck.vue'
-import Login from '../components/Auth/AuthLogin.vue'
 import Logout from '../components/Auth/AuthLogout.vue'
 import { useAuthStore } from '@userfrosting/sprinkle-account/stores'
 const auth = useAuthStore()
@@ -13,7 +12,7 @@ const auth = useAuthStore()
             <Logout />
         </div>
         <div v-else>
-            <Login />
+            <UFFormLogin />
         </div>
         <div>
             <AuthCheck />

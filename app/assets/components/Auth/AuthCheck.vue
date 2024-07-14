@@ -1,12 +1,9 @@
 <script setup>
 import { useAuthStore } from '@userfrosting/sprinkle-account/stores'
-import { useCheckApi } from '@userfrosting/sprinkle-account/api'
-
 const auth = useAuthStore()
 
 // Login API variables
-const { loading, check } = useCheckApi(auth)
-check()
+auth.check()
 </script>
 
 <template>
@@ -26,7 +23,7 @@ check()
                 </span>
             </p>
             <p>
-                <button class="uk-button uk-button-primary" @click="check()" :disabled="loading">
+                <button class="uk-button uk-button-primary" @click="auth.check()" :disabled="auth.loading">
                     Check Authentication
                 </button>
             </p>
