@@ -2,7 +2,7 @@
     "name": "my-app",
     "type": "module",
     "dependencies": {
-        "@userfrosting/theme-pink-cupcake": "^0.2.7",
+        "@userfrosting/theme-pink-cupcake": "^0.2.11",
         "@userfrosting/sprinkle-account": "git+https://github.com/userfrosting/sprinkle-account.git#6.0",
         "axios": "^1.5.0",
         "pinia": "^2.1.6",

@@ -3,7 +3,6 @@ import { useAuthStore } from '@userfrosting/sprinkle-account/stores'
 
 // Logout API variables
 const auth = useAuthStore()
-auth.check() // TODO : Move to main.ts ?
 </script>
 
 <template>
@@ -11,7 +10,6 @@ auth.check() // TODO : Move to main.ts ?
         <UFNavBarItem :to="{ name: 'home' }" label="Home" />
         <UFNavBarItem :to="{ name: 'about' }" label="About" />
         <UFNavBarItem :to="{ name: 'auth' }" label="Auth" />
-        <UFNavBarItem :to="{ name: 'login' }" label="Login" />
         <UFNavBarLogin v-if="!auth.isAuthenticated" />
         <UFNavBarUserCard
             v-if="auth.isAuthenticated"

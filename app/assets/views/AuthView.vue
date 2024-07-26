@@ -12,7 +12,9 @@ const auth = useAuthStore()
             <Logout />
         </div>
         <div v-else>
-            <UFFormLogin />
+            <UFCardBox>
+                <UFFormLogin />
+            </UFCardBox>
         </div>
         <div>
             <AuthCheck />
