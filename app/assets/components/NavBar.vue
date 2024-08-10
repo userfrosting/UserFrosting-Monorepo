@@ -10,6 +10,7 @@ const auth = useAuthStore()
         <UFNavBarItem :to="{ name: 'home' }" label="Home" />
         <UFNavBarItem :to="{ name: 'about' }" label="About" />
         <UFNavBarItem :to="{ name: 'auth' }" label="Auth" />
+        <UFNavBarItem :to="{ name: 'register' }" label="Register" v-if="!auth.isAuthenticated" />
         <UFNavBarLogin v-if="!auth.isAuthenticated" />
         <UFNavBarUserCard
             v-if="auth.isAuthenticated"

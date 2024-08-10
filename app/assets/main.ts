@@ -14,14 +14,18 @@ app.use(pinia)
 import router from './router'
 app.use(router)
 
-/** Setup Theme */
-import '@userfrosting/theme-pink-cupcake/less/main.less'
-import PinkCupcake from '@userfrosting/theme-pink-cupcake'
-app.use(PinkCupcake)
+/** Setup Core Sprinkle */
+import CoreSprinkle from '@userfrosting/sprinkle-core'
+app.use(CoreSprinkle)
 
 /** Setup Account Sprinkle */
 import AccountSprinkle from '@userfrosting/sprinkle-account'
 app.use(AccountSprinkle, {router})
+
+/** Setup Theme */
+import '@userfrosting/theme-pink-cupcake/less/main.less'
+import PinkCupcake from '@userfrosting/theme-pink-cupcake'
+app.use(PinkCupcake)
 
 // Done
 app.mount('#app')
