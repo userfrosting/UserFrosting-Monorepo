@@ -12,11 +12,13 @@ export default defineConfig({
         outDir: './dist',
         lib: {
             entry: {
-                // plugin: 'app/assets/plugin.ts',
+                plugin: 'app/assets/plugin.ts',
+                components: 'app/assets/components/index.ts',
                 // composables: 'app/assets/composables/index.ts',
                 // types: 'app/assets/interfaces/index.ts',
                 // guards: 'app/assets/guards/authGuard.ts',
                 // stores: 'app/assets/stores/auth.ts'
+                routes: 'app/assets/router/routes.ts'
             }
         },
         rollupOptions: {

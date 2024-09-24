@@ -10,7 +10,7 @@ app/.env
 # Ignore lock files
 composer.lock
 
-# Ignore log, cache, sessions and storage directories
+# Ignore log, cache, sessions and storage directories in sprinkle
 app/cache/*
 app/database/*
 app/logs/*
