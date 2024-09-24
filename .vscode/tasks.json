@@ -40,32 +40,57 @@
             "problemMatcher": []
         },
         {
-            "label": "npm install",
-            "type": "shell",
-            "options": {},
-            "command": "npm install",
-            "problemMatcher": [],
-        },
-        {
             "label": "npm update",
             "type": "shell",
             "options": {},
             "command": "npm update",
+            "problemMatcher": []
+        },
+        {
+            "label": "npm build",
+            "type": "shell",
+            "options": {},
+            "command": "npm run build",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "npm test",
+            "type": "shell",
+            "options": {},
+            "command": "npm run test",
             "problemMatcher": [],
         },
         {
-            "label": "npm run dev",
+            "label": "npm coverage",
             "type": "shell",
             "options": {},
-            "command": "npm run dev",
-            "problemMatcher": [],
+            "command": "npm run coverage",
+            "problemMatcher": []
         },
         {
-            "label": "npm run watch",
+            "label": "npm lint",
             "type": "shell",
             "options": {},
-            "command": "npm run watch",
-            "problemMatcher": [],
+            "command": "npm run lint",
+            "problemMatcher": []
+        },
+        {
+            "label": "npm format",
+            "type": "shell",
+            "options": {},
+            "command": "npm run format",
+            "problemMatcher": []
+        },
+        {
+            "label": "npm type check",
+            "type": "shell",
+            "options": {},
+            "command": "npx vue-tsc",
+            "problemMatcher": []
         }
     ]
 }

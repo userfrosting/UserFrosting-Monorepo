@@ -23,7 +23,6 @@ use UserFrosting\Sprinkle\Admin\Routes\RolesRoutes;
 use UserFrosting\Sprinkle\Admin\Routes\UsersRoutes;
 use UserFrosting\Sprinkle\Core\Core;
 use UserFrosting\Sprinkle\SprinkleRecipe;
-use UserFrosting\Theme\AdminLTE\AdminLTE;
 
 class Admin implements
     SprinkleRecipe,
@@ -53,7 +52,6 @@ class Admin implements
         return [
             Core::class,
             Account::class,
-            AdminLTE::class,
         ];
     }
 

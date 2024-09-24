@@ -1,7 +1,8 @@
 {
   "name": "@userfrosting/sprinkle-admin",
-  "version": "5.2.0-dev",
-  "description": "Admin Sprinkle for UserFrosting 5",
+  "version": "6.0.0-dev",
+  "type": "module",
+  "description": "Admin Sprinkle for UserFrosting 6",
   "funding": "https://opencollective.com/userfrosting",
   "license": "MIT",
   "author": "Alexander Weissman (https://alexanderweissman.com/)",
@@ -23,25 +24,54 @@
   "bugs": {
     "url": "https://github.com/userfrosting/UserFrosting/issues"
   },
-  "main": "app/assets/main.js",
+  "exports": {
+      "./*": "./app/assets/*"
+  },
   "files": [
-    "CHANGELOG.md",
     "app/assets",
-    "webpack.config.js",
-    "webpack.entries.js"
+    "dist/"
   ],
   "dependencies": {
-    "@userfrosting/theme-adminlte": "github:userfrosting/theme-adminlte#5.2"
+    
+  },
+  "peerDependencies": {
+    "vue": "^3.4.21",
+    "vue-router": "^4.2.4",
+    "axios": "^1.5.0",
+    "pinia": "^2.1.6",
+    "pinia-plugin-persistedstate": "^3.2.0",
+    "@userfrosting/sprinkle-core": "git+https://github.com/userfrosting/sprinkle-core.git#6.0",
+    "@userfrosting/sprinkle-account": "git+https://github.com/userfrosting/sprinkle-account.git#6.0"
   },
   "devDependencies": {
-    "@symfony/webpack-encore": "^4.4.0",
-    "sass": "^1.51.0",
-    "webpack-notifier": "^1.14.1"
+    "@rushstack/eslint-patch": "^1.8.0",
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^20.12.5",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vitest/coverage-v8": "^1.6.0",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "@vue/tsconfig": "^0.5.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0",
+    "happy-dom": "^14.12.3",
+    "less": "^4.2.0",
+    "npm-run-all2": "^6.1.2",
+    "prettier": "^3.2.5",
+    "vite": "^5.2.8",
+    "vite-plugin-dts": "^4.0.0",
+    "vitest": "^1.6.0",
+    "vue": "^3.4.21",
+    "vue-router": "^4.2.4",
+    "vue-tsc": "^2.0.11"
   },
   "scripts": {
-    "dev-server": "encore dev-server",
-    "dev": "encore dev",
-    "watch": "encore dev --watch",
-    "build": "encore production --progress"
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "lint": "eslint app/assets/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "format": "prettier --write app/assets/",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   }
 }
