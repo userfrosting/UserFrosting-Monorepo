@@ -2,6 +2,11 @@ const e = [
   {
     path: "dashboard",
     name: "admin.dashboard",
+    meta: {
+      auth: {
+        redirect: { name: "account.login" }
+      }
+    },
     component: () => import("./DashboardView-BbtHCt79.js")
   }
 ], t = [

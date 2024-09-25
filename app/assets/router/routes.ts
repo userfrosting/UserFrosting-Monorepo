@@ -2,6 +2,11 @@ const AdminDashboardRoutes = [
     {
         path: 'dashboard',
         name: 'admin.dashboard',
+        meta: {
+            auth: {
+                redirect: { name: 'account.login' },
+            }
+        },
         component: () => import('../views/DashboardView.vue')
     }
 ]
@@ -118,7 +123,7 @@ const AdminUsersRoutes = [
     }
 ]
 
-export default [
+const AdminRoutes = [
     ...AdminDashboardRoutes,
     ...AdminActivitiesRoutes,
     ...AdminGroupsRoutes,
@@ -126,6 +131,8 @@ export default [
     ...AdminRolesRoutes,
     ...AdminUsersRoutes,
 ]
+
+export default AdminRoutes
 
 export {
     AdminDashboardRoutes,

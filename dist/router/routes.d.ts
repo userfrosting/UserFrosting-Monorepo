@@ -1,6 +1,13 @@
 declare const AdminDashboardRoutes: {
     path: string;
     name: string;
+    meta: {
+        auth: {
+            redirect: {
+                name: string;
+            };
+        };
+    };
     component: () => Promise<typeof import("../views/DashboardView.vue")>;
 }[];
 declare const AdminActivitiesRoutes: {
@@ -111,10 +118,17 @@ declare const AdminUsersRoutes: {
         component: () => Promise<typeof import("../views/UserView.vue")>;
     }[];
 }[];
-declare const _default: {
+declare const AdminRoutes: {
     path: string;
     name: string;
+    meta: {
+        auth: {
+            redirect: {
+                name: string;
+            };
+        };
+    };
     component: () => Promise<typeof import("../views/DashboardView.vue")>;
 }[];
-export default _default;
+export default AdminRoutes;
 export { AdminDashboardRoutes, AdminActivitiesRoutes, AdminGroupsRoutes, AdminPermissionsRoutes, AdminRolesRoutes, AdminUsersRoutes };
