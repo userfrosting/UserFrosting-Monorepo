@@ -115,6 +115,6 @@ declare const _default: {
     path: string;
     name: string;
     component: () => Promise<typeof import("../views/DashboardView.vue")>;
-}[][];
+}[];
 export default _default;
 export { AdminDashboardRoutes, AdminActivitiesRoutes, AdminGroupsRoutes, AdminPermissionsRoutes, AdminRolesRoutes, AdminUsersRoutes };

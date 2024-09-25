@@ -112,12 +112,12 @@ const e = [
     ]
   }
 ], i = [
-  e,
-  t,
-  n,
-  o,
-  a,
-  m
+  ...e,
+  ...t,
+  ...n,
+  ...o,
+  ...a,
+  ...m
 ];
 export {
   t as AdminActivitiesRoutes,

@@ -119,12 +119,12 @@ const AdminUsersRoutes = [
 ]
 
 export default [
-    AdminDashboardRoutes,
-    AdminActivitiesRoutes,
-    AdminGroupsRoutes,
-    AdminPermissionsRoutes,
-    AdminRolesRoutes,
-    AdminUsersRoutes,
+    ...AdminDashboardRoutes,
+    ...AdminActivitiesRoutes,
+    ...AdminGroupsRoutes,
+    ...AdminPermissionsRoutes,
+    ...AdminRolesRoutes,
+    ...AdminUsersRoutes,
 ]
 
 export {
