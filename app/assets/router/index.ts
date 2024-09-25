@@ -1,3 +1,5 @@
+import AccountRoutes from '@userfrosting/sprinkle-account/routes'
+import AdminRoutes from '@userfrosting/sprinkle-admin/routes'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -18,7 +20,7 @@ const router = createRouter({
                     name: 'about',
                     meta: {
                         auth: {
-                            redirect: { name: 'login' },
+                            redirect: { name: 'account.login' },
                         }
                     },
                     component: () => import('../views/AboutView.vue')
@@ -28,26 +30,15 @@ const router = createRouter({
                     name: 'auth',
                     component: () => import('../views/AuthView.vue')
                 },
-                {
-                    path: '/login',
-                    name: 'login',
-                    meta: {
-                        guest: {
-                            redirect: { name: 'home' }
-                        }
-                    },
-                    component: () => import('../views/LoginView.vue')
-                },
-                {
-                    path: '/register',
-                    name: 'register',
-                    meta: {
-                        guest: {
-                            redirect: { name: 'home' }
-                        }
-                    },
-                    component: () => import('../views/RegisterView.vue')
-                }
+                // Include sprinkles routes
+                ...AccountRoutes,
+            ]
+        },
+        {
+            path: '',
+            component: () => import('../layouts/LayoutDashboard.vue'),
+            children: [
+                ...AdminRoutes
             ]
         }
     ]

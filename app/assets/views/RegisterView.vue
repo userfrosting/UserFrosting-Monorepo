@@ -1,3 +1,0 @@
-<template>
-    <UFPageRegister />
-</template>
