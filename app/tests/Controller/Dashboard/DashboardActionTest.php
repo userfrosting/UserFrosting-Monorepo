@@ -39,15 +39,12 @@ class DashboardActionTest extends AdminTestCase
     public function testPageDashboardForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/dashboard');
+        $request = $this->createJsonRequest('GET', '/api/dashboard');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse('Login Required', $response, 'title');
-        $this->assertResponseStatus(302, $response);
-
-        // Assert Event Redirect
-        $this->assertSame('/account/sign-in?redirect=%2Fdashboard', $response->getHeaderLine('Location'));
+        $this->assertJsonResponse('Access Denied', $response, 'title');
+        $this->assertResponseStatus(403, $response);
     }
 
     public function testPageDashboardForForbiddenException(): void
@@ -57,7 +54,7 @@ class DashboardActionTest extends AdminTestCase
         $this->actAsUser($user);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/dashboard');
+        $request = $this->createJsonRequest('GET', '/api/dashboard');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -72,7 +69,7 @@ class DashboardActionTest extends AdminTestCase
         $this->actAsUser($user, permissions: ['uri_dashboard']);
 
         // Create request with method and url and fetch response
-        $request = $this->createRequest('GET', '/dashboard');
+        $request = $this->createRequest('GET', '/api/dashboard');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -106,7 +103,7 @@ class DashboardActionTest extends AdminTestCase
         $this->actAsUser($user, isMaster: true);
 
         // Create request with method and url and fetch response
-        $request = $this->createRequest('GET', '/dashboard');
+        $request = $this->createRequest('GET', '/api/dashboard');
         $response = $this->handleRequest($request);
 
         // Assert response status & body

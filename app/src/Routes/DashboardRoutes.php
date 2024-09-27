@@ -27,14 +27,11 @@ class DashboardRoutes implements RouteDefinitionInterface
 {
     public function register(App $app): void
     {
-        $app->get('/dashboard', DashboardAction::class)
+        $app->get('/api/dashboard', DashboardAction::class)
             ->setName('dashboard')
-            ->add(AuthGuard::class)->add(NoCache::class);
+            ->add(NoCache::class);
 
         $app->post('/api/dashboard/clear-cache', CacheApiAction::class)
-            ->add(AuthGuard::class)->add(NoCache::class);
-
-        $app->get('/modals/dashboard/clear-cache', CacheModalAction::class)
             ->add(AuthGuard::class)->add(NoCache::class);
     }
 }

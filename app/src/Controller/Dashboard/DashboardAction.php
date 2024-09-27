@@ -18,7 +18,6 @@ use PDO;
 use PDOException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Views\Twig;
 use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
@@ -29,18 +28,14 @@ use UserFrosting\Sprinkle\SprinkleManager;
 use UserFrosting\UniformResourceLocator\ResourceLocatorInterface;
 
 /**
- * Controller class for /dashboard URL. Handles admin-related activities.
+ * Api for /dashboard URL. Handles admin-related activities.
  */
 class DashboardAction
 {
-    /** @var string Page template */
-    protected string $template = 'pages/dashboard.html.twig';
-
     /**
      * Inject dependencies.
      */
     public function __construct(
-        protected Twig $view,
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $dbConnection,
@@ -64,7 +59,11 @@ class DashboardAction
         $this->validateAccess();
         $payload = $this->handle($request);
 
-        return $this->view->render($response, $this->template, $payload);
+        // Write json response
+        $payload = json_encode($payload, JSON_THROW_ON_ERROR);
+        $response->getBody()->write($payload);
+
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     /**
