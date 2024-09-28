@@ -90,7 +90,7 @@ declare const AdminUsersRoutes: {
         component: () => Promise<typeof import("../views/UserView.vue")>;
     }[];
 }[];
-declare const AdminRoutes: {
+declare const AdminRoutes: ({
     path: string;
     name: string;
     meta: {
@@ -101,6 +101,17 @@ declare const AdminRoutes: {
         };
     };
     component: () => Promise<typeof import("../views/DashboardView.vue")>;
-}[];
+} | {
+    path: string;
+    name: string;
+    meta: {
+        auth: {
+            redirect: {
+                name: string;
+            };
+        };
+    };
+    component: () => Promise<typeof import("../views/ActivitiesView.vue")>;
+})[];
 export default AdminRoutes;
 export { AdminDashboardRoutes, AdminActivitiesRoutes, AdminGroupsRoutes, AdminPermissionsRoutes, AdminRolesRoutes, AdminUsersRoutes };
