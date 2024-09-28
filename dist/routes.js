@@ -34,7 +34,7 @@ const e = [
       {
         path: "g/:slug",
         // groups/g/{slug}
-        name: "account.group",
+        name: "admin.group",
         meta: {
           guest: {
             redirect: { name: "home" }
@@ -44,7 +44,7 @@ const e = [
       }
     ]
   }
-], o = [
+], m = [
   {
     path: "permissions",
     name: "admin.permissions",
@@ -58,7 +58,7 @@ const e = [
       {
         path: "p/:id",
         // permissions/p/{id}
-        name: "account.permission",
+        name: "admin.permission",
         meta: {
           guest: {
             redirect: { name: "home" }
@@ -68,7 +68,7 @@ const e = [
       }
     ]
   }
-], a = [
+], o = [
   {
     path: "roles",
     name: "admin.roles",
@@ -82,7 +82,7 @@ const e = [
       {
         path: "r/:slug",
         // roles/r/{slug}
-        name: "account.role",
+        name: "admin.role",
         meta: {
           guest: {
             redirect: { name: "home" }
@@ -92,7 +92,7 @@ const e = [
       }
     ]
   }
-], m = [
+], a = [
   {
     path: "users",
     name: "admin.users",
@@ -106,7 +106,7 @@ const e = [
       {
         path: "u/:user_name",
         // users/u/{user_name}
-        name: "account.user",
+        name: "admin.user",
         meta: {
           guest: {
             redirect: { name: "home" }
@@ -120,16 +120,16 @@ const e = [
   ...e,
   ...t,
   ...n,
+  ...m,
   ...o,
-  ...a,
-  ...m
+  ...a
 ];
 export {
   t as AdminActivitiesRoutes,
   e as AdminDashboardRoutes,
   n as AdminGroupsRoutes,
-  o as AdminPermissionsRoutes,
-  a as AdminRolesRoutes,
-  m as AdminUsersRoutes,
+  m as AdminPermissionsRoutes,
+  o as AdminRolesRoutes,
+  a as AdminUsersRoutes,
   i as default
 };

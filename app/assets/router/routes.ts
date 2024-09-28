@@ -37,7 +37,7 @@ const AdminGroupsRoutes = [
         children: [
             {
                 path: 'g/:slug', // groups/g/{slug}
-                name: 'account.group',
+                name: 'admin.group',
                 meta: {
                     guest: {
                         redirect: { name: 'home' }
@@ -62,7 +62,7 @@ const AdminPermissionsRoutes = [
         children: [
             {
                 path: 'p/:id', // permissions/p/{id}
-                name: 'account.permission',
+                name: 'admin.permission',
                 meta: {
                     guest: {
                         redirect: { name: 'home' }
@@ -86,7 +86,7 @@ const AdminRolesRoutes = [
         children: [
             {
                 path: 'r/:slug', // roles/r/{slug}
-                name: 'account.role',
+                name: 'admin.role',
                 meta: {
                     guest: {
                         redirect: { name: 'home' }
@@ -111,7 +111,7 @@ const AdminUsersRoutes = [
         children: [
             {
                 path: 'u/:user_name', // users/u/{user_name}
-                name: 'account.user',
+                name: 'admin.user',
                 meta: {
                     guest: {
                         redirect: { name: 'home' }
