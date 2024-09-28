@@ -36,13 +36,6 @@ declare const AdminGroupsRoutes: {
     children: {
         path: string;
         name: string;
-        meta: {
-            guest: {
-                redirect: {
-                    name: string;
-                };
-            };
-        };
         component: () => Promise<typeof import("../views/GroupView.vue")>;
     }[];
 }[];
@@ -60,13 +53,6 @@ declare const AdminPermissionsRoutes: {
     children: {
         path: string;
         name: string;
-        meta: {
-            guest: {
-                redirect: {
-                    name: string;
-                };
-            };
-        };
         component: () => Promise<typeof import("../views/PermissionView.vue")>;
     }[];
 }[];
@@ -84,13 +70,6 @@ declare const AdminRolesRoutes: {
     children: {
         path: string;
         name: string;
-        meta: {
-            guest: {
-                redirect: {
-                    name: string;
-                };
-            };
-        };
         component: () => Promise<typeof import("../views/RoleView.vue")>;
     }[];
 }[];
@@ -108,13 +87,6 @@ declare const AdminUsersRoutes: {
     children: {
         path: string;
         name: string;
-        meta: {
-            guest: {
-                redirect: {
-                    name: string;
-                };
-            };
-        };
         component: () => Promise<typeof import("../views/UserView.vue")>;
     }[];
 }[];

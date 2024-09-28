@@ -38,11 +38,6 @@ const AdminGroupsRoutes = [
             {
                 path: 'g/:slug', // groups/g/{slug}
                 name: 'admin.group',
-                meta: {
-                    guest: {
-                        redirect: { name: 'home' }
-                    }
-                },
                 component: () => import('../views/GroupView.vue')
             }
         ]
@@ -63,11 +58,6 @@ const AdminPermissionsRoutes = [
             {
                 path: 'p/:id', // permissions/p/{id}
                 name: 'admin.permission',
-                meta: {
-                    guest: {
-                        redirect: { name: 'home' }
-                    }
-                },
                 component: () => import('../views/PermissionView.vue')
             }
         ]
@@ -87,11 +77,6 @@ const AdminRolesRoutes = [
             {
                 path: 'r/:slug', // roles/r/{slug}
                 name: 'admin.role',
-                meta: {
-                    guest: {
-                        redirect: { name: 'home' }
-                    }
-                },
                 component: () => import('../views/RoleView.vue')
             }
         ]
@@ -112,11 +97,6 @@ const AdminUsersRoutes = [
             {
                 path: 'u/:user_name', // users/u/{user_name}
                 name: 'admin.user',
-                meta: {
-                    guest: {
-                        redirect: { name: 'home' }
-                    }
-                },
                 component: () => import('../views/UserView.vue')
             }
         ]

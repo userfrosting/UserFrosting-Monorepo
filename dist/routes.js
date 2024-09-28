@@ -1,4 +1,4 @@
-const e = [
+const n = [
   {
     path: "dashboard",
     name: "admin.dashboard",
@@ -20,7 +20,7 @@ const e = [
     },
     component: () => import("./ActivitiesView-C0jTPO1P.js")
   }
-], n = [
+], e = [
   {
     path: "groups",
     name: "admin.groups",
@@ -35,16 +35,11 @@ const e = [
         path: "g/:slug",
         // groups/g/{slug}
         name: "admin.group",
-        meta: {
-          guest: {
-            redirect: { name: "home" }
-          }
-        },
         component: () => import("./GroupView-R6IL_kMD.js")
       }
     ]
   }
-], m = [
+], o = [
   {
     path: "permissions",
     name: "admin.permissions",
@@ -59,16 +54,11 @@ const e = [
         path: "p/:id",
         // permissions/p/{id}
         name: "admin.permission",
-        meta: {
-          guest: {
-            redirect: { name: "home" }
-          }
-        },
         component: () => import("./PermissionView-Bo5S_ghn.js")
       }
     ]
   }
-], o = [
+], a = [
   {
     path: "roles",
     name: "admin.roles",
@@ -83,16 +73,11 @@ const e = [
         path: "r/:slug",
         // roles/r/{slug}
         name: "admin.role",
-        meta: {
-          guest: {
-            redirect: { name: "home" }
-          }
-        },
         component: () => import("./RoleView-HTwNAw_F.js")
       }
     ]
   }
-], a = [
+], m = [
   {
     path: "users",
     name: "admin.users",
@@ -107,29 +92,24 @@ const e = [
         path: "u/:user_name",
         // users/u/{user_name}
         name: "admin.user",
-        meta: {
-          guest: {
-            redirect: { name: "home" }
-          }
-        },
         component: () => import("./UserView-BX3m4dnh.js")
       }
     ]
   }
 ], i = [
-  ...e,
-  ...t,
   ...n,
-  ...m,
+  ...t,
+  ...e,
   ...o,
-  ...a
+  ...a,
+  ...m
 ];
 export {
   t as AdminActivitiesRoutes,
-  e as AdminDashboardRoutes,
-  n as AdminGroupsRoutes,
-  m as AdminPermissionsRoutes,
-  o as AdminRolesRoutes,
-  a as AdminUsersRoutes,
+  n as AdminDashboardRoutes,
+  e as AdminGroupsRoutes,
+  o as AdminPermissionsRoutes,
+  a as AdminRolesRoutes,
+  m as AdminUsersRoutes,
   i as default
 };
