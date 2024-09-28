@@ -42,51 +42,20 @@ axios.get('/api/dashboard')
 <template>
     <h3>Dashboard</h3>
 
-    <!-- TODO : Add Info-Box to Pink Cupcake -->
     <div class="uk-grid uk-child-width-1-3" uk-grid>
         <div>
-            <RouterLink :to="{ name: 'admin.users'} " class="uk-text-decoration-none">
-                <div class="uk-card uk-card-default uk-card-body uk-card-small">
-                    <div class="uk-grid-small uk-flex-middle" uk-grid>
-                        <div class="uk-width-auto">
-                            <font-awesome-icon icon="user" size="2xl" fixed-width />
-                        </div>
-                        <div class="uk-width-expand">
-                            <h4 class="uk-margin-remove">{{ data.counter.users }}</h4>
-                            <span class="uk-text-meta uk-text-uppercase">Users</span>
-                        </div>
-                    </div>
-                </div>
+            <RouterLink :to="{ name: 'admin.users'}">
+                <UFInfoBox :value="data.counter.users" label="Users" faIcon="user" />
             </RouterLink>
         </div>
         <div>
             <RouterLink :to="{ name: 'admin.roles'} " class="uk-text-decoration-none">
-                <div class="uk-card uk-card-default uk-card-body uk-card-small">
-                    <div class="uk-grid-small uk-flex-middle" uk-grid>
-                        <div class="uk-width-auto">
-                            <font-awesome-icon icon="address-card" size="2xl" fixed-width />
-                        </div>
-                        <div class="uk-width-expand">
-                            <h4 class="uk-margin-remove">{{ data.counter.roles }}</h4>
-                            <span class="uk-text-meta uk-text-uppercase">Roles</span>
-                        </div>
-                    </div>
-                </div>
+                <UFInfoBox :value="data.counter.roles" label="Roles" faIcon="address-card" />
             </RouterLink>
         </div>
         <div>
             <RouterLink :to="{ name: 'admin.groups'} " class="uk-text-decoration-none">
-                <div class="uk-card uk-card-default uk-card-body uk-card-small">
-                    <div class="uk-grid-small uk-flex-middle" uk-grid>
-                        <div class="uk-width-auto">
-                            <font-awesome-icon icon="users" size="2xl" fixed-width />
-                        </div>
-                        <div class="uk-width-expand">
-                            <h4 class="uk-margin-remove">{{ data.counter.groups }}</h4>
-                            <span class="uk-text-meta uk-text-uppercase">Groups</span>
-                        </div>
-                    </div>
-                </div>
+                <UFInfoBox :value="data.counter.groups" label="Groups" faIcon="users" />
             </RouterLink>
         </div>
     </div>
