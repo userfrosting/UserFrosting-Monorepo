@@ -45,19 +45,25 @@ axios
 
     <div class="uk-grid uk-child-width-1-3" uk-grid>
         <div>
-            <RouterLink :to="{ name: 'admin.users' }" class="uk-text-decoration-none">
-                <UFInfoBox :value="data.counter.users" label="Users" faIcon="user" />
-            </RouterLink>
+            <UFInfoBox
+                :value="data.counter.users"
+                label="Users"
+                faIcon="user"
+                :to="{ name: 'admin.users' }" />
         </div>
         <div>
-            <RouterLink :to="{ name: 'admin.roles' }" class="uk-text-decoration-none">
-                <UFInfoBox :value="data.counter.roles" label="Roles" faIcon="address-card" />
-            </RouterLink>
+            <UFInfoBox
+                :value="data.counter.roles"
+                label="Roles"
+                faIcon="address-card"
+                :to="{ name: 'admin.roles' }" />
         </div>
         <div>
-            <RouterLink :to="{ name: 'admin.groups' }" class="uk-text-decoration-none">
-                <UFInfoBox :value="data.counter.groups" label="Groups" faIcon="users" />
-            </RouterLink>
+            <UFInfoBox
+                :value="data.counter.groups"
+                label="Groups"
+                faIcon="users"
+                :to="{ name: 'admin.groups' }" />
         </div>
     </div>
 

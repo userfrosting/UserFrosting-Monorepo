@@ -1,4 +1,4 @@
-import { ref as f, resolveComponent as m, openBlock as a, createElementBlock as d, Fragment as k, createElementVNode as e, createVNode as o, withCtx as u, renderList as p, toDisplayString as t, createTextVNode as b } from "vue";
+import { ref as f, resolveComponent as i, openBlock as u, createElementBlock as r, Fragment as v, createElementVNode as e, createVNode as s, renderList as c, withCtx as m, toDisplayString as t, createTextVNode as b } from "vue";
 import { a as g } from "./axios-CXDYiOMX.js";
 const x = {
   class: "uk-grid uk-child-width-1-3",
@@ -37,59 +37,38 @@ const x = {
       sprinkles: {},
       users: []
     });
-    return g.get("/api/dashboard").then((i) => {
-      n.value = i.data;
-    }).catch((i) => {
-      console.error(i);
-    }), (i, l) => {
-      const v = m("UFInfoBox"), r = m("RouterLink"), c = m("UFCardBox");
-      return a(), d(k, null, [
+    return g.get("/api/dashboard").then((d) => {
+      n.value = d.data;
+    }).catch((d) => {
+      console.error(d);
+    }), (d, l) => {
+      const a = i("UFInfoBox"), k = i("RouterLink"), p = i("UFCardBox");
+      return u(), r(v, null, [
         l[13] || (l[13] = e("h3", null, "Dashboard", -1)),
         e("div", x, [
           e("div", null, [
-            o(r, {
-              to: { name: "admin.users" },
-              class: "uk-text-decoration-none"
-            }, {
-              default: u(() => [
-                o(v, {
-                  value: n.value.counter.users,
-                  label: "Users",
-                  faIcon: "user"
-                }, null, 8, ["value"])
-              ]),
-              _: 1
-            })
+            s(a, {
+              value: n.value.counter.users,
+              label: "Users",
+              faIcon: "user",
+              to: { name: "admin.users" }
+            }, null, 8, ["value"])
           ]),
           e("div", null, [
-            o(r, {
-              to: { name: "admin.roles" },
-              class: "uk-text-decoration-none"
-            }, {
-              default: u(() => [
-                o(v, {
-                  value: n.value.counter.roles,
-                  label: "Roles",
-                  faIcon: "address-card"
-                }, null, 8, ["value"])
-              ]),
-              _: 1
-            })
+            s(a, {
+              value: n.value.counter.roles,
+              label: "Roles",
+              faIcon: "address-card",
+              to: { name: "admin.roles" }
+            }, null, 8, ["value"])
           ]),
           e("div", null, [
-            o(r, {
-              to: { name: "admin.groups" },
-              class: "uk-text-decoration-none"
-            }, {
-              default: u(() => [
-                o(v, {
-                  value: n.value.counter.groups,
-                  label: "Groups",
-                  faIcon: "users"
-                }, null, 8, ["value"])
-              ]),
-              _: 1
-            })
+            s(a, {
+              value: n.value.counter.groups,
+              label: "Groups",
+              faIcon: "users",
+              to: { name: "admin.groups" }
+            }, null, 8, ["value"])
           ])
         ]),
         e("div", _, [
@@ -104,22 +83,22 @@ const x = {
               ], -1)),
               e("div", y, [
                 e("div", U, [
-                  (a(!0), d(k, null, p(n.value.users, (s) => (a(), d("div", {
-                    key: s.id,
+                  (u(!0), r(v, null, c(n.value.users, (o) => (u(), r("div", {
+                    key: o.id,
                     class: "uk-text-center"
                   }, [
-                    o(r, {
-                      to: { name: "admin.user", params: { user_name: s.user_name } },
+                    s(k, {
+                      to: { name: "admin.user", params: { user_name: o.user_name } },
                       class: "uk-text-decoration-none uk-link-text"
                     }, {
-                      default: u(() => [
+                      default: m(() => [
                         e("img", {
-                          src: s.avatar,
+                          src: o.avatar,
                           alt: "User Image",
                           class: "uk-border-circle"
                         }, null, 8, F),
-                        e("p", I, t(s.full_name), 1),
-                        e("p", B, t(s.registered), 1)
+                        e("p", I, t(o.full_name), 1),
+                        e("p", B, t(o.registered), 1)
                       ]),
                       _: 2
                     }, 1032, ["to"])
@@ -127,11 +106,11 @@ const x = {
                 ])
               ]),
               e("div", D, [
-                o(r, {
+                s(k, {
                   to: { name: "admin.users" },
                   class: "uk-button uk-button-text"
                 }, {
-                  default: u(() => l[0] || (l[0] = [
+                  default: m(() => l[0] || (l[0] = [
                     b("View All Users")
                   ])),
                   _: 1
@@ -139,8 +118,8 @@ const x = {
               ])
             ]),
             l[12] || (l[12] = e("br", null, null, -1)),
-            o(c, { title: "System Information" }, {
-              default: u(() => [
+            s(p, { title: "System Information" }, {
+              default: m(() => [
                 e("dl", R, [
                   l[2] || (l[2] = e("dt", null, "Frameword version", -1)),
                   e("dd", null, [
@@ -193,9 +172,9 @@ const x = {
                   l[11] || (l[11] = e("dt", null, "Loaded sprinkles", -1)),
                   e("dd", null, [
                     e("ul", V, [
-                      (a(!0), d(k, null, p(n.value.sprinkles, (s) => (a(), d("li", {
-                        key: s.name
-                      }, t(s), 1))), 128))
+                      (u(!0), r(v, null, c(n.value.sprinkles, (o) => (u(), r("li", {
+                        key: o.name
+                      }, t(o), 1))), 128))
                     ])
                   ])
                 ])
@@ -204,7 +183,7 @@ const x = {
             })
           ]),
           e("div", null, [
-            o(c, { title: "Activities" })
+            s(p, { title: "Activities" })
           ])
         ])
       ], 64);

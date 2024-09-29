@@ -5,7 +5,7 @@ function c(p, e) {
   const s = o("font-awesome-icon"), a = o("UFCardBox");
   return i(), m(l, null, [
     e[2] || (e[2] = t("h3", { class: "uk-margin-remove" }, "Users", -1)),
-    e[3] || (e[3] = t("p", { class: "uk-text-meta uk-margin-remove-top" }, "A listing of the users for your site. Provides management tools including the ability to edit user details, manually activate users, enable/disable users, and more.", -1)),
+    e[3] || (e[3] = t("p", { class: "uk-text-meta uk-margin-remove-top" }, " A listing of the users for your site. Provides management tools including the ability to edit user details, manually activate users, enable/disable users, and more. ", -1)),
     r(a, null, {
       header: n(() => [
         r(s, { icon: "user" }),

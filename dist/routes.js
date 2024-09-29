@@ -7,7 +7,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./DashboardView-5JFk_huL.js")
+    component: () => import("./DashboardView-DOzynbLK.js")
   }
 ], t = [
   {
@@ -18,7 +18,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./ActivitiesView-CW-IXBg4.js")
+    component: () => import("./ActivitiesView-B7sZTcln.js")
   }
 ], e = [
   {
@@ -86,7 +86,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./UsersView-CRPpx8hd.js"),
+    component: () => import("./UsersView-Bo72x_bn.js"),
     children: [
       {
         path: "u/:user_name",

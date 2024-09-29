@@ -2609,7 +2609,10 @@ const Ci = { class: "uk-table uk-table-striped" }, Li = { class: "uk-text-meta" 
                   p("td", null, [
                     p("strong", null, [
                       Nt(a, {
-                        to: { name: "admin.user", params: { user_name: i.user.user_name } }
+                        to: {
+                          name: "admin.user",
+                          params: { user_name: i.user.user_name }
+                        }
                       }, {
                         default: Wt(() => [
                           Ps(te(i.user.full_name) + " (" + te(i.user.user_name) + ") ", 1)

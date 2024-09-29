@@ -8,7 +8,8 @@ import moment from 'moment'
 // TODO : Reenable typescript
 const data = ref({})
 
-axios.get('/api/activities?size=10&page=0&sorts%5Boccurred_at%5D=desc')
+axios
+    .get('/api/activities?size=10&page=0&sorts%5Boccurred_at%5D=desc')
     .then((response) => {
         data.value = response.data
     })
@@ -33,28 +34,31 @@ axios.get('/api/activities?size=10&page=0&sorts%5Boccurred_at%5D=desc')
             <tbody>
                 <tr v-for="row in data.rows" :key="row.id">
                     <td>
-                        <div>{{ moment(row.occurred_at).format('dddd')}}</div>
-                        <div>{{ moment(row.occurred_at).format('MMM Do, YYYY h:mm a')}}</div>
+                        <div>{{ moment(row.occurred_at).format('dddd') }}</div>
+                        <div>{{ moment(row.occurred_at).format('MMM Do, YYYY h:mm a') }}</div>
                     </td>
                     <td>
                         <strong>
-                            <RouterLink :to="{ name: 'admin.user', params: { user_name: row.user.user_name } }">
-                                {{row.user.full_name}} ({{row.user.user_name}})
+                            <RouterLink
+                                :to="{
+                                    name: 'admin.user',
+                                    params: { user_name: row.user.user_name }
+                                }">
+                                {{ row.user.full_name }} ({{ row.user.user_name }})
                             </RouterLink>
                         </strong>
-                        <div class="uk-text-meta">{{row.user.email}}</div>
+                        <div class="uk-text-meta">{{ row.user.email }}</div>
                     </td>
                     <td>
                         <div>
-                            {{row.ip_address}}
+                            {{ row.ip_address }}
                         </div>
                         <div>
-                            <i>{{row.description}}</i>
+                            <i>{{ row.description }}</i>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-
     </UFCardBox>
 </template>
