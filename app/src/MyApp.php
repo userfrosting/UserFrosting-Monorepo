@@ -12,8 +12,7 @@ namespace UserFrosting\App;
 
 use UserFrosting\App\Bakery\HelloCommand;
 use UserFrosting\Sprinkle\Account\Account;
-// use UserFrosting\Sprinkle\Account\Account;
-// use UserFrosting\Sprinkle\Admin\Admin;
+use UserFrosting\Sprinkle\Admin\Admin;
 use UserFrosting\Sprinkle\BakeryRecipe;
 use UserFrosting\Sprinkle\Core\Core;
 use UserFrosting\Sprinkle\SprinkleRecipe;
@@ -68,8 +67,7 @@ class MyApp implements
         return [
             Core::class,
             Account::class,
-            // Admin::class,
-            // AdminLTE::class,
+            Admin::class,
         ];
     }
 
