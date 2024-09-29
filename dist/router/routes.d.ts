@@ -111,7 +111,12 @@ declare const AdminRoutes: ({
             };
         };
     };
-    component: () => Promise<typeof import("../views/ActivitiesView.vue")>;
+    component: () => Promise<typeof import("../views/GroupsView.vue")>;
+    children: {
+        path: string;
+        name: string;
+        component: () => Promise<typeof import("../views/GroupView.vue")>;
+    }[];
 })[];
 export default AdminRoutes;
 export { AdminDashboardRoutes, AdminActivitiesRoutes, AdminGroupsRoutes, AdminPermissionsRoutes, AdminRolesRoutes, AdminUsersRoutes };
