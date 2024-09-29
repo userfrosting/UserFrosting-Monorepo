@@ -13,10 +13,8 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Routes;
 
 use Slim\App;
-use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
-use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
-use UserFrosting\Sprinkle\Admin\Controller\Activity\ActivitiesPageAction;
+use UserFrosting\Sprinkle\Admin\Controller\Activity\ActivitiesSprunje;
 use UserFrosting\Sprinkle\Core\Middlewares\NoCache;
 
 /*
@@ -26,13 +24,7 @@ class ActivitiesRoutes implements RouteDefinitionInterface
 {
     public function register(App $app): void
     {
-        $app->group('/activities', function (RouteCollectorProxy $group) {
-            $group->get('', ActivitiesPageAction::class)
-                  ->setName('uri_activities');
-        })->add(AuthGuard::class)->add(NoCache::class);
-
-        $app->group('/api/activities', function (RouteCollectorProxy $group) {
-            $group->get('', [ActivitiesPageAction::class, 'sprunje']);
-        })->add(AuthGuard::class)->add(NoCache::class);
+        $app->get('/api/activities', ActivitiesSprunje::class)
+            ->add(NoCache::class);
     }
 }

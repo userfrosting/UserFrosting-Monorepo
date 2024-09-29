@@ -14,7 +14,6 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Activity;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
@@ -30,34 +29,15 @@ use UserFrosting\Sprinkle\Admin\Sprunje\ActivitySprunje;
  * This page requires authentication.
  * Request type: GET
  */
-class ActivitiesPageAction
+class ActivitiesSprunje
 {
-    /** @var string Page template */
-    protected string $template = 'pages/activities.html.twig';
-
     /**
      * Inject dependencies.
      */
     public function __construct(
-        protected AuthorizationManager $authorizer,
         protected Authenticator $authenticator,
         protected ActivitySprunje $sprunje,
-        protected Twig $view,
     ) {
-    }
-
-    /**
-     * Receive the request, dispatch to the handler, and return the payload to
-     * the response.
-     *
-     * @param Request  $request
-     * @param Response $response
-     */
-    public function __invoke(Request $request, Response $response): Response
-    {
-        $this->validateAccess();
-
-        return $this->view->render($response, $this->template);
     }
 
     /**
@@ -66,7 +46,7 @@ class ActivitiesPageAction
      * @param Request  $request
      * @param Response $response
      */
-    public function sprunje(Request $request, Response $response): Response
+    public function __invoke(Request $request, Response $response): Response
     {
         $this->validateAccess();
 

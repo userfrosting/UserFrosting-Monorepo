@@ -4,7 +4,7 @@ const AdminDashboardRoutes = [
         name: 'admin.dashboard',
         meta: {
             auth: {
-                redirect: { name: 'account.login' },
+                redirect: { name: 'account.login' }
             }
         },
         component: () => import('../views/DashboardView.vue')
@@ -17,7 +17,7 @@ const AdminActivitiesRoutes = [
         name: 'admin.activities',
         meta: {
             auth: {
-                redirect: { name: 'account.login' },
+                redirect: { name: 'account.login' }
             }
         },
         component: () => import('../views/ActivitiesView.vue')
@@ -30,7 +30,7 @@ const AdminGroupsRoutes = [
         name: 'admin.groups',
         meta: {
             auth: {
-                redirect: { name: 'account.login' },
+                redirect: { name: 'account.login' }
             }
         },
         component: () => import('../views/GroupsView.vue'),
@@ -50,7 +50,7 @@ const AdminPermissionsRoutes = [
         name: 'admin.permissions',
         meta: {
             auth: {
-                redirect: { name: 'account.login' },
+                redirect: { name: 'account.login' }
             }
         },
         component: () => import('../views/PermissionsView.vue'),
@@ -69,7 +69,7 @@ const AdminRolesRoutes = [
         name: 'admin.roles',
         meta: {
             auth: {
-                redirect: { name: 'account.login' },
+                redirect: { name: 'account.login' }
             }
         },
         component: () => import('../views/RolesView.vue'),
@@ -89,7 +89,7 @@ const AdminUsersRoutes = [
         name: 'admin.users',
         meta: {
             auth: {
-                redirect: { name: 'account.login' },
+                redirect: { name: 'account.login' }
             }
         },
         component: () => import('../views/UsersView.vue'),
@@ -109,7 +109,7 @@ const AdminRoutes = [
     ...AdminGroupsRoutes,
     ...AdminPermissionsRoutes,
     ...AdminRolesRoutes,
-    ...AdminUsersRoutes,
+    ...AdminUsersRoutes
 ]
 
 export default AdminRoutes

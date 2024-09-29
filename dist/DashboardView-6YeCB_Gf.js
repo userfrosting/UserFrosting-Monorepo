@@ -1747,7 +1747,10 @@ const qn = {
         n[13] || (n[13] = d("h3", null, "Dashboard", -1)),
         d("div", qn, [
           d("div", null, [
-            N(o, { to: { name: "admin.users" } }, {
+            N(o, {
+              to: { name: "admin.users" },
+              class: "uk-text-decoration-none"
+            }, {
               default: j(() => [
                 N(s, {
                   value: t.value.counter.users,
