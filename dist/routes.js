@@ -7,7 +7,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./DashboardView-DOzynbLK.js")
+    component: () => import("./DashboardView-DEuCXKu7.js")
   }
 ], t = [
   {
@@ -18,7 +18,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./ActivitiesView-B7sZTcln.js")
+    component: () => import("./ActivitiesView-QlMYCapd.js")
   }
 ], e = [
   {
@@ -29,13 +29,13 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./GroupsView-BXI7Qici.js"),
+    component: () => import("./GroupsView-ataIckLA.js"),
     children: [
       {
         path: "g/:slug",
         // groups/g/{slug}
         name: "admin.group",
-        component: () => import("./GroupView-R6IL_kMD.js")
+        component: () => import("./GroupView-Br2XanZz.js")
       }
     ]
   }
@@ -48,13 +48,13 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./PermissionsView-D5yG-J19.js"),
+    component: () => import("./PermissionsView-Gx0ZJBxu.js"),
     children: [
       {
         path: "p/:id",
         // permissions/p/{id}
         name: "admin.permission",
-        component: () => import("./PermissionView-Bo5S_ghn.js")
+        component: () => import("./PermissionView-CrT77lW9.js")
       }
     ]
   }
@@ -67,13 +67,13 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./RolesView-TXQJEbIW.js"),
+    component: () => import("./RolesView-C7qsAAC9.js"),
     children: [
       {
         path: "r/:slug",
         // roles/r/{slug}
         name: "admin.role",
-        component: () => import("./RoleView-HTwNAw_F.js")
+        component: () => import("./RoleView-DdLudICm.js")
       }
     ]
   }
@@ -86,13 +86,13 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./UsersView-Bo72x_bn.js"),
+    component: () => import("./UsersView-YFZdEXGC.js"),
     children: [
       {
         path: "u/:user_name",
         // users/u/{user_name}
         name: "admin.user",
-        component: () => import("./UserView-BX3m4dnh.js")
+        component: () => import("./UserView-jTy8GhIn.js")
       }
     ]
   }

@@ -1,3 +1,3 @@
 <template>
-    <div>Group View</div>
+    <UFHeaderPage title="Group" />
 </template>

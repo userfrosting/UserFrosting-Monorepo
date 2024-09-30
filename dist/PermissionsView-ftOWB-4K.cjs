@@ -1,1 +1,0 @@
-"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const e=require("vue"),r=require("./_plugin-vue_export-helper-BHFhmbuH.cjs"),n={};function t(o,i){return e.openBlock(),e.createElementBlock("div",null,"Permissions View")}const c=r._export_sfc(n,[["render",t]]);exports.default=c;

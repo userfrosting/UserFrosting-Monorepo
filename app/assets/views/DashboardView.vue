@@ -41,7 +41,7 @@ axios
 </script>
 
 <template>
-    <h3>Dashboard</h3>
+    <UFHeaderPage title="Dashboard" />
 
     <div class="uk-grid uk-child-width-1-3" uk-grid>
         <div>

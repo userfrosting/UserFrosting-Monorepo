@@ -19,8 +19,7 @@ axios
 </script>
 
 <template>
-    <h3 class="uk-margin-remove">Activities</h3>
-    <p class="uk-text-meta uk-margin-remove-top">A listing of user activities.</p>
+    <UFHeaderPage title="Activities" caption="A listing of user activities." />
 
     <UFCardBox>
         <table class="uk-table uk-table-striped">

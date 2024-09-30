@@ -1,18 +1,18 @@
-import { ref as f, resolveComponent as i, openBlock as u, createElementBlock as r, Fragment as v, createElementVNode as e, createVNode as s, renderList as c, withCtx as m, toDisplayString as t, createTextVNode as b } from "vue";
-import { a as g } from "./axios-CXDYiOMX.js";
+import { ref as g, resolveComponent as d, openBlock as r, createElementBlock as u, Fragment as v, createVNode as s, createElementVNode as e, renderList as p, withCtx as m, toDisplayString as t, createTextVNode as b } from "vue";
+import { a as _ } from "./axios-CXDYiOMX.js";
 const x = {
   class: "uk-grid uk-child-width-1-3",
   "uk-grid": ""
-}, _ = {
+}, w = {
   class: "uk-grid uk-child-width-1-2",
   "uk-grid": ""
-}, w = { class: "uk-card uk-card-default uk-card-small" }, y = { class: "uk-card-body" }, U = {
+}, U = { class: "uk-card uk-card-default uk-card-small" }, F = { class: "uk-card-body" }, y = {
   class: "uk-grid uk-flex-center",
   "uk-grid": ""
-}, F = ["src"], I = { class: "uk-margin-remove" }, B = { class: "uk-margin-remove uk-text-meta" }, D = { class: "uk-card-footer uk-text-center" }, R = { class: "uk-description-list" }, V = { class: "uk-list uk-list-disc uk-list-collapse" }, C = {
+}, I = ["src"], B = { class: "uk-margin-remove" }, D = { class: "uk-margin-remove uk-text-meta" }, R = { class: "uk-card-footer uk-text-center" }, V = { class: "uk-description-list" }, E = { class: "uk-list uk-list-disc uk-list-collapse" }, C = {
   __name: "DashboardView",
-  setup(E) {
-    const n = f({
+  setup(L) {
+    const n = g({
       counter: {
         users: 0,
         roles: 0,
@@ -37,17 +37,17 @@ const x = {
       sprinkles: {},
       users: []
     });
-    return g.get("/api/dashboard").then((d) => {
-      n.value = d.data;
-    }).catch((d) => {
-      console.error(d);
-    }), (d, l) => {
-      const a = i("UFInfoBox"), k = i("RouterLink"), p = i("UFCardBox");
-      return u(), r(v, null, [
-        l[13] || (l[13] = e("h3", null, "Dashboard", -1)),
+    return _.get("/api/dashboard").then((a) => {
+      n.value = a.data;
+    }).catch((a) => {
+      console.error(a);
+    }), (a, l) => {
+      const f = d("UFHeaderPage"), i = d("UFInfoBox"), c = d("RouterLink"), k = d("UFCardBox");
+      return r(), u(v, null, [
+        s(f, { title: "Dashboard" }),
         e("div", x, [
           e("div", null, [
-            s(a, {
+            s(i, {
               value: n.value.counter.users,
               label: "Users",
               faIcon: "user",
@@ -55,7 +55,7 @@ const x = {
             }, null, 8, ["value"])
           ]),
           e("div", null, [
-            s(a, {
+            s(i, {
               value: n.value.counter.roles,
               label: "Roles",
               faIcon: "address-card",
@@ -63,7 +63,7 @@ const x = {
             }, null, 8, ["value"])
           ]),
           e("div", null, [
-            s(a, {
+            s(i, {
               value: n.value.counter.groups,
               label: "Groups",
               faIcon: "users",
@@ -71,9 +71,9 @@ const x = {
             }, null, 8, ["value"])
           ])
         ]),
-        e("div", _, [
+        e("div", w, [
           e("div", null, [
-            e("div", w, [
+            e("div", U, [
               l[1] || (l[1] = e("div", { class: "uk-card-header" }, [
                 e("div", { class: "uk-grid uk-grid-small" }, [
                   e("div", { class: "uk-width-auto" }, [
@@ -81,13 +81,13 @@ const x = {
                   ])
                 ])
               ], -1)),
-              e("div", y, [
-                e("div", U, [
-                  (u(!0), r(v, null, c(n.value.users, (o) => (u(), r("div", {
+              e("div", F, [
+                e("div", y, [
+                  (r(!0), u(v, null, p(n.value.users, (o) => (r(), u("div", {
                     key: o.id,
                     class: "uk-text-center"
                   }, [
-                    s(k, {
+                    s(c, {
                       to: { name: "admin.user", params: { user_name: o.user_name } },
                       class: "uk-text-decoration-none uk-link-text"
                     }, {
@@ -96,17 +96,17 @@ const x = {
                           src: o.avatar,
                           alt: "User Image",
                           class: "uk-border-circle"
-                        }, null, 8, F),
-                        e("p", I, t(o.full_name), 1),
-                        e("p", B, t(o.registered), 1)
+                        }, null, 8, I),
+                        e("p", B, t(o.full_name), 1),
+                        e("p", D, t(o.registered), 1)
                       ]),
                       _: 2
                     }, 1032, ["to"])
                   ]))), 128))
                 ])
               ]),
-              e("div", D, [
-                s(k, {
+              e("div", R, [
+                s(c, {
                   to: { name: "admin.users" },
                   class: "uk-button uk-button-text"
                 }, {
@@ -118,9 +118,9 @@ const x = {
               ])
             ]),
             l[12] || (l[12] = e("br", null, null, -1)),
-            s(p, { title: "System Information" }, {
+            s(k, { title: "System Information" }, {
               default: m(() => [
-                e("dl", R, [
+                e("dl", V, [
                   l[2] || (l[2] = e("dt", null, "Frameword version", -1)),
                   e("dd", null, [
                     e("pre", null, [
@@ -171,8 +171,8 @@ const x = {
                   ], -1)),
                   l[11] || (l[11] = e("dt", null, "Loaded sprinkles", -1)),
                   e("dd", null, [
-                    e("ul", V, [
-                      (u(!0), r(v, null, c(n.value.sprinkles, (o) => (u(), r("li", {
+                    e("ul", E, [
+                      (r(!0), u(v, null, p(n.value.sprinkles, (o) => (r(), u("li", {
                         key: o.name
                       }, t(o), 1))), 128))
                     ])
@@ -183,7 +183,7 @@ const x = {
             })
           ]),
           e("div", null, [
-            s(p, { title: "Activities" })
+            s(k, { title: "Activities" })
           ])
         ])
       ], 64);

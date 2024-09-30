@@ -1,3 +1,3 @@
 <template>
-    <div>User View</div>
+    <UFHeaderPage title="User" />
 </template>

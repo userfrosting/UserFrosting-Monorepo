@@ -16,7 +16,6 @@ use Slim\App;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
 use UserFrosting\Sprinkle\Admin\Controller\Dashboard\CacheApiAction;
-use UserFrosting\Sprinkle\Admin\Controller\Dashboard\CacheModalAction;
 use UserFrosting\Sprinkle\Admin\Controller\Dashboard\DashboardAction;
 use UserFrosting\Sprinkle\Core\Middlewares\NoCache;
 

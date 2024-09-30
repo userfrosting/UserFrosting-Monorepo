@@ -1,3 +1,3 @@
 <template>
-    <div>Permission View</div>
+    <UFHeaderPage title="Permission" />
 </template>

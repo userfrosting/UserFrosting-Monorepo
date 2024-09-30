@@ -1,3 +1,3 @@
 <template>
-    <div>Role View</div>
+    <UFHeaderPage title="Role" />
 </template>
