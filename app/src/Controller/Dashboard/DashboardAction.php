@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Admin\Controller\Dashboard;
 
-use Carbon\Carbon;
 use Illuminate\Database\Connection;
 use PDO;
 use PDOException;
@@ -94,15 +93,11 @@ class DashboardAction
                 'groups' => $this->groupModel::count(),
             ],
             'info'      => [
-                'version'     => [
-                    'framework' => (string) \Composer\InstalledVersions::getPrettyVersion('userfrosting/framework'),
-                    'php'       => phpversion(),
-                ],
-                'database'    => $this->getDatabaseInfo(),
-                'environment' => $_SERVER,
-                'path'        => [
-                    'project' => $this->locator->getBasePath(),
-                ],
+                'frameworkVersion' => (string) \Composer\InstalledVersions::getPrettyVersion('userfrosting/framework'),
+                'phpVersion'       => phpversion(),
+                'database'         => $this->getDatabaseInfo(),
+                'server'           => $_SERVER['SERVER_SOFTWARE'],
+                'projectPath'      => $this->locator->getBasePath(),
             ],
             'sprinkles' => $this->sprinkleManager->getSprinklesNames(),
             'users'     => $this->getLatestUsers(),
@@ -117,16 +112,10 @@ class DashboardAction
     protected function getLatestUsers(): array
     {
         // Probably a better way to do this
+        // TODO : User config for number of users to display
         $users = $this->userModel::orderBy('created_at', 'desc')
                  ->take(8)
                  ->get();
-
-        // Transform the `create_at` date in "x days ago" type of string
-        $users->transform(function ($item, $key) {
-            $item->registered = Carbon::parse($item->created_at)->diffForHumans();
-
-            return $item;
-        });
 
         return $users->toArray();
     }
