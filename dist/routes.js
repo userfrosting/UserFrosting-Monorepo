@@ -7,7 +7,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./DashboardView-Rhv7jUm5.js")
+    component: () => import("./DashboardView-CpCrm67k.js")
   }
 ], t = [
   {

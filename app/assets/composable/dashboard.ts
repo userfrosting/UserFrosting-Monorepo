@@ -1,6 +1,7 @@
+import { defineStore } from 'pinia'
 import axios from 'axios'
 import type { UserInterface } from '@userfrosting/sprinkle-account/types'
-import { AlertStyle, type AlertInterface } from '@userfrosting/sprinkle-core/types'
+import { type AlertInterface, AlertStyle } from '@userfrosting/sprinkle-core/types'
 
 interface SprinkleList {
     [name: string]: string
@@ -28,32 +29,61 @@ interface DashboardApi {
         groups: number
     }
     info: SystemInfo
-    sprinkles: SprinkleList[]
+    sprinkles: SprinkleList
     users: UserInterface[]
 }
 
-// TODO : Change to pinia (non-persisting) to avoid reactivity issues
-
-// Actions
-async function useDashboardApi() {
-    return axios
-        .get<DashboardApi>('/api/dashboard')
-        .then((response) => {
-            return response.data
-        })
-        .catch((err) => {
-            const error: AlertInterface = {
-                ...{
-                    description: 'An error as occurred',
-                    style: AlertStyle.Danger,
-                    closeBtn: true
-                },
-                ...err.response.data
-            }
-
-            throw error
-        })
+const defaultDashboardApi: DashboardApi = {
+    counter: {
+        users: 0,
+        roles: 0,
+        groups: 0
+    },
+    info: {
+        frameworkVersion: '',
+        phpVersion: '',
+        database: {
+            connection: '',
+            name: '',
+            type: '',
+            version: ''
+        },
+        server: '',
+        projectPath: ''
+    },
+    sprinkles: {},
+    users: []
 }
 
-export default useDashboardApi
 export type { DashboardApi, SprinkleList, DatabaseInfo, SystemInfo }
+export const useDashboardApi = defineStore('dashboardApi', {
+    state: () => {
+        return {
+            data: defaultDashboardApi
+        }
+    },
+    actions: {
+        async load() {
+            console.log('Dashboard load')
+            return axios
+                .get<DashboardApi>('/api/dashboard')
+                .then((response) => {
+                    this.data = response.data
+
+                    return this.data
+                })
+                .catch((err) => {
+                    const error: AlertInterface = {
+                        ...{
+                            description: 'An error as occurred',
+                            style: AlertStyle.Danger,
+                            closeBtn: true
+                        },
+                        ...err.response.data
+                    }
+
+                    throw error
+                })
+        }
+    }
+})

@@ -3,7 +3,7 @@ import type { UserInterface } from '@userfrosting/sprinkle-account/types'
 import moment from 'moment'
 
 defineProps<{
-    users?: UserInterface[]
+    users: UserInterface[]
 }>()
 </script>
 
@@ -24,9 +24,9 @@ defineProps<{
             </div>
         </div>
         <template #footer>
-            <center>
-                <RouterLink :to="{ name: 'admin.users' }"> View All Users </RouterLink>
-            </center>
+            <RouterLink :to="{ name: 'admin.users' }" class="uk-text-center"
+                >View All Users</RouterLink
+            >
         </template>
     </UFCardBox>
 </template>
