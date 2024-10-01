@@ -1,8 +1,8 @@
-import { defineComponent as f, resolveComponent as p, openBlock as l, createElementBlock as c, Fragment as k, createVNode as t, createBlock as _, withCtx as m, createTextVNode as b, createElementVNode as e, renderList as g, toDisplayString as o, unref as d } from "vue";
+import { defineComponent as f, resolveComponent as p, openBlock as l, createElementBlock as c, Fragment as k, createVNode as t, createBlock as _, withCtx as m, createTextVNode as b, createElementVNode as e, renderList as v, toDisplayString as o, unref as d } from "vue";
 import { defineStore as h } from "pinia";
-import { a as D, h as U } from "./moment-BwEV_F1Z.js";
-var v = /* @__PURE__ */ ((r) => (r.Primary = "Primary", r.Success = "Success", r.Warning = "Warning", r.Danger = "Danger", r))(v || {});
-const y = {
+import { a as U, h as D } from "./moment-BwEV_F1Z.js";
+var g = /* @__PURE__ */ ((r) => (r.Primary = "Primary", r.Success = "Success", r.Warning = "Warning", r.Danger = "Danger", r))(g || {});
+const w = {
   counter: {
     users: 0,
     roles: 0,
@@ -22,23 +22,23 @@ const y = {
   },
   sprinkles: {},
   users: []
-}, B = h("dashboardApi", {
+}, y = h("dashboardApi", {
   state: () => ({
-    data: y
+    data: w
   }),
   actions: {
     async load() {
-      return console.log("Dashboard load"), D.get("/api/dashboard").then((r) => (this.data = r.data, this.data)).catch((r) => {
+      return U.get("/api/dashboard").then((r) => (this.data = r.data, this.data)).catch((r) => {
         throw {
           description: "An error as occurred",
-          style: v.Danger,
+          style: g.Danger,
           closeBtn: !0,
           ...r.response.data
         };
       });
     }
   }
-}), F = /* @__PURE__ */ f({
+}), B = /* @__PURE__ */ f({
   __name: "DashboardStats",
   props: {
     users: {},
@@ -70,7 +70,7 @@ const y = {
       ], 64);
     };
   }
-}), w = {
+}), F = {
   class: "uk-grid uk-flex-center",
   "uk-grid": ""
 }, x = ["src"], C = { class: "uk-margin-remove" }, P = { class: "uk-margin-remove uk-text-meta" }, V = /* @__PURE__ */ f({
@@ -94,8 +94,8 @@ const y = {
           })
         ]),
         default: m(() => [
-          e("div", w, [
-            (l(!0), c(k, null, g(s.users, (u) => (l(), c("div", {
+          e("div", F, [
+            (l(!0), c(k, null, v(s.users, (u) => (l(), c("div", {
               key: u.id,
               class: "uk-text-center"
             }, [
@@ -110,7 +110,7 @@ const y = {
                     class: "uk-border-circle"
                   }, null, 8, x),
                   e("p", C, o(u.full_name), 1),
-                  e("p", P, o(d(U)(u.created_at).fromNow()), 1)
+                  e("p", P, o(d(D)(u.created_at).fromNow()), 1)
                 ]),
                 _: 2
               }, 1032, ["to"])
@@ -121,7 +121,7 @@ const y = {
       });
     };
   }
-}), I = { class: "uk-description-list" }, S = { class: "uk-list uk-list-disc uk-list-collapse" }, $ = /* @__PURE__ */ f({
+}), I = { class: "uk-description-list" }, $ = { class: "uk-list uk-list-disc uk-list-collapse" }, S = /* @__PURE__ */ f({
   __name: "DashboardSystemInfo",
   props: {
     info: {},
@@ -177,8 +177,8 @@ const y = {
             ]),
             n[7] || (n[7] = e("dt", null, "Loaded sprinkles", -1)),
             e("dd", null, [
-              e("ul", S, [
-                (l(!0), c(k, null, g(s.sprinkles, (i) => (l(), c("li", { key: i }, o(i), 1))), 128))
+              e("ul", $, [
+                (l(!0), c(k, null, v(s.sprinkles, (i) => (l(), c("li", { key: i }, o(i), 1))), 128))
               ])
             ])
           ])
@@ -188,21 +188,24 @@ const y = {
     };
   }
 }), A = {
-  class: "uk-grid uk-child-width-expand",
+  class: "uk-child-width-expand",
   "uk-grid": ""
 }, L = {
-  class: "uk-grid uk-child-width-1-2",
+  class: "uk-child-width-1-2",
   "uk-grid": ""
-}, H = /* @__PURE__ */ f({
+}, N = {
+  class: "uk-child-width-1-1",
+  "uk-grid": ""
+}, W = /* @__PURE__ */ f({
   __name: "DashboardView",
   setup(r) {
-    const s = B();
+    const s = y();
     return s.load(), (n, a) => {
       const i = p("UFHeaderPage"), u = p("UFCardBox");
       return l(), c(k, null, [
         t(i, { title: "Dashboard" }),
         e("div", A, [
-          t(F, {
+          t(B, {
             users: d(s).data.counter.users,
             roles: d(s).data.counter.roles,
             groups: d(s).data.counter.groups
@@ -210,13 +213,19 @@ const y = {
         ]),
         e("div", L, [
           e("div", null, [
-            t(V, {
-              users: d(s).data.users
-            }, null, 8, ["users"]),
-            t($, {
-              info: d(s).data.info,
-              sprinkles: d(s).data.sprinkles
-            }, null, 8, ["info", "sprinkles"])
+            e("div", N, [
+              e("div", null, [
+                t(V, {
+                  users: d(s).data.users
+                }, null, 8, ["users"])
+              ]),
+              e("div", null, [
+                t(S, {
+                  info: d(s).data.info,
+                  sprinkles: d(s).data.sprinkles
+                }, null, 8, ["info", "sprinkles"])
+              ])
+            ])
           ]),
           e("div", null, [
             t(u, { title: "Activities" })
@@ -227,5 +236,5 @@ const y = {
   }
 });
 export {
-  H as default
+  W as default
 };
