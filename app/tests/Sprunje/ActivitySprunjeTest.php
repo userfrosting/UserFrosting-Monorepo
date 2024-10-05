@@ -126,6 +126,24 @@ class ActivitySprunjeTest extends AdminTestCase
         $this->assertEquals(1, $data['rows'][0]['id']); // @phpstan-ignore-line
     }
 
+    public function testWithMultipleSorts(): void
+    {
+        /** @var ActivitySprunje */
+        $sprunje = $this->ci->get(ActivitySprunje::class);
+        $sprunje->setOptions([
+            'sorts' => [
+                'occurred_at' => 'desc',
+                'user' => 'asc'
+            ],
+        ]);
+        $data = $sprunje->getArray();
+
+        $this->assertEquals(6, $data['count']);
+        $this->assertEquals(6, $data['count_filtered']);
+        $this->assertCount(6, $data['rows']); // @phpstan-ignore-line
+        $this->assertEquals(6, $data['rows'][0]['id']); // @phpstan-ignore-line
+    }
+
     public function testWithUserFilter(): void
     {
         /** @var ActivitySprunje */

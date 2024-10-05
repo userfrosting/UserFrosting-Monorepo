@@ -18,7 +18,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./ActivitiesView-B5_vaB0M.js")
+    component: () => import("./ActivitiesView-DgDr8nR8.js")
   }
 ], e = [
   {
