@@ -8,7 +8,7 @@ import moment from 'moment'
         caption="A listing of the users for your site. Provides management tools including the ability to
         edit user details, manually activate users, enable/disable users, and more." />
 
-        <UFCardBox>
+    <UFCardBox>
         <UFSprunjeTable dataUrl="/api/users">
             <template #header>
                 <UFSprunjeHeader>User</UFSprunjeHeader>
@@ -32,7 +32,9 @@ import moment from 'moment'
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
                     <div>{{ moment(item.last_activity.occurred_at).format('dddd') }}</div>
-                    <div>{{ moment(item.last_activity.occurred_at).format('MMM Do, YYYY h:mm a') }}</div>
+                    <div>
+                        {{ moment(item.last_activity.occurred_at).format('MMM Do, YYYY h:mm a') }}
+                    </div>
                     <i>{{ item.last_activity.description }}</i>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn></UFSprunjeColumn>

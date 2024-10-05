@@ -24,13 +24,13 @@
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
                     <div>
-                        <code>{{item.slug}}</code>
+                        <code>{{ item.slug }}</code>
                     </div>
                     <div>
-                        ↳ <code>{{item.conditions}}</code>
+                        ↳ <code>{{ item.conditions }}</code>
                     </div>
                     <div>
-                        <i>{{item.description}}</i>
+                        <i>{{ item.description }}</i>
                     </div>
                 </UFSprunjeColumn>
             </template>
