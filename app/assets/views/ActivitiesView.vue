@@ -6,7 +6,7 @@ import moment from 'moment'
     <UFHeaderPage title="Activities" caption="A listing of user activities." />
 
     <UFCardBox>
-        <UFSprunjeTable dataUrl='/api/activities'>
+        <UFSprunjeTable dataUrl="/api/activities">
             <template #header>
                 <UFSprunjeHeader>Activity Time</UFSprunjeHeader>
                 <UFSprunjeHeader>User</UFSprunjeHeader>
