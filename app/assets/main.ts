@@ -20,7 +20,7 @@ app.use(CoreSprinkle)
 
 /** Setup Account Sprinkle */
 import AccountSprinkle from '@userfrosting/sprinkle-account'
-app.use(AccountSprinkle, {router})
+app.use(AccountSprinkle, { router })
 
 /** Setup Theme */
 import '@userfrosting/theme-pink-cupcake/less/main.less'

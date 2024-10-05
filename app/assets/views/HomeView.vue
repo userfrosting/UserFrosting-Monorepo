@@ -5,7 +5,7 @@ import { useAuthStore } from '@userfrosting/sprinkle-account/stores'
 const auth = useAuthStore()
 
 const helloMsg = computed(() => {
-    return (auth.isAuthenticated) ? 'Hello ' + auth.user?.full_name + '!' : 'Hello guest !'
+    return auth.isAuthenticated ? 'Hello ' + auth.user?.full_name + '!' : 'Hello guest !'
 })
 </script>
 
@@ -15,12 +15,10 @@ const helloMsg = computed(() => {
             <a class="uk-link-reset" href="#">{{ helloMsg }}</a>
         </h1>
         <p class="uk-article-meta">
-            Written by <a href="#">Angela Davis</a
-            >, Professor on 29 September 2018.
+            Written by <a href="#">Angela Davis</a>, Professor on 29 September 2018.
         </p>
         <p class="uk-text-lead">
-            This is a demo of UserFrosting using a custom UiKit based template built using Vue
-            3.0
+            This is a demo of UserFrosting using a custom UiKit based template built using Vue 3.0
         </p>
         <p>All the content below is just for example and I've not added any functionality.</p>
 

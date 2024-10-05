@@ -2,10 +2,10 @@
     "name": "userfrosting",
     "type": "module",
     "dependencies": {
-        "@userfrosting/theme-pink-cupcake": "^0.2.16",
-        "@userfrosting/sprinkle-admin": "git+https://github.com/userfrosting/sprinkle-admin.git#6.0",
         "@userfrosting/sprinkle-account": "git+https://github.com/userfrosting/sprinkle-account.git#6.0",
+        "@userfrosting/sprinkle-admin": "git+https://github.com/userfrosting/sprinkle-admin.git#6.0",
         "@userfrosting/sprinkle-core": "git+https://github.com/userfrosting/sprinkle-core.git#6.0",
+        "@userfrosting/theme-pink-cupcake": "git+https://github.com/userfrosting/theme-pink-cupcake.git",
         "axios": "^1.5.0",
         "pinia": "^2.1.6",
         "pinia-plugin-persistedstate": "^3.2.0",

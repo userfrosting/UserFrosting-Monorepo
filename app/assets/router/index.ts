@@ -20,7 +20,7 @@ const router = createRouter({
                     name: 'about',
                     meta: {
                         auth: {
-                            redirect: { name: 'account.login' },
+                            redirect: { name: 'account.login' }
                         }
                     },
                     component: () => import('../views/AboutView.vue')
@@ -31,7 +31,7 @@ const router = createRouter({
                     component: () => import('../views/AuthView.vue')
                 },
                 // Include sprinkles routes
-                ...AccountRoutes,
+                ...AccountRoutes
             ]
         },
         {

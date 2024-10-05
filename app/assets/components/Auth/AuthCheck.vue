@@ -23,7 +23,10 @@ auth.check()
                 </span>
             </p>
             <p>
-                <button class="uk-button uk-button-primary" @click="auth.check()" :disabled="auth.loading">
+                <button
+                    class="uk-button uk-button-primary"
+                    @click="auth.check()"
+                    :disabled="auth.loading">
                     Check Authentication
                 </button>
             </p>
