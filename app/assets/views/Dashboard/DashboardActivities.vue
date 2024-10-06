@@ -4,7 +4,10 @@ import moment from 'moment'
 
 <template>
     <UFCardBox title="Latest Activities">
-        <UFSprunjeTable dataUrl="/api/activities" :defaultSorts="{ occurred_at: 'desc' }" no-pagination>
+        <UFSprunjeTable
+            dataUrl="/api/activities"
+            :defaultSorts="{ occurred_at: 'desc' }"
+            hidePagination>
             <template #header>
                 <UFSprunjeHeader>Activity Time</UFSprunjeHeader>
                 <UFSprunjeHeader>User</UFSprunjeHeader>

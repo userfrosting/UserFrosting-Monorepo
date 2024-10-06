@@ -1898,7 +1898,7 @@ const Vn = {
           T(i, {
             dataUrl: "/api/activities",
             defaultSorts: { occurred_at: "desc" },
-            "no-pagination": ""
+            hidePagination: ""
           }, {
             header: A(() => [
               T(r, null, {
