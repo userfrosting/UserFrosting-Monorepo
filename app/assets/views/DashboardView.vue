@@ -3,6 +3,7 @@ import { useDashboardApi } from '../composable/dashboard'
 import DashboardStats from './Dashboard/DashboardStats.vue'
 import DashboardRecentUsers from './Dashboard/DashboardRecentUsers.vue'
 import DashboardSystemInfo from './Dashboard/DashboardSystemInfo.vue'
+import DashboardActivities from './Dashboard/DashboardActivities.vue'
 
 const dashboard = useDashboardApi()
 dashboard.load()
@@ -30,7 +31,7 @@ dashboard.load()
             </div>
         </div>
         <div>
-            <UFCardBox title="Activities"></UFCardBox>
+            <DashboardActivities />
         </div>
     </div>
 </template>
