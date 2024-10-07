@@ -58,6 +58,7 @@ class GroupPageAction
     {
         $payload = $this->handle($group);
 
+        // TODO : Turn into JSON API endpoint
         return $this->view->render($response, $this->template, $payload);
     }
 

@@ -36,15 +36,12 @@ class PermissionsPageActionTest extends AdminTestCase
     public function testPageForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/permissions');
+        $request = $this->createJsonRequest('GET', '/api/permissions');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
         $this->assertJsonResponse('Login Required', $response, 'title');
-        $this->assertResponseStatus(302, $response);
-
-        // Assert Event Redirect
-        $this->assertSame('/account/sign-in?redirect=%2Fpermissions', $response->getHeaderLine('Location'));
+        $this->assertResponseStatus(400, $response);
     }
 
     public function testPageForForbiddenException(): void
@@ -54,27 +51,12 @@ class PermissionsPageActionTest extends AdminTestCase
         $this->actAsUser($user);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/permissions');
+        $request = $this->createJsonRequest('GET', '/api/permissions');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
         $this->assertJsonResponse('Access Denied', $response, 'title');
         $this->assertResponseStatus(403, $response);
-    }
-
-    public function testPage(): void
-    {
-        /** @var User */
-        $user = User::factory()->create();
-        $this->actAsUser($user, permissions: ['uri_permissions']);
-
-        // Create request with method and url and fetch response
-        $request = $this->createRequest('GET', '/permissions');
-        $response = $this->handleRequest($request);
-
-        // Assert response status & body
-        $this->assertResponseStatus(200, $response);
-        $this->assertNotEmpty((string) $response->getBody());
     }
 
     /**

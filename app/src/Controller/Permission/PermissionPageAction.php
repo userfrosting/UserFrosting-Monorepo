@@ -57,6 +57,7 @@ class PermissionPageAction
     {
         $payload = $this->handle($permission, $request);
 
+        // TODO : Turn into JSON API endpoint
         return $this->view->render($response, $this->template, $payload);
     }
 

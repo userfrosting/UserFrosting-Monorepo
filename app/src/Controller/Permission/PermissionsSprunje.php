@@ -14,9 +14,7 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Permission;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
-use UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Admin\Sprunje\PermissionSprunje;
 
@@ -29,34 +27,15 @@ use UserFrosting\Sprinkle\Admin\Sprunje\PermissionSprunje;
  *
  * Request type: GET
  */
-class PermissionsPageAction
+class PermissionsSprunje
 {
-    /** @var string Page template */
-    protected string $template = 'pages/permissions.html.twig';
-
     /**
      * Inject dependencies.
      */
     public function __construct(
-        protected AuthorizationManager $authorizer,
         protected Authenticator $authenticator,
         protected PermissionSprunje $sprunje,
-        protected Twig $view,
     ) {
-    }
-
-    /**
-     * Receive the request, dispatch to the handler, and return the payload to
-     * the response.
-     *
-     * @param Request  $request
-     * @param Response $response
-     */
-    public function __invoke(Request $request, Response $response): Response
-    {
-        $this->validateAccess();
-
-        return $this->view->render($response, $this->template);
     }
 
     /**
@@ -65,7 +44,7 @@ class PermissionsPageAction
      * @param Request  $request
      * @param Response $response
      */
-    public function sprunje(Request $request, Response $response): Response
+    public function __invoke(Request $request, Response $response): Response
     {
         $this->validateAccess();
 

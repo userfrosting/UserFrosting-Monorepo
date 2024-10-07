@@ -44,10 +44,7 @@ class RoleUpdateFieldActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertJsonResponse('Login Required', $response, 'title');
-        $this->assertResponseStatus(302, $response);
-
-        // Assert Event Redirect
-        $this->assertSame('/account/sign-in?redirect=%2Fapi%2Froles%2Fr%2Ffoo%2Fpermissions', $response->getHeaderLine('Location'));
+        $this->assertResponseStatus(400, $response);
     }
 
     public function testPageWithNotFoundUser(): void

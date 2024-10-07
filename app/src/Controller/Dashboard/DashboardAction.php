@@ -96,7 +96,7 @@ class DashboardAction
                 'frameworkVersion' => (string) \Composer\InstalledVersions::getPrettyVersion('userfrosting/framework'),
                 'phpVersion'       => phpversion(),
                 'database'         => $this->getDatabaseInfo(),
-                'server'           => $_SERVER['SERVER_SOFTWARE'],
+                'server'           => $_SERVER['SERVER_SOFTWARE'] ?? '',
                 'projectPath'      => $this->locator->getBasePath(),
             ],
             'sprinkles' => $this->sprinkleManager->getSprinklesNames(),

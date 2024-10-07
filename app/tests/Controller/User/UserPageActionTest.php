@@ -37,15 +37,12 @@ class UserPageActionTest extends AdminTestCase
     public function testPageForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/users/u/foo');
+        $request = $this->createJsonRequest('GET', '/api/users/u/foo');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
         $this->assertJsonResponse('Login Required', $response, 'title');
-        $this->assertResponseStatus(302, $response);
-
-        // Assert Event Redirect
-        $this->assertSame('/account/sign-in?redirect=%2Fusers%2Fu%2Ffoo', $response->getHeaderLine('Location'));
+        $this->assertResponseStatus(400, $response);
     }
 
     public function testPageForForbiddenException(): void
@@ -55,7 +52,7 @@ class UserPageActionTest extends AdminTestCase
         $this->actAsUser($user);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/users/u/' . $user->user_name);
+        $request = $this->createJsonRequest('GET', '/api/users/u/' . $user->user_name);
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -63,13 +60,14 @@ class UserPageActionTest extends AdminTestCase
         $this->assertResponseStatus(403, $response);
     }
 
-    public function testPage(): void
+    // TODO : Turn into JSON API endpoint
+    /*public function testPage(): void
     {
-        /** @var User */
+        /** @var User * /
         $user = User::factory()->create();
         $this->actAsUser($user, permissions: ['uri_user']);
 
-        /** @var Config */
+        /** @var Config * /
         $config = $this->ci->get(Config::class);
 
         // Force locale config.
@@ -77,11 +75,11 @@ class UserPageActionTest extends AdminTestCase
         $config->set('site.locales.available', ['en_US' => true]);
 
         // Create request with method and url and fetch response
-        $request = $this->createRequest('GET', '/users/u/' . $user->user_name);
+        $request = $this->createRequest('GET', '/api/users/u/' . $user->user_name);
         $response = $this->handleRequest($request);
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
         $this->assertNotEmpty((string) $response->getBody());
-    }
+    }*/
 }

@@ -57,6 +57,7 @@ class RolePageAction
     {
         $payload = $this->handle($role, $request);
 
+        // TODO : Turn into JSON API endpoint
         return $this->view->render($response, $this->template, $payload);
     }
 

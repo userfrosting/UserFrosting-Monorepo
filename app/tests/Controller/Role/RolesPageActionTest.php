@@ -36,15 +36,12 @@ class RolesPageActionTest extends AdminTestCase
     public function testPageForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/roles');
+        $request = $this->createJsonRequest('GET', '/api/roles');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
         $this->assertJsonResponse('Login Required', $response, 'title');
-        $this->assertResponseStatus(302, $response);
-
-        // Assert Event Redirect
-        $this->assertSame('/account/sign-in?redirect=%2Froles', $response->getHeaderLine('Location'));
+        $this->assertResponseStatus(400, $response);
     }
 
     public function testPageForForbiddenException(): void
@@ -54,7 +51,7 @@ class RolesPageActionTest extends AdminTestCase
         $this->actAsUser($user);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/roles');
+        $request = $this->createJsonRequest('GET', '/api/roles');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -69,7 +66,7 @@ class RolesPageActionTest extends AdminTestCase
         $this->actAsUser($user, permissions: ['uri_roles']);
 
         // Create request with method and url and fetch response
-        $request = $this->createRequest('GET', '/roles');
+        $request = $this->createRequest('GET', '/api/roles');
         $response = $this->handleRequest($request);
 
         // Assert response status & body

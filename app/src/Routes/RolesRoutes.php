@@ -17,15 +17,11 @@ use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleCreateAction;
-use UserFrosting\Sprinkle\Admin\Controller\Role\RoleCreateModal;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleDeleteAction;
-use UserFrosting\Sprinkle\Admin\Controller\Role\RoleDeleteModal;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleEditAction;
-use UserFrosting\Sprinkle\Admin\Controller\Role\RoleEditModal;
-use UserFrosting\Sprinkle\Admin\Controller\Role\RoleEditPermissionsModal;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolePageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolePermissionsSprunje;
-use UserFrosting\Sprinkle\Admin\Controller\Role\RolesPageAction;
+use UserFrosting\Sprinkle\Admin\Controller\Role\RolesSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleUpdateFieldAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleUsersSprunje;
 use UserFrosting\Sprinkle\Admin\Middlewares\RoleInjector;
@@ -38,17 +34,12 @@ class RolesRoutes implements RouteDefinitionInterface
 {
     public function register(App $app): void
     {
-        $app->group('/roles', function (RouteCollectorProxy $group) {
-            $group->get('', RolesPageAction::class)
-                  ->setName('uri_roles');
+        $app->group('/api/roles', function (RouteCollectorProxy $group) {
             $group->get('/r/{slug}', RolePageAction::class)
                   ->add(RoleInjector::class);
-        })->add(AuthGuard::class)->add(NoCache::class);
-
-        $app->group('/api/roles', function (RouteCollectorProxy $group) {
             $group->delete('/r/{slug}', RoleDeleteAction::class)
                   ->add(RoleInjector::class);
-            $group->get('', [RolesPageAction::class, 'sprunje']);
+            $group->get('', RolesSprunje::class);
             $group->get('/r/{slug}/permissions', RolePermissionsSprunje::class)
                   ->add(RoleInjector::class);
             $group->get('/r/{slug}/users', RoleUsersSprunje::class)
@@ -58,20 +49,6 @@ class RolesRoutes implements RouteDefinitionInterface
                   ->add(RoleInjector::class);
             $group->put('/r/{slug}/{field}', RoleUpdateFieldAction::class)
                   ->add(RoleInjector::class);
-        })->add(AuthGuard::class)->add(NoCache::class);
-
-        $app->group('/modals/roles', function (RouteCollectorProxy $group) {
-            $group->get('/confirm-delete', RoleDeleteModal::class)
-                  ->add(RoleInjector::class)
-                  ->setName('modal.roles.delete');
-            $group->get('/create', RoleCreateModal::class)
-                  ->setName('modal.roles.create');
-            $group->get('/edit', RoleEditModal::class)
-                  ->add(RoleInjector::class)
-                  ->setName('modal.roles.edit');
-            $group->get('/permissions', RoleEditPermissionsModal::class)
-                  ->add(RoleInjector::class)
-                  ->setName('modal.roles.permissions');
         })->add(AuthGuard::class)->add(NoCache::class);
     }
 }

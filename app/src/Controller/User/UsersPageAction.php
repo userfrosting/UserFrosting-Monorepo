@@ -14,7 +14,6 @@ namespace UserFrosting\Sprinkle\Admin\Controller\User;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Admin\Sprunje\UserSprunje;
@@ -30,31 +29,13 @@ use UserFrosting\Sprinkle\Admin\Sprunje\UserSprunje;
  */
 class UsersPageAction
 {
-    /** @var string Page template */
-    protected string $template = 'pages/users.html.twig';
-
     /**
      * Inject dependencies.
      */
     public function __construct(
         protected Authenticator $authenticator,
         protected UserSprunje $sprunje,
-        protected Twig $view,
     ) {
-    }
-
-    /**
-     * Receive the request, dispatch to the handler, and return the payload to
-     * the response.
-     *
-     * @param Request  $request
-     * @param Response $response
-     */
-    public function __invoke(Request $request, Response $response): Response
-    {
-        $this->validateAccess();
-
-        return $this->view->render($response, $this->template);
     }
 
     /**
@@ -63,7 +44,7 @@ class UsersPageAction
      * @param Request  $request
      * @param Response $response
      */
-    public function sprunje(Request $request, Response $response): Response
+    public function __invoke(Request $request, Response $response): Response
     {
         $this->validateAccess();
 

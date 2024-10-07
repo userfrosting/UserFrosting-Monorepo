@@ -133,7 +133,7 @@ class ActivitySprunjeTest extends AdminTestCase
         $sprunje->setOptions([
             'sorts' => [
                 'occurred_at' => 'desc',
-                'user' => 'asc'
+                'user'        => 'asc'
             ],
         ]);
         $data = $sprunje->getArray();
