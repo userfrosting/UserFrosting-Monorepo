@@ -10,7 +10,6 @@ const auth = useAuthStore()
 <template>
     <UFNavBar title="Userfrosting" :to="{ name: 'home' }">
         <UFNavBarItem :to="{ name: 'about' }" label="About" />
-        <UFNavBarItem :to="{ name: 'auth' }" label="Auth" />
         <UFNavBarItem
             :to="{ name: 'account.register' }"
             label="Register"
