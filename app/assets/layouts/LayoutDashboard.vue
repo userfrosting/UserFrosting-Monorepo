@@ -9,6 +9,7 @@ import AdminSidebarMenuItems from '@userfrosting/sprinkle-admin/components/Sideb
     <UFSideBar>
         <UFSideBarLabel label="NAVIGATION" />
         <AdminSidebarMenuItems />
+        <UFSideBarItem :to="{ name: 'test' }" faIcon="person-digging" label="Test" />
     </UFSideBar>
     <UFMainContent>
         <RouterView />
