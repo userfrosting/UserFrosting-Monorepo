@@ -8,9 +8,9 @@ import moment from 'moment'
     <UFCardBox>
         <UFSprunjeTable dataUrl="/api/activities" :defaultSorts="{ occurred_at: 'desc' }">
             <template #header>
-                <UFSprunjeHeader>Activity Time</UFSprunjeHeader>
-                <UFSprunjeHeader>User</UFSprunjeHeader>
-                <UFSprunjeHeader>Description</UFSprunjeHeader>
+                <UFSprunjeHeader sort="occurred_at">Activity Time</UFSprunjeHeader>
+                <UFSprunjeHeader sort="user">User</UFSprunjeHeader>
+                <UFSprunjeHeader sort="description">Description</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">

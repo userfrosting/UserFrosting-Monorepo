@@ -1,9 +1,9 @@
-import { resolveComponent as u, openBlock as U, createElementBlock as v, Fragment as F, createVNode as e, withCtx as t, createTextVNode as a, createElementVNode as o, toDisplayString as r, unref as i } from "vue";
+import { resolveComponent as u, openBlock as U, createElementBlock as v, Fragment as F, createVNode as e, withCtx as t, createTextVNode as l, createElementVNode as o, toDisplayString as r, unref as i } from "vue";
 import { h as _ } from "./moment-h96o7c8I.js";
 const S = { class: "uk-text-meta" }, C = {
   __name: "ActivitiesView",
   setup(x) {
-    return (g, l) => {
+    return (g, a) => {
       const c = u("UFHeaderPage"), s = u("UFSprunjeHeader"), d = u("UFSprunjeColumn"), p = u("RouterLink"), m = u("UFSprunjeTable"), f = u("UFCardBox");
       return U(), v(F, null, [
         e(c, {
@@ -17,21 +17,21 @@ const S = { class: "uk-text-meta" }, C = {
               defaultSorts: { occurred_at: "desc" }
             }, {
               header: t(() => [
-                e(s, null, {
-                  default: t(() => l[0] || (l[0] = [
-                    a("Activity Time")
+                e(s, { sort: "occurred_at" }, {
+                  default: t(() => a[0] || (a[0] = [
+                    l("Activity Time")
                   ])),
                   _: 1
                 }),
-                e(s, null, {
-                  default: t(() => l[1] || (l[1] = [
-                    a("User")
+                e(s, { sort: "user" }, {
+                  default: t(() => a[1] || (a[1] = [
+                    l("User")
                   ])),
                   _: 1
                 }),
-                e(s, null, {
-                  default: t(() => l[2] || (l[2] = [
-                    a("Description")
+                e(s, { sort: "description" }, {
+                  default: t(() => a[2] || (a[2] = [
+                    l("Description")
                   ])),
                   _: 1
                 })
@@ -54,7 +54,7 @@ const S = { class: "uk-text-meta" }, C = {
                         }
                       }, {
                         default: t(() => [
-                          a(r(n.user.full_name) + " (" + r(n.user.user_name) + ") ", 1)
+                          l(r(n.user.full_name) + " (" + r(n.user.user_name) + ") ", 1)
                         ]),
                         _: 2
                       }, 1032, ["to"])
