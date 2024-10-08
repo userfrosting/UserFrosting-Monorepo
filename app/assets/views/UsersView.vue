@@ -11,9 +11,9 @@ import moment from 'moment'
     <UFCardBox>
         <UFSprunjeTable dataUrl="/api/users">
             <template #header>
-                <UFSprunjeHeader>User</UFSprunjeHeader>
-                <UFSprunjeHeader>Last Activity</UFSprunjeHeader>
-                <UFSprunjeHeader>Status</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">User</UFSprunjeHeader>
+                <UFSprunjeHeader sort="last_activity">Last Activity</UFSprunjeHeader>
+                <UFSprunjeHeader sort="status">Status</UFSprunjeHeader>
                 <UFSprunjeHeader>Actions</UFSprunjeHeader>
             </template>
 

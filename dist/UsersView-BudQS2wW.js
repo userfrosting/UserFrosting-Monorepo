@@ -1,11 +1,11 @@
-import { resolveComponent as a, openBlock as U, createElementBlock as F, Fragment as v, createVNode as e, withCtx as t, createTextVNode as r, createElementVNode as s, toDisplayString as l, unref as i } from "vue";
+import { resolveComponent as a, openBlock as U, createElementBlock as v, Fragment as F, createVNode as e, withCtx as t, createTextVNode as s, createElementVNode as l, toDisplayString as r, unref as i } from "vue";
 import { h as _ } from "./moment-h96o7c8I.js";
 const y = { class: "uk-text-meta" }, j = {
   __name: "UsersView",
   setup(g) {
     return (S, n) => {
       const m = a("UFHeaderPage"), u = a("UFSprunjeHeader"), p = a("RouterLink"), d = a("UFSprunjeColumn"), c = a("UFSprunjeTable"), f = a("UFCardBox");
-      return U(), F(v, null, [
+      return U(), v(F, null, [
         e(m, {
           title: "Users",
           caption: `A listing of the users for your site. Provides management tools including the ability to
@@ -15,27 +15,27 @@ const y = { class: "uk-text-meta" }, j = {
           default: t(() => [
             e(c, { dataUrl: "/api/users" }, {
               header: t(() => [
-                e(u, null, {
+                e(u, { sort: "name" }, {
                   default: t(() => n[0] || (n[0] = [
-                    r("User")
+                    s("User")
                   ])),
                   _: 1
                 }),
-                e(u, null, {
+                e(u, { sort: "last_activity" }, {
                   default: t(() => n[1] || (n[1] = [
-                    r("Last Activity")
+                    s("Last Activity")
                   ])),
                   _: 1
                 }),
-                e(u, null, {
+                e(u, { sort: "status" }, {
                   default: t(() => n[2] || (n[2] = [
-                    r("Status")
+                    s("Status")
                   ])),
                   _: 1
                 }),
                 e(u, null, {
                   default: t(() => n[3] || (n[3] = [
-                    r("Actions")
+                    s("Actions")
                   ])),
                   _: 1
                 })
@@ -43,7 +43,7 @@ const y = { class: "uk-text-meta" }, j = {
               body: t(({ item: o }) => [
                 e(d, null, {
                   default: t(() => [
-                    s("strong", null, [
+                    l("strong", null, [
                       e(p, {
                         to: {
                           name: "admin.user",
@@ -51,20 +51,20 @@ const y = { class: "uk-text-meta" }, j = {
                         }
                       }, {
                         default: t(() => [
-                          r(l(o.full_name) + " (" + l(o.user_name) + ") ", 1)
+                          s(r(o.full_name) + " (" + r(o.user_name) + ") ", 1)
                         ]),
                         _: 2
                       }, 1032, ["to"])
                     ]),
-                    s("div", y, l(o.email), 1)
+                    l("div", y, r(o.email), 1)
                   ]),
                   _: 2
                 }, 1024),
                 e(d, null, {
                   default: t(() => [
-                    s("div", null, l(i(_)(o.last_activity.occurred_at).format("dddd")), 1),
-                    s("div", null, l(i(_)(o.last_activity.occurred_at).format("MMM Do, YYYY h:mm a")), 1),
-                    s("i", null, l(o.last_activity.description), 1)
+                    l("div", null, r(i(_)(o.last_activity.occurred_at).format("dddd")), 1),
+                    l("div", null, r(i(_)(o.last_activity.occurred_at).format("MMM Do, YYYY h:mm a")), 1),
+                    l("i", null, r(o.last_activity.description), 1)
                   ]),
                   _: 2
                 }, 1024),

@@ -1,39 +1,39 @@
-import { resolveComponent as t, openBlock as m, createElementBlock as c, Fragment as f, createVNode as e, withCtx as n, createTextVNode as l, createElementVNode as g, toDisplayString as u } from "vue";
+import { resolveComponent as t, openBlock as m, createElementBlock as c, Fragment as f, createVNode as e, withCtx as o, createTextVNode as r, createElementVNode as g, toDisplayString as d } from "vue";
 import { _ as F } from "./_plugin-vue_export-helper-CHgC5LLL.js";
 const U = {};
-function x(S, o) {
-  const d = t("UFHeaderPage"), r = t("UFSprunjeHeader"), i = t("RouterLink"), a = t("UFSprunjeColumn"), p = t("UFSprunjeTable"), _ = t("UFCardBox");
+function x(S, n) {
+  const u = t("UFHeaderPage"), l = t("UFSprunjeHeader"), i = t("RouterLink"), a = t("UFSprunjeColumn"), p = t("UFSprunjeTable"), _ = t("UFCardBox");
   return m(), c(f, null, [
-    e(d, {
+    e(u, {
       title: "Roles",
       caption: "A listing of the roles for your site.  Provides management tools for editing and deleting roles."
     }),
     e(_, null, {
-      default: n(() => [
+      default: o(() => [
         e(p, { dataUrl: "/api/roles" }, {
-          header: n(() => [
-            e(r, null, {
-              default: n(() => o[0] || (o[0] = [
-                l("Role")
+          header: o(() => [
+            e(l, { sort: "name" }, {
+              default: o(() => n[0] || (n[0] = [
+                r("Role")
               ])),
               _: 1
             }),
-            e(r, null, {
-              default: n(() => o[1] || (o[1] = [
-                l("Description")
+            e(l, { sort: "description" }, {
+              default: o(() => n[1] || (n[1] = [
+                r("Description")
               ])),
               _: 1
             }),
-            e(r, null, {
-              default: n(() => o[2] || (o[2] = [
-                l("Actions")
+            e(l, null, {
+              default: o(() => n[2] || (n[2] = [
+                r("Actions")
               ])),
               _: 1
             })
           ]),
-          body: n(({ item: s }) => [
+          body: o(({ item: s }) => [
             e(a, null, {
-              default: n(() => [
+              default: o(() => [
                 g("strong", null, [
                   e(i, {
                     to: {
@@ -41,8 +41,8 @@ function x(S, o) {
                       params: { slug: s.slug }
                     }
                   }, {
-                    default: n(() => [
-                      l(u(s.name), 1)
+                    default: o(() => [
+                      r(d(s.name), 1)
                     ]),
                     _: 2
                   }, 1032, ["to"])
@@ -51,8 +51,8 @@ function x(S, o) {
               _: 2
             }, 1024),
             e(a, null, {
-              default: n(() => [
-                l(u(s.description), 1)
+              default: o(() => [
+                r(d(s.description), 1)
               ]),
               _: 2
             }, 1024),

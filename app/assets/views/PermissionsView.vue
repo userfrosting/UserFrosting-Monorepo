@@ -6,8 +6,8 @@
     <UFCardBox>
         <UFSprunjeTable dataUrl="/api/permissions">
             <template #header>
-                <UFSprunjeHeader>Permission</UFSprunjeHeader>
-                <UFSprunjeHeader>Slug/Condition</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">Permission</UFSprunjeHeader>
+                <UFSprunjeHeader sort="properties">Slug/Condition</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">

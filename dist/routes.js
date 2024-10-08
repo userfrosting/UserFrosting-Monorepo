@@ -29,7 +29,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./GroupsView-DzvpkAn1.js"),
+    component: () => import("./GroupsView-Bm9TF1U3.js"),
     children: [
       {
         path: "g/:slug",
@@ -48,7 +48,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./PermissionsView-DTXYw4jD.js"),
+    component: () => import("./PermissionsView-C-572ZCS.js"),
     children: [
       {
         path: "p/:id",
@@ -67,7 +67,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./RolesView-BMYhrvg7.js"),
+    component: () => import("./RolesView-Br0Mjup7.js"),
     children: [
       {
         path: "r/:slug",
@@ -86,7 +86,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./UsersView-CMB-o-lB.js"),
+    component: () => import("./UsersView-BudQS2wW.js"),
     children: [
       {
         path: "u/:user_name",

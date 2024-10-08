@@ -6,8 +6,8 @@
     <UFCardBox>
         <UFSprunjeTable dataUrl="/api/roles">
             <template #header>
-                <UFSprunjeHeader>Role</UFSprunjeHeader>
-                <UFSprunjeHeader>Description</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">Role</UFSprunjeHeader>
+                <UFSprunjeHeader sort="description">Description</UFSprunjeHeader>
                 <UFSprunjeHeader>Actions</UFSprunjeHeader>
             </template>
 

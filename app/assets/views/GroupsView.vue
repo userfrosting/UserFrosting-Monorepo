@@ -6,8 +6,8 @@
     <UFCardBox>
         <UFSprunjeTable dataUrl="/api/groups">
             <template #header>
-                <UFSprunjeHeader>Groups</UFSprunjeHeader>
-                <UFSprunjeHeader>Description</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">Groups</UFSprunjeHeader>
+                <UFSprunjeHeader sort="description">Description</UFSprunjeHeader>
                 <UFSprunjeHeader>Actions</UFSprunjeHeader>
             </template>
 
