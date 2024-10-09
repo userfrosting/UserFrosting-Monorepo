@@ -27,16 +27,19 @@ const AdminActivitiesRoutes = [
 const AdminGroupsRoutes = [
     {
         path: 'groups',
-        name: 'admin.groups',
         meta: {
             auth: {
                 redirect: { name: 'account.login' }
             }
         },
-        component: () => import('../views/GroupsView.vue'),
         children: [
             {
-                path: 'g/:slug', // groups/g/{slug}
+                path: '',
+                name: 'admin.groups',
+                component: () => import('../views/GroupsView.vue')
+            },
+            {
+                path: 'g/:slug',
                 name: 'admin.group',
                 component: () => import('../views/GroupView.vue')
             }
@@ -47,14 +50,17 @@ const AdminGroupsRoutes = [
 const AdminPermissionsRoutes = [
     {
         path: 'permissions',
-        name: 'admin.permissions',
         meta: {
             auth: {
                 redirect: { name: 'account.login' }
             }
         },
-        component: () => import('../views/PermissionsView.vue'),
         children: [
+            {
+                path: '',
+                name: 'admin.permissions',
+                component: () => import('../views/PermissionsView.vue')
+            },
             {
                 path: 'p/:id', // permissions/p/{id}
                 name: 'admin.permission',
@@ -66,14 +72,17 @@ const AdminPermissionsRoutes = [
 const AdminRolesRoutes = [
     {
         path: 'roles',
-        name: 'admin.roles',
         meta: {
             auth: {
                 redirect: { name: 'account.login' }
             }
         },
-        component: () => import('../views/RolesView.vue'),
         children: [
+            {
+                path: '',
+                name: 'admin.roles',
+                component: () => import('../views/RolesView.vue')
+            },
             {
                 path: 'r/:slug', // roles/r/{slug}
                 name: 'admin.role',
@@ -86,14 +95,17 @@ const AdminRolesRoutes = [
 const AdminUsersRoutes = [
     {
         path: 'users',
-        name: 'admin.users',
         meta: {
             auth: {
                 redirect: { name: 'account.login' }
             }
         },
-        component: () => import('../views/UsersView.vue'),
         children: [
+            {
+                path: '',
+                name: 'admin.users',
+                component: () => import('../views/UsersView.vue')
+            },
             {
                 path: 'u/:user_name', // users/u/{user_name}
                 name: 'admin.user',

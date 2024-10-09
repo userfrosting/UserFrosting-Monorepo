@@ -23,17 +23,19 @@ const n = [
 ], e = [
   {
     path: "groups",
-    name: "admin.groups",
     meta: {
       auth: {
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./GroupsView-Bm9TF1U3.js"),
     children: [
       {
+        path: "",
+        name: "admin.groups",
+        component: () => import("./GroupsView-Bm9TF1U3.js")
+      },
+      {
         path: "g/:slug",
-        // groups/g/{slug}
         name: "admin.group",
         component: () => import("./GroupView-Br2XanZz.js")
       }
@@ -42,14 +44,17 @@ const n = [
 ], o = [
   {
     path: "permissions",
-    name: "admin.permissions",
     meta: {
       auth: {
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./PermissionsView-C-572ZCS.js"),
     children: [
+      {
+        path: "",
+        name: "admin.permissions",
+        component: () => import("./PermissionsView-C-572ZCS.js")
+      },
       {
         path: "p/:id",
         // permissions/p/{id}
@@ -61,14 +66,17 @@ const n = [
 ], a = [
   {
     path: "roles",
-    name: "admin.roles",
     meta: {
       auth: {
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./RolesView-Br0Mjup7.js"),
     children: [
+      {
+        path: "",
+        name: "admin.roles",
+        component: () => import("./RolesView-Br0Mjup7.js")
+      },
       {
         path: "r/:slug",
         // roles/r/{slug}
@@ -80,14 +88,17 @@ const n = [
 ], m = [
   {
     path: "users",
-    name: "admin.users",
     meta: {
       auth: {
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./UsersView-BudQS2wW.js"),
     children: [
+      {
+        path: "",
+        name: "admin.users",
+        component: () => import("./UsersView-BudQS2wW.js")
+      },
       {
         path: "u/:user_name",
         // users/u/{user_name}

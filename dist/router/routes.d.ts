@@ -24,7 +24,6 @@ declare const AdminActivitiesRoutes: {
 }[];
 declare const AdminGroupsRoutes: {
     path: string;
-    name: string;
     meta: {
         auth: {
             redirect: {
@@ -32,16 +31,14 @@ declare const AdminGroupsRoutes: {
             };
         };
     };
-    component: () => Promise<typeof import("../views/GroupsView.vue")>;
     children: {
         path: string;
         name: string;
-        component: () => Promise<typeof import("../views/GroupView.vue")>;
+        component: () => Promise<typeof import("../views/GroupsView.vue")>;
     }[];
 }[];
 declare const AdminPermissionsRoutes: {
     path: string;
-    name: string;
     meta: {
         auth: {
             redirect: {
@@ -49,16 +46,14 @@ declare const AdminPermissionsRoutes: {
             };
         };
     };
-    component: () => Promise<typeof import("../views/PermissionsView.vue")>;
     children: {
         path: string;
         name: string;
-        component: () => Promise<typeof import("../views/PermissionView.vue")>;
+        component: () => Promise<typeof import("../views/PermissionsView.vue")>;
     }[];
 }[];
 declare const AdminRolesRoutes: {
     path: string;
-    name: string;
     meta: {
         auth: {
             redirect: {
@@ -66,16 +61,14 @@ declare const AdminRolesRoutes: {
             };
         };
     };
-    component: () => Promise<typeof import("../views/RolesView.vue")>;
     children: {
         path: string;
         name: string;
-        component: () => Promise<typeof import("../views/RoleView.vue")>;
+        component: () => Promise<typeof import("../views/RolesView.vue")>;
     }[];
 }[];
 declare const AdminUsersRoutes: {
     path: string;
-    name: string;
     meta: {
         auth: {
             redirect: {
@@ -83,14 +76,13 @@ declare const AdminUsersRoutes: {
             };
         };
     };
-    component: () => Promise<typeof import("../views/UsersView.vue")>;
     children: {
         path: string;
         name: string;
-        component: () => Promise<typeof import("../views/UserView.vue")>;
+        component: () => Promise<typeof import("../views/UsersView.vue")>;
     }[];
 }[];
-declare const AdminRoutes: {
+declare const AdminRoutes: ({
     path: string;
     name: string;
     meta: {
@@ -101,6 +93,20 @@ declare const AdminRoutes: {
         };
     };
     component: () => Promise<typeof import("../views/DashboardView.vue")>;
-}[];
+} | {
+    path: string;
+    meta: {
+        auth: {
+            redirect: {
+                name: string;
+            };
+        };
+    };
+    children: {
+        path: string;
+        name: string;
+        component: () => Promise<typeof import("../views/GroupsView.vue")>;
+    }[];
+})[];
 export default AdminRoutes;
 export { AdminDashboardRoutes, AdminActivitiesRoutes, AdminGroupsRoutes, AdminPermissionsRoutes, AdminRolesRoutes, AdminUsersRoutes };
