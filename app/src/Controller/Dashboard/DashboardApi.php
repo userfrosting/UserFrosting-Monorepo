@@ -29,7 +29,7 @@ use UserFrosting\UniformResourceLocator\ResourceLocatorInterface;
 /**
  * Api for /dashboard URL. Handles admin-related activities.
  */
-class DashboardAction
+class DashboardApi
 {
     /**
      * Inject dependencies.

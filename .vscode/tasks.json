@@ -12,8 +12,8 @@
                 }
             },
             "command": "printf '\\33c\\e[3J' && vendor/bin/phpunit --stop-on-error --stop-on-failure",
-            // "command": "printf '\\33c\\e[3J' && vendor/bin/phpunit --filter UserRedirectedToDashboardTest --stop-on-error --stop-on-failure",
-           "problemMatcher": [],
+            // "command": "printf '\\33c\\e[3J' && vendor/bin/phpunit --filter GroupApiTest --stop-on-error --stop-on-failure",
+            "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true

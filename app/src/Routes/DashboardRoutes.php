@@ -16,7 +16,7 @@ use Slim\App;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
 use UserFrosting\Sprinkle\Admin\Controller\Dashboard\CacheApiAction;
-use UserFrosting\Sprinkle\Admin\Controller\Dashboard\DashboardAction;
+use UserFrosting\Sprinkle\Admin\Controller\Dashboard\DashboardApi;
 use UserFrosting\Sprinkle\Core\Middlewares\NoCache;
 
 /*
@@ -26,7 +26,7 @@ class DashboardRoutes implements RouteDefinitionInterface
 {
     public function register(App $app): void
     {
-        $app->get('/api/dashboard', DashboardAction::class)
+        $app->get('/api/dashboard', DashboardApi::class)
             ->setName('dashboard')
             ->add(NoCache::class);
 

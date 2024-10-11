@@ -16,10 +16,10 @@ use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
+use UserFrosting\Sprinkle\Admin\Controller\Group\GroupApi;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupCreateAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupEditAction;
-use UserFrosting\Sprinkle\Admin\Controller\Group\GroupPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupsSprunjeAction as GroupsSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupUsersSprunje;
 use UserFrosting\Sprinkle\Admin\Middlewares\GroupInjector;
@@ -35,7 +35,7 @@ class GroupsRoute implements RouteDefinitionInterface
         $app->group('/api/groups', function (RouteCollectorProxy $group) {
             $group->get('', GroupsSprunje::class)
                   ->setName('api_groups');
-            $group->get('/g/{slug}', GroupPageAction::class)
+            $group->get('/g/{slug}', GroupApi::class)
                   ->add(GroupInjector::class)
                   ->setName('api_group');
             $group->delete('/g/{slug}', GroupDeleteAction::class)

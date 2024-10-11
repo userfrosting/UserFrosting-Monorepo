@@ -17,7 +17,7 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
-use UserFrosting\Sprinkle\Admin\Controller\Dashboard\DashboardAction;
+use UserFrosting\Sprinkle\Admin\Controller\Dashboard\DashboardApi;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
@@ -93,10 +93,10 @@ class DashboardActionTest extends AdminTestCase
             ->getMock();
 
         // Create fake controller, inject mocked connection and set it in container
-        $controller = $this->ci->make(DashboardAction::class, [
+        $controller = $this->ci->make(DashboardApi::class, [
             'dbConnection' => $connection,
         ]);
-        $this->ci->set(DashboardAction::class, $controller);
+        $this->ci->set(DashboardApi::class, $controller);
 
         /** @var User */
         $user = User::factory()->create();

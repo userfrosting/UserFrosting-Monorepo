@@ -19,7 +19,7 @@ use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class GroupPageActionTest extends AdminTestCase
+class GroupApiTest extends AdminTestCase
 {
     use RefreshDatabase;
     use WithTestUser;
@@ -34,7 +34,7 @@ class GroupPageActionTest extends AdminTestCase
         $this->refreshDatabase();
     }
 
-    public function testPageForGuestUser(): void
+    public function testForGuestUser(): void
     {
         // Create request with method and url and fetch response
         $request = $this->createJsonRequest('GET', '/api/groups/g/foo');
@@ -45,7 +45,7 @@ class GroupPageActionTest extends AdminTestCase
         $this->assertResponseStatus(400, $response);
     }
 
-    public function testPageForForbiddenException(): void
+    public function testForForbiddenException(): void
     {
         /** @var User */
         $user = User::factory()->create();
@@ -63,7 +63,7 @@ class GroupPageActionTest extends AdminTestCase
         $this->assertResponseStatus(403, $response);
     }
 
-    public function testPageForNotFound(): void
+    public function testForNotFound(): void
     {
         /** @var User */
         $user = User::factory()->create();
@@ -76,5 +76,30 @@ class GroupPageActionTest extends AdminTestCase
         // Assert response status & body
         $this->assertJsonResponse('Group not found', $response, 'description');
         $this->assertResponseStatus(404, $response);
+    }
+
+    public function testApi(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user, permissions: ['uri_group']);
+
+        /** @var Group */
+        $group = Group::factory()->create();
+
+        // Create request with method and url and fetch response
+        $request = $this->createJsonRequest('GET', '/api/groups/g/' . $group->slug);
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonStructure([
+            'id',
+            'slug',
+            'name',
+            'description',
+            'icon',
+            'created_at',
+            'updated_at'
+        ], $response);
     }
 }
