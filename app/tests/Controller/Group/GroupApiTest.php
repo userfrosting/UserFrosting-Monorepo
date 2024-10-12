@@ -99,7 +99,8 @@ class GroupApiTest extends AdminTestCase
             'description',
             'icon',
             'created_at',
-            'updated_at'
+            'updated_at',
+            'users_count',
         ], $response);
     }
 }

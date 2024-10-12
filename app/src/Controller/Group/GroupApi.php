@@ -46,10 +46,27 @@ class GroupApi
     public function __invoke(GroupInterface $group, Response $response): Response
     {
         $this->validateAccess($group);
+        $group = $this->mutateGroup($group);
         $payload = json_encode($group, JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * Add or remove fields from the group object before returning it.
+     * TIP : When extending this class, you can use this method to add your own fields.
+     *
+     * @param GroupInterface $group
+     *
+     * @return GroupInterface
+     */
+    protected function mutateGroup(GroupInterface $group): GroupInterface
+    {
+        // Add the user count to the group object
+        $group->loadCount('users');
+
+        return $group;
     }
 
     /**
