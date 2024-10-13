@@ -1,30 +1,33 @@
-import { resolveComponent as t, openBlock as m, createElementBlock as c, Fragment as f, createVNode as e, withCtx as o, createTextVNode as r, createElementVNode as g, toDisplayString as s } from "vue";
+import { resolveComponent as t, openBlock as _, createElementBlock as c, Fragment as f, createVNode as e, withCtx as o, createTextVNode as r, createElementVNode as g, toDisplayString as s } from "vue";
 import { _ as F } from "./_plugin-vue_export-helper-CHgC5LLL.js";
 const U = {};
-function x(S, n) {
-  const p = t("UFHeaderPage"), l = t("UFSprunjeHeader"), d = t("RouterLink"), a = t("UFSprunjeColumn"), i = t("UFSprunjeTable"), _ = t("UFCardBox");
-  return m(), c(f, null, [
+function x(C, n) {
+  const p = t("UFHeaderPage"), a = t("UFSprunjeHeader"), d = t("RouterLink"), l = t("UFSprunjeColumn"), i = t("UFSprunjeTable"), m = t("UFCardBox");
+  return _(), c(f, null, [
     e(p, {
       title: "Groups",
       caption: "A listing of the groups for your site.  Provides management tools for editing and deleting groups."
     }),
-    e(_, null, {
+    e(m, null, {
       default: o(() => [
-        e(i, { dataUrl: "/api/groups" }, {
+        e(i, {
+          dataUrl: "/api/groups",
+          searchColumn: "name"
+        }, {
           header: o(() => [
-            e(l, { sort: "name" }, {
+            e(a, { sort: "name" }, {
               default: o(() => n[0] || (n[0] = [
                 r("Groups")
               ])),
               _: 1
             }),
-            e(l, { sort: "description" }, {
+            e(a, { sort: "description" }, {
               default: o(() => n[1] || (n[1] = [
                 r("Description")
               ])),
               _: 1
             }),
-            e(l, null, {
+            e(a, null, {
               default: o(() => n[2] || (n[2] = [
                 r("Actions")
               ])),
@@ -32,7 +35,7 @@ function x(S, n) {
             })
           ]),
           body: o(({ item: u }) => [
-            e(a, null, {
+            e(l, null, {
               default: o(() => [
                 g("strong", null, [
                   e(d, {
@@ -50,13 +53,13 @@ function x(S, n) {
               ]),
               _: 2
             }, 1024),
-            e(a, null, {
+            e(l, null, {
               default: o(() => [
                 r(s(u.description), 1)
               ]),
               _: 2
             }, 1024),
-            e(a)
+            e(l)
           ]),
           _: 1
         })

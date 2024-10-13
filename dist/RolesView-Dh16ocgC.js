@@ -1,16 +1,19 @@
-import { resolveComponent as t, openBlock as m, createElementBlock as c, Fragment as f, createVNode as e, withCtx as o, createTextVNode as r, createElementVNode as g, toDisplayString as d } from "vue";
+import { resolveComponent as t, openBlock as _, createElementBlock as c, Fragment as f, createVNode as e, withCtx as o, createTextVNode as r, createElementVNode as g, toDisplayString as u } from "vue";
 import { _ as F } from "./_plugin-vue_export-helper-CHgC5LLL.js";
 const U = {};
-function x(S, n) {
-  const u = t("UFHeaderPage"), l = t("UFSprunjeHeader"), i = t("RouterLink"), a = t("UFSprunjeColumn"), p = t("UFSprunjeTable"), _ = t("UFCardBox");
-  return m(), c(f, null, [
-    e(u, {
+function x(C, n) {
+  const d = t("UFHeaderPage"), l = t("UFSprunjeHeader"), i = t("RouterLink"), a = t("UFSprunjeColumn"), p = t("UFSprunjeTable"), m = t("UFCardBox");
+  return _(), c(f, null, [
+    e(d, {
       title: "Roles",
       caption: "A listing of the roles for your site.  Provides management tools for editing and deleting roles."
     }),
-    e(_, null, {
+    e(m, null, {
       default: o(() => [
-        e(p, { dataUrl: "/api/roles" }, {
+        e(p, {
+          dataUrl: "/api/roles",
+          searchColumn: "name"
+        }, {
           header: o(() => [
             e(l, { sort: "name" }, {
               default: o(() => n[0] || (n[0] = [
@@ -42,7 +45,7 @@ function x(S, n) {
                     }
                   }, {
                     default: o(() => [
-                      r(d(s.name), 1)
+                      r(u(s.name), 1)
                     ]),
                     _: 2
                   }, 1032, ["to"])
@@ -52,7 +55,7 @@ function x(S, n) {
             }, 1024),
             e(a, null, {
               default: o(() => [
-                r(d(s.description), 1)
+                r(u(s.description), 1)
               ]),
               _: 2
             }, 1024),

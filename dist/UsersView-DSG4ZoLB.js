@@ -1,6 +1,6 @@
 import { resolveComponent as a, openBlock as U, createElementBlock as v, Fragment as F, createVNode as e, withCtx as t, createTextVNode as s, createElementVNode as l, toDisplayString as r, unref as i } from "vue";
 import { h as _ } from "./moment-h96o7c8I.js";
-const y = { class: "uk-text-meta" }, j = {
+const y = { class: "uk-text-meta" }, b = {
   __name: "UsersView",
   setup(g) {
     return (S, n) => {
@@ -13,7 +13,10 @@ const y = { class: "uk-text-meta" }, j = {
         }),
         e(f, null, {
           default: t(() => [
-            e(c, { dataUrl: "/api/users" }, {
+            e(c, {
+              dataUrl: "/api/users",
+              searchColumn: "name"
+            }, {
               header: t(() => [
                 e(u, { sort: "name" }, {
                   default: t(() => n[0] || (n[0] = [
@@ -81,5 +84,5 @@ const y = { class: "uk-text-meta" }, j = {
   }
 };
 export {
-  j as default
+  b as default
 };

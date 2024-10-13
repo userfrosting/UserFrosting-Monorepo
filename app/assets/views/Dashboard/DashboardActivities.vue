@@ -7,7 +7,8 @@ import moment from 'moment'
         <UFSprunjeTable
             dataUrl="/api/activities"
             :defaultSorts="{ occurred_at: 'desc' }"
-            hidePagination>
+            hidePagination
+            hideFilters>
             <template #header>
                 <UFSprunjeHeader>Activity Time</UFSprunjeHeader>
                 <UFSprunjeHeader>User</UFSprunjeHeader>

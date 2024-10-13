@@ -4,7 +4,7 @@
         caption="A listing of the groups for your site.  Provides management tools for editing and deleting groups." />
 
     <UFCardBox>
-        <UFSprunjeTable dataUrl="/api/groups">
+        <UFSprunjeTable dataUrl="/api/groups" searchColumn="name">
             <template #header>
                 <UFSprunjeHeader sort="name">Groups</UFSprunjeHeader>
                 <UFSprunjeHeader sort="description">Description</UFSprunjeHeader>

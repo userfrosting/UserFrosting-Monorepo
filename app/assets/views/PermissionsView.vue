@@ -4,7 +4,7 @@
         caption="A listing of the permissions for your site.  Provides management tools for editing and deleting permissions." />
 
     <UFCardBox>
-        <UFSprunjeTable dataUrl="/api/permissions">
+        <UFSprunjeTable dataUrl="/api/permissions" searchColumn="name">
             <template #header>
                 <UFSprunjeHeader sort="name">Permission</UFSprunjeHeader>
                 <UFSprunjeHeader sort="properties">Slug/Condition</UFSprunjeHeader>

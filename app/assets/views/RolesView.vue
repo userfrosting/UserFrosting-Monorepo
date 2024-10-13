@@ -4,7 +4,7 @@
         caption="A listing of the roles for your site.  Provides management tools for editing and deleting roles." />
 
     <UFCardBox>
-        <UFSprunjeTable dataUrl="/api/roles">
+        <UFSprunjeTable dataUrl="/api/roles" searchColumn="name">
             <template #header>
                 <UFSprunjeHeader sort="name">Role</UFSprunjeHeader>
                 <UFSprunjeHeader sort="description">Description</UFSprunjeHeader>

@@ -9,7 +9,7 @@ import moment from 'moment'
         edit user details, manually activate users, enable/disable users, and more." />
 
     <UFCardBox>
-        <UFSprunjeTable dataUrl="/api/users">
+        <UFSprunjeTable dataUrl="/api/users" searchColumn="name">
             <template #header>
                 <UFSprunjeHeader sort="name">User</UFSprunjeHeader>
                 <UFSprunjeHeader sort="last_activity">Last Activity</UFSprunjeHeader>

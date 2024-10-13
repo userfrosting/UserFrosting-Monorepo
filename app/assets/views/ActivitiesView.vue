@@ -6,7 +6,10 @@ import moment from 'moment'
     <UFHeaderPage title="Activities" caption="A listing of user activities." />
 
     <UFCardBox>
-        <UFSprunjeTable dataUrl="/api/activities" :defaultSorts="{ occurred_at: 'desc' }">
+        <UFSprunjeTable
+            dataUrl="/api/activities"
+            searchColumn="user"
+            :defaultSorts="{ occurred_at: 'desc' }">
             <template #header>
                 <UFSprunjeHeader sort="occurred_at">Activity Time</UFSprunjeHeader>
                 <UFSprunjeHeader sort="user">User</UFSprunjeHeader>

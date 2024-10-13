@@ -1,8 +1,8 @@
 import { resolveComponent as r, openBlock as c, createElementBlock as f, Fragment as g, createVNode as e, withCtx as n, createTextVNode as s, createElementVNode as o, toDisplayString as i } from "vue";
 import { _ as F } from "./_plugin-vue_export-helper-CHgC5LLL.js";
 const U = {};
-function S(x, t) {
-  const u = r("UFHeaderPage"), d = r("UFSprunjeHeader"), p = r("RouterLink"), a = r("UFSprunjeColumn"), m = r("UFSprunjeTable"), _ = r("UFCardBox");
+function C(S, t) {
+  const u = r("UFHeaderPage"), a = r("UFSprunjeHeader"), m = r("RouterLink"), d = r("UFSprunjeColumn"), p = r("UFSprunjeTable"), _ = r("UFCardBox");
   return c(), f(g, null, [
     e(u, {
       title: "Permissions",
@@ -10,15 +10,18 @@ function S(x, t) {
     }),
     e(_, null, {
       default: n(() => [
-        e(m, { dataUrl: "/api/permissions" }, {
+        e(p, {
+          dataUrl: "/api/permissions",
+          searchColumn: "name"
+        }, {
           header: n(() => [
-            e(d, { sort: "name" }, {
+            e(a, { sort: "name" }, {
               default: n(() => t[0] || (t[0] = [
                 s("Permission")
               ])),
               _: 1
             }),
-            e(d, { sort: "properties" }, {
+            e(a, { sort: "properties" }, {
               default: n(() => t[1] || (t[1] = [
                 s("Slug/Condition")
               ])),
@@ -26,10 +29,10 @@ function S(x, t) {
             })
           ]),
           body: n(({ item: l }) => [
-            e(a, null, {
+            e(d, null, {
               default: n(() => [
                 o("strong", null, [
-                  e(p, {
+                  e(m, {
                     to: {
                       name: "admin.permission",
                       params: { id: l.id }
@@ -44,7 +47,7 @@ function S(x, t) {
               ]),
               _: 2
             }, 1024),
-            e(a, null, {
+            e(d, null, {
               default: n(() => [
                 o("div", null, [
                   o("code", null, i(l.slug), 1)
@@ -67,7 +70,7 @@ function S(x, t) {
     })
   ], 64);
 }
-const P = /* @__PURE__ */ F(U, [["render", S]]);
+const P = /* @__PURE__ */ F(U, [["render", C]]);
 export {
   P as default
 };

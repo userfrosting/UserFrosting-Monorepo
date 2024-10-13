@@ -197,7 +197,8 @@ const y = {
           o(U, {
             dataUrl: "/api/activities",
             defaultSorts: { occurred_at: "desc" },
-            hidePagination: ""
+            hidePagination: "",
+            hideFilters: ""
           }, {
             header: t(() => [
               o(l, null, {
