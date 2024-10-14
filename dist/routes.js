@@ -7,7 +7,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./DashboardView-_Abg0EjG.js")
+    component: () => import("./DashboardView-Dvp9NRBL.js")
   }
 ], t = [
   {
@@ -37,7 +37,7 @@ const n = [
       {
         path: "g/:slug",
         name: "admin.group",
-        component: () => import("./GroupView-Di3uAdBk.js")
+        component: () => import("./GroupView-D6otj1NJ.js")
       }
     ]
   }

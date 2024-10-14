@@ -11,7 +11,7 @@ const { group, error } = useGroupApi(route)
 <template>
     <UFHeaderPage title="Group details" caption="Group information page" />
     <template v-if="error">
-        <UFAlertContainer :alert="error" />
+        <UFAlert :alert="error" />
     </template>
     <template v-else>
         <div uk-grid>

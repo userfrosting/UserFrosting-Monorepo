@@ -1,7 +1,7 @@
 import { ref, watch } from 'vue'
 import axios from 'axios'
 import type { GroupInterface } from '@userfrosting/sprinkle-account/types'
-import { type AlertInterface, AlertStyle } from '@userfrosting/sprinkle-core/types'
+import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/types'
 
 /**
  * Create GroupAPI interface, based on GroupInterface
@@ -41,7 +41,7 @@ export function useGroupApi(route: any) {
                 error.value = {
                     ...{
                         description: 'An error as occurred',
-                        style: AlertStyle.Danger,
+                        style: Severity.Danger,
                         closeBtn: true
                     },
                     ...err.response.data

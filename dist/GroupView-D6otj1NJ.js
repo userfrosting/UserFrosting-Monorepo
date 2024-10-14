@@ -1,6 +1,6 @@
-import { ref as v, watch as y, defineComponent as U, resolveComponent as l, openBlock as p, createBlock as g, withCtx as r, createElementVNode as e, createCommentVNode as x, toDisplayString as u, createVNode as o, createTextVNode as d, unref as _, createElementBlock as h, Fragment as C } from "vue";
-import { useRoute as w } from "vue-router";
-import { a as B, b as S } from "./types-BgMW-dbA.js";
+import { ref as v, watch as y, defineComponent as U, resolveComponent as l, openBlock as p, createBlock as g, withCtx as r, createElementVNode as e, createCommentVNode as x, toDisplayString as u, createVNode as o, createTextVNode as d, unref as _, createElementBlock as h, Fragment as w } from "vue";
+import { useRoute as C } from "vue-router";
+import { a as B, b as S } from "./types-Ht7brb6q.js";
 import { h as F } from "./moment-h96o7c8I.js";
 function A(m) {
   const n = v(!1), t = v(), s = v({
@@ -154,10 +154,10 @@ const G = { class: "uk-text-center" }, j = { class: "uk-text-center uk-margin-re
 }, R = { class: "uk-width-1-3" }, T = { class: "uk-width-2-3" }, z = /* @__PURE__ */ U({
   __name: "GroupView",
   setup(m) {
-    const n = w(), { group: t, error: s } = A(n);
+    const n = C(), { group: t, error: s } = A(n);
     return (c, a) => {
-      const f = l("UFHeaderPage"), k = l("UFAlertContainer");
-      return p(), h(C, null, [
+      const f = l("UFHeaderPage"), k = l("UFAlert");
+      return p(), h(w, null, [
         o(f, {
           title: "Group details",
           caption: "Group information page"

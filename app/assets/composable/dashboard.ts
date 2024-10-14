@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import type { UserInterface } from '@userfrosting/sprinkle-account/types'
-import { type AlertInterface, AlertStyle } from '@userfrosting/sprinkle-core/types'
+import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/types'
 
 interface SprinkleList {
     [name: string]: string
@@ -75,7 +75,7 @@ export const useDashboardApi = defineStore('dashboardApi', {
                     const error: AlertInterface = {
                         ...{
                             description: 'An error as occurred',
-                            style: AlertStyle.Danger,
+                            style: Severity.Danger,
                             closeBtn: true
                         },
                         ...err.response.data

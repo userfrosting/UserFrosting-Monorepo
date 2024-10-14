@@ -1699,7 +1699,7 @@ g.formToJSON = (e) => ze(a.isHTMLForm(e) ? new FormData(e) : e);
 g.getAdapter = Ge.getAdapter;
 g.HttpStatusCode = ae;
 g.default = g;
-var Pn = /* @__PURE__ */ ((e) => (e.Primary = "Primary", e.Success = "Success", e.Warning = "Warning", e.Danger = "Danger", e))(Pn || {});
+var Pn = /* @__PURE__ */ ((e) => (e.Primary = "Primary", e.Secondary = "Secondary", e.Success = "Success", e.Warning = "Warning", e.Danger = "Danger", e.Info = "Info", e.Muted = "Muted", e))(Pn || {});
 export {
   g as a,
   Pn as b
