@@ -1,6 +1,7 @@
-import { ref as v, watch as y, defineComponent as U, resolveComponent as l, openBlock as p, createBlock as g, withCtx as r, createElementVNode as e, createCommentVNode as x, toDisplayString as u, createVNode as o, createTextVNode as d, unref as _, createElementBlock as h, Fragment as w } from "vue";
+import { ref as v, watch as y, defineComponent as U, resolveComponent as l, openBlock as _, createBlock as g, withCtx as r, createElementVNode as e, createCommentVNode as x, toDisplayString as u, createVNode as o, createTextVNode as d, unref as p, createElementBlock as h, Fragment as w } from "vue";
 import { useRoute as C } from "vue-router";
-import { a as B, b as S } from "./types-Ht7brb6q.js";
+import { a as B } from "./axios-CXDYiOMX.js";
+import { a as S } from "./types-Daou0lcF.js";
 import { h as F } from "./moment-h96o7c8I.js";
 function A(m) {
   const n = v(!1), t = v(), s = v({
@@ -36,7 +37,7 @@ function A(m) {
     { immediate: !0 }
   ), { group: s, error: t, loading: n };
 }
-const G = { class: "uk-text-center" }, j = { class: "uk-text-center uk-margin-remove" }, $ = { class: "uk-text-meta" }, b = { "uk-grid": "" }, V = { class: "uk-width-auto@m" }, H = { class: "uk-width-expand@m uk-text-right" }, N = { class: "uk-badge" }, Y = /* @__PURE__ */ U({
+const G = { class: "uk-text-center" }, j = { class: "uk-text-center uk-margin-remove" }, $ = { class: "uk-text-meta" }, V = { "uk-grid": "" }, b = { class: "uk-width-auto@m" }, H = { class: "uk-width-expand@m uk-text-right" }, N = { class: "uk-badge" }, Y = /* @__PURE__ */ U({
   __name: "GroupInfo",
   props: {
     group: {}
@@ -44,10 +45,10 @@ const G = { class: "uk-text-center" }, j = { class: "uk-text-center uk-margin-re
   setup(m) {
     return (n, t) => {
       const s = l("font-awesome-icon"), c = l("UFCardBox");
-      return p(), g(c, null, {
+      return _(), g(c, null, {
         default: r(() => [
           e("div", G, [
-            n.group.icon ? (p(), g(s, {
+            n.group.icon ? (_(), g(s, {
               key: 0,
               icon: n.group.icon,
               class: "fa-5x"
@@ -55,8 +56,8 @@ const G = { class: "uk-text-center" }, j = { class: "uk-text-center uk-margin-re
           ]),
           e("h3", j, u(n.group.name), 1),
           e("p", $, u(n.group.description), 1),
-          e("div", b, [
-            e("div", V, [
+          e("div", V, [
+            e("div", b, [
               e("strong", null, [
                 o(s, { icon: "users" }),
                 t[0] || (t[0] = d(" Users"))
@@ -79,7 +80,7 @@ const G = { class: "uk-text-center" }, j = { class: "uk-text-center uk-margin-re
   setup(m) {
     return (n, t) => {
       const s = l("UFSprunjeHeader"), c = l("RouterLink"), a = l("UFSprunjeColumn"), f = l("UFSprunjeTable"), k = l("UFCardBox");
-      return p(), g(k, { title: "Group Users" }, {
+      return _(), g(k, { title: "Group Users" }, {
         default: r(() => [
           o(f, {
             dataUrl: "/api/groups/g/" + n.slug + "/users"
@@ -132,8 +133,8 @@ const G = { class: "uk-text-center" }, j = { class: "uk-text-center uk-margin-re
               }, 1024),
               o(a, null, {
                 default: r(() => [
-                  e("div", null, u(_(F)(i.last_activity.occurred_at).format("dddd")), 1),
-                  e("div", null, u(_(F)(i.last_activity.occurred_at).format("MMM Do, YYYY h:mm a")), 1),
+                  e("div", null, u(p(F)(i.last_activity.occurred_at).format("dddd")), 1),
+                  e("div", null, u(p(F)(i.last_activity.occurred_at).format("MMM Do, YYYY h:mm a")), 1),
                   e("i", null, u(i.last_activity.description), 1)
                 ]),
                 _: 2
@@ -151,27 +152,27 @@ const G = { class: "uk-text-center" }, j = { class: "uk-text-center uk-margin-re
 }), M = {
   key: 1,
   "uk-grid": ""
-}, R = { class: "uk-width-1-3" }, T = { class: "uk-width-2-3" }, z = /* @__PURE__ */ U({
+}, R = { class: "uk-width-1-3" }, T = { class: "uk-width-2-3" }, J = /* @__PURE__ */ U({
   __name: "GroupView",
   setup(m) {
     const n = C(), { group: t, error: s } = A(n);
     return (c, a) => {
       const f = l("UFHeaderPage"), k = l("UFAlert");
-      return p(), h(w, null, [
+      return _(), h(w, null, [
         o(f, {
           title: "Group details",
           caption: "Group information page"
         }),
-        _(s) ? (p(), g(k, {
+        p(s) ? (_(), g(k, {
           key: 0,
-          alert: _(s)
-        }, null, 8, ["alert"])) : (p(), h("div", M, [
+          alert: p(s)
+        }, null, 8, ["alert"])) : (_(), h("div", M, [
           e("div", R, [
-            o(Y, { group: _(t) }, null, 8, ["group"])
+            o(Y, { group: p(t) }, null, 8, ["group"])
           ]),
           e("div", T, [
             o(L, {
-              slug: _(t).slug
+              slug: p(t).slug
             }, null, 8, ["slug"])
           ])
         ]))
@@ -180,5 +181,5 @@ const G = { class: "uk-text-center" }, j = { class: "uk-text-center uk-margin-re
   }
 });
 export {
-  z as default
+  J as default
 };

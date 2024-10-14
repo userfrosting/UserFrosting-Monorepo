@@ -1,4 +1,4 @@
-function Pe(e, t) {
+function Ne(e, t) {
   return function() {
     return e.apply(t, arguments);
   };
@@ -10,10 +10,10 @@ const { toString: Ze } = Object.prototype, { getPrototypeOf: ce } = Object, $ = 
 function Ye(e) {
   return e !== null && !q(e) && e.constructor !== null && !q(e.constructor) && x(e.constructor.isBuffer) && e.constructor.isBuffer(e);
 }
-const Ne = C("ArrayBuffer");
+const Pe = C("ArrayBuffer");
 function et(e) {
   let t;
-  return typeof ArrayBuffer < "u" && ArrayBuffer.isView ? t = ArrayBuffer.isView(e) : t = e && e.buffer && Ne(e.buffer), t;
+  return typeof ArrayBuffer < "u" && ArrayBuffer.isView ? t = ArrayBuffer.isView(e) : t = e && e.buffer && Pe(e.buffer), t;
 }
 const tt = v("string"), x = v("function"), _e = v("number"), K = (e) => e !== null && typeof e == "object", nt = (e) => e === !0 || e === !1, z = (e) => {
   if ($(e) !== "object")
@@ -59,7 +59,7 @@ function te() {
   return t;
 }
 const mt = (e, t, n, { allOwnKeys: r } = {}) => (I(t, (s, o) => {
-  n && x(s) ? e[o] = Pe(s, n) : e[o] = s;
+  n && x(s) ? e[o] = Ne(s, n) : e[o] = s;
 }, { allOwnKeys: r }), e), yt = (e) => (e.charCodeAt(0) === 65279 && (e = e.slice(1)), e), bt = (e, t, n, r) => {
   e.prototype = Object.create(t.prototype, r), e.prototype.constructor = e, Object.defineProperty(e, "super", {
     value: t.prototype
@@ -78,7 +78,7 @@ const mt = (e, t, n, { allOwnKeys: r } = {}) => (I(t, (s, o) => {
   e = String(e), (n === void 0 || n > e.length) && (n = e.length), n -= t.length;
   const r = e.indexOf(t, n);
   return r !== -1 && r === n;
-}, St = (e) => {
+}, Rt = (e) => {
   if (!e) return null;
   if (U(e)) return e;
   let t = e.length;
@@ -87,7 +87,7 @@ const mt = (e, t, n, { allOwnKeys: r } = {}) => (I(t, (s, o) => {
   for (; t-- > 0; )
     n[t] = e[t];
   return n;
-}, gt = /* @__PURE__ */ ((e) => (t) => e && t instanceof e)(typeof Uint8Array < "u" && ce(Uint8Array)), Rt = (e, t) => {
+}, St = /* @__PURE__ */ ((e) => (t) => e && t instanceof e)(typeof Uint8Array < "u" && ce(Uint8Array)), gt = (e, t) => {
   const r = (e && e[Symbol.iterator]).call(e);
   let s;
   for (; (s = r.next()) && !s.done; ) {
@@ -126,14 +126,14 @@ const mt = (e, t, n, { allOwnKeys: r } = {}) => (I(t, (s, o) => {
       });
     }
   });
-}, Pt = (e, t) => {
+}, Nt = (e, t) => {
   const n = {}, r = (s) => {
     s.forEach((o) => {
       n[o] = !0;
     });
   };
   return U(e) ? r(e) : r(String(e).split(t)), n;
-}, Nt = () => {
+}, Pt = () => {
 }, _t = (e, t) => e != null && Number.isFinite(e = +e) ? e : t, Q = "abcdefghijklmnopqrstuvwxyz", me = "0123456789", De = {
   DIGIT: me,
   ALPHA: Q,
@@ -174,7 +174,7 @@ const Bt = (e) => {
   x(L.postMessage)
 ), kt = typeof queueMicrotask < "u" ? queueMicrotask.bind(L) : typeof process < "u" && process.nextTick || Ue, a = {
   isArray: U,
-  isArrayBuffer: Ne,
+  isArrayBuffer: Pe,
   isBuffer: Ye,
   isFormData: ct,
   isArrayBufferView: et,
@@ -195,7 +195,7 @@ const Bt = (e) => {
   isFunction: x,
   isStream: at,
   isURLSearchParams: ut,
-  isTypedArray: gt,
+  isTypedArray: St,
   isFileList: it,
   forEach: I,
   merge: te,
@@ -207,8 +207,8 @@ const Bt = (e) => {
   kindOf: $,
   kindOfTest: C,
   endsWith: Et,
-  toArray: St,
-  forEachEntry: Rt,
+  toArray: Rt,
+  forEachEntry: gt,
   matchAll: Ot,
   isHTMLForm: Tt,
   hasOwnProperty: he,
@@ -216,9 +216,9 @@ const Bt = (e) => {
   // an alias to avoid ESLint no-prototype-builtins detection
   reduceDescriptors: Be,
   freezeMethods: Ct,
-  toObjectSet: Pt,
+  toObjectSet: Nt,
   toCamelCase: At,
-  noop: Nt,
+  noop: Pt,
   toFiniteNumber: _t,
   findKey: Fe,
   global: L,
@@ -327,11 +327,11 @@ function G(e, t, n) {
       if (a.endsWith(y, "{}"))
         y = r ? y : y.slice(0, -2), p = JSON.stringify(p);
       else if (a.isArray(p) && qt(p) || (a.isFileList(p) || a.endsWith(y, "[]")) && (w = a.toArray(p)))
-        return y = qe(y), w.forEach(function(R, P) {
-          !(a.isUndefined(R) || R === null) && t.append(
+        return y = qe(y), w.forEach(function(g, N) {
+          !(a.isUndefined(g) || g === null) && t.append(
             // eslint-disable-next-line no-nested-ternary
-            i === !0 ? ye([y], P, o) : i === null ? y : y + "[]",
-            u(R)
+            i === !0 ? ye([y], N, o) : i === null ? y : y + "[]",
+            u(g)
           );
         }), !1;
     }
@@ -346,14 +346,14 @@ function G(e, t, n) {
     if (!a.isUndefined(p)) {
       if (d.indexOf(p) !== -1)
         throw Error("Circular reference detected in " + y.join("."));
-      d.push(p), a.forEach(p, function(w, S) {
+      d.push(p), a.forEach(p, function(w, R) {
         (!(a.isUndefined(w) || w === null) && s.call(
           t,
           w,
-          a.isString(S) ? S.trim() : S,
+          a.isString(R) ? R.trim() : R,
           y,
           b
-        )) === !0 && E(w, y ? y.concat(S) : [S]);
+        )) === !0 && E(w, y ? y.concat(R) : [R]);
       }), d.pop();
     }
   }
@@ -865,14 +865,14 @@ const V = (e, t, n = 3) => {
     };
     e(d);
   }, n);
-}, Se = (e, t) => {
+}, Re = (e, t) => {
   const n = e != null;
   return [(r) => t[0]({
     lengthComputable: n,
     total: e,
     loaded: r
   }), t[1]];
-}, ge = (e) => (...t) => a.asap(() => e(...t)), un = T.hasStandardBrowserEnv ? (
+}, Se = (e) => (...t) => a.asap(() => e(...t)), un = T.hasStandardBrowserEnv ? (
   // Standard browser envs have full support of the APIs needed to test
   // whether the request URL is of the same origin as current location.
   function() {
@@ -939,7 +939,7 @@ function dn(e, t) {
 function We(e, t) {
   return e && !fn(t) ? dn(e, t) : t;
 }
-const Re = (e) => e instanceof A ? { ...e } : e;
+const ge = (e) => e instanceof A ? { ...e } : e;
 function D(e, t) {
   t = t || {};
   const n = {};
@@ -997,7 +997,7 @@ function D(e, t) {
     socketPath: i,
     responseEncoding: i,
     validateStatus: c,
-    headers: (u, l) => s(Re(u), Re(l), !0)
+    headers: (u, l) => s(ge(u), ge(l), !0)
   };
   return a.forEach(Object.keys(Object.assign({}, e, t)), function(l) {
     const d = f[l] || s, b = d(e[l], t[l], l);
@@ -1039,13 +1039,13 @@ const $e = (e) => {
     function w() {
       if (!h)
         return;
-      const R = A.from(
+      const g = A.from(
         "getAllResponseHeaders" in h && h.getAllResponseHeaders()
       ), O = {
         data: !c || c === "text" || c === "json" ? h.responseText : h.response,
         status: h.status,
         statusText: h.statusText,
-        headers: R,
+        headers: g,
         config: e,
         request: h
       };
@@ -1062,22 +1062,22 @@ const $e = (e) => {
     }, h.onerror = function() {
       r(new m("Network Error", m.ERR_NETWORK, e, h)), h = null;
     }, h.ontimeout = function() {
-      let P = s.timeout ? "timeout of " + s.timeout + "ms exceeded" : "timeout exceeded";
+      let N = s.timeout ? "timeout of " + s.timeout + "ms exceeded" : "timeout exceeded";
       const O = s.transitional || Me;
-      s.timeoutErrorMessage && (P = s.timeoutErrorMessage), r(new m(
-        P,
+      s.timeoutErrorMessage && (N = s.timeoutErrorMessage), r(new m(
+        N,
         O.clarifyTimeoutError ? m.ETIMEDOUT : m.ECONNABORTED,
         e,
         h
       )), h = null;
-    }, o === void 0 && i.setContentType(null), "setRequestHeader" in h && a.forEach(i.toJSON(), function(P, O) {
-      h.setRequestHeader(O, P);
-    }), a.isUndefined(s.withCredentials) || (h.withCredentials = !!s.withCredentials), c && c !== "json" && (h.responseType = s.responseType), u && ([b, p] = V(u, !0), h.addEventListener("progress", b)), f && h.upload && ([d, E] = V(f), h.upload.addEventListener("progress", d), h.upload.addEventListener("loadend", E)), (s.cancelToken || s.signal) && (l = (R) => {
-      h && (r(!R || R.type ? new k(null, e, h) : R), h.abort(), h = null);
+    }, o === void 0 && i.setContentType(null), "setRequestHeader" in h && a.forEach(i.toJSON(), function(N, O) {
+      h.setRequestHeader(O, N);
+    }), a.isUndefined(s.withCredentials) || (h.withCredentials = !!s.withCredentials), c && c !== "json" && (h.responseType = s.responseType), u && ([b, p] = V(u, !0), h.addEventListener("progress", b)), f && h.upload && ([d, E] = V(f), h.upload.addEventListener("progress", d), h.upload.addEventListener("loadend", E)), (s.cancelToken || s.signal) && (l = (g) => {
+      h && (r(!g || g.type ? new k(null, e, h) : g), h.abort(), h = null);
     }, s.cancelToken && s.cancelToken.subscribe(l), s.signal && (s.signal.aborted ? l() : s.signal.addEventListener("abort", l)));
-    const S = on(s.url);
-    if (S && T.protocols.indexOf(S) === -1) {
-      r(new m("Unsupported protocol " + S + ":", m.ERR_BAD_REQUEST, e));
+    const R = on(s.url);
+    if (R && T.protocols.indexOf(R) === -1) {
+      r(new m("Unsupported protocol " + R + ":", m.ERR_BAD_REQUEST, e));
       return;
     }
     h.send(o || null);
@@ -1168,7 +1168,7 @@ const $e = (e) => {
   } catch {
     return !1;
   }
-}, Sn = ve && Ke(() => {
+}, Rn = ve && Ke(() => {
   let e = !1;
   const t = new Request(T.origin, {
     body: new ReadableStream(),
@@ -1188,7 +1188,7 @@ X && ((e) => {
     });
   });
 })(new Response());
-const gn = async (e) => {
+const Sn = async (e) => {
   if (e == null)
     return 0;
   if (a.isBlob(e))
@@ -1202,9 +1202,9 @@ const gn = async (e) => {
     return e.byteLength;
   if (a.isURLSearchParams(e) && (e = e + ""), a.isString(e))
     return (await En(e)).byteLength;
-}, Rn = async (e, t) => {
+}, gn = async (e, t) => {
   const n = a.toFiniteNumber(e.getContentLength());
-  return n ?? gn(t);
+  return n ?? Sn(t);
 }, On = X && (async (e) => {
   let {
     url: t,
@@ -1227,16 +1227,16 @@ const gn = async (e) => {
   });
   let h;
   try {
-    if (f && Sn && n !== "get" && n !== "head" && (h = await Rn(l, r)) !== 0) {
+    if (f && Rn && n !== "get" && n !== "head" && (h = await gn(l, r)) !== 0) {
       let O = new Request(t, {
         method: "POST",
         body: r,
         duplex: "half"
-      }), N;
-      if (a.isFormData(r) && (N = O.headers.get("content-type")) && l.setContentType(N), O.body) {
-        const [F, M] = Se(
+      }), P;
+      if (a.isFormData(r) && (P = O.headers.get("content-type")) && l.setContentType(P), O.body) {
+        const [F, M] = Re(
           h,
-          V(ge(f))
+          V(Se(f))
         );
         r = Oe(O.body, Te, F, M);
       }
@@ -1252,32 +1252,32 @@ const gn = async (e) => {
       duplex: "half",
       credentials: w ? d : void 0
     });
-    let S = await fetch(p);
-    const R = se && (u === "stream" || u === "response");
-    if (se && (c || R && y)) {
+    let R = await fetch(p);
+    const g = se && (u === "stream" || u === "response");
+    if (se && (c || g && y)) {
       const O = {};
       ["status", "statusText", "headers"].forEach((pe) => {
-        O[pe] = S[pe];
+        O[pe] = R[pe];
       });
-      const N = a.toFiniteNumber(S.headers.get("content-length")), [F, M] = c && Se(
-        N,
-        V(ge(c), !0)
+      const P = a.toFiniteNumber(R.headers.get("content-length")), [F, M] = c && Re(
+        P,
+        V(Se(c), !0)
       ) || [];
-      S = new Response(
-        Oe(S.body, Te, F, () => {
+      R = new Response(
+        Oe(R.body, Te, F, () => {
           M && M(), y && y();
         }),
         O
       );
     }
     u = u || "text";
-    let P = await W[a.findKey(W, u) || "text"](S, e);
-    return !R && y && y(), await new Promise((O, N) => {
-      Ve(O, N, {
-        data: P,
-        headers: A.from(S.headers),
-        status: S.status,
-        statusText: S.statusText,
+    let N = await W[a.findKey(W, u) || "text"](R, e);
+    return !g && y && y(), await new Promise((O, P) => {
+      Ve(O, P, {
+        data: N,
+        headers: A.from(R.headers),
+        status: R.status,
+        statusText: R.statusText,
         config: e,
         request: p
       });
@@ -1674,33 +1674,31 @@ Object.entries(ae).forEach(([e, t]) => {
   ae[t] = e;
 });
 function Qe(e) {
-  const t = new B(e), n = Pe(B.prototype.request, t);
+  const t = new B(e), n = Ne(B.prototype.request, t);
   return a.extend(n, B.prototype, t, { allOwnKeys: !0 }), a.extend(n, t, null, { allOwnKeys: !0 }), n.create = function(s) {
     return Qe(D(e, s));
   }, n;
 }
-const g = Qe(H);
-g.Axios = B;
-g.CanceledError = k;
-g.CancelToken = de;
-g.isCancel = Je;
-g.VERSION = Xe;
-g.toFormData = G;
-g.AxiosError = m;
-g.Cancel = g.CanceledError;
-g.all = function(t) {
+const S = Qe(H);
+S.Axios = B;
+S.CanceledError = k;
+S.CancelToken = de;
+S.isCancel = Je;
+S.VERSION = Xe;
+S.toFormData = G;
+S.AxiosError = m;
+S.Cancel = S.CanceledError;
+S.all = function(t) {
   return Promise.all(t);
 };
-g.spread = xn;
-g.isAxiosError = Cn;
-g.mergeConfig = D;
-g.AxiosHeaders = A;
-g.formToJSON = (e) => ze(a.isHTMLForm(e) ? new FormData(e) : e);
-g.getAdapter = Ge.getAdapter;
-g.HttpStatusCode = ae;
-g.default = g;
-var Pn = /* @__PURE__ */ ((e) => (e.Primary = "Primary", e.Secondary = "Secondary", e.Success = "Success", e.Warning = "Warning", e.Danger = "Danger", e.Info = "Info", e.Muted = "Muted", e))(Pn || {});
+S.spread = xn;
+S.isAxiosError = Cn;
+S.mergeConfig = D;
+S.AxiosHeaders = A;
+S.formToJSON = (e) => ze(a.isHTMLForm(e) ? new FormData(e) : e);
+S.getAdapter = Ge.getAdapter;
+S.HttpStatusCode = ae;
+S.default = S;
 export {
-  g as a,
-  Pn as b
+  S as a
 };

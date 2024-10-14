@@ -7,7 +7,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./DashboardView-Dvp9NRBL.js")
+    component: () => import("./DashboardView-Cgrx0SLr.js")
   }
 ], t = [
   {
@@ -37,7 +37,7 @@ const n = [
       {
         path: "g/:slug",
         name: "admin.group",
-        component: () => import("./GroupView-D6otj1NJ.js")
+        component: () => import("./GroupView-LRFD2NZQ.js")
       }
     ]
   }
@@ -97,7 +97,7 @@ const n = [
       {
         path: "",
         name: "admin.users",
-        component: () => import("./UsersView-BVQ2KAGl.js")
+        component: () => import("./UsersView-CNp3SOJ9.js")
       },
       {
         path: "u/:user_name",
