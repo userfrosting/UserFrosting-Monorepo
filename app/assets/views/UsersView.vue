@@ -39,8 +39,12 @@ import moment from 'moment'
                     <i>{{ item.last_activity.description }}</i>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
-                    <UFLabel :severity="Severity.Danger" v-if="item.flag_enabled === 0">Disabled</UFLabel>
-                    <UFLabel :severity="Severity.Warning" v-else-if="item.flag_verified === 0">Unactivated</UFLabel>
+                    <UFLabel :severity="Severity.Danger" v-if="item.flag_enabled === 0">
+                        Disabled
+                    </UFLabel>
+                    <UFLabel :severity="Severity.Warning" v-else-if="item.flag_verified === 0">
+                        Unactivated
+                    </UFLabel>
                     <UFLabel :severity="Severity.Success" v-else>Active</UFLabel>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>

@@ -79,7 +79,7 @@ const k = { class: "uk-text-meta" }, L = {
                       severity: u(f).Danger
                     }, {
                       default: t(() => e[4] || (e[4] = [
-                        o("Disabled")
+                        o(" Disabled ")
                       ])),
                       _: 1
                     }, 8, ["severity"])) : a.flag_verified === 0 ? (_(), p(m, {
@@ -87,7 +87,7 @@ const k = { class: "uk-text-meta" }, L = {
                       severity: u(f).Warning
                     }, {
                       default: t(() => e[5] || (e[5] = [
-                        o("Unactivated")
+                        o(" Unactivated ")
                       ])),
                       _: 1
                     }, 8, ["severity"])) : (_(), p(m, {

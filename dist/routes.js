@@ -97,7 +97,7 @@ const n = [
       {
         path: "",
         name: "admin.users",
-        component: () => import("./UsersView-CNp3SOJ9.js")
+        component: () => import("./UsersView-DnlRsMun.js")
       },
       {
         path: "u/:user_name",
