@@ -115,6 +115,13 @@
             "options": {},
             "command": "npm run vite:build",
             "problemMatcher": []
+        },
+        {
+            "label": "vue devtools",
+            "type": "shell",
+            "options": {},
+            "command": "vue-devtools",
+            "problemMatcher": []
         }
     ]
 }
