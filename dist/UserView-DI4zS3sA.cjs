@@ -1,1 +1,0 @@
-"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const e=require("vue"),t=require("./_plugin-vue_export-helper-BHFhmbuH.cjs"),o={};function n(s,_){const r=e.resolveComponent("UFHeaderPage");return e.openBlock(),e.createBlock(r,{title:"User"})}const c=t._export_sfc(o,[["render",n]]);exports.default=c;

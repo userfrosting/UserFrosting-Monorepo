@@ -103,7 +103,7 @@ const n = [
         path: "u/:user_name",
         // users/u/{user_name}
         name: "admin.user",
-        component: () => import("./UserView-jTy8GhIn.js")
+        component: () => import("./UserView-iR40FVFk.js")
       }
     ]
   }
