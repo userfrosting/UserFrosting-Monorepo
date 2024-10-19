@@ -93,8 +93,10 @@ class UserApiTest extends AdminTestCase
             'deleted_at',
             'created_at',
             'updated_at',
+            'locale_name',
             'full_name',
             'avatar',
+            'group',
         ], $response);
     }
 }

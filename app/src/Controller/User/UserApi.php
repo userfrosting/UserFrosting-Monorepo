@@ -14,6 +14,7 @@ namespace UserFrosting\Sprinkle\Admin\Controller\User;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use UserFrosting\I18n\Locale;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
@@ -177,6 +178,12 @@ class UserApi
      */
     protected function handle(UserInterface $user): UserInterface
     {
+        // Add the locale name to the user object
+        $user->locale_name = (new Locale($user->locale))->getName();
+
+        // Add the group object to the user object
+        $user->load('group');
+
         return $user;
     }
 }
