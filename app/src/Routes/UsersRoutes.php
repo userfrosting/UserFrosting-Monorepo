@@ -17,10 +17,10 @@ use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserActivitySprunje;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserApi as UserApi;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserCreateAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserEditAction;
-use UserFrosting\Sprinkle\Admin\Controller\User\UserPageAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPasswordAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPermissionSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserRoleSprunje;
@@ -37,7 +37,7 @@ class UsersRoutes implements RouteDefinitionInterface
     public function register(App $app): void
     {
         $app->group('/api/users', function (RouteCollectorProxy $group) {
-            $group->get('/u/{user_name}', UserPageAction::class)
+            $group->get('/u/{user_name}', UserApi::class)
                   ->add(UserInjector::class)
                   ->setName('api_user');
             $group->get('', UsersSprunje::class)

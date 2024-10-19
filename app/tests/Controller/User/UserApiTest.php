@@ -19,7 +19,7 @@ use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class UserPageActionTest extends AdminTestCase
+class UserApiTest extends AdminTestCase
 {
     use RefreshDatabase;
     use WithTestUser;
@@ -61,13 +61,13 @@ class UserPageActionTest extends AdminTestCase
     }
 
     // TODO : Turn into JSON API endpoint
-    /*public function testPage(): void
+    public function testPage(): void
     {
-        /** @var User * /
+        /** @var User */
         $user = User::factory()->create();
         $this->actAsUser($user, permissions: ['uri_user']);
 
-        /** @var Config * /
+        /** @var Config */
         $config = $this->ci->get(Config::class);
 
         // Force locale config.
@@ -80,6 +80,21 @@ class UserPageActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertNotEmpty((string) $response->getBody());
-    }*/
+        $this->assertJsonStructure([
+            'id',
+            'user_name',
+            'email',
+            'first_name',
+            'last_name',
+            'locale',
+            'group_id',
+            'flag_verified',
+            'flag_enabled',
+            'deleted_at',
+            'created_at',
+            'updated_at',
+            'full_name',
+            'avatar',
+        ], $response);
+    }
 }

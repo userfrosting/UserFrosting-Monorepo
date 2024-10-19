@@ -14,12 +14,10 @@ namespace UserFrosting\Sprinkle\Admin\Controller\User;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Core\I18n\SiteLocaleInterface;
-use UserFrosting\Sprinkle\Core\Util\RouteParserInterface;
 
 /**
  * Renders a page displaying a user's information, in read-only mode.
@@ -31,19 +29,15 @@ use UserFrosting\Sprinkle\Core\Util\RouteParserInterface;
  * This page requires authentication.
  * Request type: GET
  */
-class UserPageAction
+// TODO : Eventually this class could be moved to the Account sprinkle.
+class UserApi
 {
-    /** @var string Page template */
-    protected string $template = 'pages/user.html.twig';
-
     /**
      * Inject dependencies.
      */
     public function __construct(
         protected Authenticator $authenticator,
         protected SiteLocaleInterface $siteLocale,
-        protected RouteParserInterface $routeParser,
-        protected Twig $view,
     ) {
     }
 
@@ -56,20 +50,15 @@ class UserPageAction
      */
     public function __invoke(UserInterface $user, Response $response): Response
     {
-        $payload = $this->handle($user);
+        $this->validateAccess($user);
+        $user = $this->handle($user);
+        $payload = json_encode($user, JSON_THROW_ON_ERROR);
+        $response->getBody()->write($payload);
 
-        // TODO : Turn into JSON API endpoint
-        return $this->view->render($response, $this->template, $payload);
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
-    /**
-     * Handle the request and return the payload.
-     *
-     * @param UserInterface $user
-     *
-     * @return mixed[]
-     */
-    protected function handle(UserInterface $user): array
+    protected function validateAccess(UserInterface $user): void
     {
         // Access-controlled page
         if (!$this->authenticator->checkAccess('uri_user', [
@@ -78,6 +67,8 @@ class UserPageAction
             throw new ForbiddenException();
         }
 
+        // Determine fields that currentUser is authorized to view
+        /*
         // Determine fields that currentUser is authorized to view
         $fieldNames = ['user_name', 'name', 'email', 'locale', 'group', 'roles'];
 
@@ -173,7 +164,19 @@ class UserPageAction
             'fields'          => $fields,
             'tools'           => $editButtons,
             'widgets'         => $widgets,
-            'delete_redirect' => $this->routeParser->urlFor('uri_users'),
-        ];
+        ];*/
+    }
+
+    /**
+     *  Add or remove fields from the user object before returning it.
+     * TIP : When extending this class, you can use this method to add your own fields.
+     *
+     * @param UserInterface $user
+     *
+     * @return UserInterface
+     */
+    protected function handle(UserInterface $user): UserInterface
+    {
+        return $user;
     }
 }

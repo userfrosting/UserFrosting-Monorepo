@@ -46,7 +46,7 @@ class GroupApi
     public function __invoke(GroupInterface $group, Response $response): Response
     {
         $this->validateAccess($group);
-        $group = $this->mutateGroup($group);
+        $group = $this->handle($group);
         $payload = json_encode($group, JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
@@ -61,7 +61,7 @@ class GroupApi
      *
      * @return GroupInterface
      */
-    protected function mutateGroup(GroupInterface $group): GroupInterface
+    protected function handle(GroupInterface $group): GroupInterface
     {
         // Add the user count to the group object
         $group->loadCount('users');
