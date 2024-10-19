@@ -17,7 +17,7 @@ use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserActivitySprunje;
-use UserFrosting\Sprinkle\Admin\Controller\User\UserApi as UserApi;
+use UserFrosting\Sprinkle\Admin\Controller\User\UserApi;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserCreateAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserEditAction;
