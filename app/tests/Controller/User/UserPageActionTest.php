@@ -84,4 +84,29 @@ class UserPageActionTest extends AdminTestCase
         $this->assertResponseStatus(200, $response);
         $this->assertNotEmpty((string) $response->getBody());
     }
+
+    public function testPageWithMultipleLocales(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user, permissions: ['uri_user']);
+
+        /** @var Config */
+        $config = $this->ci->get(Config::class);
+
+        // Force locale config.
+        $config->set('site.registration.user_defaults.locale', 'en_US');
+        $config->set('site.locales.available', [
+            'en_US' => true,
+            'fr_FR' => true,
+        ]);
+
+        // Create request with method and url and fetch response
+        $request = $this->createRequest('GET', '/users/u/' . $user->user_name);
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertResponseStatus(200, $response);
+        $this->assertNotEmpty((string) $response->getBody());
+    }
 }

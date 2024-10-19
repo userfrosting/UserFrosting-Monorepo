@@ -15,6 +15,7 @@ namespace UserFrosting\Sprinkle\Admin\Controller\User;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
+use UserFrosting\I18n\Locale;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
@@ -99,6 +100,8 @@ class UserPageAction
         $locales = $this->siteLocale->getAvailableIdentifiers();
         if (count($locales) <= 1) {
             $fields['hidden'][] = 'locale';
+        } else {
+            $fields['locale_name'] = (new Locale($user->locale))->getRegionalName();
         }
 
         // Determine buttons to display

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [5.2.0](https://github.com/userfrosting/sprinkle-admin/compare/5.1.0...5.2.0)
 
+## [5.1.3](https://github.com/userfrosting/sprinkle-admin/compare/5.1.2...5.1.3)
+- [Fix] Locale is not displayed on the user page
+
+## [5.1.2](https://github.com/userfrosting/sprinkle-admin/compare/5.1.1...5.1.2)
+- Fix Unable to create a user without a group on MySQL (Fix [#1273](https://github.com/userfrosting/UserFrosting/issues/1273))
+
 ## [5.1.1](https://github.com/userfrosting/sprinkle-admin/compare/5.1.0...5.1.1)
 - Fix issue when a Group Administrator without the `create_user_field` permission creates a new user, the new user SHOULD inherit the admin's group (Fix [#1256](https://github.com/userfrosting/UserFrosting/issues/1256))
 

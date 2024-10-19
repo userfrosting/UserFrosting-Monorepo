@@ -142,6 +142,11 @@ class UserCreateAction
             $data['group_id'] = $currentUser->group_id;
         }
 
+        // If group id is zero, then it's no group
+        if ($data['group_id'] === 0) {
+            $data['group_id'] = null;
+        }
+
         // Now that we check the form, we can try to register the actual user
         $user = new $this->userModel($data);
 
