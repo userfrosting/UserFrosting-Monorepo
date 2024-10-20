@@ -124,6 +124,9 @@ class RoleApi
      */
     protected function handle(RoleInterface $role): RoleInterface
     {
+        // Add the user count to the role object
+        $role->loadCount('users');
+
         return $role;
     }
 }
