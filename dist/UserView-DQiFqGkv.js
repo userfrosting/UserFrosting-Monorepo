@@ -1,4 +1,4 @@
-import { ref as C, watch as j, defineComponent as k, resolveComponent as a, openBlock as _, createBlock as f, withCtx as s, createElementVNode as n, toDisplayString as u, createElementBlock as g, createCommentVNode as b, renderSlot as x, createVNode as t, createTextVNode as l, unref as m, Fragment as y } from "vue";
+import { ref as C, watch as j, defineComponent as k, resolveComponent as a, openBlock as _, createBlock as f, withCtx as s, createElementVNode as n, toDisplayString as d, createElementBlock as g, createCommentVNode as b, renderSlot as x, createVNode as t, createTextVNode as l, unref as m, Fragment as y } from "vue";
 import { useRoute as B } from "vue-router";
 import { a as A } from "./axios-CXDYiOMX.js";
 import { a as F } from "./types-Daou0lcF.js";
@@ -23,13 +23,13 @@ function w(U) {
     group: null
   });
   async function i() {
-    o.value = !0, e.value = null, await A.get("/api/users/u/" + U.params.user_name).then((d) => {
-      r.value = d.data;
-    }).catch((d) => {
+    o.value = !0, e.value = null, await A.get("/api/users/u/" + U.params.user_name).then((u) => {
+      r.value = u.data;
+    }).catch((u) => {
       e.value = {
         description: "An error as occurred",
         style: F.Danger,
-        ...d.response.data
+        ...u.response.data
       };
     }).finally(() => {
       o.value = !1;
@@ -60,8 +60,8 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
   },
   setup(U) {
     return (o, e) => {
-      const r = a("font-awesome-icon"), i = a("UFLabel"), d = a("UFCardBox");
-      return _(), f(d, null, {
+      const r = a("font-awesome-icon"), i = a("UFLabel"), u = a("UFCardBox");
+      return _(), f(u, null, {
         default: s(() => [
           n("div", H, [
             n("img", {
@@ -69,8 +69,8 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
               alt: "avatar",
               class: "uk-border-circle"
             }, null, 8, T),
-            n("h3", $, u(o.user.full_name), 1),
-            o.user.user_name ? (_(), g("p", D, " (" + u(o.user.user_name) + ") ", 1)) : b("", !0),
+            n("h3", $, d(o.user.full_name), 1),
+            o.user.user_name ? (_(), g("p", D, " (" + d(o.user.user_name) + ") ", 1)) : b("", !0),
             x(o.$slots, "default", { dataTest: "slot" })
           ]),
           e[9] || (e[9] = n("hr", null, null, -1)),
@@ -79,19 +79,19 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
               t(r, { icon: "envelope" }),
               e[0] || (e[0] = l(" Email"))
             ]),
-            n("dd", Y, u(o.user.email), 1),
+            n("dd", Y, d(o.user.email), 1),
             n("dt", null, [
               t(r, { icon: "users" }),
               e[1] || (e[1] = l(" Group"))
             ]),
-            o.user.group ? (_(), g("dd", L, u(o.user.group.name), 1)) : (_(), g("dd", M, e[2] || (e[2] = [
+            o.user.group ? (_(), g("dd", L, d(o.user.group.name), 1)) : (_(), g("dd", M, e[2] || (e[2] = [
               n("i", null, "None", -1)
             ]))),
             n("dt", null, [
               t(r, { icon: "language" }),
               e[3] || (e[3] = l(" Locale"))
             ]),
-            n("dd", N, u(o.user.locale_name), 1),
+            n("dd", N, d(o.user.locale_name), 1),
             n("dt", null, [
               t(r, { icon: "user-shield" }),
               e[4] || (e[4] = l(" Status"))
@@ -127,7 +127,7 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
               t(r, { icon: "calendar" }),
               e[8] || (e[8] = l(" Created on"))
             ]),
-            n("dd", V, u(m(S)(o.user.created_at).format("MMMM Do, YYYY")), 1)
+            n("dd", V, d(m(S)(o.user.created_at).format("MMMM Do, YYYY")), 1)
           ])
         ]),
         _: 3
@@ -141,10 +141,10 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
   },
   setup(U) {
     return (o, e) => {
-      const r = a("UFSprunjeHeader"), i = a("UFSprunjeColumn"), d = a("UFSprunjeTable"), v = a("UFCardBox");
+      const r = a("UFSprunjeHeader"), i = a("UFSprunjeColumn"), u = a("UFSprunjeTable"), v = a("UFCardBox");
       return _(), f(v, { title: "Activities" }, {
         default: s(() => [
-          t(d, {
+          t(u, {
             dataUrl: "/api/users/u/" + o.user_name + "/activities",
             defaultSorts: { occurred_at: "desc" }
           }, {
@@ -165,16 +165,16 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
             body: s(({ item: c }) => [
               t(i, null, {
                 default: s(() => [
-                  n("div", null, u(m(S)(c.occurred_at).format("dddd")), 1),
-                  n("div", null, u(m(S)(c.occurred_at).format("MMM Do, YYYY h:mm a")), 1)
+                  n("div", null, d(m(S)(c.occurred_at).format("dddd")), 1),
+                  n("div", null, d(m(S)(c.occurred_at).format("MMM Do, YYYY h:mm a")), 1)
                 ]),
                 _: 2
               }, 1024),
               t(i, null, {
                 default: s(() => [
-                  n("div", null, u(c.ip_address), 1),
+                  n("div", null, d(c.ip_address), 1),
                   n("div", null, [
-                    n("i", null, u(c.description), 1)
+                    n("i", null, d(c.description), 1)
                   ])
                 ]),
                 _: 2
@@ -194,7 +194,7 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
   },
   setup(U) {
     return (o, e) => {
-      const r = a("UFSprunjeHeader"), i = a("RouterLink"), d = a("UFSprunjeColumn"), v = a("UFSprunjeTable"), c = a("UFCardBox");
+      const r = a("UFSprunjeHeader"), i = a("RouterLink"), u = a("UFSprunjeColumn"), v = a("UFSprunjeTable"), c = a("UFCardBox");
       return _(), f(c, { title: "Roles" }, {
         default: s(() => [
           t(v, {
@@ -222,7 +222,7 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
               })
             ]),
             body: s(({ item: p }) => [
-              t(d, null, {
+              t(u, null, {
                 default: s(() => [
                   n("strong", null, [
                     t(i, {
@@ -232,7 +232,7 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
                       }
                     }, {
                       default: s(() => [
-                        l(u(p.name), 1)
+                        l(d(p.name), 1)
                       ]),
                       _: 2
                     }, 1032, ["to"])
@@ -240,13 +240,13 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
                 ]),
                 _: 2
               }, 1024),
-              t(d, null, {
+              t(u, null, {
                 default: s(() => [
-                  l(u(p.description), 1)
+                  l(d(p.description), 1)
                 ]),
                 _: 2
               }, 1024),
-              t(d)
+              t(u)
             ]),
             _: 1
           }, 8, ["dataUrl"])
@@ -262,7 +262,7 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
   },
   setup(U) {
     return (o, e) => {
-      const r = a("UFSprunjeHeader"), i = a("RouterLink"), d = a("UFSprunjeColumn"), v = a("UFSprunjeTable"), c = a("UFCardBox");
+      const r = a("UFSprunjeHeader"), i = a("RouterLink"), u = a("UFSprunjeColumn"), v = a("UFSprunjeTable"), c = a("UFCardBox");
       return _(), f(c, { title: "Permissions" }, {
         default: s(() => [
           t(v, {
@@ -290,7 +290,7 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
               })
             ]),
             body: s(({ item: p }) => [
-              t(d, null, {
+              t(u, null, {
                 default: s(() => [
                   n("strong", null, [
                     t(i, {
@@ -300,7 +300,7 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
                       }
                     }, {
                       default: s(() => [
-                        l(u(p.name), 1)
+                        l(d(p.name), 1)
                       ]),
                       _: 2
                     }, 1032, ["to"])
@@ -308,21 +308,22 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
                 ]),
                 _: 2
               }, 1024),
-              t(d, null, {
+              t(u, null, {
                 default: s(() => [
                   n("div", null, [
-                    n("code", null, u(p.slug), 1)
+                    n("code", null, d(p.slug), 1)
                   ]),
                   n("div", null, [
                     e[3] || (e[3] = l(" ↳ ")),
-                    n("code", null, u(p.conditions), 1)
+                    n("code", null, d(p.conditions), 1)
                   ]),
                   n("div", null, [
-                    n("i", null, u(p.description), 1)
+                    n("i", null, d(p.description), 1)
                   ])
                 ]),
                 _: 2
-              }, 1024)
+              }, 1024),
+              t(u)
             ]),
             _: 1
           }, 8, ["dataUrl"])
@@ -338,7 +339,7 @@ const H = { class: "uk-text-center uk-margin" }, T = ["src"], $ = { class: "uk-t
   __name: "UserView",
   setup(U) {
     const o = B(), { user: e, error: r } = w(o);
-    return (i, d) => {
+    return (i, u) => {
       const v = a("UFHeaderPage"), c = a("UFAlert"), p = a("UFCardBox");
       return _(), g(y, null, [
         t(v, {

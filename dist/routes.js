@@ -37,7 +37,7 @@ const n = [
       {
         path: "g/:slug",
         name: "admin.group",
-        component: () => import("./GroupView-LRFD2NZQ.js")
+        component: () => import("./GroupView-BSWVGzrN.js")
       }
     ]
   }
@@ -81,7 +81,7 @@ const n = [
         path: "r/:slug",
         // roles/r/{slug}
         name: "admin.role",
-        component: () => import("./RoleView-DdLudICm.js")
+        component: () => import("./RoleView-BFlB5xbH.js")
       }
     ]
   }
@@ -103,7 +103,7 @@ const n = [
         path: "u/:user_name",
         // users/u/{user_name}
         name: "admin.user",
-        component: () => import("./UserView-iR40FVFk.js")
+        component: () => import("./UserView-DQiFqGkv.js")
       }
     ]
   }
