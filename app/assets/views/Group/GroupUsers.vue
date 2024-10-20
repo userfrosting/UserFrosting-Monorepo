@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import moment from 'moment'
 import { defineProps } from 'vue'
 
 const { slug } = defineProps<{
@@ -9,11 +8,18 @@ const { slug } = defineProps<{
 
 <template>
     <UFCardBox title="Group Users">
-        <UFSprunjeTable :dataUrl="'/api/groups/g/' + slug + '/users'">
+        <UFSprunjeTable
+            :dataUrl="'/api/groups/g/' + slug + '/users'"
+            searchColumn="name"
+            hideFilters>
+            <template #actions>
+                <button class="uk-button uk-button-default">
+                    <font-awesome-icon icon="user-plus" /> Add user
+                </button>
+            </template>
+
             <template #header>
                 <UFSprunjeHeader sort="name">User</UFSprunjeHeader>
-                <UFSprunjeHeader sort="last_activity">Last Activity</UFSprunjeHeader>
-                <UFSprunjeHeader sort="status">Status</UFSprunjeHeader>
                 <UFSprunjeHeader>Actions</UFSprunjeHeader>
             </template>
 
@@ -31,16 +37,10 @@ const { slug } = defineProps<{
                     <div class="uk-text-meta">{{ item.email }}</div>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
-                    <div>
-                        {{ moment(item.last_activity.occurred_at).format('dddd') }}
-                    </div>
-                    <div>
-                        {{ moment(item.last_activity.occurred_at).format('MMM Do, YYYY h:mm a') }}
-                    </div>
-                    <i>{{ item.last_activity.description }}</i>
+                    <button class="uk-button uk-button-danger uk-button-small">
+                        <font-awesome-icon icon="trash" />
+                    </button>
                 </UFSprunjeColumn>
-                <UFSprunjeColumn></UFSprunjeColumn>
-                <UFSprunjeColumn></UFSprunjeColumn>
             </template>
         </UFSprunjeTable>
     </UFCardBox>

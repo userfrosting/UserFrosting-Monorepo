@@ -30,7 +30,7 @@ export function usePermissionApi(route: any) {
         error.value = null
 
         await axios
-            .get<PermissionApi>('/api/permissions/p/' + route.params.slug)
+            .get<PermissionApi>('/api/permissions/p/' + route.params.id)
             .then((response) => {
                 permission.value = response.data
             })
@@ -49,7 +49,7 @@ export function usePermissionApi(route: any) {
     }
 
     watch(
-        () => route.params.slug,
+        () => route.params.id,
         () => {
             fetchApi()
         },

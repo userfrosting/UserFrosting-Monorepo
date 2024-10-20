@@ -32,7 +32,7 @@ const { user, error } = useUserAdminApi(route)
                 <UserPermissions :user_name="user.user_name" />
             </div>
             <div>
-                <UserActivities :user_name="user.user_name" />
+                <UserActivities :user_name="$route.params.user_name.toString()" />
             </div>
         </div>
     </template>

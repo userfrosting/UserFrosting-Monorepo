@@ -8,7 +8,16 @@ const { slug } = defineProps<{
 
 <template>
     <UFCardBox title="Roles">
-        <UFSprunjeTable :dataUrl="'/api/users/u/' + slug + '/roles'" searchColumn="name">
+        <UFSprunjeTable
+            :dataUrl="'/api/users/u/' + slug + '/roles'"
+            searchColumn="name"
+            hideFilters>
+            <template #actions>
+                <button class="uk-button uk-button-default">
+                    <font-awesome-icon icon="address-card" /> Add role
+                </button>
+            </template>
+
             <template #header>
                 <UFSprunjeHeader sort="name">Role</UFSprunjeHeader>
                 <UFSprunjeHeader sort="description">Description</UFSprunjeHeader>
@@ -28,7 +37,11 @@ const { slug } = defineProps<{
                     </strong>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>{{ item.description }}</UFSprunjeColumn>
-                <UFSprunjeColumn></UFSprunjeColumn>
+                <UFSprunjeColumn>
+                    <button class="uk-button uk-button-danger uk-button-small">
+                        <font-awesome-icon icon="trash" />
+                    </button>
+                </UFSprunjeColumn>
             </template>
         </UFSprunjeTable>
     </UFCardBox>

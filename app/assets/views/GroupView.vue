@@ -19,7 +19,7 @@ const { group, error } = useGroupApi(route)
                 <GroupInfo :group="group" />
             </div>
             <div class="uk-width-2-3">
-                <GroupUsers :slug="group.slug" />
+                <GroupUsers :slug="$route.params.slug.toString()" />
             </div>
         </div>
     </template>

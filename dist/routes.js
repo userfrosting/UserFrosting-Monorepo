@@ -37,7 +37,7 @@ const n = [
       {
         path: "g/:slug",
         name: "admin.group",
-        component: () => import("./GroupView-BSWVGzrN.js")
+        component: () => import("./GroupView-2Qy5dhaD.js")
       }
     ]
   }
@@ -53,13 +53,13 @@ const n = [
       {
         path: "",
         name: "admin.permissions",
-        component: () => import("./PermissionsView-CHLo2x0L.js")
+        component: () => import("./PermissionsView-CVJ-Kp0t.js")
       },
       {
         path: "p/:id",
         // permissions/p/{id}
         name: "admin.permission",
-        component: () => import("./PermissionView-DpVnMGym.js")
+        component: () => import("./PermissionView-DhQK9SjC.js")
       }
     ]
   }
@@ -81,7 +81,7 @@ const n = [
         path: "r/:slug",
         // roles/r/{slug}
         name: "admin.role",
-        component: () => import("./RoleView-BFlB5xbH.js")
+        component: () => import("./RoleView-DJn4fof1.js")
       }
     ]
   }
@@ -103,7 +103,7 @@ const n = [
         path: "u/:user_name",
         // users/u/{user_name}
         name: "admin.user",
-        component: () => import("./UserView-DQiFqGkv.js")
+        component: () => import("./UserView-Cwi8FwPa.js")
       }
     ]
   }

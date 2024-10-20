@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 
-const { slug } = defineProps<{
-    slug: string | number
+const { id } = defineProps<{
+    id: string | number
 }>()
 </script>
 
 <template>
     <UFCardBox title="Users with this permission">
         <UFSprunjeTable
-            :dataUrl="'/api/permissions/p/' + slug + '/users'"
+            :dataUrl="'/api/permissions/p/' + id + '/users'"
             searchColumn="name"
             hideFilters>
             <template #header>

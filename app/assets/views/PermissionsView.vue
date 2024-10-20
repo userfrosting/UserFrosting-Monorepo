@@ -22,17 +22,7 @@
                         </RouterLink>
                     </strong>
                 </UFSprunjeColumn>
-                <UFSprunjeColumn>
-                    <div>
-                        <code>{{ item.slug }}</code>
-                    </div>
-                    <div>
-                        ↳ <code>{{ item.conditions }}</code>
-                    </div>
-                    <div>
-                        <i>{{ item.description }}</i>
-                    </div>
-                </UFSprunjeColumn>
+                <UFSprunjeColumn>{{ item.description }}</UFSprunjeColumn>
             </template>
         </UFSprunjeTable>
     </UFCardBox>

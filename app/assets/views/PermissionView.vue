@@ -21,7 +21,7 @@ const { permission, error } = usePermissionApi(route)
                 <PermissionInfo :permission="permission" />
             </div>
             <div class="uk-width-2-3">
-                <PermissionUsers :slug="$route.params.slug.toString()" />
+                <PermissionUsers :id="$route.params.id.toString()" />
             </div>
         </div>
     </template>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import moment from 'moment'
 import { defineProps } from 'vue'
 
 const { slug } = defineProps<{
@@ -9,7 +8,10 @@ const { slug } = defineProps<{
 
 <template>
     <UFCardBox title="Role Users">
-        <UFSprunjeTable :dataUrl="'/api/roles/r/' + slug + '/users'" searchColumn="name">
+        <UFSprunjeTable
+            :dataUrl="'/api/roles/r/' + slug + '/users'"
+            searchColumn="name"
+            hideFilters>
             <template #actions>
                 <button class="uk-button uk-button-default">
                     <font-awesome-icon icon="user-plus" /> Add user

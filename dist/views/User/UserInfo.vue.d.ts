@@ -4,6 +4,9 @@ declare function __VLS_template(): {
         default?(_: {
             dataTest: string;
         }): any;
+        default?(_: {
+            dataTest: string;
+        }): any;
     };
     refs: {};
     attrs: Partial<{}>;

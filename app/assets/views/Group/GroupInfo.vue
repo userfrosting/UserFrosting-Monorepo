@@ -24,7 +24,15 @@ const { group } = defineProps<{
                 <span class="uk-badge">{{ group.users_count }}</span>
             </dd>
         </dl>
-        <!-- TODO : Edit Btn -->
-        <!-- TODO : DElete Btn -->
+        <hr />
+        <button
+            class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom uk-button-small">
+            Edit Group
+        </button>
+        <button
+            class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom uk-button-small">
+            Delete Group
+        </button>
+        <slot data-test="slot"></slot>
     </UFCardBox>
 </template>

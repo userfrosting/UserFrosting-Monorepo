@@ -43,7 +43,15 @@ const { user } = defineProps<{
             <dd class="uk-text-meta">{{ moment(user.created_at).format('MMMM Do, YYYY') }}</dd>
             <!-- <slot data-test="slot"></slot> -->
         </dl>
-        <!-- TODO : Edit, Delete and other Btn -->
-        <!-- <slot data-test="slot"></slot> -->
+        <hr />
+        <button
+            class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom uk-button-small">
+            Edit User
+        </button>
+        <button
+            class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom uk-button-small">
+            Delete User
+        </button>
+        <slot data-test="slot"></slot>
     </UFCardBox>
 </template>

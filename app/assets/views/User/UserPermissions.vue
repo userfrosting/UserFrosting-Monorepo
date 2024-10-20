@@ -27,19 +27,14 @@ const { user_name } = defineProps<{
                         </RouterLink>
                     </strong>
                 </UFSprunjeColumn>
+                <UFSprunjeColumn>{{ item.description }}</UFSprunjeColumn>
                 <UFSprunjeColumn>
-                    <div>
-                        <code>{{ item.slug }}</code>
-                    </div>
-                    <div>
-                        ↳ <code>{{ item.conditions }}</code>
-                    </div>
-                    <div>
-                        <i>{{ item.description }}</i>
-                    </div>
-                </UFSprunjeColumn>
-                <UFSprunjeColumn>
-                    <!-- TODO -->
+                    <RouterLink
+                        v-for="role in item.roles_via"
+                        :key="role.id"
+                        :to="{ name: 'admin.role', params: { slug: role.slug } }">
+                        <UFLabel>{{ role.name }}</UFLabel>
+                    </RouterLink>
                 </UFSprunjeColumn>
             </template>
         </UFSprunjeTable>

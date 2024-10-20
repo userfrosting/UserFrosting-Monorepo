@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { Severity } from '@userfrosting/sprinkle-core/types'
 import type { RoleApi } from '../../composable/role'
 import { defineProps } from 'vue'
-import moment from 'moment'
 
 const { role } = defineProps<{
     role: RoleApi
@@ -35,6 +33,6 @@ const { role } = defineProps<{
             class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom uk-button-small">
             Delete Role
         </button>
-        <!-- <slot data-test="slot"></slot> -->
+        <slot data-test="slot"></slot>
     </UFCardBox>
 </template>
