@@ -59,7 +59,7 @@ const n = [
         path: "p/:id",
         // permissions/p/{id}
         name: "admin.permission",
-        component: () => import("./PermissionView-CrT77lW9.js")
+        component: () => import("./PermissionView-DpVnMGym.js")
       }
     ]
   }
