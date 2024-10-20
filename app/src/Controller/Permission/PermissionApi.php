@@ -14,11 +14,9 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Permission;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\PermissionInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Core\Util\RouteParserInterface;
 
 /**
  * Renders a page displaying a permission's information, in read-only mode.
@@ -30,18 +28,13 @@ use UserFrosting\Sprinkle\Core\Util\RouteParserInterface;
  *
  * Request type: GET
  */
-class PermissionPageAction
+class PermissionApi
 {
-    /** @var string Page template */
-    protected string $template = 'pages/permission.html.twig';
-
     /**
      * Inject dependencies.
      */
     public function __construct(
         protected Authenticator $authenticator,
-        protected RouteParserInterface $routeParser,
-        protected Twig $view,
     ) {
     }
 
@@ -50,34 +43,40 @@ class PermissionPageAction
      * the response.
      *
      * @param PermissionInterface $permission The permission, injected from the Middleware.
-     * @param Request             $request
      * @param Response            $response
      */
-    public function __invoke(PermissionInterface $permission, Request $request, Response $response): Response
+    public function __invoke(PermissionInterface $permission, Response $response): Response
     {
-        $payload = $this->handle($permission, $request);
+        $this->validateAccess($permission);
+        $permission = $this->handle($permission);
+        $payload = json_encode($permission, JSON_THROW_ON_ERROR);
+        $response->getBody()->write($payload);
 
-        // TODO : Turn into JSON API endpoint
-        return $this->view->render($response, $this->template, $payload);
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     /**
-     * Handle the request and return the payload.
+     * Validate access to the api.
      *
-     * @param PermissionInterface $permission
-     * @param Request             $request
-     *
-     * @return mixed[]
+     * @throws ForbiddenException
      */
-    protected function handle(PermissionInterface $permission, Request $request): array
+    protected function validateAccess(PermissionInterface $permission): void
     {
-        // Access-controlled page
         if (!$this->authenticator->checkAccess('uri_permissions')) {
             throw new ForbiddenException();
         }
+    }
 
-        return [
-            'permission' => $permission,
-        ];
+    /**
+     * Add or remove fields from the permission object before returning it.
+     * TIP : When extending this class, you can use this method to add your own fields.
+     *
+     * @param PermissionInterface $permission
+     *
+     * @return PermissionInterface
+     */
+    protected function handle(PermissionInterface $permission): PermissionInterface
+    {
+        return $permission;
     }
 }

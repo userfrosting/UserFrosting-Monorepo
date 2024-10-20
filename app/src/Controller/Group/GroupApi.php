@@ -70,7 +70,7 @@ class GroupApi
     }
 
     /**
-     * Validate access to the page.
+     * Validate access to the api.
      *
      * @throws ForbiddenException
      */

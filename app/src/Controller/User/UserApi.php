@@ -59,6 +59,11 @@ class UserApi
         return $response->withHeader('Content-Type', 'application/json');
     }
 
+    /**
+     * Validate access to the api.
+     *
+     * @throws ForbiddenException
+     */
     protected function validateAccess(UserInterface $user): void
     {
         // Access-controlled page

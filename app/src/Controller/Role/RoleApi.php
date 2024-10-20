@@ -14,11 +14,9 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Role;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Views\Twig;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Core\Util\RouteParserInterface;
 
 /**
  * Renders a page displaying a role's information, in read-only mode.
@@ -30,18 +28,13 @@ use UserFrosting\Sprinkle\Core\Util\RouteParserInterface;
  *
  * Request type: GET
  */
-class RolePageAction
+class RoleApi
 {
-    /** @var string Page template */
-    protected string $template = 'pages/role.html.twig';
-
     /**
      * Inject dependencies.
      */
     public function __construct(
         protected Authenticator $authenticator,
-        protected RouteParserInterface $routeParser,
-        protected Twig $view,
     ) {
     }
 
@@ -50,26 +43,24 @@ class RolePageAction
      * the response.
      *
      * @param RoleInterface $role     The role to display, injected by middleware.
-     * @param Request       $request
      * @param Response      $response
      */
-    public function __invoke(RoleInterface $role, Request $request, Response $response): Response
+    public function __invoke(RoleInterface $role, Response $response): Response
     {
-        $payload = $this->handle($role, $request);
+        $this->validateAccess($role);
+        $role = $this->handle($role);
+        $payload = json_encode($role, JSON_THROW_ON_ERROR);
+        $response->getBody()->write($payload);
 
-        // TODO : Turn into JSON API endpoint
-        return $this->view->render($response, $this->template, $payload);
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     /**
-     * Handle the request and return the payload.
+     * Validate access to the api.
      *
-     * @param RoleInterface $role
-     * @param Request       $request
-     *
-     * @return mixed[]
+     * @throws ForbiddenException
      */
-    protected function handle(RoleInterface $role, Request $request): array
+    protected function validateAccess(RoleInterface $role): void
     {
         // Access-controlled page
         if (!$this->authenticator->checkAccess('uri_role', [
@@ -78,6 +69,7 @@ class RolePageAction
             throw new ForbiddenException();
         }
 
+        /*
         // Determine fields that currentUser is authorized to view
         $fieldNames = ['name', 'slug', 'description'];
 
@@ -119,6 +111,19 @@ class RolePageAction
             'fields'          => $fields,
             'tools'           => $editButtons,
             'delete_redirect' => $this->routeParser->urlFor('uri_roles'),
-        ];
+        ];*/
+    }
+
+    /**
+     * Add or remove fields from the role object before returning it.
+     * TIP : When extending this class, you can use this method to add your own fields.
+     *
+     * @param RoleInterface $role
+     *
+     * @return RoleInterface
+     */
+    protected function handle(RoleInterface $role): RoleInterface
+    {
+        return $role;
     }
 }

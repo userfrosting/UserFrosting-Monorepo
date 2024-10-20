@@ -10,16 +10,16 @@ declare(strict_types=1);
  * @license   https://github.com/userfrosting/sprinkle-admin/blob/master/LICENSE.md (MIT License)
  */
 
-namespace UserFrosting\Sprinkle\Admin\Tests\Controller\Role;
+namespace UserFrosting\Sprinkle\Admin\Tests\Controller\Permission;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Sprinkle\Account\Database\Models\Role;
+use UserFrosting\Sprinkle\Account\Database\Models\Permission;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class RolePageActionTest extends AdminTestCase
+class PermissionApiTest extends AdminTestCase
 {
     use RefreshDatabase;
     use WithTestUser;
@@ -37,7 +37,7 @@ class RolePageActionTest extends AdminTestCase
     public function testPageForGuestUser(): void
     {
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/api/roles/r/foo');
+        $request = $this->createJsonRequest('GET', '/api/permissions/p/1');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -51,11 +51,11 @@ class RolePageActionTest extends AdminTestCase
         $user = User::factory()->create();
         $this->actAsUser($user);
 
-        /** @var Role */
-        $role = Role::factory()->create();
+        /** @var Permission */
+        $permission = Permission::factory()->create();
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/api/roles/r/' . $role->slug);
+        $request = $this->createJsonRequest('GET', '/api/permissions/p/' . $permission->id);
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -67,33 +67,42 @@ class RolePageActionTest extends AdminTestCase
     {
         /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, permissions: ['uri_role']);
+        $this->actAsUser($user, permissions: ['uri_permissions']);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('GET', '/api/roles/r/foo');
+        $request = $this->createJsonRequest('GET', '/api/permissions/p/99');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse('Role not found', $response, 'description');
+        $this->assertJsonResponse('Permission not found', $response, 'description');
         $this->assertResponseStatus(404, $response);
     }
 
-    // TODO : Turn into JSON API endpoint
-    /*public function testPage(): void
+    public function testPage(): void
     {
-        /** @var User * /
+        /** @var User */
         $user = User::factory()->create();
-        $this->actAsUser($user, permissions: ['uri_role']);
+        $this->actAsUser($user, permissions: ['uri_permissions']);
 
-        /** @var Role * /
-        $role = Role::factory()->create();
+        /** @var Permission */
+        $permission = Permission::factory()->create();
 
         // Create request with method and url and fetch response
-        $request = $this->createRequest('GET', '/api/roles/r/' . $role->slug);
+        $request = $this->createRequest('GET', '/api/permissions/p/' . $permission->id);
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertResponseStatus(200, $response);
         $this->assertNotEmpty((string) $response->getBody());
-    }*/
+
+        // Assert response status & body
+        $this->assertJsonStructure([
+            'id',
+            'slug',
+            'name',
+            'conditions',
+            'description',
+            'created_at',
+            'updated_at',
+        ], $response);
+    }
 }

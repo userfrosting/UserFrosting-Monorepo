@@ -16,10 +16,10 @@ use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
+use UserFrosting\Sprinkle\Admin\Controller\Role\RoleApi;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleCreateAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleEditAction;
-use UserFrosting\Sprinkle\Admin\Controller\Role\RolePageAction;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolePermissionsSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RolesSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\Role\RoleUpdateFieldAction;
@@ -35,7 +35,7 @@ class RolesRoutes implements RouteDefinitionInterface
     public function register(App $app): void
     {
         $app->group('/api/roles', function (RouteCollectorProxy $group) {
-            $group->get('/r/{slug}', RolePageAction::class)
+            $group->get('/r/{slug}', RoleApi::class)
                   ->add(RoleInjector::class);
             $group->delete('/r/{slug}', RoleDeleteAction::class)
                   ->add(RoleInjector::class);

@@ -16,7 +16,7 @@ use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
-use UserFrosting\Sprinkle\Admin\Controller\Permission\PermissionPageAction;
+use UserFrosting\Sprinkle\Admin\Controller\Permission\PermissionApi;
 use UserFrosting\Sprinkle\Admin\Controller\Permission\PermissionsSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\Permission\PermissionUserSprunje;
 use UserFrosting\Sprinkle\Admin\Middlewares\PermissionInjector;
@@ -32,7 +32,7 @@ class PermissionsRoutes implements RouteDefinitionInterface
         $app->group('/api/permissions', function (RouteCollectorProxy $group) {
             $group->get('', PermissionsSprunje::class)
                   ->setName('api_permissions');
-            $group->get('/p/{id}', PermissionPageAction::class)
+            $group->get('/p/{id}', PermissionApi::class)
                   ->add(PermissionInjector::class);
             $group->get('/p/{id}/users', PermissionUserSprunje::class)
                   ->add(PermissionInjector::class);

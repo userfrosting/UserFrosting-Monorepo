@@ -33,6 +33,21 @@ class ActivitiesSprunjeTest extends AdminTestCase
         $this->refreshDatabase();
     }
 
+    public function testPageForForbiddenException(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user);
+
+        // Create request with method and url and fetch response
+        $request = $this->createJsonRequest('GET', '/api/activities');
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse('Access Denied', $response, 'title');
+        $this->assertResponseStatus(403, $response);
+    }
+
     /**
      * N.B.: Sprunje is tested in it's own test class.
      */
