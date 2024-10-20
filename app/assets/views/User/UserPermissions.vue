@@ -11,7 +11,7 @@ const { user_name } = defineProps<{
         <UFSprunjeTable :dataUrl="'/api/users/u/' + user_name + '/permissions'" searchColumn="name">
             <template #header>
                 <UFSprunjeHeader sort="name">Permission</UFSprunjeHeader>
-                <UFSprunjeHeader sort="properties">Slug/Condition</UFSprunjeHeader>
+                <UFSprunjeHeader sort="properties">Description</UFSprunjeHeader>
                 <UFSprunjeHeader>Has permission via roles</UFSprunjeHeader>
             </template>
 

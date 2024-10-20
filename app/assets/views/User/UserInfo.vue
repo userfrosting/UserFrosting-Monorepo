@@ -49,6 +49,14 @@ const { user } = defineProps<{
             Edit User
         </button>
         <button
+            class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-button-small">
+            Change User Password
+        </button>
+        <button
+            class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-button-small">
+            Disable User
+        </button>
+        <button
             class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom uk-button-small">
             Delete User
         </button>

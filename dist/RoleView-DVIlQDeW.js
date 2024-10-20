@@ -1,9 +1,9 @@
-import { ref as F, watch as S, defineComponent as b, resolveComponent as s, openBlock as c, createBlock as g, withCtx as n, createElementVNode as t, createVNode as e, toDisplayString as i, createTextVNode as a, renderSlot as w, createElementBlock as C, Fragment as v, unref as U } from "vue";
-import { useRoute as R } from "vue-router";
-import { a as x } from "./axios-CXDYiOMX.js";
-import { a as $ } from "./types-Daou0lcF.js";
-function h(p) {
-  const l = F(!1), o = F(), r = F({
+import { ref as F, watch as w, defineComponent as b, resolveComponent as s, openBlock as c, createBlock as g, withCtx as n, createElementVNode as o, createVNode as e, toDisplayString as m, createTextVNode as a, renderSlot as R, createElementBlock as C, Fragment as h, unref as U } from "vue";
+import { useRoute as S } from "vue-router";
+import { a as v } from "./axios-CXDYiOMX.js";
+import { a as x } from "./types-Daou0lcF.js";
+function $(p) {
+  const l = F(!1), t = F(), r = F({
     id: 0,
     slug: "",
     name: "",
@@ -14,25 +14,25 @@ function h(p) {
     users_count: 0
   });
   async function u() {
-    l.value = !0, o.value = null, await x.get("/api/roles/r/" + p.params.slug).then((_) => {
-      r.value = _.data;
-    }).catch((_) => {
-      o.value = {
+    l.value = !0, t.value = null, await v.get("/api/roles/r/" + p.params.slug).then((i) => {
+      r.value = i.data;
+    }).catch((i) => {
+      t.value = {
         description: "An error as occurred",
-        style: $.Danger,
-        ..._.response.data
+        style: x.Danger,
+        ...i.response.data
       };
     }).finally(() => {
       l.value = !1;
     });
   }
-  return S(
+  return w(
     () => p.params.slug,
     () => {
       u();
     },
     { immediate: !0 }
-  ), { role: r, error: o, loading: l };
+  ), { role: r, error: t, loading: l };
 }
 const j = { class: "uk-text-center" }, B = { class: "uk-text-center uk-margin-remove" }, y = { class: "uk-text-meta" }, A = { class: "uk-description-list" }, H = { class: "uk-badge" }, T = /* @__PURE__ */ b({
   __name: "RoleInfo",
@@ -40,45 +40,45 @@ const j = { class: "uk-text-center" }, B = { class: "uk-text-center uk-margin-re
     role: {}
   },
   setup(p) {
-    return (l, o) => {
+    return (l, t) => {
       const r = s("font-awesome-icon"), u = s("UFCardBox");
       return c(), g(u, null, {
         default: n(() => [
-          t("div", j, [
+          o("div", j, [
             e(r, {
               icon: "address-card",
               class: "fa-5x"
             })
           ]),
-          t("h3", B, i(l.role.name), 1),
-          t("p", y, i(l.role.description), 1),
-          o[1] || (o[1] = t("hr", null, null, -1)),
-          t("dl", A, [
-            t("dt", null, [
+          o("h3", B, m(l.role.name), 1),
+          o("p", y, m(l.role.description), 1),
+          t[1] || (t[1] = o("hr", null, null, -1)),
+          o("dl", A, [
+            o("dt", null, [
               e(r, { icon: "users" }),
-              o[0] || (o[0] = a(" Users"))
+              t[0] || (t[0] = a(" Users"))
             ]),
-            t("dd", null, [
-              t("span", H, i(l.role.users_count), 1)
+            o("dd", null, [
+              o("span", H, m(l.role.users_count), 1)
             ])
           ]),
-          o[2] || (o[2] = t("hr", null, null, -1)),
-          o[3] || (o[3] = t("button", { class: "uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom uk-button-small" }, " Edit Role ", -1)),
-          o[4] || (o[4] = t("button", { class: "uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom uk-button-small" }, " Delete Role ", -1)),
-          w(l.$slots, "default", { dataTest: "slot" })
+          t[2] || (t[2] = o("hr", null, null, -1)),
+          t[3] || (t[3] = o("button", { class: "uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom uk-button-small" }, " Edit Role ", -1)),
+          t[4] || (t[4] = o("button", { class: "uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom uk-button-small" }, " Delete Role ", -1)),
+          R(l.$slots, "default", { dataTest: "slot" })
         ]),
         _: 3
       });
     };
   }
-}), P = { class: "uk-button uk-button-default" }, L = { class: "uk-text-meta" }, V = { class: "uk-button uk-button-danger uk-button-small" }, D = /* @__PURE__ */ b({
+}), P = { class: "uk-button uk-button-default" }, D = { class: "uk-text-meta" }, L = { class: "uk-button uk-button-danger uk-button-small" }, V = /* @__PURE__ */ b({
   __name: "RoleUsers",
   props: {
     slug: {}
   },
   setup(p) {
-    return (l, o) => {
-      const r = s("font-awesome-icon"), u = s("UFSprunjeHeader"), _ = s("RouterLink"), m = s("UFSprunjeColumn"), f = s("UFSprunjeTable"), k = s("UFCardBox");
+    return (l, t) => {
+      const r = s("font-awesome-icon"), u = s("UFSprunjeHeader"), i = s("RouterLink"), d = s("UFSprunjeColumn"), f = s("UFSprunjeTable"), k = s("UFCardBox");
       return c(), g(k, { title: "Role Users" }, {
         default: n(() => [
           e(f, {
@@ -87,48 +87,48 @@ const j = { class: "uk-text-center" }, B = { class: "uk-text-center uk-margin-re
             hideFilters: ""
           }, {
             actions: n(() => [
-              t("button", P, [
+              o("button", P, [
                 e(r, { icon: "user-plus" }),
-                o[0] || (o[0] = a(" Add user "))
+                t[0] || (t[0] = a(" Add user "))
               ])
             ]),
             header: n(() => [
               e(u, { sort: "name" }, {
-                default: n(() => o[1] || (o[1] = [
+                default: n(() => t[1] || (t[1] = [
                   a("User")
                 ])),
                 _: 1
               }),
               e(u, null, {
-                default: n(() => o[2] || (o[2] = [
+                default: n(() => t[2] || (t[2] = [
                   a("Actions")
                 ])),
                 _: 1
               })
             ]),
-            body: n(({ item: d }) => [
-              e(m, null, {
+            body: n(({ item: _ }) => [
+              e(d, null, {
                 default: n(() => [
-                  t("strong", null, [
-                    e(_, {
+                  o("strong", null, [
+                    e(i, {
                       to: {
                         name: "admin.user",
-                        params: { user_name: d.user_name }
+                        params: { user_name: _.user_name }
                       }
                     }, {
                       default: n(() => [
-                        a(i(d.full_name) + " (" + i(d.user_name) + ") ", 1)
+                        a(m(_.full_name) + " (" + m(_.user_name) + ") ", 1)
                       ]),
                       _: 2
                     }, 1032, ["to"])
                   ]),
-                  t("div", L, i(d.email), 1)
+                  o("div", D, m(_.email), 1)
                 ]),
                 _: 2
               }, 1024),
-              e(m, null, {
+              e(d, null, {
                 default: n(() => [
-                  t("button", V, [
+                  o("button", L, [
                     e(r, { icon: "trash" })
                   ])
                 ]),
@@ -148,8 +148,8 @@ const j = { class: "uk-text-center" }, B = { class: "uk-text-center uk-margin-re
     role: {}
   },
   setup(p) {
-    return (l, o) => {
-      const r = s("font-awesome-icon"), u = s("UFSprunjeHeader"), _ = s("RouterLink"), m = s("UFSprunjeColumn"), f = s("UFSprunjeTable"), k = s("UFCardBox");
+    return (l, t) => {
+      const r = s("font-awesome-icon"), u = s("UFSprunjeHeader"), i = s("RouterLink"), d = s("UFSprunjeColumn"), f = s("UFSprunjeTable"), k = s("UFCardBox");
       return c(), g(k, { title: "Permissions" }, {
         default: n(() => [
           e(f, {
@@ -157,43 +157,43 @@ const j = { class: "uk-text-center" }, B = { class: "uk-text-center uk-margin-re
             searchColumn: "name"
           }, {
             actions: n(() => [
-              t("button", E, [
+              o("button", E, [
                 e(r, { icon: "key" }),
-                o[0] || (o[0] = a(" Add permission "))
+                t[0] || (t[0] = a(" Add permission "))
               ])
             ]),
             header: n(() => [
               e(u, { sort: "name" }, {
-                default: n(() => o[1] || (o[1] = [
+                default: n(() => t[1] || (t[1] = [
                   a("Permission")
                 ])),
                 _: 1
               }),
               e(u, { sort: "properties" }, {
-                default: n(() => o[2] || (o[2] = [
-                  a("Slug/Condition")
+                default: n(() => t[2] || (t[2] = [
+                  a("Description")
                 ])),
                 _: 1
               }),
               e(u, null, {
-                default: n(() => o[3] || (o[3] = [
+                default: n(() => t[3] || (t[3] = [
                   a("Actions")
                 ])),
                 _: 1
               })
             ]),
-            body: n(({ item: d }) => [
-              e(m, null, {
+            body: n(({ item: _ }) => [
+              e(d, null, {
                 default: n(() => [
-                  t("strong", null, [
-                    e(_, {
+                  o("strong", null, [
+                    e(i, {
                       to: {
                         name: "admin.permission",
-                        params: { id: d.id }
+                        params: { id: _.id }
                       }
                     }, {
                       default: n(() => [
-                        a(i(d.name), 1)
+                        a(m(_.name), 1)
                       ]),
                       _: 2
                     }, 1032, ["to"])
@@ -201,24 +201,15 @@ const j = { class: "uk-text-center" }, B = { class: "uk-text-center uk-margin-re
                 ]),
                 _: 2
               }, 1024),
-              e(m, null, {
+              e(d, null, {
                 default: n(() => [
-                  t("div", null, [
-                    t("code", null, i(d.slug), 1)
-                  ]),
-                  t("div", null, [
-                    o[4] || (o[4] = a(" ↳ ")),
-                    t("code", null, i(d.conditions), 1)
-                  ]),
-                  t("div", null, [
-                    t("i", null, i(d.description), 1)
-                  ])
+                  a(m(_.description), 1)
                 ]),
                 _: 2
               }, 1024),
-              e(m, null, {
+              e(d, null, {
                 default: n(() => [
-                  t("button", N, [
+                  o("button", N, [
                     e(r, { icon: "trash" })
                   ])
                 ]),
@@ -238,11 +229,11 @@ const j = { class: "uk-text-center" }, B = { class: "uk-text-center uk-margin-re
 }, W = /* @__PURE__ */ b({
   __name: "RoleView",
   setup(p) {
-    const l = R(), { role: o, error: r } = h(l);
-    return (u, _) => {
-      const m = s("UFHeaderPage"), f = s("UFAlert"), k = s("UFCardBox");
-      return c(), C(v, null, [
-        e(m, {
+    const l = S(), { role: t, error: r } = $(l);
+    return (u, i) => {
+      const d = s("UFHeaderPage"), f = s("UFAlert"), k = s("UFCardBox");
+      return c(), C(h, null, [
+        e(d, {
           title: "Role details",
           caption: "Role information page"
         }),
@@ -251,19 +242,19 @@ const j = { class: "uk-text-center" }, B = { class: "uk-text-center uk-margin-re
             e(f, { alert: U(r) }, null, 8, ["alert"])
           ]),
           _: 1
-        })) : (c(), C(v, { key: 1 }, [
-          t("div", q, [
-            t("div", z, [
-              e(T, { role: U(o) }, null, 8, ["role"])
+        })) : (c(), C(h, { key: 1 }, [
+          o("div", q, [
+            o("div", z, [
+              e(T, { role: U(t) }, null, 8, ["role"])
             ]),
-            t("div", G, [
-              e(D, {
-                slug: U(o).slug
+            o("div", G, [
+              e(V, {
+                slug: U(t).slug
               }, null, 8, ["slug"])
             ])
           ]),
-          t("div", J, [
-            t("div", null, [
+          o("div", J, [
+            o("div", null, [
               e(I, {
                 role: u.$route.params.slug.toString()
               }, null, 8, ["role"])

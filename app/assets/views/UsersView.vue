@@ -11,6 +11,12 @@ import moment from 'moment'
 
     <UFCardBox>
         <UFSprunjeTable dataUrl="/api/users" searchColumn="name">
+            <template #actions>
+                <button class="uk-button uk-button-default">
+                    <font-awesome-icon icon="user-plus" /> Create user
+                </button>
+            </template>
+
             <template #header>
                 <UFSprunjeHeader sort="name">User</UFSprunjeHeader>
                 <UFSprunjeHeader sort="last_activity">Last Activity</UFSprunjeHeader>
@@ -48,7 +54,17 @@ import moment from 'moment'
                     <UFLabel :severity="Severity.Success" v-else>Active</UFLabel>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
-                    <!-- TODO -->
+                    <button class="uk-button uk-button-default uk-button-small" type="button">
+                        Actions <font-awesome-icon icon="caret-down" fixed-width />
+                    </button>
+                    <div uk-dropdown>
+                        <ul class="uk-nav uk-dropdown-nav">
+                            <li><a href="#">Edit User</a></li>
+                            <li><a href="#">Change User Password</a></li>
+                            <li><a href="#">Disable User</a></li>
+                            <li><a href="#">Delete User</a></li>
+                        </ul>
+                    </div>
                 </UFSprunjeColumn>
             </template>
         </UFSprunjeTable>

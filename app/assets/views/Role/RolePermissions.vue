@@ -17,7 +17,7 @@ const { role } = defineProps<{
 
             <template #header>
                 <UFSprunjeHeader sort="name">Permission</UFSprunjeHeader>
-                <UFSprunjeHeader sort="properties">Slug/Condition</UFSprunjeHeader>
+                <UFSprunjeHeader sort="properties">Description</UFSprunjeHeader>
                 <UFSprunjeHeader>Actions</UFSprunjeHeader>
             </template>
 
@@ -33,17 +33,7 @@ const { role } = defineProps<{
                         </RouterLink>
                     </strong>
                 </UFSprunjeColumn>
-                <UFSprunjeColumn>
-                    <div>
-                        <code>{{ item.slug }}</code>
-                    </div>
-                    <div>
-                        ↳ <code>{{ item.conditions }}</code>
-                    </div>
-                    <div>
-                        <i>{{ item.description }}</i>
-                    </div>
-                </UFSprunjeColumn>
+                <UFSprunjeColumn>{{ item.description }}</UFSprunjeColumn>
                 <UFSprunjeColumn>
                     <button class="uk-button uk-button-danger uk-button-small">
                         <font-awesome-icon icon="trash" />

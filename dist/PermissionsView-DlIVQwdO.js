@@ -1,8 +1,8 @@
 import { resolveComponent as o, openBlock as _, createElementBlock as c, Fragment as f, createVNode as e, withCtx as n, createTextVNode as r, createElementVNode as F, toDisplayString as l } from "vue";
 import { _ as U } from "./_plugin-vue_export-helper-CHgC5LLL.js";
 const g = {};
-function C(S, t) {
-  const m = o("UFHeaderPage"), i = o("UFSprunjeHeader"), d = o("RouterLink"), a = o("UFSprunjeColumn"), p = o("UFSprunjeTable"), u = o("UFCardBox");
+function x(C, t) {
+  const m = o("UFHeaderPage"), i = o("UFSprunjeHeader"), p = o("RouterLink"), a = o("UFSprunjeColumn"), d = o("UFSprunjeTable"), u = o("UFCardBox");
   return _(), c(f, null, [
     e(m, {
       title: "Permissions",
@@ -10,7 +10,7 @@ function C(S, t) {
     }),
     e(u, null, {
       default: n(() => [
-        e(p, {
+        e(d, {
           dataUrl: "/api/permissions",
           searchColumn: "name"
         }, {
@@ -23,7 +23,7 @@ function C(S, t) {
             }),
             e(i, { sort: "properties" }, {
               default: n(() => t[1] || (t[1] = [
-                r("Slug/Condition")
+                r("Description")
               ])),
               _: 1
             })
@@ -32,7 +32,7 @@ function C(S, t) {
             e(a, null, {
               default: n(() => [
                 F("strong", null, [
-                  e(d, {
+                  e(p, {
                     to: {
                       name: "admin.permission",
                       params: { id: s.id }
@@ -61,7 +61,7 @@ function C(S, t) {
     })
   ], 64);
 }
-const P = /* @__PURE__ */ U(g, [["render", C]]);
+const P = /* @__PURE__ */ U(g, [["render", x]]);
 export {
   P as default
 };
