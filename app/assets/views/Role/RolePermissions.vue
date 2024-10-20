@@ -1,18 +1,24 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 
-const { user_name } = defineProps<{
-    user_name: string
+const { role } = defineProps<{
+    role: string
 }>()
 </script>
 
 <template>
     <UFCardBox title="Permissions">
-        <UFSprunjeTable :dataUrl="'/api/users/u/' + user_name + '/permissions'" searchColumn="name">
+        <UFSprunjeTable :dataUrl="'/api/roles/r/' + role + '/permissions'" searchColumn="name">
+            <template #actions>
+                <button class="uk-button uk-button-default">
+                    <font-awesome-icon icon="key" /> Add permission
+                </button>
+            </template>
+
             <template #header>
                 <UFSprunjeHeader sort="name">Permission</UFSprunjeHeader>
                 <UFSprunjeHeader sort="properties">Slug/Condition</UFSprunjeHeader>
-                <UFSprunjeHeader>Has permission via roles</UFSprunjeHeader>
+                <UFSprunjeHeader>Actions</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">
@@ -39,7 +45,9 @@ const { user_name } = defineProps<{
                     </div>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
-                    <!-- TODO -->
+                    <button class="uk-button uk-button-danger uk-button-small">
+                        <font-awesome-icon icon="trash" />
+                    </button>
                 </UFSprunjeColumn>
             </template>
         </UFSprunjeTable>

@@ -16,15 +16,14 @@ const { group } = defineProps<{
         <p class="uk-text-meta">
             {{ group.description }}
         </p>
-
-        <div uk-grid>
-            <div class="uk-width-auto@m">
-                <strong><font-awesome-icon icon="users" /> Users</strong>
-            </div>
-            <div class="uk-width-expand@m uk-text-right">
+        <hr />
+        <!-- TODO : Find a way to slot the description list -->
+        <dl class="uk-description-list">
+            <dt><font-awesome-icon icon="users" /> Users</dt>
+            <dd>
                 <span class="uk-badge">{{ group.users_count }}</span>
-            </div>
-        </div>
+            </dd>
+        </dl>
         <!-- TODO : Edit Btn -->
         <!-- TODO : DElete Btn -->
     </UFCardBox>
