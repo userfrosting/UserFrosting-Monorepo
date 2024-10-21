@@ -32,7 +32,7 @@ const n = [
       {
         path: "",
         name: "admin.groups",
-        component: () => import("./GroupsView-DxQEew_O.js")
+        component: () => import("./GroupsView-FYEMxd2t.js")
       },
       {
         path: "g/:slug",

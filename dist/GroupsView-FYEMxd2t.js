@@ -1,6 +1,6 @@
 import { resolveComponent as r, openBlock as c, createElementBlock as g, Fragment as k, createVNode as t, withCtx as n, createElementVNode as e, createTextVNode as u, toDisplayString as i } from "vue";
-import { _ as U } from "./_plugin-vue_export-helper-CHgC5LLL.js";
-const b = {}, F = { class: "uk-button uk-button-default" }, w = {
+import { _ as b } from "./_plugin-vue_export-helper-CHgC5LLL.js";
+const F = {}, U = { class: "uk-button uk-button-default" }, w = {
   class: "uk-button uk-button-default uk-button-small",
   type: "button"
 };
@@ -18,8 +18,8 @@ function x(C, o) {
           searchColumn: "name"
         }, {
           actions: n(() => [
-            e("button", F, [
-              t(d, { icon: "Users" }),
+            e("button", U, [
+              t(d, { icon: "users" }),
               o[0] || (o[0] = u(" Create Group "))
             ])
           ]),
@@ -98,7 +98,7 @@ function x(C, o) {
     })
   ], 64);
 }
-const G = /* @__PURE__ */ U(b, [["render", x]]);
+const G = /* @__PURE__ */ b(F, [["render", x]]);
 export {
   G as default
 };

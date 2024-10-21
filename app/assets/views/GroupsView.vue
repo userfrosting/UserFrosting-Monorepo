@@ -7,7 +7,7 @@
         <UFSprunjeTable dataUrl="/api/groups" searchColumn="name">
             <template #actions>
                 <button class="uk-button uk-button-default">
-                    <font-awesome-icon icon="Users" /> Create Group
+                    <font-awesome-icon icon="users" /> Create Group
                 </button>
             </template>
 
