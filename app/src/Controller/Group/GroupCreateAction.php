@@ -15,11 +15,11 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Group;
 use Illuminate\Database\Connection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\Fortress\Transformer\RequestDataTransformer;
 use UserFrosting\Fortress\Validator\ServerSideValidator;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -51,7 +51,7 @@ class GroupCreateAction
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
         protected Connection $db,
         protected GroupInterface $groupModel,
@@ -71,8 +71,11 @@ class GroupCreateAction
     public function __invoke(Request $request, Response $response): Response
     {
         $this->validateAccess();
-        $this->handle($request);
-        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $group = $this->handle($request);
+        $payload = json_encode([
+            'success' => true,
+            'message' => $this->translator->translate('GROUP.CREATION_SUCCESSFUL', $group->toArray()),
+        ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -82,8 +85,10 @@ class GroupCreateAction
      * Handle the request.
      *
      * @param Request $request
+     *
+     * @return GroupInterface
      */
-    protected function handle(Request $request): void
+    protected function handle(Request $request): GroupInterface
     {
         // Get POST parameters.
         $params = (array) $request->getParsedBody();
@@ -105,7 +110,7 @@ class GroupCreateAction
 
         // All checks passed!  log events/activities and create group
         // Begin transaction - DB will be rolled back if an exception occurs
-        $this->db->transaction(function () use ($data, $currentUser) {
+        $group = $this->db->transaction(function () use ($data, $currentUser) {
             // Create the group
             $group = new $this->groupModel($data);
             $group->save();
@@ -116,8 +121,10 @@ class GroupCreateAction
                 'user_id' => $currentUser->id,
             ]);
 
-            $this->alert->addMessage('success', 'GROUP.CREATION_SUCCESSFUL', $data);
+            return $group;
         });
+
+        return $group;
     }
 
     /**

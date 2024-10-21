@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Tests\Controller\Group;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Sprinkle\Account\Database\Models\Group;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
@@ -81,7 +80,10 @@ class GroupCreateActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([], $response);
+        $this->assertJsonResponse([
+            'success' => true,
+            'message' => 'Successfully created group <strong>The Foo</strong>',
+        ], $response);
 
         // Make sure the user is added to the db by querying it
         /** @var Group */
@@ -89,12 +91,6 @@ class GroupCreateActionTest extends AdminTestCase
         $this->assertSame('The Foo', $group['name']);
         $this->assertSame('fas fas-icon', $group['icon']);
         $this->assertSame('Foo description', $group['description']);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     /**
@@ -125,12 +121,6 @@ class GroupCreateActionTest extends AdminTestCase
             'description' => 'Please specify a value for <strong>Slug</strong>. Slug must be between 1 and 255 characters in length.',
             'status'      => 400,
         ], $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('danger', array_reverse($messages)[0]['type']);
     }
 
     /**
