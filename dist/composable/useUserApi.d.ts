@@ -10,7 +10,7 @@ interface UserApi extends UserInterface {
 /**
  * API Composable
  */
-export declare function useUserAdminApi(route: any): {
+export declare function useUserApi(route: any): {
     user: import('vue').Ref<{
         locale_name: string;
         group: {

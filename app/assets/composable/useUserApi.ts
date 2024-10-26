@@ -14,7 +14,7 @@ interface UserApi extends UserInterface {
 /**
  * API Composable
  */
-export function useUserAdminApi(route: any) {
+export function useUserApi(route: any) {
     const loading = ref(false)
     const error = ref<AlertInterface | null>()
     const user = ref<UserApi>({

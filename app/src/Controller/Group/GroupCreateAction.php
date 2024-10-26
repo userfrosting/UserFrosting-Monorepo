@@ -71,10 +71,11 @@ class GroupCreateAction
     public function __invoke(Request $request, Response $response): Response
     {
         $this->validateAccess();
-        $group = $this->handle($request);
+        $group = $this->handle($request)->toArray();
         $payload = json_encode([
             'success' => true,
-            'message' => $this->translator->translate('GROUP.CREATION_SUCCESSFUL', $group->toArray()),
+            'message' => $this->translator->translate('GROUP.CREATION_SUCCESSFUL', $group),
+            'group'   => $group,
         ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 

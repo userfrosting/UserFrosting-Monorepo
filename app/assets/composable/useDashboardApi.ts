@@ -55,7 +55,6 @@ const defaultDashboardApi: DashboardApi = {
     users: []
 }
 
-export type { DashboardApi, SprinkleList, DatabaseInfo, SystemInfo }
 export const useDashboardApi = defineStore('dashboardApi', {
     state: () => {
         return {
@@ -86,3 +85,5 @@ export const useDashboardApi = defineStore('dashboardApi', {
         }
     }
 })
+
+export type { DashboardApi, SprinkleList, DatabaseInfo, SystemInfo }

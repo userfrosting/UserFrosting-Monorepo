@@ -80,10 +80,14 @@ class GroupCreateActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([
-            'success' => true,
-            'message' => 'Successfully created group <strong>The Foo</strong>',
+        $this->assertJsonStructure([
+            'success',
+            'message',
+            'group',
         ], $response);
+        $this->assertJsonResponse(true, $response, 'success');
+        $this->assertJsonResponse('Successfully created group <strong>The Foo</strong>', $response, 'message');
+        $this->assertJsonResponse('The Foo', $response, 'group.name');
 
         // Make sure the user is added to the db by querying it
         /** @var Group */

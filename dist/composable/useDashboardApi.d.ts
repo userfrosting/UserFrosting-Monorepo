@@ -25,7 +25,6 @@ interface DashboardApi {
     sprinkles: SprinkleList;
     users: UserInterface[];
 }
-export type { DashboardApi, SprinkleList, DatabaseInfo, SystemInfo };
 export declare const useDashboardApi: import('pinia').StoreDefinition<"dashboardApi", {
     data: DashboardApi;
 }, {}, {
@@ -66,3 +65,4 @@ export declare const useDashboardApi: import('pinia').StoreDefinition<"dashboard
         }[];
     }>;
 }>;
+export type { DashboardApi, SprinkleList, DatabaseInfo, SystemInfo };

@@ -1,6 +1,6 @@
 import { ref as l, watch as u } from "vue";
 import { a as i, b as o } from "../types-Ht7brb6q.js";
-function d(t) {
+function m(t) {
   const a = l(!1), e = l(), n = l({
     id: 0,
     user_name: "",
@@ -41,5 +41,5 @@ function d(t) {
   ), { user: n, error: e, loading: a };
 }
 export {
-  d as useUserAdminApi
+  m as useUserApi
 };
