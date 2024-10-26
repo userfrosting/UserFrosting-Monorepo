@@ -1,7 +1,6 @@
 import { defineStore as e } from "pinia";
-import { a } from "../axios-CXDYiOMX.js";
-import { a as o } from "../types-Daou0lcF.js";
-const t = {
+import { a, b as o } from "../types-Ht7brb6q.js";
+const s = {
   counter: {
     users: 0,
     roles: 0,
@@ -21,9 +20,9 @@ const t = {
   },
   sprinkles: {},
   users: []
-}, p = e("dashboardApi", {
+}, d = e("dashboardApi", {
   state: () => ({
-    data: t
+    data: s
   }),
   actions: {
     async load() {
@@ -39,5 +38,5 @@ const t = {
   }
 });
 export {
-  p as useDashboardApi
+  d as useDashboardApi
 };

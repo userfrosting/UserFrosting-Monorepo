@@ -1,6 +1,5 @@
 import { ref as l, watch as u } from "vue";
-import { a as i } from "../axios-CXDYiOMX.js";
-import { a as o } from "../types-Daou0lcF.js";
+import { a as i, b as o } from "../types-Ht7brb6q.js";
 function d(t) {
   const a = l(!1), e = l(), n = l({
     id: 0,

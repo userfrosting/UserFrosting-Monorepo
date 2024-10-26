@@ -1,7 +1,7 @@
-const a = {
-  install: (p, t) => {
+const l = {
+  install: () => {
   }
 };
 export {
-  a as default
+  l as default
 };

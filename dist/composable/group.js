@@ -1,8 +1,7 @@
 import { ref as r, watch as u } from "vue";
-import { a as i } from "../axios-CXDYiOMX.js";
-import { a as l } from "../types-Daou0lcF.js";
-function m(o) {
-  const a = r(!1), e = r(), s = r({
+import { a as l, b as i } from "../types-Ht7brb6q.js";
+function d(s) {
+  const a = r(!1), e = r(), n = r({
     id: 0,
     name: "",
     slug: "",
@@ -13,13 +12,13 @@ function m(o) {
     deleted_at: null,
     users_count: 0
   });
-  async function n() {
-    a.value = !0, e.value = null, await i.get("/api/groups/g/" + o.params.slug).then((t) => {
-      s.value = t.data;
+  async function o() {
+    a.value = !0, e.value = null, await l.get("/api/groups/g/" + s.params.slug).then((t) => {
+      n.value = t.data;
     }).catch((t) => {
       e.value = {
         description: "An error as occurred",
-        style: l.Danger,
+        style: i.Danger,
         closeBtn: !0,
         ...t.response.data
       };
@@ -28,13 +27,13 @@ function m(o) {
     });
   }
   return u(
-    () => o.params.slug,
+    () => s.params.slug,
     () => {
-      n();
+      o();
     },
     { immediate: !0 }
-  ), { group: s, error: e, loading: a };
+  ), { group: n, error: e, loading: a };
 }
 export {
-  m as useGroupApi
+  d as useGroupApi
 };

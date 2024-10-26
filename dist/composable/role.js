@@ -1,8 +1,7 @@
-import { ref as t, watch as n } from "vue";
-import { a as i } from "../axios-CXDYiOMX.js";
-import { a as u } from "../types-Daou0lcF.js";
-function m(o) {
-  const e = t(!1), a = t(), s = t({
+import { ref as r, watch as o } from "vue";
+import { a as u, b as i } from "../types-Ht7brb6q.js";
+function p(s) {
+  const a = r(!1), e = r(), l = r({
     id: 0,
     slug: "",
     name: "",
@@ -12,27 +11,27 @@ function m(o) {
     deleted_at: null,
     users_count: 0
   });
-  async function l() {
-    e.value = !0, a.value = null, await i.get("/api/roles/r/" + o.params.slug).then((r) => {
-      s.value = r.data;
-    }).catch((r) => {
-      a.value = {
+  async function n() {
+    a.value = !0, e.value = null, await u.get("/api/roles/r/" + s.params.slug).then((t) => {
+      l.value = t.data;
+    }).catch((t) => {
+      e.value = {
         description: "An error as occurred",
-        style: u.Danger,
-        ...r.response.data
+        style: i.Danger,
+        ...t.response.data
       };
     }).finally(() => {
-      e.value = !1;
+      a.value = !1;
     });
   }
-  return n(
-    () => o.params.slug,
+  return o(
+    () => s.params.slug,
     () => {
-      l();
+      n();
     },
     { immediate: !0 }
-  ), { role: s, error: a, loading: e };
+  ), { role: l, error: e, loading: a };
 }
 export {
-  m as useRoleApi
+  p as useRoleApi
 };

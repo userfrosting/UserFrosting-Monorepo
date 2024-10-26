@@ -1,7 +1,6 @@
 import { ref as i, watch as o } from "vue";
-import { a as l } from "../axios-CXDYiOMX.js";
-import { a as c } from "../types-Daou0lcF.js";
-function m(r) {
+import { a as l, b as c } from "../types-Ht7brb6q.js";
+function u(r) {
   const a = i(!1), e = i(), s = i({
     id: 0,
     slug: "",
@@ -34,5 +33,5 @@ function m(r) {
   ), { permission: s, error: e, loading: a };
 }
 export {
-  m as usePermissionApi
+  u as usePermissionApi
 };

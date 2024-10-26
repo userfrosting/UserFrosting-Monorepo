@@ -7,7 +7,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./DashboardView-DuV7cK9X.js")
+    component: () => import("./DashboardView-D_3JBZn7.js")
   }
 ], t = [
   {
@@ -18,7 +18,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./ActivitiesView-BJRJlLSZ.js")
+    component: () => import("./ActivitiesView-zMin4Yo-.js")
   }
 ], e = [
   {
@@ -32,12 +32,12 @@ const n = [
       {
         path: "",
         name: "admin.groups",
-        component: () => import("./GroupsView-B5AdZnnE.js")
+        component: () => import("./GroupsView-B1HxEK-_.js")
       },
       {
         path: "g/:slug",
         name: "admin.group",
-        component: () => import("./GroupView-C-pLYY6K.js")
+        component: () => import("./GroupView-BwwF9LFo.js")
       }
     ]
   }
@@ -53,13 +53,13 @@ const n = [
       {
         path: "",
         name: "admin.permissions",
-        component: () => import("./PermissionsView-DlIVQwdO.js")
+        component: () => import("./PermissionsView-CXWyUe3L.js")
       },
       {
         path: "p/:id",
         // permissions/p/{id}
         name: "admin.permission",
-        component: () => import("./PermissionView-CwSmb9ry.js")
+        component: () => import("./PermissionView-B_Cpnimc.js")
       }
     ]
   }
@@ -75,13 +75,13 @@ const n = [
       {
         path: "",
         name: "admin.roles",
-        component: () => import("./RolesView-7Y1jKCLA.js")
+        component: () => import("./RolesView-BsMEKOXm.js")
       },
       {
         path: "r/:slug",
         // roles/r/{slug}
         name: "admin.role",
-        component: () => import("./RoleView-CuY3whsc.js")
+        component: () => import("./RoleView-CMpv_-_v.js")
       }
     ]
   }
@@ -97,13 +97,13 @@ const n = [
       {
         path: "",
         name: "admin.users",
-        component: () => import("./UsersView-BfWj-5Sm.js")
+        component: () => import("./UsersView-BnC0XV1m.js")
       },
       {
         path: "u/:user_name",
         // users/u/{user_name}
         name: "admin.user",
-        component: () => import("./UserView-BWWqdCs9.js")
+        component: () => import("./UserView-hTK3dcXV.js")
       }
     ]
   }
