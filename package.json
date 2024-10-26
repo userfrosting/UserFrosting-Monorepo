@@ -35,6 +35,11 @@
             "require": "./dist/components.cjs",
             "types": "./dist/components/index.d.ts"
         },
+        "./composable/*": {
+            "import": "./dist/composable/*.js",
+            "require": "./dist/composable/*.cjs",
+            "types": "./dist/composable/*.d.ts"
+        },
         "./routes": {
             "import": "./dist/routes.js",
             "require": "./dist/routes.cjs",

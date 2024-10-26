@@ -15,7 +15,11 @@ export default defineConfig({
             entry: {
                 plugin: 'app/assets/plugin.ts',
                 components: 'app/assets/components/index.ts',
-                // composables: 'app/assets/composables/index.ts',
+                'composable/dashboard': 'app/assets/composable/dashboard.ts',
+                'composable/group': 'app/assets/composable/group.ts',
+                'composable/permission': 'app/assets/composable/permission.ts',
+                'composable/role': 'app/assets/composable/role.ts',
+                'composable/user': 'app/assets/composable/user.ts',
                 // types: 'app/assets/interfaces/index.ts',
                 // guards: 'app/assets/guards/authGuard.ts',
                 // stores: 'app/assets/stores/auth.ts'

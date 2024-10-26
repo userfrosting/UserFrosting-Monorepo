@@ -7,7 +7,7 @@ const n = [
         redirect: { name: "account.login" }
       }
     },
-    component: () => import("./DashboardView-Cgrx0SLr.js")
+    component: () => import("./DashboardView-DuV7cK9X.js")
   }
 ], t = [
   {
@@ -32,12 +32,12 @@ const n = [
       {
         path: "",
         name: "admin.groups",
-        component: () => import("./GroupsView-FYEMxd2t.js")
+        component: () => import("./GroupsView-B5AdZnnE.js")
       },
       {
         path: "g/:slug",
         name: "admin.group",
-        component: () => import("./GroupView-2Qy5dhaD.js")
+        component: () => import("./GroupView-C-pLYY6K.js")
       }
     ]
   }
@@ -59,7 +59,7 @@ const n = [
         path: "p/:id",
         // permissions/p/{id}
         name: "admin.permission",
-        component: () => import("./PermissionView-DhQK9SjC.js")
+        component: () => import("./PermissionView-CwSmb9ry.js")
       }
     ]
   }
@@ -81,7 +81,7 @@ const n = [
         path: "r/:slug",
         // roles/r/{slug}
         name: "admin.role",
-        component: () => import("./RoleView-DVIlQDeW.js")
+        component: () => import("./RoleView-CuY3whsc.js")
       }
     ]
   }
@@ -103,7 +103,7 @@ const n = [
         path: "u/:user_name",
         // users/u/{user_name}
         name: "admin.user",
-        component: () => import("./UserView-CWu0vErB.js")
+        component: () => import("./UserView-BWWqdCs9.js")
       }
     ]
   }
