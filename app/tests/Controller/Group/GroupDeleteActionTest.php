@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Tests\Controller\Group;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Database\Models\Group;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
@@ -101,17 +100,14 @@ class GroupDeleteActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([], $response);
+        $this->assertJsonResponse([
+            'success' => true,
+            'message' => 'Successfully deleted group <strong>' . $groupToDelete->name . '</strong>',
+        ], $response);
 
         // Make sure the user is deleted from the db by querying it
         $group = Group::where('slug', $groupToDelete->slug)->first();
         $this->assertNull($group);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     public function testPostForDefaultGroup(): void

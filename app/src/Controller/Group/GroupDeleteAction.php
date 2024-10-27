@@ -15,8 +15,8 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Group;
 use Illuminate\Database\Connection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -44,7 +44,7 @@ class GroupDeleteAction
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $db,
@@ -61,8 +61,11 @@ class GroupDeleteAction
      */
     public function __invoke(GroupInterface $group, Response $response): Response
     {
-        $this->handle($group);
-        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $userMessage = $this->handle($group);
+        $payload = json_encode([
+            'success' => true,
+            'message' => $this->translator->translate($userMessage->message, $userMessage->parameters),
+        ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -73,7 +76,7 @@ class GroupDeleteAction
      *
      * @param GroupInterface $group
      */
-    protected function handle(GroupInterface $group): void
+    protected function handle(GroupInterface $group): UserMessage
     {
         // Access-controlled page based on the group.
         $this->validateAccess($group);
@@ -113,7 +116,7 @@ class GroupDeleteAction
             ]);
         });
 
-        $this->alert->addMessage('success', 'GROUP.DELETION_SUCCESSFUL', [
+        return new UserMessage('GROUP.DELETION_SUCCESSFUL', [
             'name' => $group->name,
         ]);
     }
