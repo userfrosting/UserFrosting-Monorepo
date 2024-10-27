@@ -18,6 +18,7 @@ export default defineConfig({
                 'composable/useDashboardApi': 'app/assets/composable/useDashboardApi.ts',
                 'composable/useGroupApi': 'app/assets/composable/useGroupApi.ts',
                 'composable/useGroupCreateApi': 'app/assets/composable/useGroupCreateApi.ts',
+                'composable/useGroupDeleteApi': 'app/assets/composable/useGroupDeleteApi.ts',
                 'composable/usePermissionApi': 'app/assets/composable/usePermissionApi.ts',
                 'composable/useRoleApi': 'app/assets/composable/useRoleApi.ts',
                 'composable/useUserApi': 'app/assets/composable/useUserApi.ts',
