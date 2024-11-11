@@ -38,4 +38,4 @@ declare const useSprunjer: (dataUrl: any, defaultSorts?: AssociativeArray, defau
     last: ComputedRef<number>;
     toggleSort: (column: string) => void;
 };
-export { useSprunjer, type Sprunjer };
+export { useSprunjer, type Sprunjer, type AssociativeArray };

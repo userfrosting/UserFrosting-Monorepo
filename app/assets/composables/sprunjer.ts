@@ -152,4 +152,4 @@ const useSprunjer = (
     }
 }
 
-export { useSprunjer, type Sprunjer }
+export { useSprunjer, type Sprunjer, type AssociativeArray }
