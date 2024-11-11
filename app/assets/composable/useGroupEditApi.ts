@@ -25,11 +25,11 @@ interface GroupEditResponse {
  * API Composable
  */
 export function useGroupEditApi() {
-    const loadingState = ref<Boolean>(false)
+    const apiLoading = ref<Boolean>(false)
     const apiError = ref<AlertInterface | null>(null)
 
     async function submitGroupEdit(slug: string, data: GroupEditForm) {
-        loadingState.value = true
+        apiLoading.value = true
         apiError.value = null
         return axios
             .put<GroupEditResponse>('/api/groups/g/' + slug, data)
@@ -53,11 +53,11 @@ export function useGroupEditApi() {
                 throw apiError.value
             })
             .finally(() => {
-                loadingState.value = false
+                apiLoading.value = false
             })
     }
 
-    return { submitGroupEdit, loadingState, apiError }
+    return { submitGroupEdit, apiLoading, apiError }
 }
 
 export type { GroupEditForm, GroupEditResponse }

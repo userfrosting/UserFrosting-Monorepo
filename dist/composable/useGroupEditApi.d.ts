@@ -22,7 +22,7 @@ export declare function useGroupEditApi(): {
         message: string;
         group: GroupEditForm;
     }>;
-    loadingState: import('vue').Ref<{
+    apiLoading: import('vue').Ref<{
         valueOf: () => boolean;
     }, Boolean | {
         valueOf: () => boolean;

@@ -1,4 +1,7 @@
 import { Severity, AlertInterface } from '@userfrosting/sprinkle-core/types';
+/**
+ * Interfaces - What the API expects and what it returns
+ */
 interface GroupCreateForm {
     slug: string;
     name: string;
@@ -14,29 +17,17 @@ interface GroupCreateResponse {
  * API Composable
  */
 export declare function useGroupCreateApi(): {
-    sendForm: () => Promise<{
+    submitGroupEdit: (data: GroupCreateForm) => Promise<{
         success: boolean;
         message: string;
         group: GroupCreateForm;
     }>;
-    resetForm: () => void;
-    formData: import('vue').Ref<{
-        slug: string;
-        name: string;
-        description: string;
-        icon: string;
-    }, GroupCreateForm | {
-        slug: string;
-        name: string;
-        description: string;
-        icon: string;
-    }>;
-    loadingState: import('vue').Ref<{
+    apiLoading: import('vue').Ref<{
         valueOf: () => boolean;
     }, Boolean | {
         valueOf: () => boolean;
     }>;
-    formError: import('vue').Ref<{
+    apiError: import('vue').Ref<{
         title?: string | undefined;
         description?: string | undefined;
         style?: (Severity | keyof typeof Severity) | undefined;

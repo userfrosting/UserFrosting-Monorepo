@@ -2,7 +2,9 @@ import { ref } from 'vue'
 import axios from 'axios'
 import { Severity, type AlertInterface } from '@userfrosting/sprinkle-core/types'
 
-// Interfaces
+/**
+ * Interfaces - What the API expects and what it returns
+ */
 interface GroupCreateForm {
     slug: string
     name: string
@@ -23,23 +25,14 @@ interface GroupCreateResponse {
  * API Composable
  */
 export function useGroupCreateApi() {
-    const defaultData: GroupCreateForm = {
-        slug: '',
-        name: '',
-        description: '',
-        icon: 'users'
-    }
+    const apiLoading = ref<Boolean>(false)
+    const apiError = ref<AlertInterface | null>(null)
 
-    // Form data
-    const formData = ref<GroupCreateForm>({ ...defaultData })
-    const loadingState = ref<Boolean>(false)
-    const formError = ref<AlertInterface | null>(null)
-
-    async function sendForm() {
-        loadingState.value = true
-        formError.value = null
+    async function submitGroupEdit(data: GroupCreateForm) {
+        apiLoading.value = true
+        apiError.value = null
         return axios
-            .post<GroupCreateResponse>('/api/groups', formData.value)
+            .post<GroupCreateResponse>('/api/groups', data)
             .then((response) => {
                 return {
                     success: response.data.success,
@@ -48,7 +41,7 @@ export function useGroupCreateApi() {
                 }
             })
             .catch((err) => {
-                formError.value = {
+                apiError.value = {
                     ...{
                         description: 'An error as occurred',
                         style: Severity.Danger,
@@ -57,20 +50,14 @@ export function useGroupCreateApi() {
                     ...err.response.data
                 }
 
-                throw formError.value
+                throw apiError.value
             })
             .finally(() => {
-                loadingState.value = false
+                apiLoading.value = false
             })
     }
 
-    function resetForm() {
-        formData.value = { ...defaultData }
-        loadingState.value = false
-        formError.value = null
-    }
-
-    return { sendForm, resetForm, formData, loadingState, formError }
+    return { submitGroupEdit, apiLoading, apiError }
 }
 
 export type { GroupCreateForm, GroupCreateResponse }

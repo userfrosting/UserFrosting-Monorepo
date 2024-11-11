@@ -1,24 +1,24 @@
-import { ref as e } from "vue";
-import { a as n, b as l } from "../types-Ht7brb6q.js";
+import { ref as t } from "vue";
+import { a as n, b as i } from "../types-Ht7brb6q.js";
 function p() {
-  const t = e(!1), r = e(null);
+  const e = t(!1), r = t(null);
   async function u(s, o) {
-    return t.value = !0, r.value = null, n.put("/api/groups/g/" + s, o).then((a) => ({
+    return e.value = !0, r.value = null, n.put("/api/groups/g/" + s, o).then((a) => ({
       success: a.data.success,
       message: a.data.message,
       group: a.data.group
     })).catch((a) => {
       throw r.value = {
         description: "An error as occurred",
-        style: l.Danger,
+        style: i.Danger,
         closeBtn: !0,
         ...a.response.data
       }, r.value;
     }).finally(() => {
-      t.value = !1;
+      e.value = !1;
     });
   }
-  return { submitGroupEdit: u, loadingState: t, apiError: r };
+  return { submitGroupEdit: u, apiLoading: e, apiError: r };
 }
 export {
   p as useGroupEditApi

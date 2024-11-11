@@ -1,33 +1,25 @@
-import { ref as s } from "vue";
-import { a as l, b as c } from "../types-Ht7brb6q.js";
-function m() {
-  const u = {
-    slug: "",
-    name: "",
-    description: "",
-    icon: "users"
-  }, t = s({ ...u }), r = s(!1), a = s(null);
-  async function o() {
-    return r.value = !0, a.value = null, l.post("/api/groups", t.value).then((e) => ({
-      success: e.data.success,
-      message: e.data.message,
-      group: e.data.group
-    })).catch((e) => {
-      throw a.value = {
+import { ref as t } from "vue";
+import { a as o, b as n } from "../types-Ht7brb6q.js";
+function l() {
+  const e = t(!1), r = t(null);
+  async function s(u) {
+    return e.value = !0, r.value = null, o.post("/api/groups", u).then((a) => ({
+      success: a.data.success,
+      message: a.data.message,
+      group: a.data.group
+    })).catch((a) => {
+      throw r.value = {
         description: "An error as occurred",
-        style: c.Danger,
+        style: n.Danger,
         closeBtn: !0,
-        ...e.response.data
-      }, a.value;
+        ...a.response.data
+      }, r.value;
     }).finally(() => {
-      r.value = !1;
+      e.value = !1;
     });
   }
-  function n() {
-    t.value = { ...u }, r.value = !1, a.value = null;
-  }
-  return { sendForm: o, resetForm: n, formData: t, loadingState: r, formError: a };
+  return { submitGroupEdit: s, apiLoading: e, apiError: r };
 }
 export {
-  m as useGroupCreateApi
+  l as useGroupCreateApi
 };
