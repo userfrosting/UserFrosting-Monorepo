@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Tests\Controller\Group;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Sprinkle\Account\Database\Models\Group;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
@@ -116,7 +115,14 @@ class GroupEditActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([], $response);
+        $this->assertJsonStructure([
+            'success',
+            'message',
+            'group',
+        ], $response);
+        $this->assertJsonResponse(true, $response, 'success');
+        $this->assertJsonResponse('Details updated for group <strong>The Foo</strong>', $response, 'message');
+        $this->assertJsonResponse('The Foo', $response, 'group.name');
 
         // Test that the user was updated
         /** @var Group */
@@ -125,12 +131,6 @@ class GroupEditActionTest extends AdminTestCase
         $this->assertSame('The Foo', $editedGroup['name']);
         $this->assertSame('fas fas-icon', $editedGroup['icon']);
         $this->assertSame('Foo description', $editedGroup['description']);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     /**
@@ -158,7 +158,12 @@ class GroupEditActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([], $response);
+        $this->assertJsonStructure([
+            'success',
+            'message',
+            'group',
+        ], $response);
+        $this->assertJsonResponse($group->name, $response, 'group.name');
     }
 
     public function testPostForFailedValidation(): void

@@ -15,12 +15,12 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Group;
 use Illuminate\Database\Connection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\Fortress\Transformer\RequestDataTransformer;
 use UserFrosting\Fortress\Validator\ServerSideValidator;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -50,7 +50,7 @@ class GroupEditAction
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $db,
@@ -71,8 +71,12 @@ class GroupEditAction
      */
     public function __invoke(GroupInterface $group, Request $request, Response $response): Response
     {
-        $this->handle($group, $request);
-        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $group = $this->handle($group, $request);
+        $payload = json_encode([
+            'success' => true,
+            'message' => $this->translator->translate('GROUP.UPDATE', $group->toArray()),
+            'group'   => $group,
+        ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -83,8 +87,10 @@ class GroupEditAction
      *
      * @param GroupInterface $group
      * @param Request        $request
+     *
+     * @return GroupInterface
      */
-    protected function handle(GroupInterface $group, Request $request): void
+    protected function handle(GroupInterface $group, Request $request): GroupInterface
     {
         // Get PUT parameters
         $params = (array) $request->getParsedBody();
@@ -138,9 +144,7 @@ class GroupEditAction
             ]);
         });
 
-        $this->alert->addMessage('success', 'GROUP.UPDATE', [
-            'name' => $group->name,
-        ]);
+        return $group;
     }
 
     /**
