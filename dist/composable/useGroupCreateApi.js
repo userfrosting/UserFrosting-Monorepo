@@ -1,6 +1,6 @@
 import { ref as t } from "vue";
 import { a as o, b as n } from "../types-Ht7brb6q.js";
-function l() {
+function i() {
   const e = t(!1), r = t(null);
   async function s(u) {
     return e.value = !0, r.value = null, o.post("/api/groups", u).then((a) => ({
@@ -18,8 +18,8 @@ function l() {
       e.value = !1;
     });
   }
-  return { submitGroupEdit: s, apiLoading: e, apiError: r };
+  return { submitGroupCreate: s, apiLoading: e, apiError: r };
 }
 export {
-  l as useGroupCreateApi
+  i as useGroupCreateApi
 };

@@ -17,7 +17,7 @@ interface GroupCreateResponse {
  * API Composable
  */
 export declare function useGroupCreateApi(): {
-    submitGroupEdit: (data: GroupCreateForm) => Promise<{
+    submitGroupCreate: (data: GroupCreateForm) => Promise<{
         success: boolean;
         message: string;
         group: GroupCreateForm;

@@ -28,7 +28,7 @@ export function useGroupCreateApi() {
     const apiLoading = ref<Boolean>(false)
     const apiError = ref<AlertInterface | null>(null)
 
-    async function submitGroupEdit(data: GroupCreateForm) {
+    async function submitGroupCreate(data: GroupCreateForm) {
         apiLoading.value = true
         apiError.value = null
         return axios
@@ -57,7 +57,7 @@ export function useGroupCreateApi() {
             })
     }
 
-    return { submitGroupEdit, apiLoading, apiError }
+    return { submitGroupCreate, apiLoading, apiError }
 }
 
 export type { GroupCreateForm, GroupCreateResponse }
