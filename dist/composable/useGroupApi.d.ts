@@ -33,5 +33,6 @@ export declare function useGroupApi(route: any): {
     }>;
     error: import('vue').Ref<AlertInterface | null | undefined, AlertInterface | null | undefined>;
     loading: import('vue').Ref<boolean, boolean>;
+    fetchApi: () => Promise<void>;
 };
 export type { GroupApi };

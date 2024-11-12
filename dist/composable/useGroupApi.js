@@ -32,7 +32,7 @@ function d(s) {
       o();
     },
     { immediate: !0 }
-  ), { group: n, error: e, loading: a };
+  ), { group: n, error: e, loading: a, fetchApi: o };
 }
 export {
   d as useGroupApi

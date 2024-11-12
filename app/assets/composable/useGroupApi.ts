@@ -60,7 +60,7 @@ export function useGroupApi(route: any) {
         { immediate: true }
     )
 
-    return { group, error, loading }
+    return { group, error, loading, fetchApi }
 }
 
 export type { GroupApi }
