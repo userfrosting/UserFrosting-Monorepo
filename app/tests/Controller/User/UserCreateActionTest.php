@@ -355,6 +355,57 @@ class UserCreateActionTest extends AdminTestCase
         $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
+    public function testPostForNoGroup(): void
+    {
+        /** @var User */
+        $user = User::factory()->create();
+        $this->actAsUser($user, isMaster: true);
+
+        /** @var Config */
+        $config = $this->ci->get(Config::class);
+
+        // Force locale config.
+        $config->set('site.registration.user_defaults.locale', 'en_US');
+        $config->set('site.locales.available', ['en_US' => true]);
+
+        /** @var Mailer */
+        $mailer = Mockery::mock(Mailer::class)
+            ->makePartial()
+            ->shouldReceive('send')->once()
+            ->getMock();
+        $this->ci->set(Mailer::class, $mailer);
+
+        // Set post payload
+        $data = [
+            'user_name'  => 'foo',
+            'first_name' => 'Foo',
+            'last_name'  => 'Bar',
+            'email'      => 'foo@bar.com',
+            'locale'     => 'en_US',
+            'group_id'   => 0,
+        ];
+
+        // Create request with method and url and fetch response
+        $request = $this->createJsonRequest('POST', '/api/users', $data);
+        $response = $this->handleRequest($request);
+
+        // Assert response status & body
+        $this->assertJsonResponse([], $response);
+        $this->assertResponseStatus(200, $response);
+
+        // Make sure the user is added to the db by querying it
+        /** @var User */
+        $user = User::where('email', 'foo@bar.com')->first();
+        $this->assertSame('foo', $user['user_name']);
+        $this->assertSame('en_US', $user['locale']);
+
+        // Test message
+        /** @var AlertStream */
+        $ms = $this->ci->get(AlertStream::class);
+        $messages = $ms->getAndClearMessages();
+        $this->assertSame('success', array_reverse($messages)[0]['type']);
+    }
+
     /**
      * @depends testPost
      */

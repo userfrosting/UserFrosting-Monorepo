@@ -97,6 +97,8 @@ class UserApi
         $locales = $this->siteLocale->getAvailableIdentifiers();
         if (count($locales) <= 1) {
             $fields['hidden'][] = 'locale';
+        } else {
+            $fields['locale_name'] = (new Locale($user->locale))->getRegionalName();
         }
 
         // Determine buttons to display
