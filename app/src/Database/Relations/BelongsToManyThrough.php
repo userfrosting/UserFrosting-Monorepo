@@ -94,12 +94,12 @@ class BelongsToManyThrough extends BelongsToMany
     /**
      * Add a "via" query to load the intermediate models through which the child models are related.
      *
-     * @param string|null $viaRelationName
-     * @param callable    $viaCallback
+     * @param string|null   $viaRelationName
+     * @param callable|null $viaCallback
      *
      * @return self
      */
-    public function withVia(?string $viaRelationName = null, callable $viaCallback = null): self
+    public function withVia(?string $viaRelationName = null, ?callable $viaCallback = null): self
     {
         $this->tertiaryRelated = $this->intermediateRelation->getRelated();
 
