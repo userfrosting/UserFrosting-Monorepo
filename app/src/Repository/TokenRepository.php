@@ -229,7 +229,7 @@ abstract class TokenRepository
      *
      * @return string
      */
-    protected function generateRandomToken(string $gen = null): string
+    protected function generateRandomToken(?string $gen = null): string
     {
         do {
             $gen = md5(uniqid((string) mt_rand(), false));
