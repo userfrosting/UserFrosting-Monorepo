@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php_versions: ['8.1', '8.2', '8.3']
+        php_versions: ['8.1', '8.2', '8.3', '8.4']
 
     runs-on: ubuntu-latest
     name: PHPUnit - PHP ${{ matrix.php_versions }} - Memory SQLite
@@ -60,7 +60,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php_versions: ['8.1', '8.2', '8.3']
+        php_versions: ['8.1', '8.2', '8.3', '8.4']
 
     runs-on: ubuntu-latest
     name: PHPUnit - PHP ${{ matrix.php_versions }} - MySQL
@@ -129,7 +129,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php_versions: ['8.1', '8.2', '8.3']
+        php_versions: ['8.1', '8.2', '8.3', '8.4']
 
     runs-on: ubuntu-latest
     name: PHPUnit - PHP ${{ matrix.php_versions }} - MariaDB
@@ -191,7 +191,7 @@ jobs:
       strategy:
         fail-fast: false
         matrix:
-          php_versions: ['8.1', '8.2', '8.3']
+          php_versions: ['8.1', '8.2', '8.3', '8.4']
 
       runs-on: ubuntu-latest
       name: PHPUnit - PHP ${{ matrix.php_versions }} - SQLite
@@ -243,7 +243,7 @@ jobs:
       strategy:
         fail-fast: false
         matrix:
-          php_versions: ['8.1', '8.2', '8.3']
+          php_versions: ['8.1', '8.2', '8.3', '8.4']
 
       runs-on: ubuntu-latest
       name: PHPUnit - PHP ${{ matrix.php_versions }} - PostgreSQL
@@ -302,7 +302,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-          php_versions: ['8.1', '8.2', '8.3']
+          php_versions: ['8.1', '8.2', '8.3', '8.4']
 
     runs-on: windows-latest
     name: PHPUnit - PHP ${{ matrix.php_versions }} - Windows
