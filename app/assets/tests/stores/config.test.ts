@@ -27,7 +27,7 @@ describe('Config Store', () => {
         expect(configStore.config).toEqual({})
 
         // Act
-        const result = await configStore.load()
+        await configStore.load()
 
         // Assert
         expect(axios.get).toHaveBeenCalledWith('/api/config')
