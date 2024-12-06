@@ -1,8 +1,9 @@
 import { afterEach, describe, expect, test, vi } from 'vitest'
 import axios from 'axios'
 import type { UserInterface } from 'app/assets/interfaces'
-import { Severity } from '@userfrosting/sprinkle-core/types'
+import { Severity } from '@userfrosting/sprinkle-core/interfaces'
 import { useConfigStore } from '@userfrosting/sprinkle-core/stores'
+import type { RegisterForm } from '../../interfaces'
 import { Register } from '../../composables'
 
 const { getDefaultForm, doRegister, getAvailableLocales, getCaptchaUrl } = Register
@@ -24,7 +25,7 @@ const testUser: UserInterface = {
     deleted_at: null
 }
 
-const form: Register.RegisterForm = {
+const form: RegisterForm = {
     first_name: 'John',
     last_name: 'Doe',
     email: 'john.doe@example.com',

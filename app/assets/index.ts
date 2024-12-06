@@ -1,7 +1,7 @@
 import type { App } from 'vue'
+import type { Router } from 'vue-router'
 import { useAuthStore } from './stores/auth'
 import { useAuthGuard } from './guards/authGuard'
-import type { Router } from 'vue-router'
 
 /* Install plugins */
 export default {

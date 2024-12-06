@@ -1,1 +1,0 @@
-"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const e=require("vue"),r=require("./_plugin-vue_export-helper-BHFhmbuH.cjs"),t={};function n(s,_){const o=e.resolveComponent("UFPageForgotPassword");return e.openBlock(),e.createBlock(o)}const c=r._export_sfc(t,[["render",n]]);exports.default=c;

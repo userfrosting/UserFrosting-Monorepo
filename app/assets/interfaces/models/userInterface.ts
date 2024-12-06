@@ -1,4 +1,6 @@
 /**
+ * User Model
+ *
  * By default, the frontend user will have the same interface as the PHP user.
  * Note that any Sprinkle can (and should!) extend this interface.
  *

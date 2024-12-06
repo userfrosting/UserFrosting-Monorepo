@@ -24,50 +24,24 @@
         "url": "https://github.com/userfrosting/UserFrosting/issues"
     },
     "exports": {
-        ".": {
-            "import": "./dist/plugin.js",
-            "require": "./dist/plugin.cjs",
-            "types": "./dist/plugin.d.ts"
-        },
-        "./types": {
-            "import": "./dist/types.js",
-            "require": "./dist/types.cjs",
-            "types": "./dist/interfaces/index.d.ts"
-        },
-        "./composables": {
-            "import": "./dist/composables.js",
-            "require": "./dist/composables.cjs",
-            "types": "./dist/composables/index.d.ts"
-        },
-        "./stores": {
-            "import": "./dist/stores.js",
-            "require": "./dist/stores.cjs",
-            "types": "./dist/stores/auth.d.ts"
-        },
-        "./guards": {
-            "import": "./dist/guards.js",
-            "require": "./dist/guards.cjs",
-            "types": "./dist/guards/authGuard.d.ts"
-        },
-        "./routes": {
-            "import": "./dist/routes.js",
-            "require": "./dist/routes.cjs",
-            "types": "./dist/router/routes.d.ts"
-        },
-        "./*": "./app/assets/*"
+        ".": "./app/assets/index.ts",
+        "./composables": "./app/assets/composables/index.ts",
+        "./guards": "./app/assets/guards/index.ts",
+        "./interfaces": "./app/assets/interfaces/index.ts",
+        "./routes": "./app/assets/routes/index.ts",
+        "./stores": "./app/assets/stores/index.ts",
+        "./views": "./app/assets/views/index.ts"
     },
     "files": [
-        "app/assets/",
-        "dist/"
+        "app/assets/"
     ],
-    "dependencies": {},
     "peerDependencies": {
-        "vue": "^3.4.21",
-        "vue-router": "^4.2.4",
+        "@userfrosting/sprinkle-core": "git+https://github.com/userfrosting/sprinkle-core.git#6.0",
         "axios": "^1.5.0",
         "pinia": "^2.1.6",
         "pinia-plugin-persistedstate": "^3.2.0",
-        "@userfrosting/sprinkle-core": "git+https://github.com/userfrosting/sprinkle-core.git#6.0"
+        "vue": "^3.4.21",
+        "vue-router": "^4.2.4"
     },
     "devDependencies": {
         "@rushstack/eslint-patch": "^1.8.0",
@@ -81,7 +55,7 @@
         "@vue/tsconfig": "^0.5.1",
         "eslint": "^8.57.0",
         "eslint-plugin-vue": "^9.23.0",
-        "happy-dom": "^14.12.3",
+        "happy-dom": "^15.11.6",
         "less": "^4.2.0",
         "npm-run-all2": "^6.1.2",
         "prettier": "^3.2.5",
@@ -90,10 +64,11 @@
         "vitest": "^1.6.0",
         "vue": "^3.4.21",
         "vue-router": "^4.2.4",
-        "vue-tsc": "^2.0.11"
+        "vue-tsc": "^2.1.10"
     },
     "scripts": {
         "dev": "vite",
+        "typecheck": "vue-tsc --noEmit",
         "build": "vue-tsc && vite build",
         "lint": "eslint app/assets/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
         "format": "prettier --write app/assets/",

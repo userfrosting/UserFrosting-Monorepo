@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import { useAuthGuard } from '../guards/authGuard'
 import { useRouter } from 'vue-router'
-import plugin from '../plugin'
+import plugin from '../'
 import * as Auth from '../stores/auth'
 import * as AuthGuard from '../guards/authGuard'
 

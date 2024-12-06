@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test, vi } from 'vitest'
 import axios from 'axios'
-import { Severity } from '@userfrosting/sprinkle-core/types'
+import { Severity } from '@userfrosting/sprinkle-core/interfaces'
 import { resendVerification } from '../../composables'
 
 const email: String = 'john.doe@example.com'

@@ -1,4 +1,6 @@
 /**
+ * Role Model
+ *
  * By default, the frontend role object will have the same interface as the PHP user.
  * Note that any Sprinkle can (and should!) extend this interface.
  *

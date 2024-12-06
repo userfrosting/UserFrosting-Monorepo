@@ -1,18 +1,27 @@
+/**
+ * Forgot password API
+ *
+ * Fetch the forgot password API. This will send an email to the user with
+ * instructions to reset their password.
+ *
+ * @param {String} email - The email of the user to send the email to.
+ *
+ * @return {Promise} - The response of the API. Throw an error (AlertInterface)
+ * if the request failed. Return a success message (AlertInterface) if the
+ * request is a success.
+ */
 import axios from 'axios'
-import { Severity, type AlertInterface } from '@userfrosting/sprinkle-core/types'
+import { Severity, type AlertInterface } from '@userfrosting/sprinkle-core/interfaces'
 
-// Actions
-async function forgotPassword(email: String) {
+export async function forgotPassword(email: String) {
     return axios
         .post<{ message: string }>('/account/forgot-password', { email: email })
-        .then((response) => {
-            const error: AlertInterface = {
+        .then((response): AlertInterface => {
+            return {
                 description: response.data.message,
                 style: Severity.Success,
                 closeBtn: true
             }
-
-            return error
         })
         .catch((err) => {
             const error: AlertInterface = {
@@ -27,5 +36,3 @@ async function forgotPassword(email: String) {
             throw error
         })
 }
-
-export default forgotPassword

@@ -1,20 +1,9 @@
 import axios from 'axios'
-import { Severity, type AlertInterface } from '@userfrosting/sprinkle-core/types'
+import { Severity, type AlertInterface } from '@userfrosting/sprinkle-core/interfaces'
 import { useConfigStore } from '@userfrosting/sprinkle-core/stores'
-import type { UserInterface } from '../interfaces'
+import type { UserInterface, RegisterForm } from '../interfaces'
 
-// Interfaces
-interface RegisterForm {
-    first_name: string
-    last_name: string
-    email: string
-    user_name: string
-    password: string
-    passwordc: string
-    locale: string
-    captcha: string
-    spiderbro: string
-}
+// TODO : Refactor as a true composable
 
 // Variables
 function getDefaultForm(): RegisterForm {
@@ -61,5 +50,4 @@ async function doRegister(form: RegisterForm) {
         })
 }
 
-export type { RegisterForm }
 export { getDefaultForm, getAvailableLocales, getCaptchaUrl, doRegister }

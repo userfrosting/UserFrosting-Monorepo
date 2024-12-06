@@ -1,4 +1,4 @@
-const routes = [
+export default [
     {
         path: '/account/sign-in',
         name: 'account.login',
@@ -40,5 +40,3 @@ const routes = [
         component: () => import('../views/ResendVerificationView.vue')
     }
 ]
-
-export default routes

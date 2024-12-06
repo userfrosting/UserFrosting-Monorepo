@@ -1,4 +1,6 @@
 /**
+ * Permission Model
+ *
  * By default, the frontend role object will have the same interface as the PHP user.
  * Note that any Sprinkle can (and should!) extend this interface.
  *
@@ -13,12 +15,12 @@
  * - deleted_at: null
  */
 export interface PermissionInterface {
-    id: number;
-    slug: string;
-    name: string;
-    conditions: string;
-    description: string;
-    created_at: Date | string;
-    updated_at: Date | string;
-    deleted_at: Date | string | null;
+    id: number
+    slug: string
+    name: string
+    conditions: string
+    description: string
+    created_at: Date | string
+    updated_at: Date | string
+    deleted_at: Date | string | null
 }
