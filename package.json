@@ -34,7 +34,7 @@
         "vite": "^5.2.8",
         "vite-plugin-vue-devtools": "^7.5.4",
         "vue-loader": "^17.2.2",
-        "vue-tsc": "^2.0.11",
+        "vue-tsc": "^2.1.10",
         "webpack-notifier": "^1.15.0"
     },
     "scripts": {
