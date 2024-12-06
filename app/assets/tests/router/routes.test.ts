@@ -1,6 +1,6 @@
-import { describe, expect, test, vi } from 'vitest'
+import { describe, expect, test } from 'vitest'
 
-import AdminRoutes from '../../router/routes'
+import AdminRoutes from '../../routes'
 
 describe('routes.test.ts', () => {
     test('AdminRoutes should contain all the individual routes', () => {

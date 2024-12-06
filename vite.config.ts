@@ -13,17 +13,11 @@ export default defineConfig({
         outDir: './dist',
         lib: {
             entry: {
-                plugin: 'app/assets/plugin.ts',
+                main: 'app/assets/index.ts',
                 components: 'app/assets/components/index.ts',
-                'composable/useDashboardApi': 'app/assets/composable/useDashboardApi.ts',
-                'composable/useGroupApi': 'app/assets/composable/useGroupApi.ts',
-                'composable/useGroupCreateApi': 'app/assets/composable/useGroupCreateApi.ts',
-                'composable/useGroupEditApi': 'app/assets/composable/useGroupEditApi.ts',
-                'composable/useGroupDeleteApi': 'app/assets/composable/useGroupDeleteApi.ts',
-                'composable/usePermissionApi': 'app/assets/composable/usePermissionApi.ts',
-                'composable/useRoleApi': 'app/assets/composable/useRoleApi.ts',
-                'composable/useUserApi': 'app/assets/composable/useUserApi.ts',
-                routes: 'app/assets/router/routes.ts'
+                composables: 'app/assets/composables/index.ts',
+                routes: 'app/assets/routes/index.ts',
+                views: 'app/assets/views/index.ts'
             }
         },
         rollupOptions: {

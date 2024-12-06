@@ -1,1 +1,0 @@
-"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const e=require("vue"),n=require("./_plugin-vue_export-helper-BHFhmbuH.cjs"),t={};function r(s,l){const o=e.resolveComponent("UFAdminRolesPage");return e.openBlock(),e.createBlock(o)}const c=n._export_sfc(t,[["render",r]]);exports.default=c;
