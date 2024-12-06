@@ -45,7 +45,7 @@ const router = createRouter({
                         {
                             path: '',
                             name: 'test',
-                            component: () => import('../views/TestView.vue'),
+                            component: () => import('../views/TestView.vue')
                         },
                         {
                             path: 't/:slug',
