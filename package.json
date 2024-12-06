@@ -24,31 +24,13 @@
         "url": "https://github.com/userfrosting/UserFrosting/issues"
     },
     "exports": {
-        ".": {
-            "import": "./dist/plugin.js",
-            "require": "./dist/plugin.cjs",
-            "types": "./dist/plugin.d.ts"
-        },
-        "./types": {
-            "import": "./dist/types.js",
-            "require": "./dist/types.cjs",
-            "types": "./dist/interfaces/index.d.ts"
-        },
-        "./stores": {
-            "import": "./dist/stores.js",
-            "require": "./dist/stores.cjs",
-            "types": "./dist/stores/config.d.ts"
-        },
-        "./sprunjer": {
-            "import": "./dist/sprunjer.js",
-            "require": "./dist/sprunjer.cjs",
-            "types": "./dist/composables/sprunjer.d.ts"
-        },
-        "./*": "./app/assets/*"
+        ".": "./app/assets/index.ts",
+        "./interfaces": "./app/assets/interfaces/index.ts",
+        "./stores": "./app/assets/stores/index.ts",
+        "./composables": "./app/assets/composables/index.ts"
     },
     "files": [
-        "app/assets/",
-        "dist/"
+        "app/assets/"
     ],
     "dependencies": {
         "dot-prop": "^9.0.0"
@@ -84,6 +66,7 @@
     },
     "scripts": {
         "dev": "vite",
+        "typecheck": "vue-tsc --noEmit",
         "build": "vue-tsc && vite build",
         "lint": "eslint app/assets/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
         "format": "prettier --write app/assets/",

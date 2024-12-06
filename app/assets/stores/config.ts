@@ -1,3 +1,9 @@
+/**
+ * Config Store
+ *
+ * This store is used to access the configuration of the application from the
+ * API.
+ */
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { getProperty } from 'dot-prop'

@@ -12,10 +12,10 @@ export default defineConfig({
         outDir: './dist',
         lib: {
             entry: {
-                plugin: 'app/assets/plugin.ts',
-                types: 'app/assets/interfaces/index.ts',
-                stores: 'app/assets/stores/config.ts',
-                sprunjer: 'app/assets/composables/sprunjer.ts'
+                main: 'app/assets/index.ts',
+                interfaces: 'app/assets/interfaces/index.ts',
+                stores: 'app/assets/stores/index.ts',
+                composables: 'app/assets/composables/index.ts'
             }
         },
         rollupOptions: {

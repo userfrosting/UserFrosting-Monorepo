@@ -1,36 +1,47 @@
-import { ref, toValue, watchEffect, computed, type Ref, type ComputedRef } from 'vue'
+/**
+ * Sprunjer Composable
+ *
+ * A composable function that fetches data from a Sprunjer API and provides
+ * all necessary function like pagination, sorting and filtering.
+ *
+ * Pass the URL of the Sprunjer API to the function, and it will fetch the data.
+ * A watcher will refetch the data whenever any parameters change.
+ *
+ * Params:
+ * @param {String} dataUrl - The URL of the Sprunjer API
+ * @param {Object} defaultSorts - An object of default sorts
+ * @param {Object} defaultFilters - An object of default filters
+ * @param {Number} defaultSize - The default number of items per page
+ * @param {Number} defaultPage - The default page number
+ *
+ * Exports:
+ * - size: The number of items per page
+ * - page: The current page number
+ * - sorts: An object of sorts
+ * - filters: An object of filters
+ * - data: The raw data from the API
+ * - fetch: A function to fetch the data
+ * - loading: A boolean indicating if the data is loading
+ * - totalPages: The total number of pages
+ * - downloadCsv: A function to download the data as a CSV file
+ * - countFiltered: The total number of items after filtering
+ * - count: The total number of items
+ * - rows: The rows of data
+ * - first: The index of the first item on the current page
+ * - last: The index of the last item on the current page
+ * - toggleSort: A function to toggle the sort order of a column
+ */
+import { ref, toValue, watchEffect, computed } from 'vue'
 import axios from 'axios'
+import type { AssociativeArray, Sprunjer } from '../interfaces'
 
-interface AssociativeArray {
-    [key: string]: string | null
-}
-
-interface Sprunjer {
-    dataUrl: any
-    size: Ref<number>
-    page: Ref<number>
-    totalPages: ComputedRef<number>
-    countFiltered: ComputedRef<number>
-    first: ComputedRef<number>
-    last: ComputedRef<number>
-    sorts: Ref<AssociativeArray>
-    filters: Ref<AssociativeArray>
-    data: Ref<any>
-    loading: Ref<boolean>
-    count: ComputedRef<number>
-    rows: ComputedRef<any>
-    fetch: () => void
-    toggleSort: (column: string) => void
-    downloadCsv: () => void
-}
-
-const useSprunjer = (
+export const useSprunjer = (
     dataUrl: any,
     defaultSorts: AssociativeArray = {},
     defaultFilters: AssociativeArray = {},
     defaultSize: number = 10,
     defaultPage: number = 0
-) => {
+): Sprunjer => {
     // Sprunje parameters
     const size = ref<number>(defaultSize)
     const page = ref<number>(defaultPage)
@@ -151,5 +162,3 @@ const useSprunjer = (
         toggleSort
     }
 }
-
-export { useSprunjer, type Sprunjer, type AssociativeArray }

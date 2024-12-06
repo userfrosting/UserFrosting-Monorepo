@@ -30,6 +30,7 @@ node_modules/
 
 # Ignore compiled assets
 public/assets/
+dist/
 
 # Ignore dev utils cache
 .phpunit.cache

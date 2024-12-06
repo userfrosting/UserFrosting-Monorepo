@@ -1,4 +1,4 @@
-import { useConfigStore } from './stores/config'
+import { useConfigStore } from './stores'
 
 export default {
     install: () => {

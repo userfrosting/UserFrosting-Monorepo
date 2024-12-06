@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest'
 import { useConfigStore } from '../stores/config'
-import plugin from '../plugin'
+import plugin from '../'
 import * as Config from '../stores/config'
 
 const mockConfigStore = {

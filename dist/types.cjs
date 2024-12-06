@@ -1,1 +1,0 @@
-"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});var n=(a=>(a.Primary="Primary",a.Secondary="Secondary",a.Success="Success",a.Warning="Warning",a.Danger="Danger",a.Info="Info",a.Muted="Muted",a.Default="Default",a))(n||{});exports.Severity=n;
