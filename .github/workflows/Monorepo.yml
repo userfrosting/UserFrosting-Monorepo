@@ -12,32 +12,34 @@ env:
 jobs:
     packages_split:
         runs-on: ubuntu-latest
+        name: Split Monorepo - ${{ matrix.package.name }}
 
         strategy:
             fail-fast: false
             matrix:
                 package:
-                    - local_path: "packages/ui/theme-pink-cupcake"
+                    - name: "Pink Cupcake"
+                      local_path: "packages/ui/theme-pink-cupcake"
                       split_repository: "theme-pink-cupcake"
+                      branch: "main"
 
         steps:
             - uses: actions/checkout@v2
 
             # no tag
             - if: "!startsWith(github.ref, 'refs/tags/')"
-              name: Monorepo Split of ${{ matrix.package }}
-              uses: "symplify/monorepo-split-github-action@2.1"
+              uses: "symplify/monorepo-split-github-action@2.3"
               with:
                   package_directory: "${{ matrix.package.local_path }}"
                   repository_organization: "userfrosting"
                   repository_name: "${{ matrix.package.split_repository }}"
                   user_name: "UserFrosting Bot"
                   user_email: "no-reply@userfrosting.com"
+                  branch: "${{ matrix.package.branch }}"
 
             # with tag
             - if: "startsWith(github.ref, 'refs/tags/')"
-              name: Monorepo Split of ${{ matrix.package }} (Tag)
-              uses: "symplify/monorepo-split-github-action@2.1"
+              uses: "symplify/monorepo-split-github-action@2.3"
               with:
                   tag: ${GITHUB_REF#refs/tags/}
                   package_directory: "${{ matrix.package.local_path }}"
@@ -45,3 +47,4 @@ jobs:
                   repository_name: "${{ matrix.package.split_repository }}"
                   user_name: "UserFrosting Bot"
                   user_email: "no-reply@userfrosting.com"
+                  branch: "${{ matrix.package.branch }}"
