@@ -1,0 +1,19 @@
+{
+  "name": "userfrosting-monorepo",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/ui/*",
+    "packages/skeleton"
+  ],
+  "scripts": {
+    "vite:dev": "vite",
+    "vite:build": "vue-tsc && vite build",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "typescript": "5.6.2",
+    "vue-tsc": "2.0.29"
+  }
+}
