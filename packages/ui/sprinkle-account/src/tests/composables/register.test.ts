@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test, vi } from 'vitest'
 import axios from 'axios'
-import type { UserInterface } from 'app/assets/interfaces'
+import type { UserInterface } from 'src/interfaces'
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
 import { useConfigStore } from '@userfrosting/sprinkle-core/stores'
 import type { RegisterForm } from '../../interfaces'

@@ -12,10 +12,10 @@ export default defineConfig({
         outDir: './dist',
         lib: {
             entry: {
-                main: 'app/assets/index.ts',
-                interfaces: 'app/assets/interfaces/index.ts',
-                stores: 'app/assets/stores/index.ts',
-                composables: 'app/assets/composables/index.ts'
+                main: 'src/index.ts',
+                interfaces: 'src/interfaces/index.ts',
+                stores: 'src/stores/index.ts',
+                composables: 'src/composables/index.ts'
             }
         },
         rollupOptions: {
@@ -31,8 +31,8 @@ export default defineConfig({
     test: {
         coverage: {
             reportsDirectory: './_meta/_coverage',
-            include: ['app/assets/**/*.*'],
-            // exclude: ['app/assets/tests/**/*.*', 'app/assets/interfaces/routes.ts']
+            include: ['src/**/*.*'],
+            // exclude: ['src/tests/**/*.*', 'src/interfaces/routes.ts']
         },
         environment: 'happy-dom'
     }

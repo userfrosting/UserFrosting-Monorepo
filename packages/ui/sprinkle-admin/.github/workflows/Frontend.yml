@@ -54,4 +54,4 @@ jobs:
               uses: creyD/prettier_action@v4.3
               with:
                   dry: True
-                  prettier_options: --write app/assets/
+                  prettier_options: --write src/

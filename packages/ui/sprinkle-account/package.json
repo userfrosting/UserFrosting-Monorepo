@@ -24,16 +24,16 @@
         "url": "https://github.com/userfrosting/UserFrosting/issues"
     },
     "exports": {
-        ".": "./app/assets/index.ts",
-        "./composables": "./app/assets/composables/index.ts",
-        "./guards": "./app/assets/guards/index.ts",
-        "./interfaces": "./app/assets/interfaces/index.ts",
-        "./routes": "./app/assets/routes/index.ts",
-        "./stores": "./app/assets/stores/index.ts",
-        "./views": "./app/assets/views/index.ts"
+        ".": "./src/index.ts",
+        "./composables": "./src/composables/index.ts",
+        "./guards": "./src/guards/index.ts",
+        "./interfaces": "./src/interfaces/index.ts",
+        "./routes": "./src/routes/index.ts",
+        "./stores": "./src/stores/index.ts",
+        "./views": "./src/views/index.ts"
     },
     "files": [
-        "app/assets/"
+        "src/"
     ],
     "peerDependencies": {
         "@userfrosting/sprinkle-core": "^6.0.0-alpha",
@@ -70,8 +70,8 @@
         "dev": "vite",
         "typecheck": "vue-tsc --noEmit",
         "build": "vue-tsc && vite build",
-        "lint": "eslint app/assets/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-        "format": "prettier --write app/assets/",
+        "lint": "eslint src/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+        "format": "prettier --write src/",
         "test": "vitest",
         "coverage": "vitest run --coverage"
     }

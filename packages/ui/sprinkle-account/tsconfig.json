@@ -2,9 +2,9 @@
     "extends": "@vue/tsconfig/tsconfig.dom.json",
     "include": [
         "env.d.ts",
-        "app/assets/**/*.ts",
-        "app/assets/**/*.d.ts",
-        "app/assets/**/*.vue",
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.vue",
     ],
     "exclude": ["vite.config.ts"],
     "compilerOptions": {

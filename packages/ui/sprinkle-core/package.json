@@ -24,13 +24,13 @@
         "url": "https://github.com/userfrosting/UserFrosting/issues"
     },
     "exports": {
-        ".": "./app/assets/index.ts",
-        "./interfaces": "./app/assets/interfaces/index.ts",
-        "./stores": "./app/assets/stores/index.ts",
-        "./composables": "./app/assets/composables/index.ts"
+        ".": "./src/index.ts",
+        "./interfaces": "./src/interfaces/index.ts",
+        "./stores": "./src/stores/index.ts",
+        "./composables": "./src/composables/index.ts"
     },
     "files": [
-        "app/assets/"
+        "src/"
     ],
     "dependencies": {
         "dot-prop": "^9.0.0"
@@ -68,8 +68,8 @@
         "dev": "vite",
         "typecheck": "vue-tsc --noEmit",
         "build": "vue-tsc && vite build",
-        "lint": "eslint app/assets/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-        "format": "prettier --write app/assets/",
+        "lint": "eslint src/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+        "format": "prettier --write src/",
         "test": "vitest",
         "coverage": "vitest run --coverage"
     }
