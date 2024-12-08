@@ -1,6 +1,6 @@
 {
     "name": "@userfrosting/sprinkle-account",
-    "version": "6.0.0",
+    "version": "6.0.0-alpha.1",
     "type": "module",
     "description": "Account Sprinkle for UserFrosting",
     "funding": "https://opencollective.com/userfrosting",
@@ -36,7 +36,7 @@
         "app/assets/"
     ],
     "peerDependencies": {
-        "@userfrosting/sprinkle-core": "git+https://github.com/userfrosting/sprinkle-core.git#6.0",
+        "@userfrosting/sprinkle-core": "^6.0.0-alpha",
         "axios": "^1.5.0",
         "pinia": "^2.1.6",
         "pinia-plugin-persistedstate": "^3.2.0",
