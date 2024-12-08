@@ -1,0 +1,82 @@
+{
+    "name": "@userfrosting/sprinkle-admin",
+    "version": "6.0.0",
+    "type": "module",
+    "description": "Admin Sprinkle for UserFrosting 6",
+    "funding": "https://opencollective.com/userfrosting",
+    "license": "MIT",
+    "author": "Alexander Weissman (https://alexanderweissman.com/)",
+    "contributors": [
+        "Alexander Weissman (https://alexanderweissman.com/)",
+        "Louis Charette (https://bbqsoftwares.com/)",
+        "Jordan Mele <SiliconSoldier@outlook.com.au> (https://djmm.me/)"
+    ],
+    "keywords": [
+        "UserFrosting",
+        "Admin panel",
+        "Sprinkle"
+    ],
+    "homepage": "https://github.com/userfrosting/sprinkle-admin#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/userfrosting/sprinkle-admin.git"
+    },
+    "bugs": {
+        "url": "https://github.com/userfrosting/UserFrosting/issues"
+    },
+    "exports": {
+        ".": "./app/assets/index.ts",
+        "./components": "./app/assets/components/index.ts",
+        "./composables": "./app/assets/composables/index.ts",
+        "./interfaces": "./app/assets/interfaces/index.ts",
+        "./routes": "./app/assets/routes/index.ts",
+        "./views": "./app/assets/views/index.ts"
+    },
+    "files": [
+        "app/assets"
+    ],
+    "dependencies": {
+        "moment": "^2.30.1"
+    },
+    "peerDependencies": {
+        "@userfrosting/sprinkle-account": "git+https://github.com/userfrosting/sprinkle-account.git#6.0",
+        "@userfrosting/sprinkle-core": "git+https://github.com/userfrosting/sprinkle-core.git#6.0",
+        "axios": "^1.5.0",
+        "pinia": "^2.1.6",
+        "pinia-plugin-persistedstate": "^3.2.0",
+        "vue": "^3.4.21",
+        "vue-router": "^4.2.4"
+    },
+    "devDependencies": {
+        "@rushstack/eslint-patch": "^1.8.0",
+        "@tsconfig/node20": "^20.1.4",
+        "@types/node": "^20.12.5",
+        "@vitejs/plugin-vue": "^5.0.4",
+        "@vitest/coverage-v8": "^1.6.0",
+        "@vue/eslint-config-prettier": "^9.0.0",
+        "@vue/eslint-config-typescript": "^13.0.0",
+        "@vue/test-utils": "^2.4.6",
+        "@vue/tsconfig": "^0.5.1",
+        "eslint": "^8.57.0",
+        "eslint-plugin-vue": "^9.23.0",
+        "happy-dom": "^15.11.6",
+        "less": "^4.2.0",
+        "npm-run-all2": "^6.1.2",
+        "prettier": "^3.2.5",
+        "vite": "^5.2.8",
+        "vite-plugin-dts": "^4.0.0",
+        "vitest": "^1.6.0",
+        "vue": "^3.4.21",
+        "vue-router": "^4.2.4",
+        "vue-tsc": "^2.1.10"
+    },
+    "scripts": {
+        "dev": "vite",
+        "typecheck": "vue-tsc --noEmit",
+        "build": "vue-tsc && vite build",
+        "lint": "eslint app/assets/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+        "format": "prettier --write app/assets/",
+        "test": "vitest",
+        "coverage": "vitest run --coverage"
+    }
+}

@@ -1,0 +1,56 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\|Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Relation\\|Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:orderBy\\(\\)\\.$#"
+			count: 2
+			path: app/src/Sprunje/ActivitySprunje.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\|Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Relation\\|Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:where\\(\\)\\.$#"
+			count: 1
+			path: app/src/Sprunje/ActivitySprunje.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\|Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Relation\\|Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:orderBy\\(\\)\\.$#"
+			count: 1
+			path: app/src/Sprunje/PermissionSprunje.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\|Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Relation\\|Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:where\\(\\)\\.$#"
+			count: 1
+			path: app/src/Sprunje/PermissionSprunje.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\|Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Relation\\|Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:orderBy\\(\\)\\.$#"
+			count: 2
+			path: app/src/Sprunje/PermissionUserSprunje.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\|Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Relation\\|Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:where\\(\\)\\.$#"
+			count: 2
+			path: app/src/Sprunje/PermissionUserSprunje.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\|Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Relation\\|Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:where\\(\\)\\.$#"
+			count: 1
+			path: app/src/Sprunje/RoleSprunje.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\|Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Relation\\|Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:orderBy\\(\\)\\.$#"
+			count: 1
+			path: app/src/Sprunje/UserPermissionSprunje.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\|Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Relation\\|Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:where\\(\\)\\.$#"
+			count: 1
+			path: app/src/Sprunje/UserPermissionSprunje.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\|Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Relation\\|Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:orderBy\\(\\)\\.$#"
+			count: 3
+			path: app/src/Sprunje/UserSprunje.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\|Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\Relation\\|Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:where\\(\\)\\.$#"
+			count: 3
+			path: app/src/Sprunje/UserSprunje.php
