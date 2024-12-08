@@ -1,0 +1,586 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\ConnectionInterface\\:\\:getSchemaBuilder\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Builder.php
+
+		-
+			message: "#^Parameter \\#1 \\$columns \\(array\\<string\\>\\|string\\) of method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Builder\\:\\:get\\(\\) should be contravariant with parameter \\$columns \\(array\\|string\\) of method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:get\\(\\)$#"
+			count: 1
+			path: app/src/Database/Builder.php
+
+		-
+			message: "#^Parameter \\#1 \\$columns of method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Builder\\:\\:convertColumnsToFullyQualified\\(\\) expects array\\<string\\>, array\\<string\\>\\|null given\\.$#"
+			count: 1
+			path: app/src/Database/Builder.php
+
+		-
+			message: "#^Parameter \\#1 \\$columns of method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Builder\\:\\:convertColumnsToFullyQualified\\(\\) expects array\\<string\\>, array\\|null given\\.$#"
+			count: 1
+			path: app/src/Database/Builder.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:exists\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Migrator/DatabaseMigrationRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$array of function array_pop expects array, array\\<int, string\\>\\|false given\\.$#"
+			count: 1
+			path: app/src/Database/Models/Model.php
+
+		-
+			message: "#^Parameter \\#2 \\$type of method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:getMorphs\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: app/src/Database/Models/Model.php
+
+		-
+			message: "#^Parameter \\#3 \\$id of method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:getMorphs\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: app/src/Database/Models/Model.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$pivot\\.$#"
+			count: 4
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:whereIn\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:eagerLoadRelations\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:getModels\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Call to function is_null\\(\\) with array will always evaluate to false\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Cannot call method pluck\\(\\) on array\\<Illuminate\\\\Database\\\\Eloquent\\\\Builder\\>\\|Illuminate\\\\Database\\\\Eloquent\\\\Collection\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:addSelect\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:distinct\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:limit\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:offset\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:whereIn\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:buildDictionary\\(\\) has parameter \\$results with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection but does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:buildDictionary\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:buildTertiaryDictionary\\(\\) has parameter \\$models with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:buildTertiaryDictionary\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:condenseModels\\(\\) has parameter \\$models with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:condenseModels\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:get\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:getEager\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:getModels\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:getPaginatedQuery\\(\\) should return Illuminate\\\\Database\\\\Eloquent\\\\Builder but returns Illuminate\\\\Database\\\\Query\\\\Builder\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:getTertiaryModels\\(\\) has parameter \\$models with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:getTertiaryModels\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:matchTertiaryModels\\(\\) has parameter \\$dictionary with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:matchTertiaryModels\\(\\) has parameter \\$results with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection but does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Only booleans are allowed in a ternary operator condition, array\\|null given\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Parameter \\#1 \\$columns \\(array\\<string\\>\\) of method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyThrough\\:\\:get\\(\\) should be contravariant with parameter \\$columns \\(array\\) of method Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\BelongsToMany\\:\\:get\\(\\)$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Trying to invoke \\(callable\\(\\)\\: mixed\\)\\|null but it might not be a callable\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Variable property access on mixed\\.$#"
+			count: 7
+			path: app/src/Database/Relations/BelongsToManyThrough.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$pivot\\.$#"
+			count: 4
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:whereIn\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:eagerLoadRelations\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:getModels\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Call to function is_null\\(\\) with array will always evaluate to false\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Cannot call method pluck\\(\\) on array\\<Illuminate\\\\Database\\\\Eloquent\\\\Builder\\>\\|Illuminate\\\\Database\\\\Eloquent\\\\Collection\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:addSelect\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:distinct\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:limit\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:offset\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:whereIn\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:buildDictionary\\(\\) has parameter \\$results with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection but does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:buildDictionary\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:buildTertiaryDictionary\\(\\) has parameter \\$models with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:buildTertiaryDictionary\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:condenseModels\\(\\) has parameter \\$models with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:condenseModels\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:get\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:getEager\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:getModels\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:getPaginatedQuery\\(\\) should return Illuminate\\\\Database\\\\Eloquent\\\\Builder but returns Illuminate\\\\Database\\\\Query\\\\Builder\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:getTertiaryModels\\(\\) has parameter \\$models with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:getTertiaryModels\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:match\\(\\) has parameter \\$results with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection but does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:matchTertiaryModels\\(\\) has parameter \\$dictionary with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:matchTertiaryModels\\(\\) has parameter \\$results with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection but does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:unsetTertiaryPivots\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:unsetTertiaryPivots\\(\\) has parameter \\$models with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection but does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Only booleans are allowed in a ternary operator condition, array\\|null given\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Parameter \\#1 \\$columns \\(array\\<string\\>\\) of method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\BelongsToManyUnique\\:\\:get\\(\\) should be contravariant with parameter \\$columns \\(array\\) of method Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\BelongsToMany\\:\\:get\\(\\)$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Trying to invoke \\(callable\\(\\)\\: mixed\\)\\|null but it might not be a callable\\.$#"
+			count: 1
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Variable property access on mixed\\.$#"
+			count: 8
+			path: app/src/Database/Relations/BelongsToManyUnique.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:withoutGlobalScopes\\(\\)\\.$#"
+			count: 2
+			path: app/src/Database/Relations/HasManySyncable.php
+
+		-
+			message: "#^Call to an undefined method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\HasManySyncable\\:\\:newQuery\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/HasManySyncable.php
+
+		-
+			message: "#^Variable property access on Illuminate\\\\Database\\\\Eloquent\\\\Model\\.$#"
+			count: 1
+			path: app/src/Database/Relations/HasManySyncable.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:withoutGlobalScopes\\(\\)\\.$#"
+			count: 2
+			path: app/src/Database/Relations/MorphManySyncable.php
+
+		-
+			message: "#^Call to an undefined method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphManySyncable\\:\\:newQuery\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphManySyncable.php
+
+		-
+			message: "#^Variable property access on Illuminate\\\\Database\\\\Eloquent\\\\Model\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphManySyncable.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$pivot\\.$#"
+			count: 4
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:whereIn\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:eagerLoadRelations\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:getModels\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Call to function is_null\\(\\) with array will always evaluate to false\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Cannot call method pluck\\(\\) on array\\<Illuminate\\\\Database\\\\Eloquent\\\\Builder\\>\\|Illuminate\\\\Database\\\\Eloquent\\\\Collection\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:addSelect\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:distinct\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:limit\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:offset\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:whereIn\\(\\)\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:buildDictionary\\(\\) has parameter \\$results with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection but does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:buildDictionary\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:buildTertiaryDictionary\\(\\) has parameter \\$models with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:buildTertiaryDictionary\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:condenseModels\\(\\) has parameter \\$models with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:condenseModels\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:get\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:getEager\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:getModels\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:getPaginatedQuery\\(\\) should return Illuminate\\\\Database\\\\Eloquent\\\\Builder but returns Illuminate\\\\Database\\\\Query\\\\Builder\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:getTertiaryModels\\(\\) has parameter \\$models with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:getTertiaryModels\\(\\) return type with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:match\\(\\) has parameter \\$results with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection but does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:matchTertiaryModels\\(\\) has parameter \\$dictionary with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:matchTertiaryModels\\(\\) has parameter \\$results with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection but does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:unsetTertiaryPivots\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:unsetTertiaryPivots\\(\\) has parameter \\$models with generic class Illuminate\\\\Database\\\\Eloquent\\\\Collection but does not specify its types\\: TKey, TModel$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Only booleans are allowed in a ternary operator condition, array\\|null given\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, Illuminate\\\\Database\\\\Eloquent\\\\Model given\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Parameter \\#1 \\$columns \\(array\\<string\\>\\) of method UserFrosting\\\\Sprinkle\\\\Core\\\\Database\\\\Relations\\\\MorphToManyUnique\\:\\:get\\(\\) should be contravariant with parameter \\$columns \\(array\\) of method Illuminate\\\\Database\\\\Eloquent\\\\Relations\\\\BelongsToMany\\:\\:get\\(\\)$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Trying to invoke \\(callable\\(\\)\\: mixed\\)\\|null but it might not be a callable\\.$#"
+			count: 1
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Variable property access on mixed\\.$#"
+			count: 8
+			path: app/src/Database/Relations/MorphToManyUnique.php
+
+		-
+			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:exclude\\(\\)\\.$#"
+			count: 3
+			path: app/tests/Integration/Database/DatabaseTest.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Eloquent\\\\Builder\\:\\:withCount\\(\\)\\.$#"
+			count: 1
+			path: app/tests/Integration/Database/DatabaseTest.php
+
+		-
+			message: "#^Dynamic call to static method Illuminate\\\\Database\\\\Query\\\\Builder\\:\\:orderBy\\(\\)\\.$#"
+			count: 1
+			path: app/tests/Integration/Database/DatabaseTest.php
+
+		-
+			message: "#^Access to an undefined property UserFrosting\\\\Sprinkle\\\\Core\\\\Tests\\\\Integration\\\\Testing\\\\RefreshDatabaseTest\\:\\:\\$ci\\.$#"
+			count: 3
+			path: app/tests/Integration/Testing/RefreshDatabaseTest.php

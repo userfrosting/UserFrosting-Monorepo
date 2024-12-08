@@ -1,0 +1,59 @@
+{# This is the base layout template for all pages.  #}
+{% block page %}
+<!DOCTYPE html>
+<html lang="{{ currentLocale }}">
+    {% block head %}
+        <head>
+            <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+            <meta name="generator" content="UserFrosting" />
+            <meta name="description" content="">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+            <meta name="author" content="{% block page_author %}{{ site.author }}{% endblock %}">
+
+            <title>{{ site.title }} | {% block page_title %}{% endblock %}</title>
+
+            {# Add favicons content #}
+            {% include "content/favicons.html.twig" %}
+
+            {# Use this block to add extra content in page head without having to override the entire base layout #}
+            {% block head_extra %}{% endblock %}
+
+            {% block stylesheets %}
+                {# Override this file in a child sprinkle to override site-level stylesheets. #}
+                {% include 'content/stylesheets_site.html.twig' %}
+
+                {# Override this block in a child layout template or page template to specify or override stylesheets for groups of similar pages. #}
+                {% block stylesheets_page_group %}{% endblock %}
+
+                {# Override this block in a child layout template or page template to specify or override page-level stylesheets. #}
+                {% block stylesheets_page %}{% endblock %}
+            {% endblock %}
+
+            {% include "pages/partials/analytics.html.twig" %}
+        </head>
+    {% endblock %}
+
+    {% block body %}
+        <body {% block body_attributes %}{% endblock %}>
+            {# Page Content #}
+            {% block content %}{% endblock %}
+
+            {% block scripts %}
+                {# Inject PHP Defined Configuration #}
+                <script>
+                {% include "pages/partials/config.js.twig" %}
+                </script>
+
+                {# Override this file in a child sprinkle to override site-level scripts. #}
+                {% include 'content/scripts_site.html.twig' %}
+
+                {# Override this block in a child layout template or page template to specify or override scripts for groups of similar pages. #}
+                {% block scripts_page_group %}{% endblock %}
+
+                {# Override this block in a child layout template or page template to specify or override page-level scripts. #}
+                {% block scripts_page %}{% endblock %}
+            {% endblock %}
+        </body>
+    {% endblock %}
+</html>
+{% endblock %}

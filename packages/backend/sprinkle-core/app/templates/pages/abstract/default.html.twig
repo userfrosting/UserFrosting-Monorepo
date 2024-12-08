@@ -1,0 +1,39 @@
+{% extends "pages/abstract/base.html.twig" %}
+
+{% block stylesheets_page_group %}
+<style>
+    body {
+        margin: 0;
+        padding: 30px;
+        font: 12px/1.5 Helvetica, Arial, Verdana, sans-serif;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 48px;
+        font-weight: normal;
+        line-height: 48px;
+    }
+
+    strong {
+        display: inline-block;
+        width: 65px;
+    }
+
+    table, th, td {
+        font: 12px Helvetica, Arial, Verdana, sans-serif;
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+        text-align: left;
+    }
+
+    th {
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div>{% block body_matter %}{% endblock %}</div>
+{% endblock %}
