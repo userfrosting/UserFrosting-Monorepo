@@ -1,0 +1,66 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * UserFrosting Account Sprinkle (http://www.userfrosting.com)
+ *
+ * @link      https://github.com/userfrosting/sprinkle-account
+ * @copyright Copyright (c) 2013-2024 Alexander Weissman & Louis Charette
+ * @license   https://github.com/userfrosting/sprinkle-account/blob/master/LICENSE.md (MIT License)
+ */
+
+namespace UserFrosting\Sprinkle\Account\Routes;
+
+use Slim\App;
+use Slim\Routing\RouteCollectorProxy;
+use UserFrosting\Routes\RouteDefinitionInterface;
+use UserFrosting\Sprinkle\Account\Authenticate\AuthGuard;
+use UserFrosting\Sprinkle\Account\Authenticate\GuestGuard;
+use UserFrosting\Sprinkle\Account\Controller\AuthCheckAction;
+use UserFrosting\Sprinkle\Account\Controller\CaptchaAction;
+use UserFrosting\Sprinkle\Account\Controller\CheckUsernameAction;
+use UserFrosting\Sprinkle\Account\Controller\DenyResetPasswordAction;
+use UserFrosting\Sprinkle\Account\Controller\ForgetPasswordAction;
+use UserFrosting\Sprinkle\Account\Controller\LoginAction;
+use UserFrosting\Sprinkle\Account\Controller\LogoutAction;
+use UserFrosting\Sprinkle\Account\Controller\ProfileAction;
+use UserFrosting\Sprinkle\Account\Controller\RegisterAction;
+use UserFrosting\Sprinkle\Account\Controller\ResendVerificationAction;
+use UserFrosting\Sprinkle\Account\Controller\SetPasswordAction;
+use UserFrosting\Sprinkle\Account\Controller\SettingsAction;
+use UserFrosting\Sprinkle\Account\Controller\SuggestUsernameAction;
+use UserFrosting\Sprinkle\Account\Controller\VerifyAction;
+use UserFrosting\Sprinkle\Core\Middlewares\NoCache;
+
+class AuthRoutes implements RouteDefinitionInterface
+{
+    public function register(App $app): void
+    {
+        // Guest Guard
+        $app->group('/account', function (RouteCollectorProxy $group) {
+            $group->post('/login', LoginAction::class)->setName('account.login');
+            $group->post('/register', RegisterAction::class)->setName('account.register');
+            $group->get('/verify', VerifyAction::class)->setName('account.verify');
+            $group->post('/resend-verification', ResendVerificationAction::class)->setName('account.resendVerification');
+            $group->post('/forgot-password', ForgetPasswordAction::class)->setName('account.forgotPassword');
+            $group->get('/set-password/deny', DenyResetPasswordAction::class)->setName('account.setPassword.deny');
+            $group->post('/set-password', SetPasswordAction::class)->setName('account.setPassword');
+        })->add(GuestGuard::class)->add(NoCache::class);
+
+        // Auth Guard
+        $app->group('/account', function (RouteCollectorProxy $group) {
+            $group->get('/logout', LogoutAction::class)->setName('account.logout');
+            $group->post('/settings', SettingsAction::class)->setName('settings');
+            $group->post('/settings/profile', ProfileAction::class)->setName('settings.profile');
+        })->add(AuthGuard::class)->add(NoCache::class);
+
+        // No guard
+        $app->group('/account', function (RouteCollectorProxy $group) {
+            $group->get('/auth-check', AuthCheckAction::class)->setName('account.authCheck');
+            $group->get('/captcha', CaptchaAction::class)->setName('account.captcha');
+            $group->get('/check-username', CheckUsernameAction::class)->setName('account.checkUsername');
+            $group->get('/suggest-username', SuggestUsernameAction::class)->setName('account.suggestUsername');
+        })->add(NoCache::class);
+    }
+}
