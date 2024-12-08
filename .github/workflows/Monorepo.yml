@@ -1,0 +1,47 @@
+name: Monorepo Split
+
+on:
+  push:
+    branches: ['*']
+    tags: ['*']
+  workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+jobs:
+    packages_split:
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: false
+            matrix:
+                package:
+                    - local_path: "packages/ui/theme-pink-cupcake"
+                      split_repository: "theme-pink-cupcake"
+
+        steps:
+            - uses: actions/checkout@v2
+
+            # no tag
+            - if: "!startsWith(github.ref, 'refs/tags/')"
+              name: Monorepo Split of ${{ matrix.package }}
+              uses: "symplify/monorepo-split-github-action@2.1"
+              with:
+                  package_directory: "${{ matrix.package.local_path }}"
+                  repository_organization: "userfrosting"
+                  repository_name: "${{ matrix.package.split_repository }}"
+                  user_name: "UserFrosting Bot"
+                  user_email: "no-reply@userfrosting.com"
+
+            # with tag
+            - if: "startsWith(github.ref, 'refs/tags/')"
+              name: Monorepo Split of ${{ matrix.package }} (Tag)
+              uses: "symplify/monorepo-split-github-action@2.1"
+              with:
+                  tag: ${GITHUB_REF#refs/tags/}
+                  package_directory: "${{ matrix.package.local_path }}"
+                  repository_organization: "userfrosting"
+                  repository_name: "${{ matrix.package.split_repository }}"
+                  user_name: "UserFrosting Bot"
+                  user_email: "no-reply@userfrosting.com"
