@@ -1,0 +1,151 @@
+// Variables
+// ========================================================================
+// Custom title bar backgrounds
+@alert-primary-title-background: @global-primary-background;
+@alert-success-title-background: @global-success-background;
+@alert-warning-title-background: @global-warning-background;
+@alert-danger-title-background: @global-danger-background;
+@alert-info-title-background: @global-info-background;
+@alert-secondary-title-background: @global-secondary-background;
+@alert-muted-title-background: @global-muted-background;
+
+// Main background colors
+// N.B.: Preset are not changed, only the custom ones
+@alert-primary-background: @global-primary-background-lighten;
+@alert-warning-background: @global-warning-background-lighten;
+@alert-danger-background: @global-danger-background-lighten;
+@alert-success-background: @global-success-background-lighten;
+@alert-info-background: @global-info-background-lighten;
+@alert-secondary-background: @global-muted-background;
+@alert-muted-background: @global-muted-background;
+
+// Main alert text color
+@alert-primary-color: @global-color;
+@alert-success-color: @global-color;
+@alert-warning-color: @global-color;
+@alert-danger-color: @global-color;
+@alert-info-color: @global-color;
+@alert-secondary-color: @global-color;
+@alert-muted-color: @global-color;
+
+// Custom title style
+@alert-primary-title-color: @global-inverse-color;
+@alert-success-title-color: @global-inverse-color;
+@alert-warning-title-color: @global-inverse-color;
+@alert-danger-title-color: @global-inverse-color;
+@alert-info-title-color: @global-inverse-color;
+@alert-secondary-title-color: @global-inverse-color;
+@alert-muted-title-color: @global-color;
+
+// Set the title height
+@alert-title-vertical-padding: 6px;
+@alert-title-horizontal-padding: @alert-content-padding-horizontal;
+
+// Remove the main div padding
+@alert-padding: 0px;
+@alert-padding-right: 0px;
+
+// Add custom padding to the 'p' content
+@alert-content-padding-vertical: 5px;
+@alert-content-padding-horizontal: 15px;
+
+// Fix the close button position
+@alert-close-padding-right: 10px;
+
+// Custom styles
+// ========================================================================
+.hook-alert-primary() {
+    color: @alert-primary-color;
+}
+
+.hook-alert-success() {
+    color: @alert-success-color;
+}
+
+.hook-alert-warning() {
+    color: @alert-warning-color;
+}
+
+.hook-alert-danger() {
+    color: @alert-danger-color;
+}
+
+.hook-alert-close() {
+    right: @alert-close-padding-right;
+    opacity: 1;
+}
+
+.hook-alert-misc() {
+    // Custom severities
+    .uk-alert-info {
+        background: @alert-info-background;
+        color: @alert-info-color;
+        .hook-alert-info();
+    }
+
+    .uk-alert-secondary {
+        background: @alert-secondary-background;
+        color: @alert-secondary-color;
+        .hook-alert-secondary();
+    }
+
+    .uk-alert-muted {
+        background: @alert-muted-background;
+        color: @alert-muted-color;
+        .hook-alert-muted();
+    }
+
+    // Custom style to the 'p' element + remove 'p' inherited margin
+    .uk-alert p {
+        padding: @alert-content-padding-vertical @alert-content-padding-horizontal;
+        margin-top: 0px;
+    }
+
+    // Custom style to the 'h3' element + remove 'h3' inherited margin
+    .uk-alert h3 {
+        font-size: @base-body-font-size;
+        padding: @alert-title-vertical-padding @alert-title-horizontal-padding;
+        margin-bottom: 0px;
+
+        .uk-icon {
+            padding-right: 5px;
+        }
+    }
+
+    // Apply custom title bar background
+    .uk-alert-primary h3 {
+        background-color: @alert-primary-title-background;
+        color: @alert-primary-title-color;
+    }
+    .uk-alert-success h3 {
+        background-color: @alert-success-title-background;
+        color: @alert-success-title-color;
+    }
+    .uk-alert-warning h3 {
+        background-color: @alert-warning-title-background;
+        color: @alert-warning-title-color;
+    }
+    .uk-alert-danger h3 {
+        background-color: @alert-danger-title-background;
+        color: @alert-danger-title-color;
+    }
+    .uk-alert-info h3 {
+        background-color: @alert-info-title-background;
+        color: @alert-info-title-color;
+    }
+    .uk-alert-secondary h3 {
+        background-color: @alert-secondary-title-background;
+        color: @alert-secondary-title-color;
+    }
+    .uk-alert-muted h3 {
+        background-color: @alert-muted-title-background;
+        color: @alert-muted-title-color;
+    }
+}
+
+.hook-alert-info() {
+}
+.hook-alert-secondary() {
+}
+.hook-alert-muted() {
+}

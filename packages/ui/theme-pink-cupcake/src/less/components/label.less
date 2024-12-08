@@ -1,0 +1,40 @@
+// Variables
+// ========================================================================
+@label-info-background: @global-info-background;
+@label-info-color: @global-inverse-color;
+
+@label-muted-background: @global-muted-background;
+@label-muted-color: @global-color;
+
+@label-secondary-background: @global-secondary-background;
+@label-secondary-color: @global-inverse-color;
+
+// Custom hooks
+// ========================================================================
+// Use default font color for close button
+.hook-label-misc() {
+    .uk-label-info {
+        background-color: @label-info-background;
+        color: @label-info-color;
+        .hook-label-info();
+    }
+
+    .uk-label-secondary {
+        background-color: @label-secondary-background;
+        color: @label-secondary-color;
+        .hook-label-secondary();
+    }
+
+    .uk-label-muted {
+        background-color: @label-muted-background;
+        color: @label-muted-color;
+        .hook-label-muted();
+    }
+}
+
+.hook-label-info() {
+}
+.hook-label-secondary() {
+}
+.hook-label-muted() {
+}

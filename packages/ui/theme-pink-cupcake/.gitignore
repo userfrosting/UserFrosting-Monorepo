@@ -1,0 +1,11 @@
+# Ignores Mac metadata. You can configure this globally if you use a Mac: http://islegend.com/development/setting-global-gitignore-mac-windows/
+.DS_Store
+
+# Ignore developer resources
+_meta/
+
+# Ignore node modules
+node_modules/
+
+# Ignore compiled assets
+dist/

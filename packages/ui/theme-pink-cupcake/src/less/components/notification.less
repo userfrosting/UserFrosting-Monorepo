@@ -1,0 +1,124 @@
+// Imports
+// ========================================================================
+@import '@fortawesome/fontawesome-free/less/solid.less';
+
+// Variables
+// ========================================================================
+// Primary
+@notification-message-primary-color: @global-color;
+@notification-message-primary-background: @global-primary-background-lighten;
+@notification-message-primary-border: @global-primary-background;
+@notification-message-primary-icon-color: @global-primary-background;
+
+// Success
+@notification-message-success-color: @global-color;
+@notification-message-success-background: @global-success-background-lighten;
+@notification-message-success-border: @global-success-background;
+@notification-message-success-icon-color: @global-success-background;
+
+// Danger
+@notification-message-danger-color: @global-color;
+@notification-message-danger-background: @global-danger-background-lighten;
+@notification-message-danger-border: @global-danger-background;
+@notification-message-danger-icon-color: @global-danger-background;
+
+// Warning
+@notification-message-warning-color: @global-color;
+@notification-message-warning-background: @global-warning-background-lighten;
+@notification-message-warning-border: @global-warning-background;
+@notification-message-warning-icon-color: @global-warning-background;
+
+// Undefined - Default style
+@notification-message-color: @global-color;
+@notification-message-background: @global-muted-background;
+@notification-message-border: @global-secondary-background;
+@notification-message-icon-color: @global-secondary-background;
+
+// Icons
+@notification-icon-primary: '\f05a';
+@notification-icon-success: '\f058';
+@notification-icon-danger: '\f057';
+@notification-icon-warning: '\f06a';
+@notification-icon-left: 10px;
+@notification-icon-text-offset: 35px;
+
+// Custom left border width
+@notification-message-border-width: 5px;
+
+// Make font size smaller
+@notification-message-font-size: @global-font-size;
+
+// Add box shadow
+@notification-message-box-shadow: @global-small-box-shadow;
+
+// Move notification below the navbar
+@notification-position-top: 80px;
+
+// Custom hooks
+// ========================================================================
+.hook-notification() {
+    top: @notification-position-top;
+}
+
+.hook-notification-message-primary() {
+    background: @notification-message-primary-background;
+    border-left: @notification-message-border-width solid @notification-message-primary-border;
+}
+
+.hook-notification-message-success() {
+    background: @notification-message-success-background;
+    border-left: @notification-message-border-width solid @notification-message-success-border;
+}
+
+.hook-notification-message-danger() {
+    background: @notification-message-danger-background;
+    border-left: @notification-message-border-width solid @notification-message-danger-border;
+}
+
+.hook-notification-message-warning() {
+    background: @notification-message-warning-background;
+    border-left: @notification-message-border-width solid @notification-message-warning-border;
+}
+
+// Apply "undefined" message style
+.hook-notification-message() {
+    background: @notification-message-background;
+    border-left: @notification-message-border-width solid @notification-message-border;
+
+    // Apply drop shadow
+    box-shadow: @notification-message-box-shadow;
+    padding-left: @notification-icon-text-offset;
+}
+
+// Add custom icons to the notifications
+.hook-notification-misc() {
+    .uk-notification-message::before {
+        position: absolute;
+        top: @notification-message-padding;
+        font-size: @notification-message-font-size;
+        font: var(--fa-font-solid);
+        left: @notification-icon-left;
+        line-height: @notification-message-line-height;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .uk-notification-message-primary::before {
+        content: @notification-icon-primary;
+        color: @notification-message-primary-icon-color;
+    }
+
+    .uk-notification-message-success::before {
+        content: @notification-icon-success;
+        color: @notification-message-success-icon-color;
+    }
+
+    .uk-notification-message-danger::before {
+        content: @notification-icon-danger;
+        color: @notification-message-danger-icon-color;
+    }
+
+    .uk-notification-message-warning::before {
+        content: @notification-icon-warning;
+        color: @notification-message-warning-icon-color;
+    }
+}

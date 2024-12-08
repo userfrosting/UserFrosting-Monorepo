@@ -1,0 +1,188 @@
+// Variables
+// ========================================================================
+@button-success-background: @global-success-background;
+@button-success-color: @global-inverse-color;
+@button-success-hover-background: darken(@button-success-background, 5%);
+@button-success-hover-color: @global-inverse-color;
+@button-success-active-background: darken(@button-success-background, 10%);
+@button-success-active-color: @global-inverse-color;
+
+@button-warning-background: @global-warning-background;
+@button-warning-color: @global-inverse-color;
+@button-warning-hover-background: darken(@button-warning-background, 5%);
+@button-warning-hover-color: @global-inverse-color;
+@button-warning-active-background: darken(@button-warning-background, 10%);
+@button-warning-active-color: @global-inverse-color;
+
+@button-info-background: @global-info-background;
+@button-info-color: @global-inverse-color;
+@button-info-hover-background: darken(@button-info-background, 5%);
+@button-info-hover-color: @global-inverse-color;
+@button-info-active-background: darken(@button-info-background, 10%);
+@button-info-active-color: @global-inverse-color;
+
+@button-muted-background: @global-muted-background;
+@button-muted-color: @global-color;
+@button-muted-hover-background: darken(@button-muted-background, 5%);
+@button-muted-hover-color: @global-color;
+@button-muted-active-background: darken(@button-muted-background, 5%);
+@button-muted-active-color: @global-color;
+
+// Custom hooks
+// ========================================================================
+
+// Fix margin for non button group
+.hook-button() {
+    margin: 0px 2px;
+}
+
+// Add Custom styles
+.hook-button-misc() {
+    // Match the button fix above for actual group
+    .uk-button-group > .uk-button:nth-child(n + 2),
+    .uk-button-group > div:nth-child(n + 2) .uk-button {
+        margin-left: -2px;
+    }
+
+    /*
+    * Success
+    */
+
+    .uk-button-success {
+        background-color: @button-success-background;
+        color: @button-success-color;
+        border: @button-border-width solid transparent;
+        .hook-button-success();
+    }
+
+    /* Hover */
+    .uk-button-success:hover {
+        background-color: @button-success-hover-background;
+        color: @button-success-hover-color;
+        .hook-button-success-hover();
+    }
+
+    /* OnClick + Active */
+    .uk-button-success:active,
+    .uk-button-success.uk-active {
+        background-color: @button-success-active-background;
+        color: @button-success-active-color;
+        .hook-button-success-active();
+    }
+
+    /*
+    * Info
+    */
+
+    .uk-button-info {
+        background-color: @button-info-background;
+        color: @button-info-color;
+        border: @button-border-width solid transparent;
+        .hook-button-info();
+    }
+
+    /* Hover */
+    .uk-button-info:hover {
+        background-color: @button-info-hover-background;
+        color: @button-info-hover-color;
+        .hook-button-info-hover();
+    }
+
+    /* OnClick + Active */
+    .uk-button-info:active,
+    .uk-button-info.uk-active {
+        background-color: @button-info-active-background;
+        color: @button-info-active-color;
+        .hook-button-info-active();
+    }
+
+    /*
+    * Warning
+    */
+
+    .uk-button-warning {
+        background-color: @button-warning-background;
+        color: @button-warning-color;
+        border: @button-border-width solid transparent;
+        .hook-button-warning();
+    }
+
+    /* Hover */
+    .uk-button-warning:hover {
+        background-color: @button-warning-hover-background;
+        color: @button-warning-hover-color;
+        .hook-button-warning-hover();
+    }
+
+    /* OnClick + Active */
+    .uk-button-warning:active,
+    .uk-button-warning.uk-active {
+        background-color: @button-warning-active-background;
+        color: @button-warning-active-color;
+        .hook-button-warning-active();
+    }
+
+    /*
+    * Muted
+    */
+
+    .uk-button-muted {
+        background-color: @button-muted-background;
+        color: @button-muted-color;
+        border: @button-border-width solid transparent;
+        .hook-button-muted();
+    }
+
+    /* Hover */
+    .uk-button-muted:hover {
+        background-color: @button-muted-hover-background;
+        color: @button-muted-hover-color;
+        .hook-button-muted-hover();
+    }
+
+    /* OnClick + Active */
+    .uk-button-muted:active,
+    .uk-button-muted.uk-active {
+        background-color: @button-muted-active-background;
+        color: @button-muted-active-color;
+        .hook-button-muted-active();
+    }
+
+    /*
+    * Disabled
+    * The same for all style modifiers
+    */
+    .uk-button-success:disabled,
+    .uk-button-warning:disabled,
+    .uk-button-info:disabled,
+    .uk-button-muted:disabled {
+        background-color: @button-disabled-background;
+        color: @button-disabled-color;
+        border-color: @button-disabled-border;
+    }
+}
+
+.hook-button-success() {
+}
+.hook-button-success-hover() {
+}
+.hook-button-success-active() {
+}
+.hook-button-warning() {
+}
+.hook-button-warning-hover() {
+}
+.hook-button-warning-active() {
+}
+.hook-button-info() {
+}
+.hook-button-info-hover() {
+}
+.hook-button-info-active() {
+}
+.hook-button-muted() {
+}
+.hook-button-muted-hover() {
+}
+.hook-button-muted-active() {
+}

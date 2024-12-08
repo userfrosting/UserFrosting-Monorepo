@@ -1,0 +1,36 @@
+/* ========================================================================
+   Component: Nav User Card
+ ========================================================================== */
+// Variables
+// ========================================================================
+@uf-nav-user-avatar-height: 38px;
+@uf-nav-user-avatar-padding: 5px;
+@uf-nav-user-card-width: 300px;
+@uf-nav-user-card-avatar-height: 90px;
+
+// Custom styles
+// ========================================================================
+.uf-nav-user {
+    a > img {
+        height: @uf-nav-user-avatar-height;
+        padding-left: @uf-nav-user-avatar-padding;
+        padding-right: @uf-nav-user-avatar-padding;
+    }
+    .uk-navbar-dropdown {
+        width: @uf-nav-user-card-width;
+    }
+    .uk-navbar-dropdown-nav {
+        padding: 10px;
+    }
+    .uk-navbar-dropdown-nav img {
+        height: @uf-nav-user-card-avatar-height;
+        margin-bottom: 4px;
+    }
+    .uk-navbar-dropdown-nav .uk-button {
+        display: block;
+        padding: 0 15px !important;
+        line-height: 28px;
+        font-size: 0.875rem;
+        margin-top: 4px;
+    }
+}

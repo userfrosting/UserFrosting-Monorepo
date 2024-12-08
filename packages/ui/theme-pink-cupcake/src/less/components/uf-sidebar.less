@@ -1,0 +1,63 @@
+// Variables
+// ========================================================================
+@sidebar-width: 260px;
+@sidebar-background: #38424d;
+@sidebar-nested-background: #2d353e;
+
+/* ========================================================================
+   Component: Sidebar
+ ========================================================================== */
+.uf-sidebar-left {
+    position: fixed;
+    left: 0;
+    top: @navbar-nav-item-height;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: @sidebar-background;
+    width: @sidebar-width;
+    z-index: 2;
+    transition: height 0.3s ease-out;
+    font-family: @navbar-navbar-nav-item-font;
+}
+
+/* Set main content beside sidebar */
+.uf-sidebar-left ~ .uf-main {
+    margin-left: @sidebar-width;
+}
+
+/* Nav links */
+.uf-sidebar-left ul.uk-nav-default > li > a {
+    padding: 8px 20px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s ease-out;
+    font-size: 1rem;
+    color: #bbb;
+}
+
+.uf-sidebar-left ul.uk-nav-default > li > a:hover,
+.uf-sidebar-left ul.uk-nav-default > li.uk-open > a,
+.uf-sidebar-left ul.uk-nav-default > li.uk-active > a {
+    border-left: 2px solid @navbar-background;
+    color: white;
+}
+
+.uf-sidebar-left ul.uk-nav-default > li > a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Nav header */
+.uf-sidebar-left ul.uk-nav-default li.uk-nav-header {
+    padding: 20px 20px 8px 20px;
+}
+
+/* Nested navs */
+.uf-sidebar-left .uk-nav-default .uk-nav-sub {
+    padding-left: 24px;
+    background: @sidebar-nested-background;
+}
+
+.uf-sidebar-left .uk-nav-default .uk-nav-sub a {
+    font-size: 1rem;
+    padding: 4px;
+}

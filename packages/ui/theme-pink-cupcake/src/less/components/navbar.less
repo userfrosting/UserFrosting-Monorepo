@@ -1,0 +1,56 @@
+// Variables
+// ========================================================================
+@navbar-background: #ee6e73;
+@navbar-nav-item-color: #ffffff;
+@navbar-nav-item-active-color: #ffffff;
+@navbar-nav-item-hover-color: #ffffff;
+@navbar-nav-item-height: 64px;
+@navbar-nav-gap: 0px;
+@navbar-nav-gap-m: 0px;
+@navbar-nav-item-padding-horizontal: 15px;
+@navbar-nav-item-hover-background-color: rgba(255, 255, 255, 0.2);
+@navbar-navbar-nav-item-font: @global-font-family;
+
+// Custom hooks
+// ========================================================================
+// Custom hover color for nav items
+.hook-navbar-nav-item-hover() {
+    background-color: @navbar-nav-item-hover-background-color;
+}
+
+// Custom font for nav items
+.hook-navbar-nav-item() {
+    font-family: @navbar-navbar-nav-item-font;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
+// Customize dropdown
+@navbar-dropdown-padding: 0px !important;
+.hook-navbar-dropdown-nav-item() {
+    font-family: @navbar-navbar-nav-item-font;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: #26a69a;
+    line-height: 22px;
+    padding: 14px 16px !important;
+}
+
+.hook-navbar-dropdown-nav-item-hover() {
+    background-color: #e2e2e2;
+}
+
+.hook-navbar-misc() {
+    // Active state - Underline the box
+    .uk-navbar-nav > li.uk-active:after {
+        content: '';
+        display: block;
+        background-color: rgba(255, 255, 255, 1);
+        height: 2px;
+        margin: -2px 15px;
+        position: relative;
+        top: -16px;
+    }
+}
