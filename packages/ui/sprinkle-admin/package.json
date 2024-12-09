@@ -25,12 +25,12 @@
         "url": "https://github.com/userfrosting/UserFrosting/issues"
     },
     "exports": {
-        ".": "./src/index.ts",
-        "./components": "./src/components/index.ts",
-        "./composables": "./src/composables/index.ts",
-        "./interfaces": "./src/interfaces/index.ts",
-        "./routes": "./src/routes/index.ts",
-        "./views": "./src/views/index.ts"
+        ".": "./app/assets/index.ts",
+        "./components": "./app/assets/components/index.ts",
+        "./composables": "./app/assets/composables/index.ts",
+        "./interfaces": "./app/assets/interfaces/index.ts",
+        "./routes": "./app/assets/routes/index.ts",
+        "./views": "./app/assets/views/index.ts"
     },
     "files": [
         "app/assets"
@@ -74,8 +74,8 @@
         "dev": "vite",
         "typecheck": "vue-tsc --noEmit",
         "build": "vue-tsc && vite build",
-        "lint": "eslint src/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-        "format": "prettier --write src/",
+        "lint": "eslint app/assets/ --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+        "format": "prettier --write app/assets/",
         "test": "vitest",
         "coverage": "vitest run --coverage"
     }
