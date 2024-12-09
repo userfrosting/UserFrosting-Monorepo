@@ -3,7 +3,10 @@
   "type": "module",
   "private": true,
   "workspaces": [
-    "packages/ui/*",
+    "packages/sprinkle-core",
+    "packages/sprinkle-account",
+    "packages/sprinkle-admin",
+    "packages/theme-pink-cupcake",
     "packages/skeleton"
   ],
   "scripts": {

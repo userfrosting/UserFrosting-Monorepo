@@ -76,29 +76,29 @@
         "slam/phpstan-extensions": "^6.0",
         "symplify/monorepo-builder": "^11.2"
     },
-    "autoload": {
-        "psr-4": {
-            "UserFrosting\\": "packages/backend/framework/src",
-            "UserFrosting\\App\\": "packages/skeleton/app/src",
-            "UserFrosting\\Sprinkle\\Account\\": "packages/backend/sprinkle-account/app/src/",
-            "UserFrosting\\Sprinkle\\Admin\\": "packages/backend/sprinkle-admin/app/src/",
-            "UserFrosting\\Sprinkle\\Core\\": "packages/backend/sprinkle-core/app/src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "UserFrosting\\Sprinkle\\Account\\Tests\\": "packages/backend/sprinkle-account/app/tests/",
-            "UserFrosting\\Sprinkle\\Admin\\Tests\\": "packages/backend/sprinkle-admin/app/tests/",
-            "UserFrosting\\Sprinkle\\Core\\Tests\\": "packages/backend/sprinkle-core/app/tests/",
-            "UserFrosting\\Tests\\": "packages/backend/framework/tests",
-            "UserFrosting\\Tests\\App\\": "packages/skeleton/app/tests/"
-        }
-    },
     "replace": {
         "userfrosting/framework": "self.version",
         "userfrosting/sprinkle-account": "self.version",
         "userfrosting/sprinkle-admin": "self.version",
         "userfrosting/sprinkle-core": "self.version",
         "userfrosting/userfrosting": "self.version"
+    },
+    "autoload": {
+        "psr-4": {
+            "UserFrosting\\": "packages/framework/src",
+            "UserFrosting\\App\\": "packages/skeleton/app/src",
+            "UserFrosting\\Sprinkle\\Account\\": "packages/sprinkle-account/app/src/",
+            "UserFrosting\\Sprinkle\\Admin\\": "packages/sprinkle-admin/app/src/",
+            "UserFrosting\\Sprinkle\\Core\\": "packages/sprinkle-core/app/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "UserFrosting\\Sprinkle\\Account\\Tests\\": "packages/sprinkle-account/app/tests/",
+            "UserFrosting\\Sprinkle\\Admin\\Tests\\": "packages/sprinkle-admin/app/tests/",
+            "UserFrosting\\Sprinkle\\Core\\Tests\\": "packages/sprinkle-core/app/tests/",
+            "UserFrosting\\Tests\\": "packages/framework/tests",
+            "UserFrosting\\Tests\\App\\": "packages/skeleton/app/tests/"
+        }
     }
 }
