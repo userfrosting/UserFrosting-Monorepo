@@ -19,7 +19,7 @@ jobs:
             matrix:
                 package:
                     - name: "Pink Cupcake"
-                      local_path: "packages/ui/theme-pink-cupcake"
+                      local_path: "packages/theme-pink-cupcake"
                       split_repository: "theme-pink-cupcake"
                       branch: "main"
 
