@@ -2,11 +2,11 @@ version: 8
 
 finder:
   path:
-    - 'packages/framework',
-    - 'packages/skeleton',
-    - 'packages/sprinkle-account',
-    - 'packages/sprinkle-admin',
-    - 'packages/sprinkle-core',
+    - 'packages/framework'
+    - 'packages/skeleton'
+    - 'packages/sprinkle-account'
+    - 'packages/sprinkle-admin'
+    - 'packages/sprinkle-core'
   exclude:
     - "tests"
   name: "*.php"
