@@ -120,7 +120,7 @@ class SprinkleMiddlewareRepositoryTest extends TestCase
         $repository = new SprinkleMiddlewareRepository($sprinkleManager, $ci);
 
         $this->expectException(BadInstanceOfException::class);
-        $this->expectExceptionMessage('Middleware class `'.$middleware::class."` doesn't implement ".MiddlewareInterface::class.'.');
+        $this->expectExceptionMessage('Middleware class `' . $middleware::class . "` doesn't implement " . MiddlewareInterface::class . '.');
         $repository->all();
     }
 }

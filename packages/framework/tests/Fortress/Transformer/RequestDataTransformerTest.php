@@ -27,10 +27,10 @@ class RequestDataTransformerTest extends TestCase
 
     public function setUp(): void
     {
-        $this->basePath = __DIR__.'/../data';
+        $this->basePath = __DIR__ . '/../data';
 
         // Arrange
-        $loader = new YamlFileLoader($this->basePath.'/register.yaml');
+        $loader = new YamlFileLoader($this->basePath . '/register.yaml');
         $this->schema = new RequestSchema($loader->load());
         $this->transformer = new RequestDataTransformer();
     }
@@ -486,7 +486,7 @@ class RequestDataTransformerTest extends TestCase
                     'name'  => 'John',
                     'color' => 'red',
                 ]
-                ],
+            ],
         ];
 
         // Act
@@ -534,7 +534,7 @@ class RequestDataTransformerTest extends TestCase
                     'name'  => 'John',
                     'color' => 'red',
                 ]
-                ],
+            ],
         ];
 
         // Act

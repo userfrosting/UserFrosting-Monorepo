@@ -27,7 +27,7 @@ class ExtendSchemaTest extends TestCase
 
     public function setUp(): void
     {
-        $this->basePath = __DIR__.'/data';
+        $this->basePath = __DIR__ . '/data';
 
         // Arrange
         $this->locator = new ResourceLocator($this->basePath);

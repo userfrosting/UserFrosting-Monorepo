@@ -28,10 +28,10 @@ class RequestDataTransformerTest extends TestCase
 
     public function setUp(): void
     {
-        $this->basePath = __DIR__.'/data';
+        $this->basePath = __DIR__ . '/data';
 
         // Arrange
-        $loader = new YamlFileLoader($this->basePath.'/register.yaml');
+        $loader = new YamlFileLoader($this->basePath . '/register.yaml');
         $schema = new RequestSchemaRepository($loader->load());
         $this->transformer = new RequestDataTransformer($schema);
     }

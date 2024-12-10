@@ -17,12 +17,12 @@ use UserFrosting\Support\DotenvEditor\DotenvEditor;
 
 class DotenvEditorTest extends TestCase
 {
-    protected string $basePath = __DIR__.'/data/';
+    protected string $basePath = __DIR__ . '/data/';
 
     public function testLoad(): void
     {
         $editor = new DotenvEditor();
-        $editor->load($this->basePath.'.env');
+        $editor->load($this->basePath . '.env');
         $this->assertEquals('dbpass', $editor->getValue('DB_PASSWORD'));
     }
 
@@ -32,8 +32,8 @@ class DotenvEditorTest extends TestCase
     public function testBackup(): void
     {
         $editor = new DotenvEditor();
-        $editor->setBackupPath($this->basePath.'.env-backups/');
-        $editor->load($this->basePath.'.env');
+        $editor->setBackupPath($this->basePath . '.env-backups/');
+        $editor->load($this->basePath . '.env');
 
         $backups_before = $editor->getBackups();
         $editor->backup();
@@ -44,19 +44,19 @@ class DotenvEditorTest extends TestCase
         $this->assertCount(0, $editor->getBackups());
 
         // Reset our test dir
-        touch($this->basePath.'.env-backups/.gitkeep');
+        touch($this->basePath . '.env-backups/.gitkeep');
     }
 
     public function testLoadPathNotExist(): void
     {
-        $editor = new DotenvEditor($this->basePath.'.env-backups/');
-        $result = $editor->load($this->basePath.'.fakeEnv');
+        $editor = new DotenvEditor($this->basePath . '.env-backups/');
+        $result = $editor->load($this->basePath . '.fakeEnv');
         $this->assertEquals($editor, $result);
     }
 
     public function testLoadPathIsNull(): void
     {
-        $editor = new DotenvEditor($this->basePath.'.env-backups/');
+        $editor = new DotenvEditor($this->basePath . '.env-backups/');
         $this->expectException(\InvalidArgumentException::class);
         $editor->load();
     }
@@ -64,16 +64,16 @@ class DotenvEditorTest extends TestCase
     public function testLoadPathNotExistAndRestore(): void
     {
         // Create a backup
-        $editor = new DotenvEditor($this->basePath.'.env-backups/');
-        $editor->load($this->basePath.'.env');
+        $editor = new DotenvEditor($this->basePath . '.env-backups/');
+        $editor->load($this->basePath . '.env');
         $editor->backup();
 
-        $result = $editor->load($this->basePath.'.fakeEnv', true);
+        $result = $editor->load($this->basePath . '.fakeEnv', true);
         $this->assertEquals($editor, $result);
 
         // Reset our test dir
-        unlink($this->basePath.'.fakeEnv');
+        unlink($this->basePath . '.fakeEnv');
         $editor->deleteBackups();
-        touch($this->basePath.'.env-backups/.gitkeep');
+        touch($this->basePath . '.env-backups/.gitkeep');
     }
 }

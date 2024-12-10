@@ -44,8 +44,8 @@ class ResourceLocatorTest extends TestCase
 
     public function testSetBasePathWithConstructorArgument(): void
     {
-        $locator = new ResourceLocator(__DIR__.'/Building');
-        $this->assertEquals(Normalizer::normalizePath(__DIR__.'/Building'), $locator->getBasePath());
+        $locator = new ResourceLocator(__DIR__ . '/Building');
+        $this->assertEquals(Normalizer::normalizePath(__DIR__ . '/Building'), $locator->getBasePath());
     }
 
     public function testAddStream(): void
@@ -384,7 +384,7 @@ class ResourceLocatorTest extends TestCase
         $locator->addStream(new ResourceStream('sprinkles', ''));
         $locator->addLocation(new ResourceLocation('uploads', 'app/uploads/profile'));
 
-        $result = $locator->getResource('sprinkles://'.'../MyFile.txt');
+        $result = $locator->getResource('sprinkles://' . '../MyFile.txt');
 
         $this->assertNull($result);
     }
@@ -394,13 +394,13 @@ class ResourceLocatorTest extends TestCase
      */
     public function testFindResourceOutsideMainPath(): void
     {
-        $locator = new ResourceLocator(__DIR__.'/Building/Floors');
+        $locator = new ResourceLocator(__DIR__ . '/Building/Floors');
         $locator->addStream(new ResourceStream('files'));
-        $locator->addLocation(new ResourceLocation('Garage', __DIR__.'/Building/Garage'));
+        $locator->addLocation(new ResourceLocation('Garage', __DIR__ . '/Building/Garage'));
 
         $resource = $locator->getResource('files://blah.json');
 
-        $this->assertSame(Normalizer::normalizePath(__DIR__).'Building/Garage/files/blah.json', $resource?->getAbsolutePath());
+        $this->assertSame(Normalizer::normalizePath(__DIR__) . 'Building/Garage/files/blah.json', $resource?->getAbsolutePath());
     }
 
     /**
@@ -408,13 +408,13 @@ class ResourceLocatorTest extends TestCase
      */
     public function testListResourceOutsideMainPath(): void
     {
-        $locator = new ResourceLocator(__DIR__.'/Building/Floors');
+        $locator = new ResourceLocator(__DIR__ . '/Building/Floors');
         $locator->addStream(new ResourceStream('files'));
-        $locator->addLocation(new ResourceLocation('Garage', __DIR__.'/Building/Garage'));
+        $locator->addLocation(new ResourceLocation('Garage', __DIR__ . '/Building/Garage'));
 
         $resources = $locator->listResources('files://', true);
 
-        $this->assertSame(Normalizer::normalizePath(__DIR__).'Building/Garage/files/blah.json', $resources[0]->getAbsolutePath());
+        $this->assertSame(Normalizer::normalizePath(__DIR__) . 'Building/Garage/files/blah.json', $resources[0]->getAbsolutePath());
     }
 
     public function testMultipleStreamWithSameScheme(): void

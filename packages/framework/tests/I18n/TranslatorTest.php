@@ -26,7 +26,7 @@ class TranslatorTest extends TestCase
     /**
      * @var string Test locale file location
      **/
-    protected string $basePath = __DIR__.'/data/sprinkles';
+    protected string $basePath = __DIR__ . '/data/sprinkles';
 
     /**
      * @var ResourceLocator

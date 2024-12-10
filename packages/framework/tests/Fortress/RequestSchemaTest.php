@@ -34,7 +34,7 @@ class RequestSchemaTest extends TestCase
 
     public function setUp(): void
     {
-        $this->schemaPath = __DIR__.'/data';
+        $this->schemaPath = __DIR__ . '/data';
     }
 
     public function testWithNoInput(): void
@@ -45,32 +45,32 @@ class RequestSchemaTest extends TestCase
 
     public function testWithPathJson(): void
     {
-        $requestSchema = new RequestSchema($this->schemaPath.'/contact.json');
+        $requestSchema = new RequestSchema($this->schemaPath . '/contact.json');
         $this->assertSame($this->contactSchema['message'], $requestSchema->all()['message']);
     }
 
     public function testWithPathYaml(): void
     {
-        $requestSchema = new RequestSchema($this->schemaPath.'/contact.yaml');
+        $requestSchema = new RequestSchema($this->schemaPath . '/contact.yaml');
         $this->assertSame($this->contactSchema['message'], $requestSchema->all()['message']);
     }
 
     public function testWithBadPath(): void
     {
         $this->expectException(FileNotFoundException::class);
-        new RequestSchema(__DIR__.'/data/bad.json');
+        new RequestSchema(__DIR__ . '/data/bad.json');
     }
 
     public function testArrayData(): void
     {
-        $loader = new YamlFileLoader($this->schemaPath.'/contact.json');
+        $loader = new YamlFileLoader($this->schemaPath . '/contact.json');
         $schema = new RequestSchema($loader->load());
         $this->assertSame($this->contactSchema['message'], $schema->all()['message']);
     }
 
     public function testSetDefault(): void
     {
-        $schema = new RequestSchema($this->schemaPath.'/contact.yaml');
+        $schema = new RequestSchema($this->schemaPath . '/contact.yaml');
         $schema->setDefault('message', 'I require more voles.');
 
         // Add the default to the expected schema
@@ -81,7 +81,7 @@ class RequestSchemaTest extends TestCase
 
     public function testSetDefaultWithMissingField(): void
     {
-        $schema = new RequestSchema($this->schemaPath.'/contact.yaml');
+        $schema = new RequestSchema($this->schemaPath . '/contact.yaml');
         $schema->setDefault('foo', 'bar');
 
         $contactSchema = [
@@ -94,7 +94,7 @@ class RequestSchemaTest extends TestCase
 
     public function testAddValidator(): void
     {
-        $schema = new RequestSchema($this->schemaPath.'/contact.yaml');
+        $schema = new RequestSchema($this->schemaPath . '/contact.yaml');
         $schema->addValidator('message', 'length', [
             'max'     => 10000,
             'message' => 'Your message is too long!',
@@ -119,7 +119,7 @@ class RequestSchemaTest extends TestCase
 
     public function testAddValidatorWithMissingField(): void
     {
-        $schema = new RequestSchema($this->schemaPath.'/contact.yaml');
+        $schema = new RequestSchema($this->schemaPath . '/contact.yaml');
         $schema->addValidator('foo', 'length', [
             'max'     => 10000,
             'message' => 'Your message is too long!',
@@ -175,7 +175,7 @@ class RequestSchemaTest extends TestCase
 
     public function testSetTransformation(): void
     {
-        $schema = new RequestSchema($this->schemaPath.'/contact.yaml');
+        $schema = new RequestSchema($this->schemaPath . '/contact.yaml');
         $schema->setTransformations('message', ['purge', 'owlify']);
 
         // Assert
@@ -197,7 +197,7 @@ class RequestSchemaTest extends TestCase
 
     public function testSetTransformationNotAnArray(): void
     {
-        $schema = new RequestSchema($this->schemaPath.'/contact.yaml');
+        $schema = new RequestSchema($this->schemaPath . '/contact.yaml');
         $schema->setTransformations('message', 'purge');
 
         // Assert
@@ -218,7 +218,7 @@ class RequestSchemaTest extends TestCase
 
     public function testSetTransformationWithMissingField(): void
     {
-        $schema = new RequestSchema($this->schemaPath.'/contact.yaml');
+        $schema = new RequestSchema($this->schemaPath . '/contact.yaml');
         $schema->setTransformations('foo', ['purge', 'owlify']);
 
         $contactSchema = [

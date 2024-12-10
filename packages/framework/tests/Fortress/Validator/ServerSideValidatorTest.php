@@ -26,7 +26,7 @@ class ServerSideValidatorTest extends TestCase
 
     public function setUp(): void
     {
-        $this->basePath = __DIR__.'/../data';
+        $this->basePath = __DIR__ . '/../data';
         $this->translator = new Translator(new DictionaryStub());
         $this->validator = new ServerSideValidator($this->translator);
     }
@@ -933,7 +933,7 @@ class ServerSideValidatorTest extends TestCase
     public function testInputArray(): void
     {
         // Get schema
-        $schema = new RequestSchema($this->basePath.'/InputArray.yaml');
+        $schema = new RequestSchema($this->basePath . '/InputArray.yaml');
 
         // Test no errors
         $errors = $this->validator->validate($schema, [
@@ -964,7 +964,7 @@ class ServerSideValidatorTest extends TestCase
     public function testMultidimensional(): void
     {
         // Get schema
-        $schema = new RequestSchema($this->basePath.'/Multidimensional.yaml');
+        $schema = new RequestSchema($this->basePath . '/Multidimensional.yaml');
 
         // String threshold
         $errors = $this->validator->validate($schema, [

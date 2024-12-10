@@ -96,7 +96,7 @@ class SprinkleRoutesRepositoryTest extends TestCase
         $repository = new SprinkleRoutesRepository($sprinkleManager, $ci);
 
         $this->expectException(BadInstanceOfException::class);
-        $this->expectExceptionMessage('Routes definition class `'.$route::class."` doesn't implement ".RouteDefinitionInterface::class.'.');
+        $this->expectExceptionMessage('Routes definition class `' . $route::class . "` doesn't implement " . RouteDefinitionInterface::class . '.');
         $repository->all();
     }
 }

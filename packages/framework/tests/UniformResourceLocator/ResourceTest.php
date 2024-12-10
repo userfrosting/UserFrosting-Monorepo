@@ -42,7 +42,7 @@ class ResourceTest extends TestCase
 
     public function testGetStreamAndGetLocation(): void
     {
-        $resource = new Resource($this->stream, $this->location, $this->streamPath.'test.txt', 'basePath/');
+        $resource = new Resource($this->stream, $this->location, $this->streamPath . 'test.txt', 'basePath/');
         $this->assertEquals($this->stream, $resource->getStream());
         $this->assertEquals($this->location, $resource->getLocation());
     }
@@ -65,17 +65,17 @@ class ResourceTest extends TestCase
             $locationPath = '';
         }
 
-        $resource = new Resource($this->stream, $location, $locationPath.$this->streamPath.$path, $basePath);
+        $resource = new Resource($this->stream, $location, $locationPath . $this->streamPath . $path, $basePath);
 
         // getBasePath
         $this->assertSame($path, $resource->getBasePath());
 
         // Test `getUri` as the too are connected
-        $this->assertSame($this->streamScheme.'://'.$path, $resource->getUri());
+        $this->assertSame($this->streamScheme . '://' . $path, $resource->getUri());
 
         // Test `getAbsolutePath` and `__toString`
         $basePath = Normalizer::normalizePath($basePath);
-        $this->assertSame($basePath.$locationPath.$this->streamPath.$path, $resource->getAbsolutePath());
+        $this->assertSame($basePath . $locationPath . $this->streamPath . $path, $resource->getAbsolutePath());
         $this->assertSame($resource->getAbsolutePath(), (string) $resource);
     }
 
@@ -183,7 +183,7 @@ class ResourceTest extends TestCase
         string $expectedFilename,
         string $expectedExtension
     ): void {
-        $resource = new Resource($this->stream, $this->location, $this->locationPath.$this->streamPath.$path);
+        $resource = new Resource($this->stream, $this->location, $this->locationPath . $this->streamPath . $path);
 
         $this->assertSame($expectedBasename, $resource->getBasename());
         $this->assertSame($expectedFilename, $resource->getFilename());

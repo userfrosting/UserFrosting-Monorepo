@@ -120,7 +120,7 @@ class SprinkleCommandsRepositoryTest extends TestCase
         $repository = new SprinkleCommandsRepository($sprinkleManager, $ci);
 
         $this->expectException(BadInstanceOfException::class);
-        $this->expectExceptionMessage('Bakery command class `'.$command::class."` doesn't implement Symfony\Component\Console\Command\Command.");
+        $this->expectExceptionMessage('Bakery command class `' . $command::class . "` doesn't implement Symfony\Component\Console\Command\Command.");
         $repository->all();
     }
 }

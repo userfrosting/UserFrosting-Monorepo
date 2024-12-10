@@ -24,7 +24,7 @@ class CacheTest extends TestCase
 
     public function setUp(): void
     {
-        $this->storage = __DIR__.'/store';
+        $this->storage = __DIR__ . '/store';
     }
 
     /**

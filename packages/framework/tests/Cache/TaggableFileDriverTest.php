@@ -32,7 +32,7 @@ class TaggableFileDriverTest extends TestCase
     {
         parent::setUp();
         $this->file = new Filesystem();
-        $this->path = __DIR__.'/store';
+        $this->path = __DIR__ . '/store';
     }
 
     public function testTagKeyGeneratesPrefixedKey(): void

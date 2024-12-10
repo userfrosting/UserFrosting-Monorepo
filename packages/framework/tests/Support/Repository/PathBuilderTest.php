@@ -28,7 +28,7 @@ class PathBuilderTest extends TestCase
 
     public function setUp(): void
     {
-        $this->basePath = Normalizer::normalizePath(__DIR__.'/data');
+        $this->basePath = Normalizer::normalizePath(__DIR__ . '/data');
         $this->locator = new ResourceLocator($this->basePath);
 
         $this->locator->addStream(new ResourceStream('owls'));
@@ -49,10 +49,10 @@ class PathBuilderTest extends TestCase
 
         // Assert
         $this->assertEquals($paths, [
-            $this->basePath.'core/owls/megascops.php',
-            $this->basePath.'core/owls/tyto.php',
-            $this->basePath.'account/owls/megascops.php',
-            $this->basePath.'admin/owls/megascops.php',
+            $this->basePath . 'core/owls/megascops.php',
+            $this->basePath . 'core/owls/tyto.php',
+            $this->basePath . 'account/owls/megascops.php',
+            $this->basePath . 'admin/owls/megascops.php',
         ]);
     }
 
@@ -66,9 +66,9 @@ class PathBuilderTest extends TestCase
 
         // Assert
         $this->assertEquals([
-            $this->basePath.'core/owls/megascops.php',
-            $this->basePath.'account/owls/megascops.php',
-            $this->basePath.'admin/owls/megascops.php',
+            $this->basePath . 'core/owls/megascops.php',
+            $this->basePath . 'account/owls/megascops.php',
+            $this->basePath . 'admin/owls/megascops.php',
         ], $paths);
     }
 }

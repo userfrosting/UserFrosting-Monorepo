@@ -33,7 +33,7 @@ class LocaleTest extends TestCase
 
     public function setUp(): void
     {
-        $this->basePath = __DIR__.'/data/sprinkles';
+        $this->basePath = __DIR__ . '/data/sprinkles';
         $this->locator = new ResourceLocator($this->basePath);
         $this->locator->addStream(new ResourceStream('locale'));
 
@@ -179,7 +179,7 @@ class LocaleTest extends TestCase
     public static function locationProvider(): array
     {
         return [
-            [__DIR__.'/data/shared'],
+            [__DIR__ . '/data/shared'],
             ['data/shared'],
         ];
     }

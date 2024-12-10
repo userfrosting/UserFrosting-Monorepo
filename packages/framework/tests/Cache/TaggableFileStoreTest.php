@@ -22,7 +22,7 @@ class TaggableFileStoreTest extends StoreTestCase
 
     public function setUp(): void
     {
-        $this->storage = Normalizer::normalizePath(__DIR__.'/store');
+        $this->storage = Normalizer::normalizePath(__DIR__ . '/store');
     }
 
     /** {@inheritdoc} */

@@ -40,7 +40,7 @@ class RepositoryLoaderTest extends TestCase
 
     public function setUp(): void
     {
-        $this->basePath = __DIR__.'/data';
+        $this->basePath = __DIR__ . '/data';
         $this->locator = new ResourceLocator($this->basePath);
 
         $this->locator->addStream(new ResourceStream('owls'));
@@ -81,8 +81,8 @@ class RepositoryLoaderTest extends TestCase
     public function testYamlFileLoaderWithGetPaths(): void
     {
         $data = [
-            __DIR__.'data/core/owls/megascops.yaml',
-            __DIR__.'data/core/owls/tyto.yaml',
+            __DIR__ . 'data/core/owls/megascops.yaml',
+            __DIR__ . 'data/core/owls/tyto.yaml',
         ];
 
         $loader = new YamlFileLoader($data);
@@ -95,8 +95,8 @@ class RepositoryLoaderTest extends TestCase
      */
     public function testYamlFileLoaderWithStringPath(): void
     {
-        $loaderA = new YamlFileLoader([__DIR__.'data/core/owls/tyto.yaml']);
-        $loaderB = new YamlFileLoader(__DIR__.'data/core/owls/tyto.yaml');
+        $loaderA = new YamlFileLoader([__DIR__ . 'data/core/owls/tyto.yaml']);
+        $loaderB = new YamlFileLoader(__DIR__ . 'data/core/owls/tyto.yaml');
 
         $this->assertSame($loaderA->load(), $loaderB->load());
     }
@@ -107,11 +107,11 @@ class RepositoryLoaderTest extends TestCase
     public function testYamlFileLoaderWithPrependPath(): void
     {
         $loaderA = new YamlFileLoader([
-            __DIR__.'data/core/owls/megascops.yaml',
-            __DIR__.'data/core/owls/tyto.yaml',
+            __DIR__ . 'data/core/owls/megascops.yaml',
+            __DIR__ . 'data/core/owls/tyto.yaml',
         ]);
-        $loaderB = new YamlFileLoader(__DIR__.'data/core/owls/megascops.yaml');
-        $loaderB->prependPath(__DIR__.'data/core/owls/tyto.yaml');
+        $loaderB = new YamlFileLoader(__DIR__ . 'data/core/owls/megascops.yaml');
+        $loaderB->prependPath(__DIR__ . 'data/core/owls/tyto.yaml');
 
         $this->assertSame($loaderA->load(), $loaderB->load());
     }
@@ -123,7 +123,7 @@ class RepositoryLoaderTest extends TestCase
     {
         // Arrange
         $loader = new YamlFileLoader([
-            __DIR__.'data/core/owls/dontExist.yaml',
+            __DIR__ . 'data/core/owls/dontExist.yaml',
         ]);
 
         // Expectations
@@ -140,7 +140,7 @@ class RepositoryLoaderTest extends TestCase
     {
         // Arrange
         $loader = new YamlFileLoader([
-            __DIR__.'data/core/owls/dontExist.yaml',
+            __DIR__ . 'data/core/owls/dontExist.yaml',
         ]);
 
         // Act
@@ -157,7 +157,7 @@ class RepositoryLoaderTest extends TestCase
     {
         // Need to mock `is_readable`. That's why it's wrapped in a method, so we can properly test the exception.
         // @see https://stackoverflow.com/a/20080850
-        $path = __DIR__.'/data/core/owls/tyto.yaml';
+        $path = __DIR__ . '/data/core/owls/tyto.yaml';
         $loader = $this->getMockBuilder(YamlFileLoader::class)
                        ->setConstructorArgs([$path])
                        ->onlyMethods(['isReadable'])
@@ -180,7 +180,7 @@ class RepositoryLoaderTest extends TestCase
     {
         // Need to mock `file_get_contents`. That's why it's wrapped in a method, so we can properly test the exception.
         // @see https://stackoverflow.com/a/53905681/445757
-        $path = __DIR__.'/data/core/owls/tyto.yaml';
+        $path = __DIR__ . '/data/core/owls/tyto.yaml';
         $loader = $this->getMockBuilder(YamlFileLoader::class)
                        ->setConstructorArgs([$path])
                        ->onlyMethods(['fileGetContents'])
@@ -203,7 +203,7 @@ class RepositoryLoaderTest extends TestCase
      */
     public function testYamlFileLoaderWithNoFileContent(): void
     {
-        $loader = new YamlFileLoader(__DIR__.'/data/core/owls/empty.yaml');
+        $loader = new YamlFileLoader(__DIR__ . '/data/core/owls/empty.yaml');
 
         // Act
         $data = $loader->load();
@@ -219,8 +219,8 @@ class RepositoryLoaderTest extends TestCase
     public function testYamlFileLoaderWithNoFileContentOnFirstFile(): void
     {
         $loader = new YamlFileLoader([
-            __DIR__.'/data/core/owls/empty.yaml',
-            __DIR__.'/data/core/owls/tyto.yaml',
+            __DIR__ . '/data/core/owls/empty.yaml',
+            __DIR__ . '/data/core/owls/tyto.yaml',
         ]);
 
         // Act
@@ -239,8 +239,8 @@ class RepositoryLoaderTest extends TestCase
     public function testYamlFileLoaderWithNoFileContentOnSecondFile(): void
     {
         $loader = new YamlFileLoader([
-            __DIR__.'/data/core/owls/tyto.yaml',
-            __DIR__.'/data/core/owls/empty.yaml',
+            __DIR__ . '/data/core/owls/tyto.yaml',
+            __DIR__ . '/data/core/owls/empty.yaml',
         ]);
 
         // Act

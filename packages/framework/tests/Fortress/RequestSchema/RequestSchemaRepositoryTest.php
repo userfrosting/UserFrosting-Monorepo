@@ -23,7 +23,7 @@ class RequestSchemaRepositoryTest extends TestCase
 {
     public function testRequestSchemaRepository(): void
     {
-        $loader = new YamlFileLoader(__DIR__.'/../data/contact.json');
+        $loader = new YamlFileLoader(__DIR__ . '/../data/contact.json');
         $schema = new RequestSchemaRepository($loader->load());
         $contactSchema = [
             'message' => [

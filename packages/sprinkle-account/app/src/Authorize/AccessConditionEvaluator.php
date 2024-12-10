@@ -104,7 +104,7 @@ class AccessConditionEvaluator extends NodeVisitorAbstract
                 'expression' => $argString,
             ];
 
-            switch(true) {
+            switch (true) {
                 case $arg->value instanceof \PhpParser\Node\Expr\BinaryOp\Concat:
                 case $arg->value instanceof \PhpParser\Node\Expr\ConstFetch:
                     // Resolve parameter placeholders ('variable' names (either single-word or array-dot identifiers))
@@ -228,7 +228,7 @@ class AccessConditionEvaluator extends NodeVisitorAbstract
             if (is_array($value) && isset($value[$token])) {
                 $value = $value[$token];
                 continue;
-            // @phpstan-ignore-next-line Allow variable property for this use
+                // @phpstan-ignore-next-line Allow variable property for this use
             } elseif (is_object($value) && isset($value->$token)) {
                 // @phpstan-ignore-next-line Allow variable property for this use
                 $value = $value->$token;

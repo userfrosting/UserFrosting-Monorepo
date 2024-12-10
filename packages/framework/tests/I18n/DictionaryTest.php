@@ -33,7 +33,7 @@ class DictionaryTest extends TestCase
 
     public function setUp(): void
     {
-        $this->basePath = __DIR__.'/data/dictionary';
+        $this->basePath = __DIR__ . '/data/dictionary';
         $this->locator = new ResourceLocator($this->basePath);
 
         $this->locator->addStream(new ResourceStream('locale', shared: true));

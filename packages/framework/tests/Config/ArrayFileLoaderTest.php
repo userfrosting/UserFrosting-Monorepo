@@ -23,7 +23,7 @@ class ArrayFileLoaderTest extends TestCase
 
     public function setUp(): void
     {
-        $this->basePath = __DIR__.'/data';
+        $this->basePath = __DIR__ . '/data';
         $this->locator = new ResourceLocator($this->basePath);
 
         // Add them as locations to simulate how they are added in SprinkleManager
