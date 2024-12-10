@@ -67,6 +67,11 @@
             }
         },
         {
+            "label": "Workspace - PHP CS Fixer",
+            "type": "shell",
+            "command": "vendor/bin/php-cs-fixer fix"
+        },
+        {
             "label": "Workspace - PHPStan",
             "type": "shell",
             "command": "vendor/bin/phpstan analyse"

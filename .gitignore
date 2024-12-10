@@ -19,6 +19,7 @@ public/assets/
 # Ignore dev utils cache
 .phpunit.cache
 .php_cs.cache
+.php-cs-fixer.cache
 
 # Ignore Frontend Coverage
 coverage/
