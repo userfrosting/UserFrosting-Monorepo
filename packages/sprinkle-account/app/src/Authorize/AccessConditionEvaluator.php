@@ -228,14 +228,16 @@ class AccessConditionEvaluator extends NodeVisitorAbstract
             if (is_array($value) && isset($value[$token])) {
                 $value = $value[$token];
                 continue;
-                // @phpstan-ignore-next-line Allow variable property for this use
-            } elseif (is_object($value) && isset($value->$token)) {
+            }
+
+            // @phpstan-ignore-next-line Allow variable property for this use
+            if (is_object($value) && isset($value->$token)) {
                 // @phpstan-ignore-next-line Allow variable property for this use
                 $value = $value->$token;
                 continue;
-            } else {
-                throw new AuthorizationException("Cannot resolve the path \"$path\". Error at token \"$token\".");
             }
+
+            throw new AuthorizationException("Cannot resolve the path \"$path\". Error at token \"$token\".");
         }
 
         return $value;
