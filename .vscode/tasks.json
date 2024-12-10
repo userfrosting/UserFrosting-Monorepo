@@ -52,19 +52,19 @@
             "type": "shell",
             "command": "vendor/bin/monorepo-builder validate"
         },
-        
-        /**
-         * Git Submodule Tasks
-         */
         {
-            "label": "Git Submodule - Init",
+            "label": "Workspace - PHPUnit",
             "type": "shell",
-            "command": "git submodule update --init"
-        },
-        {
-            "label": "Git Submodule - Update from Git",
-            "type": "shell",
-            "command": "git submodule update --remote --merge"
+            "options": {
+                "env": {
+                    "XDEBUG_CONFIG": "idekey=VSCODE"
+                }
+            },
+            "command": "printf '\\33c\\e[3J' && vendor/bin/phpunit",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
 
         /**

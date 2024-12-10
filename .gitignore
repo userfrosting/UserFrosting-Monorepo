@@ -13,5 +13,12 @@ vendor/
 # Ignore node modules
 node_modules/
 
-# Ignore Coverage
+# Ignore compiled assets
+public/assets/
+
+# Ignore dev utils cache
+.phpunit.cache
+.php_cs.cache
+
+# Ignore Frontend Coverage
 coverage/

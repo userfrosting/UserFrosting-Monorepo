@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    backupGlobals="false" 
+    bootstrap="vendor/autoload.php" 
+    colors="true" 
+    processIsolation="false" 
+    stderr="true" 
+    stopOnFailure="false" 
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd" 
+    cacheDirectory=".phpunit.cache" 
+    backupStaticProperties="false"
+>
+  <coverage includeUncoveredFiles="true">
+    <report>
+      <clover outputFile="_meta/coverage.xml"/>
+      <html outputDirectory="_meta/coverage"/>
+    </report>
+  </coverage>
+  <testsuites>
+    <testsuite name="Framework">
+      <directory suffix="Test.php">packages/framework/tests/</directory>
+    </testsuite>
+    <testsuite name="Core Sprinkle">
+      <directory suffix="Test.php">packages/sprinkle-core/app/tests/Unit</directory>
+      <directory suffix="Test.php">packages/sprinkle-core/app/tests/Integration</directory>
+    </testsuite>
+    <testsuite name="Account Sprinkle">
+      <directory suffix="Test.php">packages/sprinkle-account/app/tests/</directory>
+    </testsuite>
+    <testsuite name="Admin Sprinkle">
+      <directory suffix="Test.php">packages/sprinkle-admin/app/tests/</directory>
+    </testsuite>
+    <testsuite name="Skeleton">
+      <directory suffix="Test.php">packages/skeleton/app/tests/</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <env name="UF_MODE" value="testing"/>
+  </php>
+  <source>
+    <include>
+      <directory suffix=".php">packages/framework/src/</directory>
+      <directory suffix=".php">packages/skeleton/app/src/</directory>
+      <directory suffix=".php">packages/sprinkle-core/app/src/</directory>
+      <directory suffix=".php">packages/sprinkle-account/app/src/</directory>
+      <directory suffix=".php">packages/sprinkle-admin/app/src/</directory>
+    </include>
+  </source>
+</phpunit>
