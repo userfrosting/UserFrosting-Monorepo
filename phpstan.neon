@@ -1,0 +1,43 @@
+parameters:
+  level: 8
+  paths:
+    - packages/framework/src/
+    - packages/framework/tests/
+    - packages/skeleton/app/src/
+    - packages/skeleton/app/tests/
+    - packages/sprinkle-account/app/src/
+    - packages/sprinkle-account/app/tests/
+    - packages/sprinkle-admin/app/src/
+    - packages/sprinkle-admin/app/tests/
+    - packages/sprinkle-core/app/src/
+    - packages/sprinkle-core/app/tests/
+  reportUnmatchedIgnoredErrors: false
+  ignoreErrors:
+    - '#Dynamic call to static method PHPUnit\\Framework\\.*#'
+    - '#Call to an undefined method Mockery\\Expectation::.*#'
+    - '/^Parameter #1 \$value of function strval expects bool\|float\|int\|resource\|string\|null, mixed given.$/'
+    - '/^Parameter #1 \$value of function intval expects array\|bool\|float\|int\|resource\|string\|null, mixed given.$/'
+  universalObjectCratesClasses:
+    - UserFrosting\Sprinkle\Core\Database\Models\Interfaces\ThrottleModelInterface
+    - UserFrosting\Sprinkle\Account\Database\Models\Interfaces\ActivityInterface
+    - UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface
+    - UserFrosting\Sprinkle\Account\Database\Models\Interfaces\PasswordResetInterface
+    - UserFrosting\Sprinkle\Account\Database\Models\Interfaces\PermissionInterface
+    - UserFrosting\Sprinkle\Account\Database\Models\Interfaces\PersistenceInterface
+    - UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface
+    - UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface
+    - UserFrosting\Sprinkle\Account\Database\Models\Interfaces\VerificationInterface
+includes:
+  - packages/sprinkle-account/phpstan-baseline.neon
+  - packages/sprinkle-admin/phpstan-baseline.neon
+  - packages/sprinkle-core/phpstan-baseline.neon
+  - vendor/phpstan/phpstan-strict-rules/rules.neon
+  - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+  - vendor/phpstan/phpstan-mockery/extension.neon
+  - vendor/phpstan/phpstan-phpunit/extension.neon
+
+services:
+-
+    class: SlamPhpStan\UnusedVariableRule
+    tags:
+        - phpstan.rules.rule

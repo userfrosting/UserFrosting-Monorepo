@@ -66,6 +66,11 @@
                 "isDefault": true
             }
         },
+        {
+            "label": "Workspace - PHPStan",
+            "type": "shell",
+            "command": "vendor/bin/phpstan analyse"
+        },
 
         /**
          * All workspaces NPM Tasks
