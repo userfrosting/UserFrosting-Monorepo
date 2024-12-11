@@ -39,8 +39,6 @@ use UserFrosting\Support\Message\UserMessage;
  * This route requires authentication (and should generally be limited to admins or the root user).
  *
  * Request type: POST
- *
- * @see getModalCreateGroup
  */
 class GroupCreateAction
 {
