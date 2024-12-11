@@ -27,13 +27,21 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php_versions }}
-          extensions: mbstring, dom, fileinfo, gd, pdo_sqlite
+          extensions: mbstring, dom, fileinfo, gd, memcached, redis, pdo_sqlite
           coverage: xdebug
           tools: pecl, composer
 
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+
+      - name: Setup Redis-server
+        uses: supercharge/redis-github-action@1.1.0
+        with:
+          redis-version: 6
+  
+      - name: Setup Memcached
+        uses: niden/actions-memcached@v7
       
       - name: Install Dependencies
         run: composer update --prefer-dist --no-progress
@@ -106,6 +114,14 @@ jobs:
           sleep 1
         done
     
+    - name: Setup Redis-server
+      uses: supercharge/redis-github-action@1.1.0
+      with:
+        redis-version: 6
+      
+    - name: Setup Memcached
+      uses: niden/actions-memcached@v7
+            
     - name: Install Dependencies
       run: composer update --prefer-dist --no-progress
       
@@ -169,6 +185,14 @@ jobs:
         mysql database: 'userfrosting'
         mysql user: 'userfrosting'
         mysql password: 'password'
+    
+    - name: Setup Redis-server
+      uses: supercharge/redis-github-action@1.1.0
+      with:
+        redis-version: 6
+      
+    - name: Setup Memcached
+      uses: niden/actions-memcached@v7
 
     - name: Install Dependencies
       run: composer update --prefer-dist --no-progress
@@ -220,6 +244,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+    
+      - name: Setup Redis-server
+        uses: supercharge/redis-github-action@1.1.0
+        with:
+          redis-version: 6
+      
+      - name: Setup Memcached
+        uses: niden/actions-memcached@v7
             
       - name: Install Dependencies
         run: composer update --prefer-dist --no-progress
@@ -283,7 +315,15 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      
+
+      - name: Setup Redis-server
+        uses: supercharge/redis-github-action@1.1.0
+        with:
+          redis-version: 6
+    
+      - name: Setup Memcached
+        uses: niden/actions-memcached@v7
+
       - name: Install Dependencies
         run: composer update --prefer-dist --no-progress
       
