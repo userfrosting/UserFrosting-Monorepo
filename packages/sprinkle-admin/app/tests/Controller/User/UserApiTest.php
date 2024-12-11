@@ -117,7 +117,7 @@ class UserApiTest extends AdminTestCase
         ]);
 
         // Create request with method and url and fetch response
-        $request = $this->createRequest('GET', '/users/u/' . $user->user_name);
+        $request = $this->createRequest('GET', '/api/users/u/' . $user->user_name);
         $response = $this->handleRequest($request);
 
         // Assert response status & body
