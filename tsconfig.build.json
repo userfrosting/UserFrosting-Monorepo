@@ -8,6 +8,6 @@
         { "path": "packages/sprinkle-admin" },
         { "path": "packages/sprinkle-core" },
         { "path": "packages/theme-pink-cupcake" }, 
-        { "path": "packages/UserFrosting" }
+        { "path": "packages/skeleton" }
     ]
 }
