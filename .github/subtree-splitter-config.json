@@ -1,0 +1,9 @@
+{
+    "sub-splits": [
+        {
+            "name": "core",
+            "directory": "packages/sprinkle-core",
+            "target": "git@github.com:userfrosting/sprinkle-core.git"
+        }
+    ]
+}
