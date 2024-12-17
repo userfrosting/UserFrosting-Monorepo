@@ -37,13 +37,16 @@ jobs:
 
             # Cache the splitsh executable to speedup future runs
             - name: Cache splitsh-lite
+              id: splitsh-cache
               uses: actions/cache@v4
               with:
-                  path: "./splitsh"
-                  key: "${{ runner.os }}-splitsh-v101"
+                  path: "./.splitsh"
+                  key: '${{ runner.os }}-splitsh-d-101'
 
             # Sync commits and tags for the configured subtree splits
-            - name: subtree split
-              uses: acrobat/subtree-splitter@v1.1.5
+            - uses: frankdejonge/use-subsplit-publish@1.1.0
               with:
-                  config-path: .github/subtree-splitter-config.json # Reference the location where you saved your config file
+                source-branch: '6.0'
+                config-path: '.github/subtree-splitter-config.json'
+                splitsh-path: './.splitsh/splitsh-lite'
+                splitsh-version: 'v1.0.1'
