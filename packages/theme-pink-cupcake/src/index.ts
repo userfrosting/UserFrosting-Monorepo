@@ -1,9 +1,9 @@
 import type { App } from 'vue'
 
 // Import sub-plugins
-import PinkCupcakeComponents from './components'
-import PinkCupcakeViews from './views'
-import AdminSprinkle from './views/Admin/index'
+import PinkCupcakeComponents from './plugins/components'
+import PinkCupcakeViews from './plugins/views'
+import AdminSprinkle from './plugins/admin'
 import FontAwesome from './plugins/font-awesome'
 
 // Init UIkit
