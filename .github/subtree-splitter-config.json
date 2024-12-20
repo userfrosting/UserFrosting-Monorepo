@@ -4,6 +4,31 @@
             "name": "core",
             "directory": "packages/sprinkle-core",
             "target": "git@github.com:userfrosting/sprinkle-core.git"
+        },
+        {
+            "name": "account",
+            "directory": "packages/sprinkle-account",
+            "target": "git@github.com:userfrosting/sprinkle-account.git"
+        },
+        {
+            "name": "admin",
+            "directory": "packages/sprinkle-admin",
+            "target": "git@github.com:userfrosting/sprinkle-admin.git"
+        },
+        {
+            "name": "pink-cupcake",
+            "directory": "packages/theme-pink-cupcake",
+            "target": "git@github.com:userfrosting/theme-pink-cupcake.git"
+        },
+        {
+            "name": "framework",
+            "directory": "packages/framework",
+            "target": "git@github.com:userfrosting/framework.git"
+        },
+        {
+            "name": "skeleton",
+            "directory": "packages/skeleton",
+            "target": "git@github.com:userfrosting/userfrosting.git"
         }
     ]
 }

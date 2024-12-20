@@ -6,24 +6,18 @@ on:
     branches:
       - "*"
     # paths:
-    #   - src/**
-    # Tag push events should be ignored, they will be handled with the create event below.
-    tags-ignore:
+    #   - packages/**
+    tags:
       - "*"
-#   create:
-#     tags:
-#       - "*"
-#   delete:
-#     tags:
-#       - "*"
 
 jobs:
     sync_commits:
         runs-on: ubuntu-latest
         name: Sync commits
-        if: github.repository == 'userfrosting/monorepo' # Execute this workflow job only on the main repository.
+        # Execute this workflow job only on the main repository.
+        if: github.repository == 'userfrosting/monorepo'
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
               with:
                   persist-credentials: false
                   fetch-depth: 0
