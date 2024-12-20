@@ -4,9 +4,9 @@ on:
   push:
     # Only trigger for specific branches or changes in specific paths.
     branches:
-      - "*"
-    # paths:
-    #   - packages/**
+      - "6.0"
+    paths:
+      - packages/**
     tags:
       - "*"
 
