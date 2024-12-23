@@ -44,7 +44,6 @@ jobs:
 
         runs-on: ubuntu-latest
         name: Test & Coverage - Node ${{ matrix.node_versions }}
-        needs: Build
 
         steps:
             - uses: actions/checkout@v4
@@ -61,10 +60,10 @@ jobs:
       
             - name: Upload coverage to Codecov
               if: github.event_name != 'schedule'
-              uses: codecov/codecov-action@v4
+              uses: codecov/codecov-action@v5
               with:
                 token: ${{ secrets.CODECOV_TOKEN }}
-                file: ./_meta/_coverage/clover.xml
+                files: ./_meta/_coverage/clover.xml
                 fail_ci_if_error: true
 
     Prettier:
