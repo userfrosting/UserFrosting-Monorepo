@@ -3,10 +3,20 @@ name: PHPUnit
 on:
   push:
     branches: [6.0]
+    paths:
+        - packages/framework
+        - packages/skeleton
+        - packages/sprinkle-account
+        - packages/sprinkle-admin
+        - packages/sprinkle-core
   pull_request:
     branches: [6.0]
-#   schedule:
-#     - cron: "0 0 * * 5"
+    paths:
+        - packages/framework
+        - packages/skeleton
+        - packages/sprinkle-account
+        - packages/sprinkle-admin
+        - packages/sprinkle-core
   workflow_dispatch:
 
 jobs:
@@ -45,12 +55,6 @@ jobs:
       
       - name: Install Dependencies
         run: composer update --prefer-dist --no-progress
-      
-      #- name: Npm Install
-      #  run: npm install
-      
-      #- name: Run Webpack
-      #  run: npm run dev
 
       - name: Execute tests
         run: | 
@@ -74,6 +78,7 @@ jobs:
 
     runs-on: ubuntu-latest
     name: PHPUnit - PHP ${{ matrix.php_versions }} - MySQL
+    needs: PHPUnit-Memory
 
     env:
       DB_TEST_CONNECTION: mysql
@@ -124,12 +129,6 @@ jobs:
             
     - name: Install Dependencies
       run: composer update --prefer-dist --no-progress
-      
-    #- name: Npm Install
-    #  run: npm install
-    
-    #- name: Run Webpack
-    #  run: npm run dev
 
     - name: Execute tests
       run: | 
@@ -153,6 +152,7 @@ jobs:
 
     runs-on: ubuntu-latest
     name: PHPUnit - PHP ${{ matrix.php_versions }} - MariaDB
+    needs: PHPUnit-Memory
 
     env:
       DB_TEST_CONNECTION: mysql
@@ -196,12 +196,6 @@ jobs:
 
     - name: Install Dependencies
       run: composer update --prefer-dist --no-progress
-      
-    #- name: Npm Install
-    #  run: npm install
-    
-    #- name: Run Webpack
-    #  run: npm run dev
 
     - name: Execute tests
       run: | 
@@ -225,6 +219,7 @@ jobs:
 
       runs-on: ubuntu-latest
       name: PHPUnit - PHP ${{ matrix.php_versions }} - SQLite
+      needs: PHPUnit-Memory
 
       env:
         DB_TEST_CONNECTION: sqlite
@@ -256,12 +251,6 @@ jobs:
       - name: Install Dependencies
         run: composer update --prefer-dist --no-progress
       
-      #- name: Npm Install
-      #  run: npm install
-      
-      #- name: Run Webpack
-      #  run: npm run dev
-      
       - name: Create SQLite Database
         run: touch database.sqlite
 
@@ -287,6 +276,7 @@ jobs:
 
       runs-on: ubuntu-latest
       name: PHPUnit - PHP ${{ matrix.php_versions }} - PostgreSQL
+      needs: PHPUnit-Memory
 
       env:
         DB_TEST_CONNECTION: pgsql
@@ -326,12 +316,6 @@ jobs:
 
       - name: Install Dependencies
         run: composer update --prefer-dist --no-progress
-      
-      #- name: Npm Install
-      #  run: npm install
-      
-      #- name: Run Webpack
-      #  run: npm run dev
 
       - name: Execute tests
         run: | 
@@ -355,6 +339,7 @@ jobs:
 
 #     runs-on: windows-latest
 #     name: PHPUnit - PHP ${{ matrix.php_versions }} - Windows
+#     needs: PHPUnit-Memory
 
 #     env:
 #       DB_TEST_CONNECTION: sqlite
