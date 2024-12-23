@@ -4,19 +4,19 @@ on:
   push:
     branches: [6.0]
     paths:
-        - packages/framework
-        - packages/skeleton
-        - packages/sprinkle-account
-        - packages/sprinkle-admin
-        - packages/sprinkle-core
+        - packages/framework/**
+        - packages/skeleton/**
+        - packages/sprinkle-account/**
+        - packages/sprinkle-admin/**
+        - packages/sprinkle-core/**
   pull_request:
     branches: [6.0]
     paths:
-        - packages/framework
-        - packages/skeleton
-        - packages/sprinkle-account
-        - packages/sprinkle-admin
-        - packages/sprinkle-core
+        - packages/framework/**
+        - packages/skeleton/**
+        - packages/sprinkle-account/**
+        - packages/sprinkle-admin/**
+        - packages/sprinkle-core/**
   workflow_dispatch:
 
 jobs:
