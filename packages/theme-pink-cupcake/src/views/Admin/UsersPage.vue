@@ -1,6 +1,9 @@
 <script setup>
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
 import moment from 'moment'
+import UserCreateModal from '../../components/Pages/Admin/User/UserCreateModal.vue'
+import UserEditModal from '../../components/Pages/Admin/User/UserEditModal.vue'
+import UserDeleteModal from '../../components/Pages/Admin/User/UserDeleteModal.vue'
 </script>
 
 <template>
@@ -11,10 +14,8 @@ import moment from 'moment'
 
     <UFCardBox>
         <UFSprunjeTable dataUrl="/api/users" searchColumn="name">
-            <template #actions>
-                <button class="uk-button uk-button-primary">
-                    <font-awesome-icon icon="user-plus" /> Create user
-                </button>
+            <template #actions="{ sprunjer }">
+                <UserCreateModal @saved="sprunjer.fetch()" class="uk-button uk-button-primary" />
             </template>
 
             <template #header>
@@ -24,7 +25,7 @@ import moment from 'moment'
                 <UFSprunjeHeader>Actions</UFSprunjeHeader>
             </template>
 
-            <template #body="{ item }">
+            <template #body="{ item, sprunjer }">
                 <UFSprunjeColumn>
                     <strong>
                         <RouterLink
@@ -57,12 +58,33 @@ import moment from 'moment'
                     <button class="uk-button uk-button-default uk-button-small" type="button">
                         Actions <font-awesome-icon icon="caret-down" fixed-width />
                     </button>
-                    <div uk-dropdown>
+                    <div
+                        class="uk-padding-small"
+                        uk-dropdown="pos: bottom-right; mode: click; offset: 2">
                         <ul class="uk-nav uk-dropdown-nav">
-                            <li><a href="#">Edit User</a></li>
+                            <li>
+                                <RouterLink
+                                    :to="{
+                                        name: 'admin.user',
+                                        params: { user_name: item.user_name }
+                                    }">
+                                    <font-awesome-icon icon="eye" fixed-width /> View
+                                </RouterLink>
+                            </li>
+                            <li>
+                                <UserEditModal
+                                    :user="item"
+                                    @saved="sprunjer.fetch()"
+                                    class="uk-drop-close" />
+                            </li>
                             <li><a href="#">Change User Password</a></li>
                             <li><a href="#">Disable User</a></li>
-                            <li><a href="#">Delete User</a></li>
+                            <li>
+                                <UserDeleteModal
+                                    :user="item"
+                                    @deleted="sprunjer.fetch()"
+                                    class="uk-drop-close" />
+                            </li>
                         </ul>
                     </div>
                 </UFSprunjeColumn>

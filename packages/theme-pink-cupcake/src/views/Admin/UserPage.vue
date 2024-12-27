@@ -7,7 +7,7 @@ import UserRoles from '../../components/Pages/Admin/User/UserRoles.vue'
 import UserPermissions from '../../components/Pages/Admin/User/UserPermissions.vue'
 
 const route = useRoute()
-const { user, error } = useUserApi(route)
+const { user, error, fetchApi } = useUserApi(route)
 </script>
 
 <template>
@@ -20,7 +20,7 @@ const { user, error } = useUserApi(route)
     <template v-else>
         <div uk-grid>
             <div class="uk-width-1-3">
-                <UserInfo :user="user" />
+                <UserInfo :user="user" @updated="fetchApi()" />
             </div>
             <div class="uk-width-2-3">
                 <UserRoles :slug="user.user_name" />

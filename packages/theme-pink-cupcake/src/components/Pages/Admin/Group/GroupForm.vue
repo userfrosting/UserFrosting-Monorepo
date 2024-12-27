@@ -1,13 +1,5 @@
 <script setup lang="ts">
-/**
- * Interface
- */
-interface GroupEditForm {
-    slug: string
-    name: string
-    description: string
-    icon: string
-}
+import type { GroupEditForm } from '@userfrosting/sprinkle-admin/interfaces'
 
 /**
  * Form Model

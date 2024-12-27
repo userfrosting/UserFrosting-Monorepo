@@ -16,12 +16,12 @@ use Illuminate\Database\Connection;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\Fortress\Transformer\RequestDataTransformer;
 use UserFrosting\Fortress\Validator\ServerSideValidator;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\GroupInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -59,7 +59,7 @@ class UserCreateAction
      * @param \UserFrosting\Event\EventDispatcher $eventDispatcher
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $db,
@@ -86,8 +86,12 @@ class UserCreateAction
     public function __invoke(Request $request, Response $response): Response
     {
         $this->validateAccess();
-        $this->handle($request);
-        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $user = $this->handle($request)->toArray();
+        $payload = json_encode([
+            'success' => true,
+            'message' => $this->translator->translate('USER.CREATED', $user),
+            'user'    => $user,
+        ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -97,8 +101,10 @@ class UserCreateAction
      * Handle the request.
      *
      * @param Request $request
+     *
+     * @return UserInterface
      */
-    protected function handle(Request $request): void
+    protected function handle(Request $request): UserInterface
     {
         // Get POST parameters.
         $params = (array) $request->getParsedBody();
@@ -156,7 +162,7 @@ class UserCreateAction
         $this->userValidation->validate($user);
 
         // Ready to save
-        $this->db->transaction(function () use ($user, $data, $currentUser) {
+        $user = $this->db->transaction(function () use ($user, $data, $currentUser) {
             // Store new user to database
             $user->save();
 
@@ -175,8 +181,10 @@ class UserCreateAction
                 $this->passwordEmail->send($user);
             }
 
-            $this->alert->addMessage('success', 'USER.CREATED');
+            return $user;
         });
+
+        return $user;
     }
 
     /**

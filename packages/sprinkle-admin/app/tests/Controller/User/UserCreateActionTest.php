@@ -14,7 +14,6 @@ namespace UserFrosting\Sprinkle\Admin\Tests\Controller\User;
 
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Database\Models\Group;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
@@ -99,19 +98,20 @@ class UserCreateActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([], $response);
+        $this->assertJsonStructure([
+            'success',
+            'message',
+            'user',
+        ], $response);
+        $this->assertJsonResponse(true, $response, 'success');
+        $this->assertJsonResponse('User <strong>foo</strong> has been successfully created', $response, 'message');
+        $this->assertJsonResponse('Foo', $response, 'user.first_name');
 
         // Make sure the user is added to the db by querying it
         /** @var User */
         $user = User::where('email', 'foo@bar.com')->first();
         $this->assertSame('foo', $user['user_name']);
         $this->assertSame('en_US', $user['locale']);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     /**
@@ -154,19 +154,20 @@ class UserCreateActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([], $response);
+        $this->assertJsonStructure([
+            'success',
+            'message',
+            'user',
+        ], $response);
+        $this->assertJsonResponse(true, $response, 'success');
+        $this->assertJsonResponse('User <strong>foo</strong> has been successfully created', $response, 'message');
+        $this->assertJsonResponse('Foo', $response, 'user.first_name');
 
         // Make sure the user is added to the db by querying it
         /** @var User */
         $user = User::where('email', 'foo@bar.com')->first();
         $this->assertSame('foo', $user['user_name']);
         $this->assertSame('en_US', $user['locale']);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     /**
@@ -281,19 +282,18 @@ class UserCreateActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([], $response);
+        $this->assertJsonStructure([
+            'success',
+            'message',
+            'user',
+        ], $response);
+        $this->assertJsonResponse($group->id, $response, 'user.group_id');
 
         // Make sure the user is added to the db by querying it
         /** @var User */
         $user = User::where('email', 'foo@bar.com')->first();
         $this->assertSame($group->id, $user->group?->id);
         $this->assertSame('en_US', $user['locale']); // Locale will be default :)
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     /**
@@ -340,19 +340,13 @@ class UserCreateActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([], $response);
+        $this->assertJsonResponse(true, $response, 'success');
 
         // Make sure the user is added to the db by querying it
         /** @var User */
         $user = User::where('email', 'foo@bar.com')->first();
         $this->assertSame($group->id, $user->group?->id);
         $this->assertSame('en_US', $user['locale']); // Locale will be default :)
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     public function testPostForNoGroup(): void
@@ -390,20 +384,14 @@ class UserCreateActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
+        $this->assertJsonResponse(true, $response, 'success');
 
         // Make sure the user is added to the db by querying it
         /** @var User */
         $user = User::where('email', 'foo@bar.com')->first();
         $this->assertSame('foo', $user['user_name']);
         $this->assertSame('en_US', $user['locale']);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     /**
@@ -476,11 +464,5 @@ class UserCreateActionTest extends AdminTestCase
             'status'      => 400,
         ], $response);
         $this->assertResponseStatus(400, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('danger', array_reverse($messages)[0]['type']);
     }
 }

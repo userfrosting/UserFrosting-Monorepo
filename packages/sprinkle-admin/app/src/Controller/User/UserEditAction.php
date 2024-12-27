@@ -15,12 +15,12 @@ namespace UserFrosting\Sprinkle\Admin\Controller\User;
 use Illuminate\Database\Connection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\Fortress\Transformer\RequestDataTransformer;
 use UserFrosting\Fortress\Validator\ServerSideValidator;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\EmailNotUniqueException;
@@ -48,7 +48,7 @@ class UserEditAction
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $db,
@@ -69,8 +69,12 @@ class UserEditAction
      */
     public function __invoke(UserInterface $user, Request $request, Response $response): Response
     {
-        $this->handle($user, $request);
-        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $user = $this->handle($user, $request)->toArray();
+        $payload = json_encode([
+            'success' => true,
+            'message' => $this->translator->translate('DETAILS_UPDATED', $user),
+            'user'    => $user,
+        ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -81,8 +85,10 @@ class UserEditAction
      *
      * @param UserInterface $user
      * @param Request       $request
+     *
+     * @return UserInterface
      */
-    protected function handle(UserInterface $user, Request $request): void
+    protected function handle(UserInterface $user, Request $request): UserInterface
     {
         // Get PUT parameters
         $params = (array) $request->getParsedBody();
@@ -146,7 +152,7 @@ class UserEditAction
         }
 
         // Begin transaction - DB will be rolled back if an exception occurs
-        $this->db->transaction(function () use ($data, $user, $currentUser) {
+        $newUser = $this->db->transaction(function () use ($data, $user, $currentUser) {
             // Update the user and generate success messages
             foreach ($data as $name => $value) {
                 $user->setAttribute($name, $value);
@@ -159,11 +165,11 @@ class UserEditAction
                 'type'    => 'account_update_info',
                 'user_id' => $user->id,
             ]);
+
+            return $user;
         });
 
-        $this->alert->addMessage('success', 'DETAILS_UPDATED', [
-            'user_name' => $user->user_name,
-        ]);
+        return $newUser;
     }
 
     /**

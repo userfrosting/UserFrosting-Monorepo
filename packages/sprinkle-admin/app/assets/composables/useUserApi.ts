@@ -59,5 +59,5 @@ export function useUserApi(route: any) {
         { immediate: true }
     )
 
-    return { user, error, loading }
+    return { user, error, loading, fetchApi }
 }

@@ -1,0 +1,157 @@
+<script setup lang="ts">
+import { useConfigStore } from '@userfrosting/sprinkle-core/stores'
+import type { UserEditForm } from '@userfrosting/sprinkle-admin/interfaces'
+
+/**
+ * Form Model
+ */
+const formData = defineModel<UserEditForm>({
+    default: {
+        user_name: '',
+        group_id: '',
+        first_name: '',
+        last_name: '',
+        email: '',
+        locale: ''
+    }
+})
+
+function getAvailableLocales(): string[] {
+    return useConfigStore().get('locales.available')
+}
+
+function getDefaultLocale(): string {
+    return useConfigStore().get('site.registration.user_defaults.locale', 'en_US')
+}
+
+// Apply default locale to form data
+formData.value.locale = getDefaultLocale()
+
+/**
+ * Emits
+ */
+const emits = defineEmits(['submit'])
+</script>
+
+<template>
+    <form v-on:submit.prevent="emits('submit')">
+        <fieldset class="uk-fieldset uk-form-stacked">
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Username</label>
+                <div class="uk-inline uk-width-1-1">
+                    <font-awesome-icon class="fa-form-icon" icon="edit" fixed-width />
+                    <input
+                        class="uk-input"
+                        type="text"
+                        placeholder="Username"
+                        aria-label="Username"
+                        data-test="user_name"
+                        autofocus
+                        tabindex="1"
+                        autocomplete="false"
+                        v-model="formData.user_name" />
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Group</label>
+                <div class="uk-inline uk-width-1-1">
+                    <font-awesome-icon class="fa-form-icon" icon="users" fixed-width />
+                    <select
+                        class="uk-input"
+                        aria-label="Group"
+                        data-test="group"
+                        tabindex="2"
+                        v-model="formData.group_id">
+                        <option value="0">None</option>
+                        <option disabled="true">-----</option>
+                        <!--
+                        TODO : Load groups from API
+                        {% for group in groups %}
+                        <option value="{{group.id}}" {% if (group.id == user.group_id) %}selected{% endif %}>{{group.name}}</option>
+                        {% endfor %}
+                        -->
+                    </select>
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">First Name</label>
+                <div class="uk-inline uk-width-1-1">
+                    <font-awesome-icon class="fa-form-icon" icon="edit" fixed-width />
+                    <input
+                        class="uk-input"
+                        type="text"
+                        placeholder="First Name"
+                        aria-label="First Name"
+                        data-test="first_name"
+                        tabindex="3"
+                        v-model="formData.first_name" />
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Last Name</label>
+                <div class="uk-inline uk-width-1-1">
+                    <font-awesome-icon class="fa-form-icon" icon="edit" fixed-width />
+                    <input
+                        class="uk-input"
+                        type="text"
+                        placeholder="Last Name"
+                        aria-label="Last Name"
+                        data-test="last_name"
+                        tabindex="4"
+                        v-model="formData.last_name" />
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Email</label>
+                <div class="uk-inline uk-width-1-1">
+                    <font-awesome-icon class="fa-form-icon" icon="envelope" fixed-width />
+                    <input
+                        class="uk-input"
+                        type="text"
+                        placeholder="Email"
+                        aria-label="Email"
+                        data-test="email"
+                        tabindex="5"
+                        v-model="formData.email" />
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Locale</label>
+                <div class="uk-inline uk-width-1-1">
+                    <font-awesome-icon class="fa-form-icon" icon="language" fixed-width />
+                    <select
+                        class="uk-input"
+                        aria-label="Locale"
+                        data-test="locale"
+                        tabindex="6"
+                        v-model="formData.locale">
+                        <option
+                            v-for="(value, key) in getAvailableLocales()"
+                            :value="key"
+                            :key="key">
+                            {{ value }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <!--
+            {% if 'password' not in form.fields.hidden %}
+                {% include "forms/partials/user-set-password.html.twig" %}
+            {% endif %}
+            -->
+
+            <div class="uk-text-right" uk-margin>
+                <button class="uk-button uk-button-default uk-modal-close" type="button">
+                    Cancel
+                </button>
+                <button class="uk-button uk-button-primary" type="submit" tabindex="7">Save</button>
+            </div>
+        </fieldset>
+    </form>
+</template>

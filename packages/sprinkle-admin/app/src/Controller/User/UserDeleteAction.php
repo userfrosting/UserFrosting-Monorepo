@@ -15,8 +15,8 @@ namespace UserFrosting\Sprinkle\Admin\Controller\User;
 use Illuminate\Database\Connection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\AccountException;
@@ -47,7 +47,7 @@ class UserDeleteAction
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $db,
@@ -65,7 +65,10 @@ class UserDeleteAction
     public function __invoke(UserInterface $user, Response $response): Response
     {
         $this->handle($user);
-        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $payload = json_encode([
+            'success' => true,
+            'message' => $this->translator->translate('DELETION_SUCCESSFUL', $user->toArray()),
+        ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -107,10 +110,6 @@ class UserDeleteAction
                 'user_id' => $currentUser->id,
             ]);
         });
-
-        $this->alert->addMessage('success', 'DELETION_SUCCESSFUL', [
-            'user_name' => $username,
-        ]);
     }
 
     /**

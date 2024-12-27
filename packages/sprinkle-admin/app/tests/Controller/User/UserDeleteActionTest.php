@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Tests\Controller\User;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
@@ -121,17 +120,14 @@ class UserDeleteActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([], $response);
+        $this->assertJsonResponse([
+            'success' => true,
+            'message' => 'User <strong>' . $userToDelete->user_name . '</strong> has been successfully deleted.',
+        ], $response);
 
         // Make sure the user is deleted from the db by querying it
         $user = User::where('email', $userToDelete->email)->first();
         $this->assertNull($user);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     public function testPostForMasterUser(): void

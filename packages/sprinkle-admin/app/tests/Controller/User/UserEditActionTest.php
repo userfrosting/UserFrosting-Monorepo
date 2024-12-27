@@ -113,7 +113,14 @@ class UserEditActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([], $response);
+        $this->assertJsonStructure([
+            'success',
+            'message',
+            'user',
+        ], $response);
+        $this->assertJsonResponse(true, $response, 'success');
+        $this->assertJsonResponse('Account details updated for user <strong>' . $userToEdit->user_name . '</strong>', $response, 'message'); // N.B.: The username CANNOT be changed
+        $this->assertJsonResponse('Foo', $response, 'user.first_name');
 
         // Test that the user was updated
         /** @var User */
@@ -121,12 +128,6 @@ class UserEditActionTest extends AdminTestCase
         $this->assertNotSame('foo', $editedUser->user_name); // Username not allowed by schema
         $this->assertSame('foo@bar.com', $editedUser->email);
         $this->assertNull($editedUser->group_id);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     public function testPageForEditMasterUser(): void

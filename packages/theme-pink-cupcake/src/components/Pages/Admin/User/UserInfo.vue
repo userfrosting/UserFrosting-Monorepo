@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, defineEmits } from 'vue'
+import { useRouter } from 'vue-router'
 import moment from 'moment'
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
 import type { UserApi } from '@userfrosting/sprinkle-admin/interfaces'
+import UserEditModal from './UserEditModal.vue'
+import UserDeleteModal from './UserDeleteModal.vue'
 
+const router = useRouter()
 const { user } = defineProps<{
     user: UserApi
 }>()
+
+const emits = defineEmits(['updated'])
 </script>
 
 <template>
@@ -44,10 +50,10 @@ const { user } = defineProps<{
             <!-- <slot data-test="slot"></slot> -->
         </dl>
         <hr />
-        <button
-            class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom uk-button-small">
-            Edit User
-        </button>
+        <UserEditModal
+            :user="user"
+            @saved="emits('updated')"
+            class="uk-width-1-1 uk-margin-small-bottom uk-button uk-button-primary uk-button-small" />
         <button
             class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-button-small">
             Change User Password
@@ -56,10 +62,10 @@ const { user } = defineProps<{
             class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-button-small">
             Disable User
         </button>
-        <button
-            class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom uk-button-small">
-            Delete User
-        </button>
+        <UserDeleteModal
+            :user="user"
+            @deleted="router.push({ name: 'admin.users' })"
+            class="uk-width-1-1 uk-margin-small-bottom uk-button uk-button-danger uk-button-small" />
         <slot data-test="slot"></slot>
     </UFCardBox>
 </template>

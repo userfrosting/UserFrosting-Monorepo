@@ -1,3 +1,5 @@
+import type { GroupInterface } from '@userfrosting/sprinkle-account/interfaces'
+
 /**
  * Interfaces - What the API expects and what it returns
  */
@@ -11,5 +13,5 @@ export interface GroupCreateForm {
 export interface GroupCreateResponse {
     success: boolean
     message: string
-    group: GroupCreateForm
+    group: GroupInterface
 }
