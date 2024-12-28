@@ -34,7 +34,7 @@ class UserMessage
      * @param string      $message
      * @param mixed[]|int $parameters The parameters to be filled in for any placeholders in the message.
      */
-    public function __construct(string $message, array|int $parameters = [])
+    public function __construct(string $message = '', array|int $parameters = [])
     {
         $this->message = $message;
         $this->parameters = $parameters;
