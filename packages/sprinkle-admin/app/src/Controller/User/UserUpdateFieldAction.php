@@ -198,7 +198,7 @@ class UserUpdateFieldAction
         // Return success messages
         $message = new UserMessage();
         $message->parameters = ['user_name' => $user->user_name];
-        
+
         if ($fieldName === 'flag_enabled' && $fieldValue === '1') {
             $message->message = 'ENABLE_SUCCESSFUL';
         } elseif ($fieldName === 'flag_enabled') {
