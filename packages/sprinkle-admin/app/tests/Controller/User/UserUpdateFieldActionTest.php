@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Tests\Controller\User;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Database\Models\Role;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
@@ -121,15 +120,10 @@ class UserUpdateFieldActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
-        $this->assertSame('Account details updated for user <strong>' . $userToEdit->user_name . '</strong>', array_reverse($messages)[0]['message']);
+        $this->assertJsonResponse([
+            'message' => 'Account details updated for user <strong>' . $userToEdit->user_name . '</strong>',
+        ], $response);
     }
 
     public function testPostForPasswordWithoutConfirmation(): void
@@ -167,15 +161,10 @@ class UserUpdateFieldActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
-        $this->assertSame('Account for user <strong>' . $user->user_name . '</strong> has been successfully enabled.', array_reverse($messages)[0]['message']);
+        $this->assertJsonResponse([
+            'message' => 'Account for user <strong>' . $user->user_name . '</strong> has been successfully enabled.',
+        ], $response);
     }
 
     public function testPostForDisabled(): void
@@ -194,15 +183,10 @@ class UserUpdateFieldActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
-        $this->assertSame('Account for user <strong>' . $userToEdit->user_name . '</strong> has been successfully disabled.', array_reverse($messages)[0]['message']);
+        $this->assertJsonResponse([
+            'message' => 'Account for user <strong>' . $userToEdit->user_name . '</strong> has been successfully disabled.',
+        ], $response);
     }
 
     public function testPostForVerified(): void
@@ -217,15 +201,10 @@ class UserUpdateFieldActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
-        $this->assertSame($user->user_name . "'s account has been manually activated", array_reverse($messages)[0]['message']);
+        $this->assertJsonResponse([
+            'message' => $user->user_name . "'s account has been manually activated",
+        ], $response);
     }
 
     public function testPostForRole(): void
@@ -255,19 +234,14 @@ class UserUpdateFieldActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
+        $this->assertJsonResponse([
+            'message' => 'Account details updated for user <strong>' . $user->user_name . '</strong>',
+        ], $response);
 
         // Make sure the user has the new roles.
         $user->refresh();
         $this->assertCount(2, $user->roles);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
-        $this->assertSame('Account details updated for user <strong>' . $user->user_name . '</strong>', array_reverse($messages)[0]['message']);
     }
 
     public function testPostForRemovingRoles(): void
@@ -283,19 +257,14 @@ class UserUpdateFieldActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
+        $this->assertJsonResponse([
+            'message' => 'Account details updated for user <strong>' . $user->user_name . '</strong>',
+        ], $response);
 
         // Make sure the user has the new roles.
         $user->refresh();
         $this->assertCount(0, $user->roles);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
-        $this->assertSame('Account details updated for user <strong>' . $user->user_name . '</strong>', array_reverse($messages)[0]['message']);
     }
 
     public function testPageForFailedValidation(): void
@@ -316,12 +285,6 @@ class UserUpdateFieldActionTest extends AdminTestCase
         // Assert response status & body
         $this->assertJsonResponse('Invalid email address.', $response, 'description');
         $this->assertResponseStatus(400, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('danger', array_reverse($messages)[0]['type']);
     }
 
     public function testPageForFailedToEditMasterUser(): void
@@ -346,12 +309,6 @@ class UserUpdateFieldActionTest extends AdminTestCase
         // Assert response status & body
         $this->assertJsonResponse('Access Denied', $response, 'title');
         $this->assertResponseStatus(403, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('danger', array_reverse($messages)[0]['type']);
     }
 
     public function testPostForDisableMasterUser(): void

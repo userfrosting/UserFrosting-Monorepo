@@ -6,6 +6,7 @@ import { Severity } from '@userfrosting/sprinkle-core/interfaces'
 import type { UserApi } from '@userfrosting/sprinkle-admin/interfaces'
 import UserEditModal from './UserEditModal.vue'
 import UserDeleteModal from './UserDeleteModal.vue'
+import UserActivateModal from './UserActivateModal.vue'
 
 const router = useRouter()
 const { user } = defineProps<{
@@ -58,10 +59,10 @@ const emits = defineEmits(['updated'])
             class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-button-small">
             Change User Password
         </button>
-        <button
-            class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-button-small">
-            Disable User
-        </button>
+        <UserActivateModal
+            :user="user"
+            @saved="emits('updated')"
+            class="uk-width-1-1 uk-margin-small-bottom uk-button uk-button-default uk-button-small" />
         <UserDeleteModal
             :user="user"
             @deleted="router.push({ name: 'admin.users' })"

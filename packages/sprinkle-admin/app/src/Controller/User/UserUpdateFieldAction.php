@@ -16,19 +16,21 @@ use Illuminate\Database\Connection;
 use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\Fortress\Transformer\RequestDataTransformer;
 use UserFrosting\Fortress\Validator\ServerSideValidator;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
+use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Account\Exceptions\AccountException;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
 use UserFrosting\Sprinkle\Admin\Exceptions\MissingRequiredParamException;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
+use UserFrosting\Support\Message\UserMessage;
 
 /**
  * Processes the request to update a specific field for an existing user.
@@ -51,7 +53,7 @@ class UserUpdateFieldAction
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $db,
@@ -76,8 +78,10 @@ class UserUpdateFieldAction
         Request $request,
         Response $response
     ): Response {
-        $this->handle($user, $field, $request);
-        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $message = $this->handle($user, $field, $request);
+        $payload = json_encode([
+            'message' => $this->translator->translate($message->message, $message->parameters),
+        ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -89,12 +93,14 @@ class UserUpdateFieldAction
      * @param UserInterface $user
      * @param string        $fieldName
      * @param Request       $request
+     *
+     * @return UserMessage The message to display to the user.
      */
     protected function handle(
         UserInterface $user,
         string $fieldName,
         Request $request
-    ): void {
+    ): UserMessage {
         // Access-controlled resource - check that current User has permission
         // to edit the specified field for this user
         $this->validateAccess($user, $fieldName);
@@ -189,24 +195,21 @@ class UserUpdateFieldAction
             ]);
         });
 
-        // Add success messages
+        // Return success messages
+        $message = new UserMessage();
+        $message->parameters = ['user_name' => $user->user_name];
+        
         if ($fieldName === 'flag_enabled' && $fieldValue === '1') {
-            $this->alert->addMessage('success', 'ENABLE_SUCCESSFUL', [
-                'user_name' => $user->user_name,
-            ]);
+            $message->message = 'ENABLE_SUCCESSFUL';
         } elseif ($fieldName === 'flag_enabled') {
-            $this->alert->addMessage('success', 'DISABLE_SUCCESSFUL', [
-                'user_name' => $user->user_name,
-            ]);
+            $message->message = 'DISABLE_SUCCESSFUL';
         } elseif ($fieldName == 'flag_verified') {
-            $this->alert->addMessage('success', 'MANUALLY_ACTIVATED', [
-                'user_name' => $user->user_name,
-            ]);
+            $message->message = 'MANUALLY_ACTIVATED';
         } else {
-            $this->alert->addMessage('success', 'DETAILS_UPDATED', [
-                'user_name' => $user->user_name,
-            ]);
+            $message->message = 'DETAILS_UPDATED';
         }
+
+        return $message;
     }
 
     /**

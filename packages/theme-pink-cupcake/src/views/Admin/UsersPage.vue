@@ -4,6 +4,7 @@ import moment from 'moment'
 import UserCreateModal from '../../components/Pages/Admin/User/UserCreateModal.vue'
 import UserEditModal from '../../components/Pages/Admin/User/UserEditModal.vue'
 import UserDeleteModal from '../../components/Pages/Admin/User/UserDeleteModal.vue'
+import UserActivateModal from '../../components/Pages/Admin/User/UserActivateModal.vue'
 </script>
 
 <template>
@@ -78,7 +79,12 @@ import UserDeleteModal from '../../components/Pages/Admin/User/UserDeleteModal.v
                                     class="uk-drop-close" />
                             </li>
                             <li><a href="#">Change User Password</a></li>
-                            <li><a href="#">Disable User</a></li>
+                            <li>
+                                <UserActivateModal
+                                    :user="item"
+                                    @saved="sprunjer.fetch()"
+                                    class="uk-drop-close" />
+                            </li>
                             <li>
                                 <UserDeleteModal
                                     :user="item"
