@@ -21,7 +21,7 @@ import moment from 'moment'
                     <div>{{ moment(item.occurred_at).format('dddd') }}</div>
                     <div>{{ moment(item.occurred_at).format('MMM Do, YYYY h:mm a') }}</div>
                 </UFSprunjeColumn>
-                <UFSprunjeColumn>
+                <UFSprunjeColumn v-if="item.user">
                     <strong>
                         <RouterLink
                             :to="{
@@ -32,6 +32,9 @@ import moment from 'moment'
                         </RouterLink>
                     </strong>
                     <div class="uk-text-meta">{{ item.user.email }}</div>
+                </UFSprunjeColumn>
+                <UFSprunjeColumn v-else>
+                    <i>Deleted User</i>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
                     <div>
