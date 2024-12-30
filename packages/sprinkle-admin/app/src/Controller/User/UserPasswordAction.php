@@ -14,7 +14,7 @@ namespace UserFrosting\Sprinkle\Admin\Controller\User;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
@@ -38,7 +38,7 @@ class UserPasswordAction
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
         protected PasswordResetEmail $passwordEmail,
     ) {
@@ -54,7 +54,11 @@ class UserPasswordAction
     public function __invoke(UserInterface $user, Response $response): Response
     {
         $this->handle($user);
-        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $payload = json_encode([
+            'message' => $this->translator->translate('USER.ADMIN.PASSWORD_RESET', [
+                'email' => $user->email,
+            ]),
+        ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -72,10 +76,6 @@ class UserPasswordAction
 
         // Send password reset email.
         $this->passwordEmail->send($user, 'mail/password-reset.html.twig');
-
-        $this->alert->addMessage('success', 'USER.ADMIN.PASSWORD_RESET', [
-            'email' => $user->email,
-        ]);
     }
 
     /**

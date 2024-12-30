@@ -5,6 +5,8 @@ import UserCreateModal from '../../components/Pages/Admin/User/UserCreateModal.v
 import UserEditModal from '../../components/Pages/Admin/User/UserEditModal.vue'
 import UserDeleteModal from '../../components/Pages/Admin/User/UserDeleteModal.vue'
 import UserActivateModal from '../../components/Pages/Admin/User/UserActivateModal.vue'
+import UserPasswordModal from '../../components/Pages/Admin/User/UserPasswordModal.vue'
+import UserPasswordResetModal from '../../components/Pages/Admin/User/UserPasswordResetModal.vue'
 </script>
 
 <template>
@@ -56,8 +58,8 @@ import UserActivateModal from '../../components/Pages/Admin/User/UserActivateMod
                     <UFLabel :severity="Severity.Success" v-else>Active</UFLabel>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
-                    <button class="uk-button uk-button-default uk-button-small" type="button">
-                        Actions <font-awesome-icon icon="caret-down" fixed-width />
+                    <button class="uk-button uk-button-primary uk-text-nowrap" type="button">
+                        Actions <span uk-drop-parent-icon></span>
                     </button>
                     <div
                         class="uk-padding-small"
@@ -78,7 +80,12 @@ import UserActivateModal from '../../components/Pages/Admin/User/UserActivateMod
                                     @saved="sprunjer.fetch()"
                                     class="uk-drop-close" />
                             </li>
-                            <li><a href="#">Change User Password</a></li>
+                            <li>
+                                <UserPasswordModal :user="item" class="uk-drop-close" />
+                            </li>
+                            <li>
+                                <UserPasswordResetModal :user="item" class="uk-drop-close" />
+                            </li>
                             <li>
                                 <UserActivateModal
                                     :user="item"

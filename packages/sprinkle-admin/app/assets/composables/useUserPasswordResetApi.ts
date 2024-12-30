@@ -1,24 +1,21 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { Severity, type AlertInterface } from '@userfrosting/sprinkle-core/interfaces'
-import type { ApiResponse } from '../interfaces'
-
-// TODO : Add validation
-// 'schema://requests/user/edit-field.yaml'
+import type { UserDeleteResponse } from '../interfaces'
 
 /**
  * API Composable
  */
-export function useUserUpdateApi() {
-    const apiLoading = ref<Boolean>(false)
+export function useUserPasswordResetApi() {
+    // Form data
+    const loadingState = ref<Boolean>(false)
     const apiError = ref<AlertInterface | null>(null)
 
-    async function submitUserUpdate(user_name: string, fieldName: string, formData: any) {
-        apiLoading.value = true
+    async function passwordReset(user_name: string) {
+        loadingState.value = true
         apiError.value = null
-
         return axios
-            .put<ApiResponse>('/api/users/u/' + user_name + '/' + fieldName, formData)
+            .post<UserDeleteResponse>('/api/users/u/' + user_name + '/password-reset')
             .then((response) => {
                 return {
                     message: response.data.message
@@ -37,9 +34,9 @@ export function useUserUpdateApi() {
                 throw apiError.value
             })
             .finally(() => {
-                apiLoading.value = false
+                loadingState.value = false
             })
     }
 
-    return { submitUserUpdate, apiLoading, apiError }
+    return { loadingState, apiError, passwordReset }
 }

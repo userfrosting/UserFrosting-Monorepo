@@ -18,7 +18,11 @@ const emits = defineEmits(['saved'])
 
 // Methods
 const updateUser = (fieldName: string, value: string) => {
-    submitUserUpdate(props.user.user_name, fieldName, value)
+    // Assign the field name and value to the payload
+    const payload: Record<string, any> = {}
+    payload[fieldName] = value
+
+    submitUserUpdate(props.user.user_name, fieldName, payload)
         .then((response) => {
             emits('saved')
             UIkit.notification({

@@ -80,13 +80,9 @@ class UserPasswordActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
+        $this->assertJsonResponse([
+            'message' => 'A password reset link will be sent to <strong>'.$user->email.'</strong>.',
+        ], $response);
     }
 }
