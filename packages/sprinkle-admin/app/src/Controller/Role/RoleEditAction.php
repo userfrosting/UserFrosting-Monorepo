@@ -15,12 +15,12 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Role;
 use Illuminate\Database\Connection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\Fortress\Transformer\RequestDataTransformer;
 use UserFrosting\Fortress\Validator\ServerSideValidator;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -50,7 +50,7 @@ class RoleEditAction
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $db,
@@ -71,8 +71,11 @@ class RoleEditAction
      */
     public function __invoke(RoleInterface $role, Request $request, Response $response): Response
     {
-        $this->handle($role, $request);
-        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $role = $this->handle($role, $request)->toArray();
+        $payload = json_encode([
+            'message' => $this->translator->translate('ROLE.UPDATED', $role),
+            'role'    => $role,
+        ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -83,8 +86,10 @@ class RoleEditAction
      *
      * @param RoleInterface $role
      * @param Request       $request
+     *
+     * @return RoleInterface The role that was updated
      */
-    protected function handle(RoleInterface $role, Request $request): void
+    protected function handle(RoleInterface $role, Request $request): RoleInterface
     {
         // Get PUT parameters
         $params = (array) $request->getParsedBody();
@@ -123,7 +128,7 @@ class RoleEditAction
         $currentUser = $this->authenticator->user();
 
         // Begin transaction - DB will be rolled back if an exception occurs
-        $this->db->transaction(function () use ($data, $role, $currentUser) {
+        $role = $this->db->transaction(function () use ($data, $role, $currentUser) {
             // Update the user and generate success messages
             foreach ($data as $name => $value) {
                 $role->setAttribute($name, $value);
@@ -136,11 +141,11 @@ class RoleEditAction
                 'type'    => 'role_update_info',
                 'user_id' => $currentUser->id,
             ]);
+
+            return $role;
         });
 
-        $this->alert->addMessage('success', 'ROLE.UPDATED', [
-            'name' => $role->name,
-        ]);
+        return $role;
     }
 
     /**

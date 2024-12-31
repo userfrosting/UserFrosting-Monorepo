@@ -15,8 +15,8 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Role;
 use Illuminate\Database\Connection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -44,7 +44,7 @@ class RoleDeleteAction
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $db,
@@ -62,7 +62,9 @@ class RoleDeleteAction
     public function __invoke(RoleInterface $role, Response $response): Response
     {
         $this->handle($role);
-        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $payload = json_encode([
+            'message' => $this->translator->translate('ROLE.DELETION_SUCCESSFUL', $role->toArray()),
+        ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -115,10 +117,6 @@ class RoleDeleteAction
                 'user_id' => $currentUser->id,
             ]);
         });
-
-        $this->alert->addMessage('success', 'ROLE.DELETION_SUCCESSFUL', [
-            'name' => $role->name,
-        ]);
     }
 
     /**

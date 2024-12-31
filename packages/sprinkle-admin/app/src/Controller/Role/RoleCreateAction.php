@@ -15,11 +15,11 @@ namespace UserFrosting\Sprinkle\Admin\Controller\Role;
 use Illuminate\Database\Connection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\Fortress\Transformer\RequestDataTransformer;
 use UserFrosting\Fortress\Validator\ServerSideValidator;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -49,7 +49,7 @@ class RoleCreateAction
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
         protected Connection $db,
         protected RoleInterface $roleModel,
@@ -69,8 +69,11 @@ class RoleCreateAction
     public function __invoke(Request $request, Response $response): Response
     {
         $this->validateAccess();
-        $this->handle($request);
-        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $role = $this->handle($request)->toArray();
+        $payload = json_encode([
+            'message' => $this->translator->translate('ROLE.CREATION_SUCCESSFUL', $role),
+            'role'    => $role,
+        ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -80,8 +83,10 @@ class RoleCreateAction
      * Handle the request.
      *
      * @param Request $request
+     *
+     * @return RoleInterface
      */
-    protected function handle(Request $request): void
+    protected function handle(Request $request): RoleInterface
     {
         // Get POST parameters.
         $params = (array) $request->getParsedBody();
@@ -103,7 +108,7 @@ class RoleCreateAction
 
         // All checks passed!  log events/activities and create role
         // Begin transaction - DB will be rolled back if an exception occurs
-        $this->db->transaction(function () use ($data, $currentUser) {
+        $role = $this->db->transaction(function () use ($data, $currentUser) {
             // Create the role
             $role = new $this->roleModel($data);
             $role->save();
@@ -114,8 +119,10 @@ class RoleCreateAction
                 'user_id' => $currentUser->id,
             ]);
 
-            $this->alert->addMessage('success', 'ROLE.CREATION_SUCCESSFUL', $data);
+            return $role;
         });
+
+        return $role;
     }
 
     /**

@@ -1,3 +1,9 @@
+<script setup>
+import RoleCreateModal from '../../components/Pages/Admin/Role/RoleCreateModal.vue'
+import RoleEditModal from '../../components/Pages/Admin/Role/RoleEditModal.vue'
+import RoleDeleteModal from '../../components/Pages/Admin/Role/RoleDeleteModal.vue'
+</script>
+
 <template>
     <UFHeaderPage
         title="Roles"
@@ -5,10 +11,8 @@
 
     <UFCardBox>
         <UFSprunjeTable dataUrl="/api/roles" searchColumn="name">
-            <template #actions>
-                <button class="uk-button uk-button-primary">
-                    <font-awesome-icon icon="plus" /> Create Role
-                </button>
+            <template #actions="{ sprunjer }">
+                <RoleCreateModal @saved="sprunjer.fetch()" class="uk-button uk-button-primary" />
             </template>
 
             <template #header>
@@ -17,7 +21,7 @@
                 <UFSprunjeHeader>Actions</UFSprunjeHeader>
             </template>
 
-            <template #body="{ item }">
+            <template #body="{ item, sprunjer }">
                 <UFSprunjeColumn>
                     <strong>
                         <RouterLink
@@ -31,13 +35,34 @@
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>{{ item.description }}</UFSprunjeColumn>
                 <UFSprunjeColumn>
-                    <button class="uk-button uk-button-default uk-button-small" type="button">
-                        Actions <font-awesome-icon icon="caret-down" fixed-width />
+                    <button class="uk-button uk-button-primary uk-text-nowrap" type="button">
+                        Actions <span uk-drop-parent-icon></span>
                     </button>
-                    <div uk-dropdown>
+                    <div
+                        class="uk-padding-small"
+                        uk-dropdown="pos: bottom-right; mode: click; offset: 2">
                         <ul class="uk-nav uk-dropdown-nav">
-                            <li><a href="#">Edit Role</a></li>
-                            <li><a href="#">Delete Role</a></li>
+                            <li>
+                                <RouterLink
+                                    :to="{
+                                        name: 'admin.role',
+                                        params: { slug: item.slug }
+                                    }">
+                                    <font-awesome-icon icon="eye" fixed-width /> View
+                                </RouterLink>
+                            </li>
+                            <li>
+                                <RoleEditModal
+                                    :role="item"
+                                    @saved="sprunjer.fetch()"
+                                    class="uk-drop-close" />
+                            </li>
+                            <li>
+                                <RoleDeleteModal
+                                    :role="item"
+                                    @deleted="sprunjer.fetch()"
+                                    class="uk-drop-close" />
+                            </li>
                         </ul>
                     </div>
                 </UFSprunjeColumn>

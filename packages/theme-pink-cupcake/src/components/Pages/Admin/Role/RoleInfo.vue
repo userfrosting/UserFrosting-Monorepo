@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, defineEmits } from 'vue'
+import { useRouter } from 'vue-router'
 import type { RoleApi } from '@userfrosting/sprinkle-admin/interfaces'
+import RoleEditModal from './RoleEditModal.vue'
+import RoleDeleteModal from './RoleDeleteModal.vue'
 
+const router = useRouter()
 const { role } = defineProps<{
     role: RoleApi
 }>()
+
+const emits = defineEmits(['updated'])
 </script>
 
 <template>
@@ -25,14 +31,14 @@ const { role } = defineProps<{
             </dd>
         </dl>
         <hr />
-        <button
-            class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom uk-button-small">
-            Edit Role
-        </button>
-        <button
-            class="uk-button uk-button-danger uk-width-1-1 uk-margin-small-bottom uk-button-small">
-            Delete Role
-        </button>
+        <RoleEditModal
+            :role="role"
+            @saved="emits('updated')"
+            class="uk-width-1-1 uk-margin-small-bottom uk-button uk-button-primary uk-button-small" />
+        <RoleDeleteModal
+            :role="role"
+            @deleted="router.push({ name: 'admin.roles' })"
+            class="uk-width-1-1 uk-margin-small-bottom uk-button uk-button-danger uk-button-small" />
         <slot data-test="slot"></slot>
     </UFCardBox>
 </template>

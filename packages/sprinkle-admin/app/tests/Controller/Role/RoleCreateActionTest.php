@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Tests\Controller\Role;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Sprinkle\Account\Database\Models\Group;
 use UserFrosting\Sprinkle\Account\Database\Models\Role;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
@@ -81,19 +80,15 @@ class RoleCreateActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([], $response);
+        $this->assertJsonStructure(['message', 'role'], $response);
+        $this->assertJsonResponse('Successfully created role <strong>The Foo</strong>', $response, 'message');
+        $this->assertJsonResponse('The Foo', $response, 'role.name');
 
         // Make sure the user is added to the db by querying it
         /** @var Role */
         $group = Role::where('slug', 'foo')->first();
         $this->assertSame('The Foo', $group['name']);
         $this->assertSame('Foo description', $group['description']);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     /**

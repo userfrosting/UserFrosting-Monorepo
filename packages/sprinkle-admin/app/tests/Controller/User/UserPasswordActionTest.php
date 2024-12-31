@@ -14,7 +14,6 @@ namespace UserFrosting\Sprinkle\Admin\Tests\Controller\User;
 
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
@@ -82,7 +81,7 @@ class UserPasswordActionTest extends AdminTestCase
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
         $this->assertJsonResponse([
-            'message' => 'A password reset link will be sent to <strong>'.$user->email.'</strong>.',
+            'message' => 'A password reset link will be sent to <strong>' . $user->email . '</strong>.',
         ], $response);
     }
 }

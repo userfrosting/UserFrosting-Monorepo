@@ -12,6 +12,9 @@ export { usePermissionApi } from './usePermissionApi'
 
 // Role
 export { useRoleApi } from './useRoleApi'
+export { useRoleCreateApi } from './useRoleCreateApi'
+export { useRoleEditApi } from './useRoleEditApi'
+export { useRoleDeleteApi } from './useRoleDeleteApi'
 
 // User
 export { useUserApi } from './useUserApi'

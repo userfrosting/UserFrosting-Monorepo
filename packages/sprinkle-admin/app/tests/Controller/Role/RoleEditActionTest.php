@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Tests\Controller\Role;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Sprinkle\Account\Database\Models\Group;
 use UserFrosting\Sprinkle\Account\Database\Models\Role;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
@@ -115,7 +114,9 @@ class RoleEditActionTest extends AdminTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
-        $this->assertJsonResponse([], $response);
+        $this->assertJsonStructure(['message', 'role'], $response);
+        $this->assertJsonResponse('Details updated for role <strong>The Foo</strong>', $response, 'message');
+        $this->assertJsonResponse('The Foo', $response, 'role.name');
 
         // Test that the user was updated
         /** @var Role */
@@ -123,12 +124,6 @@ class RoleEditActionTest extends AdminTestCase
         $this->assertSame('foo', $edited['slug']);
         $this->assertSame('The Foo', $edited['name']);
         $this->assertSame('Foo description', $edited['description']);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     /**
@@ -155,8 +150,10 @@ class RoleEditActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
+        $this->assertJsonStructure(['message', 'role'], $response);
+        $this->assertJsonResponse('Details updated for role <strong>' . $role->name . '</strong>', $response, 'message');
+        $this->assertJsonResponse($role->slug, $response, 'role.slug');
     }
 
     public function testPostForFailedValidation(): void

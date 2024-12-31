@@ -51,5 +51,5 @@ export function useRoleApi(route: any) {
         { immediate: true }
     )
 
-    return { role, error, loading }
+    return { role, error, loading, fetchApi }
 }
