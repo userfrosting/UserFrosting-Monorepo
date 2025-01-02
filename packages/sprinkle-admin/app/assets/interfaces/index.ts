@@ -2,7 +2,7 @@
 export type { SprinkleList, DatabaseInfo, SystemInfo, DashboardApi } from './DashboardApi'
 
 // Groups
-export type { GroupApi } from './GroupApi'
+export type { GroupResponse } from './GroupApi'
 export type { GroupCreateForm, GroupCreateResponse } from './GroupCreateApi'
 export type { GroupDeleteResponse } from './GroupDeleteApi'
 export type { GroupEditForm, GroupEditResponse } from './GroupEditApi'

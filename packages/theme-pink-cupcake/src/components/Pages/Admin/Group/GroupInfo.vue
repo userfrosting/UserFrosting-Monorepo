@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
-import type { GroupApi } from '@userfrosting/sprinkle-admin/interfaces'
+import type { GroupResponse } from '@userfrosting/sprinkle-admin/interfaces'
 import GroupEditModal from './GroupEditModal.vue'
 import GroupDeleteModal from './GroupDeleteModal.vue'
 
 const router = useRouter()
 const { group } = defineProps<{
-    group: GroupApi
+    group: GroupResponse
 }>()
 
 const emits = defineEmits(['groupUpdated'])
