@@ -6,6 +6,7 @@ export type { GroupResponse } from './GroupApi'
 export type { GroupCreateForm, GroupCreateResponse } from './GroupCreateApi'
 export type { GroupDeleteResponse } from './GroupDeleteApi'
 export type { GroupEditForm, GroupEditResponse } from './GroupEditApi'
+export type { GroupSprunjerResponse } from './GroupsApi'
 
 // Permissions
 export type { PermissionApi } from './PermissionApi'

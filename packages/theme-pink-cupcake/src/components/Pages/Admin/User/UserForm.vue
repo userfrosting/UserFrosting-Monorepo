@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useConfigStore } from '@userfrosting/sprinkle-core/stores'
 import type { UserEditForm } from '@userfrosting/sprinkle-admin/interfaces'
+import { useGroupsApi } from '@userfrosting/sprinkle-admin/composables'
 
 /**
  * Form Model
@@ -26,6 +27,11 @@ function getDefaultLocale(): string {
 
 // Apply default locale to form data
 formData.value.locale = getDefaultLocale()
+
+/**
+ * Load group list from API
+ */
+const { groups } = useGroupsApi()
 
 /**
  * Emits
@@ -58,19 +64,19 @@ const emits = defineEmits(['submit'])
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="users" fixed-width />
                     <select
-                        class="uk-input"
+                        class="uk-input uk-select"
                         aria-label="Group"
                         data-test="group"
                         tabindex="2"
                         v-model="formData.group_id">
                         <option value="0">None</option>
                         <option disabled="true">-----</option>
-                        <!--
-                        TODO : Load groups from API
-                        {% for group in groups %}
-                        <option value="{{group.id}}" {% if (group.id == user.group_id) %}selected{% endif %}>{{group.name}}</option>
-                        {% endfor %}
-                        -->
+                        <option
+                            v-for="group in groups"
+                            :key="group.id"
+                            :value="group.id">
+                            {{ group.name }}
+                        </option>
                     </select>
                 </div>
             </div>
@@ -125,7 +131,7 @@ const emits = defineEmits(['submit'])
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="language" fixed-width />
                     <select
-                        class="uk-input"
+                        class="uk-input uk-select"
                         aria-label="Locale"
                         data-test="locale"
                         tabindex="6"

@@ -6,6 +6,7 @@ export { useGroupApi } from './useGroupApi'
 export { useGroupCreateApi } from './useGroupCreateApi'
 export { useGroupDeleteApi } from './useGroupDeleteApi'
 export { useGroupEditApi } from './useGroupEditApi'
+export { useGroupsApi } from './useGroupsApi'
 
 // Permission
 export { usePermissionApi } from './usePermissionApi'

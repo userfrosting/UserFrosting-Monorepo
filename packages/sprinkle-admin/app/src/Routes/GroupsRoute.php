@@ -20,7 +20,7 @@ use UserFrosting\Sprinkle\Admin\Controller\Group\GroupApi;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupCreateAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupDeleteAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupEditAction;
-use UserFrosting\Sprinkle\Admin\Controller\Group\GroupsSprunjeAction as GroupsSprunje;
+use UserFrosting\Sprinkle\Admin\Controller\Group\GroupsSprunjeAction;
 use UserFrosting\Sprinkle\Admin\Controller\Group\GroupUsersSprunje;
 use UserFrosting\Sprinkle\Admin\Middlewares\GroupInjector;
 use UserFrosting\Sprinkle\Core\Middlewares\NoCache;
@@ -33,7 +33,7 @@ class GroupsRoute implements RouteDefinitionInterface
     public function register(App $app): void
     {
         $app->group('/api/groups', function (RouteCollectorProxy $group) {
-            $group->get('', GroupsSprunje::class)
+            $group->get('', GroupsSprunjeAction::class)
                   ->setName('api_groups');
             $group->get('/g/{slug}', GroupApi::class)
                   ->add(GroupInjector::class)
