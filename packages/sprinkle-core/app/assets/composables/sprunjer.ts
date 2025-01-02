@@ -33,10 +33,10 @@
  */
 import { ref, toValue, watchEffect, computed } from 'vue'
 import axios from 'axios'
-import type { AssociativeArray, Sprunjer } from '../interfaces'
+import type { AssociativeArray, Sprunjer, SprunjerData, SprunjerResponse } from '../interfaces'
 
 export const useSprunjer = (
-    dataUrl: any,
+    dataUrl: string | (() => string),
     defaultSorts: AssociativeArray = {},
     defaultFilters: AssociativeArray = {},
     defaultSize: number = 10,
@@ -48,8 +48,15 @@ export const useSprunjer = (
     const sorts = ref<AssociativeArray>(defaultSorts)
     const filters = ref<AssociativeArray>(defaultFilters)
 
-    // Raw data
-    const data = ref<any>({})
+    // Raw data - Init with default data
+    const data = ref<SprunjerData>({
+        count: 0,
+        count_filtered: 0,
+        rows: [],
+        listable: {},
+        sortable: [],
+        filterable: []
+    })
 
     // State
     const loading = ref<boolean>(false)
@@ -60,7 +67,7 @@ export const useSprunjer = (
     async function fetch() {
         loading.value = true
         axios
-            .get(toValue(dataUrl), {
+            .get<SprunjerResponse>(toValue(dataUrl), {
                 params: {
                     size: size.value,
                     page: page.value,
@@ -69,12 +76,22 @@ export const useSprunjer = (
                 }
             })
             .then((response) => {
-                data.value = response.data
-                loading.value = false
+                // Assign the response data to the Sprunje Data. 
+                // Note both object can't be assigned directly, as the response 
+                // object is not a SprunjeData object.
+                data.value.count = response.data.count
+                data.value.count_filtered = response.data.count_filtered
+                data.value.rows = response.data.rows
+                data.value.listable = response.data.listable ?? {}
+                data.value.sortable = response.data.sortable ?? []
+                data.value.filterable = response.data.filterable ?? []
             })
             .catch((err) => {
                 // TODO : User toast alert, or export alert
                 console.error(err)
+            })
+            .finally(() => {
+                loading.value = false
             })
     }
 

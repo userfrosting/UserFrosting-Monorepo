@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { inject, computed } from 'vue'
-import type { Sprunjer } from '@userfrosting/sprinkle-core/interfaces'
+import type { Sprunjer, SprunjerListable } from '@userfrosting/sprinkle-core/interfaces'
 
 const sprunjer = inject('sprunjer') as Sprunjer
 const { data, filters } = sprunjer
 
-const filterable = computed(() => {
+const filterable = computed((): string[] => {
     return data.value.filterable
 })
 
-const listable = computed(() => {
+const listable = computed((): SprunjerListable => {
     return data.value.listable
 })
 
@@ -18,7 +18,7 @@ const resetFilters = () => {
 }
 
 const isListable = (column: string) => {
-    return listable.value[column] !== undefined
+    return column in listable.value
 }
 
 const listableOptions = (column: string) => {

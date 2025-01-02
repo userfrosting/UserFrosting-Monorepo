@@ -1,4 +1,5 @@
 export type { AlertInterface } from './alerts'
 export type { AssociativeArray } from './common'
 export { Severity } from './severity'
-export type { Sprunjer } from './sprunjer'
+export type { Sprunjer, SprunjerData, SprunjerListable, SprunjerListableOption } from './sprunjer'
+export type { SprunjerRequest, SprunjerResponse } from './sprunjerApi'
