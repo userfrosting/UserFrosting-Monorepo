@@ -5,7 +5,7 @@ import type { GroupInterface } from '@userfrosting/sprinkle-account/interfaces'
  *
  * This interface is tied to the `GroupApi` API, accessed at the
  * GET `/api/groups/g/{slug}` endpoint.
- * 
+ *
  * This api doesn't have a corresponding Request data interface.
  */
 export interface GroupResponse extends GroupInterface {

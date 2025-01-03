@@ -71,10 +71,7 @@ const emits = defineEmits(['submit'])
                         v-model="formData.group_id">
                         <option value="0">None</option>
                         <option disabled="true">-----</option>
-                        <option
-                            v-for="group in groups"
-                            :key="group.id"
-                            :value="group.id">
+                        <option v-for="group in groups" :key="group.id" :value="group.id">
                             {{ group.name }}
                         </option>
                     </select>

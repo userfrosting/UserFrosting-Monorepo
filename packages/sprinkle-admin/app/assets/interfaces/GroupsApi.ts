@@ -6,7 +6,7 @@ import type { SprunjerResponse } from '@userfrosting/sprinkle-core/interfaces'
  *
  * This interface is tied to the `GroupsSprunjeAction` API, accessed at the
  * GET `/api/groups` endpoint.
- * 
+ *
  * This api doesn't have a corresponding Request data interface.
  */
 export interface GroupSprunjerResponse extends Omit<SprunjerResponse, 'rows'> {

@@ -76,8 +76,8 @@ export const useSprunjer = (
                 }
             })
             .then((response) => {
-                // Assign the response data to the Sprunje Data. 
-                // Note both object can't be assigned directly, as the response 
+                // Assign the response data to the Sprunje Data.
+                // Note both object can't be assigned directly, as the response
                 // object is not a SprunjeData object.
                 data.value.count = response.data.count
                 data.value.count_filtered = response.data.count_filtered

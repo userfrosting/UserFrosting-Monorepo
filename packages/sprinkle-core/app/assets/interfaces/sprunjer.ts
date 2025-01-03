@@ -26,12 +26,12 @@ export interface Sprunjer {
 }
 
 /**
- * Sprunjer Data. Represents the data that is returned from any Sprunjer 
- * Composable. It is different than SprunjerResponse, as the response if what 
+ * Sprunjer Data. Represents the data that is returned from any Sprunjer
+ * Composable. It is different than SprunjerResponse, as the response if what
  * the API return, Data is what Vue provides. Both are similar, but Data doesn't
  * have optional values.
- * 
- * N.B.: "rows" uses a generic array. It can contain any object, and should 
+ *
+ * N.B.: "rows" uses a generic array. It can contain any object, and should
  * actually be can be extended for each Sprunjer
  */
 export interface SprunjerData {

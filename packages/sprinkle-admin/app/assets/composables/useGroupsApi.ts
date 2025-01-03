@@ -6,16 +6,16 @@ import type { GroupInterface } from '@userfrosting/sprinkle-account/interfaces'
 
 /**
  * API used to fetch a list of groups.
- * 
+ *
  * This interface is tied to the `GroupsSprunjeAction` API, accessed at the
- * GET `/api/groups` endpoint and the `GroupSprunjerResponse` Typescript 
+ * GET `/api/groups` endpoint and the `GroupSprunjerResponse` Typescript
  * interface.
- * 
- * This composable can be used to access a list of groups, for select purpose 
- * for example. While it uses the Sprunjer on the backend, it doesn't filter 
+ *
+ * This composable can be used to access a list of groups, for select purpose
+ * for example. While it uses the Sprunjer on the backend, it doesn't filter
  * nor sort the data. The Sprunjer should be used directly for that.
- * 
- * NOTE: This group list is not access controlled. It return all groups, so use 
+ *
+ * NOTE: This group list is not access controlled. It return all groups, so use
  * it wisely.
  */
 export function useGroupsApi() {

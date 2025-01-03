@@ -5,7 +5,7 @@ import type { GroupResponse } from '../interfaces'
 
 /**
  * API used to fetch a specific group.
- * 
+ *
  * The Route object is used to watch the slug parameter. When the slug changes, the API is called.
  * TODO : The watch should be specific to the theme, and not the API.
  */
