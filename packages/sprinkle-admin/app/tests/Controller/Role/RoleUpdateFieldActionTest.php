@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Tests\Controller\Role;
 
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Sprinkle\Account\Database\Models\Permission;
 use UserFrosting\Sprinkle\Account\Database\Models\Role;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
@@ -121,8 +120,10 @@ class RoleUpdateFieldActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
+        $this->assertJsonResponse([
+            'message' => 'Details updated for role <strong>New Foo</strong>',
+        ], $response);
 
         // Make sure the role has the new name.
         $role->refresh();
@@ -159,19 +160,14 @@ class RoleUpdateFieldActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
+        $this->assertJsonResponse([
+            'message' => 'Permissions updated for role <strong>' . $role->name . '</strong>',
+        ], $response);
 
         // Make sure the role has the new permissions.
         $role->refresh();
         $this->assertCount(2, $role->permissions);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
-        $this->assertSame('Permissions updated for role <strong>' . $role->name . '</strong>', array_reverse($messages)[0]['message']);
     }
 
     public function testPostForRemovingAllRoles(): void
@@ -191,19 +187,14 @@ class RoleUpdateFieldActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
         $this->assertResponseStatus(200, $response);
+        $this->assertJsonResponse([
+            'message' => 'Permissions updated for role <strong>' . $role->name . '</strong>',
+        ], $response);
 
         // Make sure the user has the new roles.
         $role->refresh();
         $this->assertCount(0, $role->permissions);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
-        $this->assertSame('Permissions updated for role <strong>' . $role->name . '</strong>', array_reverse($messages)[0]['message']);
     }
 
     public function testPostForMissingValueArgument(): void
@@ -222,19 +213,8 @@ class RoleUpdateFieldActionTest extends AdminTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertJsonResponse([], $response);
-        $this->assertResponseStatus(200, $response);
-
-        // Make sure the user has the new roles.
-        $role->refresh();
-        $this->assertCount(0, $role->permissions);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
-        $this->assertSame('Permissions updated for role <strong>' . $role->name . '</strong>', array_reverse($messages)[0]['message']);
+        $this->assertResponseStatus(400, $response);
+        $this->assertJsonResponse('Please specify a value for <strong>permissions</strong>.', $response, 'description');
     }
 
     public function testPageForFailedValidation(): void
@@ -254,11 +234,5 @@ class RoleUpdateFieldActionTest extends AdminTestCase
         // Assert response status & body
         $this->assertJsonResponse('The values for <strong>permissions</strong> must be in an array.', $response, 'description');
         $this->assertResponseStatus(400, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('danger', array_reverse($messages)[0]['type']);
     }
 }

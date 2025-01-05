@@ -1,24 +1,26 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
+import RoleManagePermissionModal from './RoleManagePermissionModal.vue'
+import type { RoleInterface } from '@userfrosting/sprinkle-account/interfaces'
 
 const { role } = defineProps<{
-    role: string
+    role: RoleInterface
 }>()
 </script>
 
 <template>
     <UFCardBox title="Permissions">
-        <UFSprunjeTable :dataUrl="'/api/roles/r/' + role + '/permissions'" searchColumn="name">
-            <template #actions>
-                <button class="uk-button uk-button-default">
-                    <font-awesome-icon icon="key" /> Add permission
-                </button>
+        <UFSprunjeTable :dataUrl="'/api/roles/r/' + role.slug + '/permissions'" searchColumn="name">
+            <template #actions="{ sprunjer }">
+                <RoleManagePermissionModal
+                    :role="role"
+                    @saved="sprunjer.fetch()"
+                    class="uk-button uk-button-default" />
             </template>
 
             <template #header>
                 <UFSprunjeHeader sort="name">Permission</UFSprunjeHeader>
                 <UFSprunjeHeader sort="properties">Description</UFSprunjeHeader>
-                <UFSprunjeHeader>Actions</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">
@@ -34,11 +36,6 @@ const { role } = defineProps<{
                     </strong>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>{{ item.description }}</UFSprunjeColumn>
-                <UFSprunjeColumn>
-                    <button class="uk-button uk-button-danger uk-button-small">
-                        <font-awesome-icon icon="trash" />
-                    </button>
-                </UFSprunjeColumn>
             </template>
         </UFSprunjeTable>
     </UFCardBox>

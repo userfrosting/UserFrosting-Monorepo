@@ -16,6 +16,7 @@ export { useRoleApi } from './useRoleApi'
 export { useRoleCreateApi } from './useRoleCreateApi'
 export { useRoleEditApi } from './useRoleEditApi'
 export { useRoleDeleteApi } from './useRoleDeleteApi'
+export { useRoleUpdateApi } from './useRoleUpdateApi'
 
 // User
 export { useUserApi } from './useUserApi'

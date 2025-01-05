@@ -27,7 +27,7 @@ const { role, error, fetchApi } = useRoleApi(route)
         </div>
         <div class="uk-child-width-1-1" uk-grid>
             <div>
-                <RolePermissions :role="$route.params.slug.toString()" />
+                <RolePermissions :role="role" />
             </div>
         </div>
     </template>

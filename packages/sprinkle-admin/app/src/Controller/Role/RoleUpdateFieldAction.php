@@ -13,15 +13,14 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Controller\Role;
 
 use Illuminate\Database\Connection;
-use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\Fortress\Transformer\RequestDataTransformer;
 use UserFrosting\Fortress\Validator\ServerSideValidator;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\RoleInterface;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -29,6 +28,7 @@ use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLogger;
 use UserFrosting\Sprinkle\Admin\Exceptions\MissingRequiredParamException;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
+use UserFrosting\Support\Message\UserMessage;
 
 /**
  * Processes the request to update a specific field for an existing role, including permissions.
@@ -49,7 +49,7 @@ class RoleUpdateFieldAction
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
         protected Config $config,
         protected Connection $db,
@@ -74,8 +74,10 @@ class RoleUpdateFieldAction
         Request $request,
         Response $response
     ): Response {
-        $this->handle($role, $field, $request);
-        $payload = json_encode([], JSON_THROW_ON_ERROR);
+        $message = $this->handle($role, $field, $request);
+        $payload = json_encode([
+            'message' => $this->translator->translate($message->message, $message->parameters),
+        ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -87,12 +89,14 @@ class RoleUpdateFieldAction
      * @param RoleInterface $role
      * @param string        $fieldName
      * @param Request       $request
+     *
+     * @return UserMessage The message to display to the user.
      */
     protected function handle(
         RoleInterface $role,
         string $fieldName,
         Request $request
-    ): void {
+    ): UserMessage {
         // Access-controlled resource - check that current User has permission
         // to edit the specified field for this user
         $this->validateAccess($role, $fieldName);
@@ -108,8 +112,6 @@ class RoleUpdateFieldAction
         // Except for roles, which we allows to be empty.
         if (isset($put[$fieldName])) {
             $fieldData = $put[$fieldName];
-        } elseif ($fieldName === 'permissions') {
-            $fieldData = $put['value'] ?? [];
         } else {
             $e = new MissingRequiredParamException();
             $e->setParam($fieldName);
@@ -137,9 +139,7 @@ class RoleUpdateFieldAction
         // Begin transaction - DB will be rolled back if an exception occurs
         $this->db->transaction(function () use ($fieldName, $fieldValue, $role, $currentUser) {
             if ($fieldName === 'permissions') {
-                $collection = new Collection($fieldValue);
-                $newPermissions = $collection->pluck('permission_id')->all();
-                $role->permissions()->sync($newPermissions);
+                $role->permissions()->sync($fieldValue);
             } else {
                 $role->$fieldName = $fieldValue; // @phpstan-ignore-line Variable property is ok here.
                 $role->save();
@@ -154,11 +154,11 @@ class RoleUpdateFieldAction
 
         // Add success messages
         if ($fieldName === 'permissions') {
-            $this->alert->addMessage('success', 'ROLE.PERMISSIONS_UPDATED', [
+            return new UserMessage('ROLE.PERMISSIONS_UPDATED', [
                 'name' => $role->name,
             ]);
         } else {
-            $this->alert->addMessage('success', 'ROLE.UPDATED', [
+            return new UserMessage('ROLE.UPDATED', [
                 'name' => $role->name,
             ]);
         }
