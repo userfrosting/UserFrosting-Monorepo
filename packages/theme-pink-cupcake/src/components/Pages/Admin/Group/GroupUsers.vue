@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Severity } from '@userfrosting/sprinkle-core/interfaces'
 import { defineProps } from 'vue'
 
 const { slug } = defineProps<{
@@ -12,15 +13,9 @@ const { slug } = defineProps<{
             :dataUrl="'/api/groups/g/' + slug + '/users'"
             searchColumn="name"
             hideFilters>
-            <template #actions>
-                <button class="uk-button uk-button-default">
-                    <font-awesome-icon icon="user-plus" /> Add user
-                </button>
-            </template>
-
             <template #header>
                 <UFSprunjeHeader sort="name">User</UFSprunjeHeader>
-                <UFSprunjeHeader>Actions</UFSprunjeHeader>
+                <UFSprunjeHeader>Status</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">
@@ -37,9 +32,13 @@ const { slug } = defineProps<{
                     <div class="uk-text-meta">{{ item.email }}</div>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
-                    <button class="uk-button uk-button-danger uk-button-small">
-                        <font-awesome-icon icon="trash" />
-                    </button>
+                    <UFLabel :severity="Severity.Danger" v-if="item.flag_enabled == false">
+                        Disabled
+                    </UFLabel>
+                    <UFLabel :severity="Severity.Warning" v-else-if="item.flag_verified == false">
+                        Unactivated
+                    </UFLabel>
+                    <UFLabel :severity="Severity.Success" v-else>Active</UFLabel>
                 </UFSprunjeColumn>
             </template>
         </UFSprunjeTable>
