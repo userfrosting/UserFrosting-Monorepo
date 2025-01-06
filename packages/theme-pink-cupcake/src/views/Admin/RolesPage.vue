@@ -2,6 +2,7 @@
 import RoleCreateModal from '../../components/Pages/Admin/Role/RoleCreateModal.vue'
 import RoleEditModal from '../../components/Pages/Admin/Role/RoleEditModal.vue'
 import RoleDeleteModal from '../../components/Pages/Admin/Role/RoleDeleteModal.vue'
+import RoleManagePermissionModal from '../../components/Pages/Admin/Role/RoleManagePermissionModal.vue'
 </script>
 
 <template>
@@ -56,6 +57,9 @@ import RoleDeleteModal from '../../components/Pages/Admin/Role/RoleDeleteModal.v
                                     :role="item"
                                     @saved="sprunjer.fetch()"
                                     class="uk-drop-close" />
+                            </li>
+                            <li>
+                                <RoleManagePermissionModal :role="item" class="uk-drop-close" />
                             </li>
                             <li>
                                 <RoleDeleteModal

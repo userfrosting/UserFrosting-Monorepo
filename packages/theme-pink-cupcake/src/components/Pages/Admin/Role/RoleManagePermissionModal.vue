@@ -76,7 +76,7 @@ const submitForm = () => {
             emits('saved')
 
             // Close the modal
-            UIkit.modal('#modal-role-manage-permission').hide()
+            UIkit.modal('#' + modalName.value).hide()
 
             // Display a success notification
             UIkit.notification({
@@ -112,20 +112,20 @@ const allSelected = computed({
         }
     }
 })
+
+const modalName = computed(() => 'modal-role-manage-permission-' + props.role.slug)
 </script>
 
 <template>
-    <a
-        v-bind="$attrs"
-        :uk-toggle="'target: #modal-role-manage-permission'"
-        @click="fetchPermission()">
-        <slot><font-awesome-icon icon="key" /> Manage permissions</slot>
+    <a v-bind="$attrs" :uk-toggle="'target: #' + modalName" @click="fetchPermission()">
+        <slot><font-awesome-icon icon="key" /> Manage Permissions</slot>
     </a>
 
     <!-- This is the modal -->
-    <UFModal id="modal-role-manage-permission" class="uk-modal-container" closable>
-        <template #header>Manage permissions</template>
+    <UFModal :id="modalName" class="uk-modal-container" closable>
+        <template #header>Manage Permissions - {{ role.name }}</template>
         <template #default>
+            <p>The selected permissions will be assigned to the role.</p>
             <div class="uk-text-center" v-if="loading">
                 <font-awesome-icon icon="spinner" spin size="2xl" />
             </div>
