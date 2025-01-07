@@ -24,7 +24,7 @@ use UserFrosting\Sprinkle\Admin\Controller\User\UserEditAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPasswordAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserPermissionSprunje;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserRoleSprunje;
-use UserFrosting\Sprinkle\Admin\Controller\User\UsersPageAction as UsersSprunje;
+use UserFrosting\Sprinkle\Admin\Controller\User\UsersSprunjeAction;
 use UserFrosting\Sprinkle\Admin\Controller\User\UserUpdateFieldAction;
 use UserFrosting\Sprinkle\Admin\Middlewares\UserInjector;
 use UserFrosting\Sprinkle\Core\Middlewares\NoCache;
@@ -40,7 +40,7 @@ class UsersRoutes implements RouteDefinitionInterface
             $group->get('/u/{user_name}', UserApi::class)
                   ->add(UserInjector::class)
                   ->setName('api_user');
-            $group->get('', UsersSprunje::class)
+            $group->get('', UsersSprunjeAction::class)
                   ->setName('api_users');
             $group->delete('/u/{user_name}', UserDeleteAction::class)
                   ->add(UserInjector::class)

@@ -18,7 +18,7 @@ use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class UsersPageActionTest extends AdminTestCase
+class UsersSprunjeActionTest extends AdminTestCase
 {
     use RefreshDatabase;
     use WithTestUser;

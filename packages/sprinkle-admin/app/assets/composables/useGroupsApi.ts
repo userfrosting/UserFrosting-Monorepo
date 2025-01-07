@@ -1,14 +1,14 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
-import type { GroupSprunjerResponse } from '../interfaces'
+import type { GroupsSprunjerResponse } from '../interfaces'
 import type { GroupInterface } from '@userfrosting/sprinkle-account/interfaces'
 
 /**
  * API used to fetch a list of groups.
  *
  * This interface is tied to the `GroupsSprunjeAction` API, accessed at the
- * GET `/api/groups` endpoint and the `GroupSprunjerResponse` Typescript
+ * GET `/api/groups` endpoint and the `GroupsSprunjerResponse` Typescript
  * interface.
  *
  * This composable can be used to access a list of groups, for select purpose
@@ -28,7 +28,7 @@ export function useGroupsApi() {
         error.value = null
 
         await axios
-            .get<GroupSprunjerResponse>('/api/groups')
+            .get<GroupsSprunjerResponse>('/api/groups')
             .then((response) => {
                 groups.value = response.data.rows
             })

@@ -6,7 +6,7 @@ export type { GroupResponse } from './GroupApi'
 export type { GroupCreateForm, GroupCreateResponse } from './GroupCreateApi'
 export type { GroupDeleteResponse } from './GroupDeleteApi'
 export type { GroupEditForm, GroupEditResponse } from './GroupEditApi'
-export type { GroupSprunjerResponse } from './GroupsApi'
+export type { GroupsSprunjerResponse } from './GroupsApi'
 
 // Permissions
 export type { PermissionApi } from './PermissionApi'
@@ -23,6 +23,7 @@ export type { UserCreateForm, UserCreateResponse } from './UserCreateApi'
 export type { UserDeleteResponse } from './UserDeleteApi'
 export type { UserEditForm, UserEditResponse } from './UserEditApi'
 export type { UserPasswordApi } from './UserPasswordApi'
+export type { UsersSprunjerResponse } from './UsersApi'
 
 // Misc
 export type { ApiResponse } from './ApiResponse'

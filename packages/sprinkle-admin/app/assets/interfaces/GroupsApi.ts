@@ -9,6 +9,6 @@ import type { SprunjerResponse } from '@userfrosting/sprinkle-core/interfaces'
  *
  * This api doesn't have a corresponding Request data interface.
  */
-export interface GroupSprunjerResponse extends Omit<SprunjerResponse, 'rows'> {
+export interface GroupsSprunjerResponse extends Omit<SprunjerResponse, 'rows'> {
     rows: GroupInterface[]
 }

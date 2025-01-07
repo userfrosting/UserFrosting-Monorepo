@@ -27,7 +27,7 @@ use UserFrosting\Sprinkle\Admin\Sprunje\UserSprunje;
  * This page requires authentication.
  * Request type: GET
  */
-class UsersPageAction
+class UsersSprunjeAction
 {
     /**
      * Inject dependencies.
