@@ -16,6 +16,7 @@ export type { RoleApi } from './RoleApi'
 export type { RoleCreateRequest, RoleCreateResponse } from './RoleCreateApi'
 export type { RoleEditRequest, RoleEditResponse } from './RoleEditApi'
 export type { RoleDeleteResponse } from './RoleDeleteApi'
+export type { RolesSprunjeResponse } from './RolesApi'
 
 // Users
 export type { UserApi } from './UserApi'
@@ -24,6 +25,7 @@ export type { UserDeleteResponse } from './UserDeleteApi'
 export type { UserEditForm, UserEditResponse } from './UserEditApi'
 export type { UserPasswordApi } from './UserPasswordApi'
 export type { UsersSprunjerResponse } from './UsersApi'
+export type { UserRoleSprunjeResponse } from './UserRolesApi'
 
 // Misc
 export type { ApiResponse } from './ApiResponse'

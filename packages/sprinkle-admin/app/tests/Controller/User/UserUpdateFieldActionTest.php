@@ -253,14 +253,14 @@ class UserUpdateFieldActionTest extends AdminTestCase
 
         // Create request with method and url and fetch response
         // uf-collection will pass no data when removing all roles_id.
-        $request = $this->createJsonRequest('PUT', '/api/users/u/' . $user->user_name . '/roles');
+        $request = $this->createJsonRequest('PUT', '/api/users/u/' . $user->user_name . '/roles', ['roles' => []]);
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertResponseStatus(200, $response);
         $this->assertJsonResponse([
             'message' => 'Account details updated for user <strong>' . $user->user_name . '</strong>',
         ], $response);
+        $this->assertResponseStatus(200, $response);
 
         // Make sure the user has the new roles.
         $user->refresh();

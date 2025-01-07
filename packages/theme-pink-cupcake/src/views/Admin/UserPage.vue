@@ -23,7 +23,7 @@ const { user, error, fetchApi } = useUserApi(route)
                 <UserInfo :user="user" @updated="fetchApi()" />
             </div>
             <div class="uk-width-2-3">
-                <UserRoles :slug="user.user_name" />
+                <UserRoles :user="user" />
             </div>
         </div>
 

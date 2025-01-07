@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace UserFrosting\Sprinkle\Admin\Controller\User;
 
 use Illuminate\Database\Connection;
-use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use UserFrosting\Config\Config;
@@ -124,8 +123,6 @@ class UserUpdateFieldAction
         // Except for roles, which we allows to be empty.
         if (isset($put[$fieldName])) {
             $fieldData = $put[$fieldName];
-        } elseif ($fieldName === 'roles') {
-            $fieldData = [];
         } else {
             $e = new MissingRequiredParamException();
             $e->setParam($fieldName);
@@ -180,9 +177,7 @@ class UserUpdateFieldAction
         // Begin transaction - DB will be rolled back if an exception occurs
         $this->db->transaction(function () use ($fieldName, $fieldValue, $user, $currentUser) {
             if ($fieldName === 'roles') {
-                $collection = new Collection($fieldValue);
-                $newRoles = $collection->pluck('role_id')->all();
-                $user->roles()->sync($newRoles);
+                $user->roles()->sync($fieldValue);
             } else {
                 $user->$fieldName = $fieldValue; // @phpstan-ignore-line Variable property is ok here.
                 $user->save();
