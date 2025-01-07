@@ -12,15 +12,8 @@ const { slug } = defineProps<{
             :dataUrl="'/api/roles/r/' + slug + '/users'"
             searchColumn="name"
             hideFilters>
-            <template #actions>
-                <button class="uk-button uk-button-default">
-                    <font-awesome-icon icon="user-plus" /> Add user
-                </button>
-            </template>
-
             <template #header>
                 <UFSprunjeHeader sort="name">User</UFSprunjeHeader>
-                <UFSprunjeHeader>Actions</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">
@@ -35,11 +28,6 @@ const { slug } = defineProps<{
                         </RouterLink>
                     </strong>
                     <div class="uk-text-meta">{{ item.email }}</div>
-                </UFSprunjeColumn>
-                <UFSprunjeColumn>
-                    <button class="uk-button uk-button-danger uk-button-small">
-                        <font-awesome-icon icon="trash" />
-                    </button>
                 </UFSprunjeColumn>
             </template>
         </UFSprunjeTable>
