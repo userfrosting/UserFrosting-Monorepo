@@ -10,6 +10,7 @@ export type { GroupsSprunjerResponse } from './GroupsApi'
 
 // Permissions
 export type { PermissionApi } from './PermissionApi'
+export type { PermissionSprunjeResponse } from './PermissionsApi'
 
 // Roles
 export type { RoleApi } from './RoleApi'
@@ -17,6 +18,7 @@ export type { RoleCreateRequest, RoleCreateResponse } from './RoleCreateApi'
 export type { RoleEditRequest, RoleEditResponse } from './RoleEditApi'
 export type { RoleDeleteResponse } from './RoleDeleteApi'
 export type { RolesSprunjeResponse } from './RolesApi'
+export type { RolePermissionsSprunjeResponse } from './RolePermissionsApi'
 
 // Users
 export type { UserApi } from './UserApi'

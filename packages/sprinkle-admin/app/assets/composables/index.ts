@@ -17,6 +17,7 @@ export { useRoleCreateApi } from './useRoleCreateApi'
 export { useRoleEditApi } from './useRoleEditApi'
 export { useRoleDeleteApi } from './useRoleDeleteApi'
 export { useRoleUpdateApi } from './useRoleUpdateApi'
+export { useRolePermissionsApi } from './useRolePermissionsApi'
 
 // User
 export { useUserApi } from './useUserApi'
@@ -25,3 +26,4 @@ export { useUserDeleteApi } from './useUserDeleteApi'
 export { useUserEditApi } from './useUserEditApi'
 export { useUserUpdateApi } from './useUserUpdateApi'
 export { useUserPasswordResetApi } from './useUserPasswordResetApi'
+export { useUserRolesApi } from './useUserRolesApi'

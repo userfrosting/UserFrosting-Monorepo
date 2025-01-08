@@ -1,13 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import UIkit from 'uikit'
-import axios from 'axios'
-import type { RoleInterface, UserInterface } from '@userfrosting/sprinkle-account/interfaces'
-import { useUserUpdateApi } from '@userfrosting/sprinkle-admin/composables'
-import type {
-    RolesSprunjeResponse,
-    UserRoleSprunjeResponse
-} from '@userfrosting/sprinkle-admin/interfaces'
+import type { UserInterface } from '@userfrosting/sprinkle-account/interfaces'
+import { useUserRolesApi, useUserUpdateApi } from '@userfrosting/sprinkle-admin/composables'
 
 /**
  * Emits - Define the saved event. This event is emitted when the form is saved
@@ -23,55 +18,9 @@ const { user } = defineProps<{
 }>()
 
 /**
- * Variables - All roles, loading state and selected roles.
- */
-const roles = ref<RoleInterface[]>([])
-const loading = ref<boolean>(false)
-const selected = ref<Number[]>([])
-
-/**
  * Methods - Fetch roles, fetch user's roles and submit the form.
  */
-// TODO : Move to a composable in Admin Sprinkle
-async function fetchRoles() {
-    loading.value = true
-    axios
-        .get<RolesSprunjeResponse>('/api/roles')
-        .then((response) => {
-            roles.value = response.data.rows
-            fetchUserRoles()
-        })
-        .catch((err) => {
-            loading.value = false
-            // TODO : User toast alert, or export alert
-            console.error(err)
-        })
-}
-
-// TODO : Move to a composable in Admin Sprinkle
-async function fetchUserRoles() {
-    loading.value = true
-    axios
-        .get<UserRoleSprunjeResponse>('/api/users/u/' + user.user_name + '/roles')
-        .then((response) => {
-            const userRoles: RoleInterface[] = response.data.rows
-            selected.value.splice(0)
-            userRoles.forEach((userRole) => {
-                let record = roles.value.find((element) => element.id === userRole.id)
-                if (record) {
-                    selected.value.push(userRole.id)
-                }
-            })
-        })
-        .catch((err) => {
-            // TODO : User toast alert, or export alert
-            console.error(err)
-        })
-        .then(() => {
-            loading.value = false
-        })
-}
-
+const { loading, selected, roles, fetch } = useUserRolesApi()
 const { submitUserUpdate } = useUserUpdateApi()
 const submitForm = () => {
     submitUserUpdate(user.user_name, 'roles', { roles: selected.value })
@@ -121,7 +70,7 @@ const modalName = computed(() => 'modal-user-manage-roles-' + user.user_name)
 </script>
 
 <template>
-    <a v-bind="$attrs" :uk-toggle="'target: #' + modalName" @click="fetchRoles()">
+    <a v-bind="$attrs" :uk-toggle="'target: #' + modalName" @click="fetch(user.user_name)">
         <slot><font-awesome-icon icon="address-card" /> Manage Roles</slot>
     </a>
 

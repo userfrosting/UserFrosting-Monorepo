@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import UIkit from 'uikit'
-import axios from 'axios'
-import type { PermissionInterface, RoleInterface } from '@userfrosting/sprinkle-account/interfaces'
-import { useRoleUpdateApi } from '@userfrosting/sprinkle-admin/composables'
+import type { RoleInterface } from '@userfrosting/sprinkle-account/interfaces'
+import { useRolePermissionsApi, useRoleUpdateApi } from '@userfrosting/sprinkle-admin/composables'
 
 /**
  * Emits - Define the saved event. This event is emitted when the form is saved
@@ -14,63 +13,17 @@ const emits = defineEmits(['saved'])
 /**
  * Props - The role to edit.
  */
-const props = defineProps<{
+const { role } = defineProps<{
     role: RoleInterface
 }>()
 
 /**
- * Variables - All permissions, loading state and selected permissions.
+ * Methods - Fetch permissions, selected, fetch method and submit the form.
  */
-const permissions = ref<PermissionInterface[]>([])
-const loading = ref<boolean>(false)
-const selected = ref<Number[]>([])
-
-/**
- * Methods - Fetch permissions, fetch role permissions and submit the form.
- */
-// TODO : Move to a composable in Admin Sprinkle
-async function fetchPermission() {
-    loading.value = true
-    axios
-        .get('/api/permissions')
-        .then((response) => {
-            permissions.value = response.data.rows
-            fetchRolePermissions()
-        })
-        .catch((err) => {
-            loading.value = false
-            // TODO : User toast alert, or export alert
-            console.error(err)
-        })
-}
-
-// TODO : Move to a composable in Admin Sprinkle
-async function fetchRolePermissions() {
-    loading.value = true
-    axios
-        .get('/api/roles/r/' + props.role.slug + '/permissions')
-        .then((response) => {
-            const rolePermissions: PermissionInterface[] = response.data.rows
-            selected.value.splice(0)
-            rolePermissions.forEach((rolePermission) => {
-                let record = permissions.value.find((element) => element.id === rolePermission.id)
-                if (record) {
-                    selected.value.push(rolePermission.id)
-                }
-            })
-        })
-        .catch((err) => {
-            // TODO : User toast alert, or export alert
-            console.error(err)
-        })
-        .then(() => {
-            loading.value = false
-        })
-}
-
+const { loading, selected, permissions, fetch } = useRolePermissionsApi()
 const { submitRoleUpdate } = useRoleUpdateApi()
 const submitForm = () => {
-    submitRoleUpdate(props.role.slug, 'permissions', { permissions: selected.value })
+    submitRoleUpdate(role.slug, 'permissions', { permissions: selected.value })
         .then((response) => {
             // Emit the saved event
             emits('saved')
@@ -113,11 +66,11 @@ const allSelected = computed({
     }
 })
 
-const modalName = computed(() => 'modal-role-manage-permission-' + props.role.slug)
+const modalName = computed(() => 'modal-role-manage-permission-' + role.slug)
 </script>
 
 <template>
-    <a v-bind="$attrs" :uk-toggle="'target: #' + modalName" @click="fetchPermission()">
+    <a v-bind="$attrs" :uk-toggle="'target: #' + modalName" @click="fetch(role.slug)">
         <slot><font-awesome-icon icon="key" /> Manage Permissions</slot>
     </a>
 
