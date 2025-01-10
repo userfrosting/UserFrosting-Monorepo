@@ -82,7 +82,10 @@ const modalName = computed(() => 'modal-role-manage-permission-' + role.slug)
             <div class="uk-text-center" v-if="loading">
                 <font-awesome-icon icon="spinner" spin size="2xl" />
             </div>
-            <form v-on:submit.prevent="submitForm()" v-if="!loading">
+            <form
+                v-on:submit.prevent="submitForm()"
+                v-if="!loading"
+                class="uk-overflow-auto uk-height-max-large">
                 <fieldset class="uk-fieldset uk-form-stacked">
                     <table class="uk-table uk-table-striped">
                         <thead>
@@ -119,17 +122,18 @@ const modalName = computed(() => 'modal-role-manage-permission-' + role.slug)
                             </tr>
                         </tbody>
                     </table>
-
-                    <div class="uk-text-right" uk-margin>
-                        <button class="uk-button uk-button-default uk-modal-close" type="button">
-                            Cancel
-                        </button>
-                        <button class="uk-button uk-button-primary" type="submit" tabindex="2">
-                            Update Permissions
-                        </button>
-                    </div>
                 </fieldset>
             </form>
+        </template>
+        <template #footer>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <button
+                class="uk-button uk-button-primary"
+                type="submit"
+                @click="submitForm()"
+                :disabled="loading">
+                Update Permissions
+            </button>
         </template>
     </UFModal>
 </template>
