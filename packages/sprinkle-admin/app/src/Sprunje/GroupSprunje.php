@@ -26,6 +26,7 @@ class GroupSprunje extends Sprunje
     protected array $sortable = [
         'name',
         'description',
+        'users_count',
     ];
 
     protected array $filterable = [
@@ -45,6 +46,6 @@ class GroupSprunje extends Sprunje
     protected function baseQuery()
     {
         // @phpstan-ignore-next-line Model implement Model.
-        return $this->model;
+        return $this->model->withCount('users');
     }
 }

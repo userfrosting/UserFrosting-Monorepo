@@ -14,6 +14,7 @@ namespace UserFrosting\Sprinkle\Admin\Tests\Sprunje;
 
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use UserFrosting\Sprinkle\Account\Database\Models\Group;
+use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Admin\Sprunje\GroupSprunje;
 use UserFrosting\Sprinkle\Admin\Sprunje\RoleSprunje;
 use UserFrosting\Sprinkle\Admin\Tests\AdminTestCase;
@@ -44,6 +45,11 @@ class GroupSprunjeTest extends AdminTestCase
         $this->groups = Group::factory()
                         ->count(3)
                         ->create();
+
+        // Add some users to the groups
+        User::factory()->count(2)
+            ->for($this->groups[0])
+            ->create();
     }
 
     public function testBaseSprunje(): void
@@ -56,5 +62,9 @@ class GroupSprunjeTest extends AdminTestCase
         $this->assertEquals(3, $data['count_filtered']);
         $this->assertCount(3, $data['rows']); // @phpstan-ignore-line
         $this->assertEquals([], $data['listable']);
+
+        // Test User Count
+        $this->assertEquals($this->groups[0]['id'], $data['rows'][0]['id']);
+        $this->assertEquals(2, $data['rows'][0]['users_count']);
     }
 }

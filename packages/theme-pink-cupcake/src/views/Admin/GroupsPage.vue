@@ -18,6 +18,7 @@ import GroupDeleteModal from '../../components/Pages/Admin/Group/GroupDeleteModa
             <template #header>
                 <UFSprunjeHeader sort="name">Groups</UFSprunjeHeader>
                 <UFSprunjeHeader sort="description">Description</UFSprunjeHeader>
+                <UFSprunjeHeader sort="users_count" class="uk-width-small">Users</UFSprunjeHeader>
                 <UFSprunjeHeader>Actions</UFSprunjeHeader>
             </template>
 
@@ -34,6 +35,9 @@ import GroupDeleteModal from '../../components/Pages/Admin/Group/GroupDeleteModa
                     </strong>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>{{ item.description }}</UFSprunjeColumn>
+                <UFSprunjeColumn class="uk-text-center">
+                    <span class="uk-badge">{{ item.users_count }}</span>
+                </UFSprunjeColumn>
                 <UFSprunjeColumn>
                     <button class="uk-button uk-button-primary uk-text-nowrap" type="button">
                         Actions <span uk-drop-parent-icon></span>
