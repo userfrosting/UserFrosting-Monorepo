@@ -112,12 +112,15 @@ const modalName = computed(() => 'modal-role-manage-permission-' + role.slug)
                                 <td>{{ permission.name }}</td>
                                 <td>
                                     {{ permission.description }}
-                                    <!-- <div>
-                                        <code>{{permission.slug}}</code>
+                                    <div>
+                                        <code>{{ permission.slug }}</code>
                                     </div>
                                     <div>
-                                        ↳ <code>{{permission.conditions}}</code>
-                                    </div> -->
+                                        ↳
+                                        <code style="white-space: normal">{{
+                                            permission.conditions
+                                        }}</code>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
