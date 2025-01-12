@@ -6,10 +6,6 @@ import RoleManagePermissionModal from '../../components/Pages/Admin/Role/RoleMan
 </script>
 
 <template>
-    <UFHeaderPage
-        title="Roles"
-        caption="A listing of the roles for your site.  Provides management tools for editing and deleting roles." />
-
     <UFCardBox>
         <UFSprunjeTable dataUrl="/api/roles" searchColumn="name">
             <template #actions="{ sprunjer }">

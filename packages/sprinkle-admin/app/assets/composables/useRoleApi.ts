@@ -2,6 +2,7 @@ import { ref, watch } from 'vue'
 import axios from 'axios'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
 import type { RoleApi } from '../interfaces'
+import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 
 /**
  * API Composable
@@ -28,6 +29,10 @@ export function useRoleApi(route: any) {
             .get<RoleApi>('/api/roles/r/' + route.params.slug)
             .then((response) => {
                 role.value = response.data
+
+                // Update Current Title
+                const page = usePageMeta()
+                page.title = role.value.name
             })
             .catch((err) => {
                 error.value = {

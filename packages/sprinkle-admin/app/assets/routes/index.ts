@@ -5,7 +5,8 @@ const AdminDashboardRoutes = [
         meta: {
             auth: {
                 redirect: { name: 'account.login' }
-            }
+            },
+            title: 'Dashboard'
         },
         component: () => import('../views/DashboardView.vue')
     }
@@ -18,7 +19,9 @@ const AdminActivitiesRoutes = [
         meta: {
             auth: {
                 redirect: { name: 'account.login' }
-            }
+            },
+            title: 'Activities',
+            description: 'List of all activities'
         },
         component: () => import('../views/ActivitiesView.vue')
     }
@@ -30,7 +33,10 @@ const AdminGroupsRoutes = [
         meta: {
             auth: {
                 redirect: { name: 'account.login' }
-            }
+            },
+            title: 'Groups',
+            description:
+                'A listing of the groups for your site. Provides management tools for editing and deleting groups.'
         },
         children: [
             {
@@ -41,7 +47,11 @@ const AdminGroupsRoutes = [
             {
                 path: 'g/:slug',
                 name: 'admin.group',
-                component: () => import('../views/GroupView.vue')
+                component: () => import('../views/GroupView.vue'),
+                meta: {
+                    title: 'Group Details',
+                    description: 'View and edit group details.'
+                }
             }
         ]
     }
@@ -53,7 +63,10 @@ const AdminPermissionsRoutes = [
         meta: {
             auth: {
                 redirect: { name: 'account.login' }
-            }
+            },
+            title: 'Permissions',
+            description:
+                'A listing of the permissions for your site. Provides management tools for editing and deleting permissions.'
         },
         children: [
             {
@@ -64,7 +77,11 @@ const AdminPermissionsRoutes = [
             {
                 path: 'p/:id', // permissions/p/{id}
                 name: 'admin.permission',
-                component: () => import('../views/PermissionView.vue')
+                component: () => import('../views/PermissionView.vue'),
+                meta: {
+                    title: 'Permission details',
+                    description: 'View and edit permission details.'
+                }
             }
         ]
     }
@@ -75,7 +92,10 @@ const AdminRolesRoutes = [
         meta: {
             auth: {
                 redirect: { name: 'account.login' }
-            }
+            },
+            title: 'Roles',
+            description:
+                'A listing of the roles for your site. Provides management tools for editing and deleting roles.'
         },
         children: [
             {
@@ -86,7 +106,11 @@ const AdminRolesRoutes = [
             {
                 path: 'r/:slug', // roles/r/{slug}
                 name: 'admin.role',
-                component: () => import('../views/RoleView.vue')
+                component: () => import('../views/RoleView.vue'),
+                meta: {
+                    title: 'Role details',
+                    description: 'View and edit role details.'
+                }
             }
         ]
     }
@@ -98,7 +122,10 @@ const AdminUsersRoutes = [
         meta: {
             auth: {
                 redirect: { name: 'account.login' }
-            }
+            },
+            title: 'Users',
+            description:
+                'A listing of the users for your site. Provides management tools including the ability to edit user details, manually activate users, enable/disable users, and more.'
         },
         children: [
             {
@@ -109,7 +136,11 @@ const AdminUsersRoutes = [
             {
                 path: 'u/:user_name', // users/u/{user_name}
                 name: 'admin.user',
-                component: () => import('../views/UserView.vue')
+                component: () => import('../views/UserView.vue'),
+                meta: {
+                    title: 'User Details',
+                    description: 'View and edit user details.'
+                }
             }
         ]
     }

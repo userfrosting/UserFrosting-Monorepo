@@ -10,7 +10,6 @@ dashboard.load()
 </script>
 
 <template>
-    <UFHeaderPage title="Dashboard" />
     <div class="uk-child-width-expand" uk-grid>
         <DashboardStats
             :users="dashboard.data.counter.users"

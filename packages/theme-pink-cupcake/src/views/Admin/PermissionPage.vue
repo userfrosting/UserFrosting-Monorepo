@@ -9,7 +9,6 @@ const { permission, error } = usePermissionApi(route)
 </script>
 
 <template>
-    <UFHeaderPage title="Permission details" caption="Permission information page" />
     <template v-if="error">
         <UFCardBox>
             <UFAlert :alert="error" />

@@ -2,6 +2,7 @@ import { ref, watch } from 'vue'
 import axios from 'axios'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
 import type { GroupResponse } from '../interfaces'
+import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 
 /**
  * API used to fetch a specific group.
@@ -32,6 +33,10 @@ export function useGroupApi(route: any) {
             .get<GroupResponse>('/api/groups/g/' + route.params.slug)
             .then((response) => {
                 group.value = response.data
+
+                // Update Current Title
+                const page = usePageMeta()
+                page.title = group.value.name
             })
             .catch((err) => {
                 error.value = {

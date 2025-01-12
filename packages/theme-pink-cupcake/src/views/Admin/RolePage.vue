@@ -10,7 +10,6 @@ const { role, error, fetchApi } = useRoleApi(route)
 </script>
 
 <template>
-    <UFHeaderPage title="Role details" caption="Role information page" />
     <template v-if="error">
         <UFCardBox>
             <UFAlert :alert="error" />

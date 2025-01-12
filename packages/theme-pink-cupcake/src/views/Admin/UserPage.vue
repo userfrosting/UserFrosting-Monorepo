@@ -11,7 +11,6 @@ const { user, error, fetchApi } = useUserApi(route)
 </script>
 
 <template>
-    <UFHeaderPage title="User details" caption="User information page" />
     <template v-if="error">
         <UFCardBox>
             <UFAlert :alert="error" />

@@ -3,8 +3,6 @@ import moment from 'moment'
 </script>
 
 <template>
-    <UFHeaderPage title="Activities" caption="A listing of user activities." />
-
     <UFCardBox>
         <UFSprunjeTable
             dataUrl="/api/activities"

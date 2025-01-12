@@ -2,6 +2,7 @@ import { ref, watch } from 'vue'
 import axios from 'axios'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
 import type { UserApi } from '../interfaces'
+import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 
 /**
  * API Composable
@@ -36,6 +37,10 @@ export function useUserApi(route: any) {
             .get<UserApi>('/api/users/u/' + route.params.user_name)
             .then((response) => {
                 user.value = response.data
+
+                // Update Current Title
+                const page = usePageMeta()
+                page.title = user.value.full_name
             })
             .catch((err) => {
                 error.value = {

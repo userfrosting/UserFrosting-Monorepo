@@ -10,11 +10,6 @@ import UserPasswordResetModal from '../../components/Pages/Admin/User/UserPasswo
 </script>
 
 <template>
-    <UFHeaderPage
-        title="Users"
-        caption="A listing of the users for your site. Provides management tools including the ability to
-        edit user details, manually activate users, enable/disable users, and more." />
-
     <UFCardBox>
         <UFSprunjeTable dataUrl="/api/users" searchColumn="name">
             <template #actions="{ sprunjer }">

@@ -9,7 +9,6 @@ const { group, error, fetchApi } = useGroupApi(route)
 </script>
 
 <template>
-    <UFHeaderPage title="Group details" caption="Group information page" />
     <template v-if="error">
         <UFAlert :alert="error" />
     </template>
