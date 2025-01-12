@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Core\Tests\Unit\Bakery;
 
-use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
@@ -33,12 +32,12 @@ class MigrateResetHardCommandTest extends TestCase
 
     public function testResetWithNoTables(): void
     {
-        $schema = Mockery::mock(AbstractSchemaManager::class)
-            ->shouldReceive('listTableNames')->once()->andReturn([])
+        $schema = Mockery::mock(Builder::class)
+            ->shouldReceive('getTableListing')->once()->andReturn([])
             ->getMock();
 
         $connection = Mockery::mock(Connection::class)
-            ->shouldReceive('getDoctrineSchemaManager')->once()->andReturn($schema)
+            ->shouldReceive('getSchemaBuilder')->once()->andReturn($schema)
             ->getMock();
 
         $db = Mockery::mock(Capsule::class)
@@ -58,14 +57,16 @@ class MigrateResetHardCommandTest extends TestCase
 
     public function testReset(): void
     {
-        $schema = Mockery::mock(AbstractSchemaManager::class)
-            ->shouldReceive('listTableNames')->once()->andReturn(['foo', 'bar'])
-            ->shouldReceive('dropTable')->with('foo')->once()
-            ->shouldReceive('dropTable')->with('bar')->once()
+        $schema = Mockery::mock(Builder::class)
+            ->shouldReceive('getTableListing')->once()->andReturn(['foo', 'bar'])
+            ->shouldReceive('disableForeignKeyConstraints')->once()
+            ->shouldReceive('enableForeignKeyConstraints')->once()
+            ->shouldReceive('drop')->with('foo')->once()
+            ->shouldReceive('drop')->with('bar')->once()
             ->getMock();
 
         $connection = Mockery::mock(Connection::class)
-            ->shouldReceive('getDoctrineSchemaManager')->once()->andReturn($schema)
+            ->shouldReceive('getSchemaBuilder')->once()->andReturn($schema)
             ->shouldReceive('getName')->once()->andReturn('foobar')
             ->getMock();
 
@@ -90,14 +91,16 @@ class MigrateResetHardCommandTest extends TestCase
 
     public function testResetWithForce(): void
     {
-        $schema = Mockery::mock(AbstractSchemaManager::class)
-            ->shouldReceive('listTableNames')->once()->andReturn(['foo', 'bar'])
-            ->shouldReceive('dropTable')->with('foo')->once()
-            ->shouldReceive('dropTable')->with('bar')->once()
+        $schema = Mockery::mock(Builder::class)
+            ->shouldReceive('getTableListing')->once()->andReturn(['foo', 'bar'])
+            ->shouldReceive('disableForeignKeyConstraints')->once()
+            ->shouldReceive('enableForeignKeyConstraints')->once()
+            ->shouldReceive('drop')->with('foo')->once()
+            ->shouldReceive('drop')->with('bar')->once()
             ->getMock();
 
         $connection = Mockery::mock(Connection::class)
-            ->shouldReceive('getDoctrineSchemaManager')->once()->andReturn($schema)
+            ->shouldReceive('getSchemaBuilder')->once()->andReturn($schema)
             ->shouldNotReceive('getName') // NOT
             ->getMock();
 
@@ -122,12 +125,12 @@ class MigrateResetHardCommandTest extends TestCase
 
     public function testResetWithDeniedConfirmation(): void
     {
-        $schema = Mockery::mock(AbstractSchemaManager::class)
-            ->shouldReceive('listTableNames')->once()->andReturn(['foo', 'bar'])
+        $schema = Mockery::mock(Builder::class)
+            ->shouldReceive('getTableListing')->once()->andReturn(['foo', 'bar'])
             ->getMock();
 
         $connection = Mockery::mock(Connection::class)
-            ->shouldReceive('getDoctrineSchemaManager')->once()->andReturn($schema)
+            ->shouldReceive('getSchemaBuilder')->once()->andReturn($schema)
             ->shouldReceive('getName')->once()->andReturn('foobar')
             ->getMock();
 
@@ -151,14 +154,16 @@ class MigrateResetHardCommandTest extends TestCase
 
     public function testResetWithDatabase(): void
     {
-        $schema = Mockery::mock(AbstractSchemaManager::class)
-            ->shouldReceive('listTableNames')->once()->andReturn(['foo', 'bar'])
-            ->shouldReceive('dropTable')->with('foo')->once()
-            ->shouldReceive('dropTable')->with('bar')->once()
+        $schema = Mockery::mock(Builder::class)
+            ->shouldReceive('getTableListing')->once()->andReturn(['foo', 'bar'])
+            ->shouldReceive('disableForeignKeyConstraints')->once()
+            ->shouldReceive('enableForeignKeyConstraints')->once()
+            ->shouldReceive('drop')->with('foo')->once()
+            ->shouldReceive('drop')->with('bar')->once()
             ->getMock();
 
         $connection = Mockery::mock(Connection::class)
-            ->shouldReceive('getDoctrineSchemaManager')->once()->andReturn($schema)
+            ->shouldReceive('getSchemaBuilder')->once()->andReturn($schema)
             ->shouldReceive('getName')->once()->andReturn('foobar')
             ->getMock();
 
@@ -192,14 +197,11 @@ class MigrateResetHardCommandTest extends TestCase
         $queries1 = [['query' => 'drop table "forbar"']];
         $queries2 = [['query' => 'drop table "barfoo"']];
 
-        $doctrineSchema = Mockery::mock(AbstractSchemaManager::class)
-            ->shouldReceive('listTableNames')->once()->andReturn(['foo/bar', 'bar/foo'])
+        $schema = Mockery::mock(Builder::class)
+            ->shouldReceive('getTableListing')->once()->andReturn(['foo/bar', 'bar/foo'])
             ->getMock();
 
-        $schema = Mockery::mock(Builder::class);
-
         $connection = Mockery::mock(Connection::class)
-            ->shouldReceive('getDoctrineSchemaManager')->once()->andReturn($doctrineSchema)
             ->shouldReceive('getSchemaBuilder')->once()->andReturn($schema)
             ->shouldReceive('pretend')->once()->andReturn($queries1)
             ->shouldReceive('pretend')->once()->andReturn($queries2)
@@ -227,14 +229,11 @@ class MigrateResetHardCommandTest extends TestCase
 
     public function testPretendResetWithNoTables(): void
     {
-        $doctrineSchema = Mockery::mock(AbstractSchemaManager::class)
-            ->shouldReceive('listTableNames')->once()->andReturn([])
+        $schema = Mockery::mock(Builder::class)
+            ->shouldReceive('getTableListing')->once()->andReturn([])
             ->getMock();
 
-        $schema = Mockery::mock(Builder::class);
-
         $connection = Mockery::mock(Connection::class)
-            ->shouldReceive('getDoctrineSchemaManager')->once()->andReturn($doctrineSchema)
             ->shouldReceive('getSchemaBuilder')->once()->andReturn($schema)
             ->getMock();
 

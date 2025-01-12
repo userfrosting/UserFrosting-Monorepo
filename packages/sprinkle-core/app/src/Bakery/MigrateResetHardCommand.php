@@ -79,12 +79,12 @@ class MigrateResetHardCommand extends Command
      */
     protected function performHardReset(bool $force): int
     {
-        // Get doctrine schema Builder
+        // Get schema Builder
         $connection = $this->db->getConnection();
-        $schema = $connection->getDoctrineSchemaManager();
+        $builder = $connection->getSchemaBuilder();
 
         // Get a list of all tables
-        $tables = $schema->listTableNames();
+        $tables = $builder->getTableListing();
 
         // Stop if nothing to drop
         if (count($tables) === 0) {
@@ -104,13 +104,19 @@ class MigrateResetHardCommand extends Command
             }
         }
 
+        // Disable foreign key constraints
+        $builder->disableForeignKeyConstraints();
+
         // Drop all tables
         foreach ($tables as $table) {
             $this->io->writeln("Dropping table `$table`...");
 
             // Perform drop
-            $schema->dropTable($table);
+            $builder->drop($table);
         }
+
+        // Re-enable foreign key constraints
+        $builder->enableForeignKeyConstraints();
 
         $this->io->success('Hard reset successful !');
 
@@ -126,14 +132,12 @@ class MigrateResetHardCommand extends Command
     {
         $this->io->note("Running {$this->getName()} in pretend mode");
 
-        // Get doctrine schema Builder
-        // Doctrine schema is required to bypass sqlite not supported by normal schema
+        // Get schema Builder
         $connection = $this->db->getConnection();
-        $doctrineSchema = $connection->getDoctrineSchemaManager();
-        $schema = $connection->getSchemaBuilder();
+        $builder = $connection->getSchemaBuilder();
 
         // Get a list of all tables
-        $tables = $doctrineSchema->listTableNames();
+        $tables = $builder->getTableListing();
 
         // Stop if nothing to drop
         if (count($tables) === 0) {
@@ -151,8 +155,8 @@ class MigrateResetHardCommand extends Command
             $this->io->section("Dropping table `$table`...");
 
             // Perform drop
-            $queries = $connection->pretend(function () use ($schema, $table) {
-                $schema->drop($table);
+            $queries = $connection->pretend(function () use ($builder, $table) {
+                $builder->drop($table);
             });
 
             // Display information
