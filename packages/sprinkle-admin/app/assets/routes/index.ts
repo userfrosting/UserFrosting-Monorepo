@@ -116,6 +116,7 @@ const AdminUsersRoutes = [
 ]
 
 const AdminRoutes = [
+    { path: '', redirect: { name: 'admin.dashboard' } },
     ...AdminDashboardRoutes,
     ...AdminActivitiesRoutes,
     ...AdminGroupsRoutes,
