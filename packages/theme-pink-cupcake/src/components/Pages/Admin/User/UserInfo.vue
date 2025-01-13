@@ -34,7 +34,11 @@ const emits = defineEmits(['updated'])
             <dt><font-awesome-icon icon="envelope" /> Email</dt>
             <dd class="uk-text-meta">{{ user.email }}</dd>
             <dt><font-awesome-icon icon="users" /> Group</dt>
-            <dd class="uk-text-meta" v-if="user.group">{{ user.group.name }}</dd>
+            <dd class="uk-text-meta" v-if="user.group">
+                <router-link :to="{ name: 'admin.group', params: { slug: user.group.slug } }">
+                    {{ user.group.name }}
+                </router-link>
+            </dd>
             <dd class="uk-text-meta" v-else><i>None</i></dd>
             <dt><font-awesome-icon icon="language" /> Locale</dt>
             <dd class="uk-text-meta">{{ user.locale_name }}</dd>
