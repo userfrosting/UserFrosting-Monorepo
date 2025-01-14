@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
 import { watch } from 'vue'
 import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 import { useUserApi } from '@userfrosting/sprinkle-admin/composables'
@@ -8,17 +9,11 @@ import UserRoles from '../../components/Pages/Admin/User/UserRoles.vue'
 import UserPermissions from '../../components/Pages/Admin/User/UserPermissions.vue'
 
 /**
- * Props - Passed from the router
- */
-const props = defineProps<{
-    user_name: string
-}>()
-
-/**
  * Variables and composables
  */
+const route = useRoute()
 const page = usePageMeta()
-const { user, error, fetchUser } = useUserApi(() => props.user_name)
+const { user, error, fetchUser } = useUserApi(() => route.params.user_name)
 
 /**
  * Watcher - Match page title to the user full name

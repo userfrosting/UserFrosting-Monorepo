@@ -19,7 +19,6 @@ export default [
                 path: 'u/:user_name', // users/u/{user_name}
                 name: 'admin.user',
                 component: () => import('../views/UserView.vue'),
-                props: true,
                 meta: {
                     title: 'User Details',
                     description: 'View and edit user details.'
