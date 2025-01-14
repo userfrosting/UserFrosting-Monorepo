@@ -4,7 +4,19 @@ import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/inter
 import type { UserApi } from '../interfaces'
 
 /**
- * 
+ * API used to fetch data about a specific user.
+ *
+ * This interface is tied to the `UserApi` API, accessed at the GET
+ * `/api/users/u/{user_name}` endpoint and the `UserApi` Typescript interface.
+ *
+ * This composable accept a {user_name} to select the user. Any changes to the
+ * {user_name} is watched and will trigger an update.
+ *
+ * Available ref:
+ * - user: UserApi
+ * - error: AlertInterface | null
+ * - loading: boolean
+ * - fetchUser(): void - Trigger a refresh of the user data
  */
 export function useUserApi(user_name: any) {
     const loading = ref(false)
