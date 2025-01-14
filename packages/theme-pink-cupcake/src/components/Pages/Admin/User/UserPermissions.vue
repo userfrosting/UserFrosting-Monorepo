@@ -8,7 +8,7 @@ const { user_name } = defineProps<{
 
 <template>
     <UFCardBox title="Permissions">
-        <UFSprunjeTable :dataUrl="'/api/users/u/' + user_name + '/permissions'" searchColumn="name">
+        <UFSprunjeTable v-if="user_name !== ''" :dataUrl="'/api/users/u/' + user_name + '/permissions'" searchColumn="name">
             <template #header>
                 <UFSprunjeHeader sort="name">Permission</UFSprunjeHeader>
                 <UFSprunjeHeader sort="properties">Description</UFSprunjeHeader>

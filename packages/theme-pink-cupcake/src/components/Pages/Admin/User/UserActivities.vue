@@ -10,6 +10,7 @@ const { user_name } = defineProps<{
 <template>
     <UFCardBox title="Activities">
         <UFSprunjeTable
+            v-if="user_name !== ''"
             :dataUrl="'/api/users/u/' + user_name + '/activities'"
             :defaultSorts="{ occurred_at: 'desc' }">
             <template #header>

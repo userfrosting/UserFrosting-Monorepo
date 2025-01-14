@@ -1,13 +1,35 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { watch } from 'vue'
+import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 import { useUserApi } from '@userfrosting/sprinkle-admin/composables'
 import UserInfo from '../../components/Pages/Admin/User/UserInfo.vue'
 import UserActivities from '../../components/Pages/Admin/User/UserActivities.vue'
 import UserRoles from '../../components/Pages/Admin/User/UserRoles.vue'
 import UserPermissions from '../../components/Pages/Admin/User/UserPermissions.vue'
 
-const route = useRoute()
-const { user, error, fetchApi } = useUserApi(route)
+/**
+ * Props - Passed from the router
+ */
+const props = defineProps<{
+    user_name: string,
+}>()
+
+/**
+ * Variables and composables
+ */
+const page = usePageMeta()
+const { user, error, fetchUser } = useUserApi(() => props.user_name)
+
+/**
+ * Watcher - Match page title to the user full name
+ */
+watch(
+    () => user.value.full_name,
+    () => {
+        page.title = user.value.full_name
+    },
+    { immediate: true }
+)
 </script>
 
 <template>
@@ -19,7 +41,7 @@ const { user, error, fetchApi } = useUserApi(route)
     <template v-else>
         <div uk-grid>
             <div class="uk-width-1-3">
-                <UserInfo :user="user" @updated="fetchApi()" />
+                <UserInfo :user="user" @updated="fetchUser()" />
             </div>
             <div class="uk-width-2-3">
                 <UserRoles :user="user" />
@@ -31,7 +53,7 @@ const { user, error, fetchApi } = useUserApi(route)
                 <UserPermissions :user_name="user.user_name" />
             </div>
             <div>
-                <UserActivities :user_name="$route.params.user_name.toString()" />
+                <UserActivities :user_name="user.user_name" />
             </div>
         </div>
     </template>

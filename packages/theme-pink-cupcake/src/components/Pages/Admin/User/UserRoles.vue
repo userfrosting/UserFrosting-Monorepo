@@ -11,6 +11,7 @@ const { user } = defineProps<{
 <template>
     <UFCardBox title="Roles">
         <UFSprunjeTable
+            v-if="user.user_name !== ''"
             :dataUrl="'/api/users/u/' + user.user_name + '/roles'"
             searchColumn="name"
             hideFilters>

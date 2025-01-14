@@ -1,13 +1,12 @@
-import { ref, watch } from 'vue'
+import { ref, toValue, watchEffect } from 'vue'
 import axios from 'axios'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
 import type { UserApi } from '../interfaces'
-import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 
 /**
- * API Composable
+ * 
  */
-export function useUserApi(route: any) {
+export function useUserApi(user_name: any) {
     const loading = ref(false)
     const error = ref<AlertInterface | null>()
     const user = ref<UserApi>({
@@ -29,18 +28,14 @@ export function useUserApi(route: any) {
         group: null
     })
 
-    async function fetchApi() {
+    async function fetchUser() {
         loading.value = true
         error.value = null
 
         await axios
-            .get<UserApi>('/api/users/u/' + route.params.user_name)
+            .get<UserApi>('/api/users/u/' + toValue(user_name))
             .then((response) => {
                 user.value = response.data
-
-                // Update Current Title
-                const page = usePageMeta()
-                page.title = user.value.full_name
             })
             .catch((err) => {
                 error.value = {
@@ -56,13 +51,9 @@ export function useUserApi(route: any) {
             })
     }
 
-    watch(
-        () => route.params.user_name,
-        () => {
-            fetchApi()
-        },
-        { immediate: true }
-    )
+    watchEffect(() => {
+        fetchUser()
+    })
 
-    return { user, error, loading, fetchApi }
+    return { user, error, loading, fetchUser }
 }
