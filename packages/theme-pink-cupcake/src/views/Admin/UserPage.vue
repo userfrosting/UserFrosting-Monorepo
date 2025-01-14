@@ -11,7 +11,7 @@ import UserPermissions from '../../components/Pages/Admin/User/UserPermissions.v
  * Props - Passed from the router
  */
 const props = defineProps<{
-    user_name: string,
+    user_name: string
 }>()
 
 /**
