@@ -2,7 +2,7 @@
 import UIkit from 'uikit'
 import { defineEmits, ref, watch } from 'vue'
 import { useGroupEditApi } from '@userfrosting/sprinkle-admin/composables'
-import type { GroupEditForm } from '@userfrosting/sprinkle-admin/interfaces'
+import type { GroupEditRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import type { GroupInterface } from '@userfrosting/sprinkle-account/interfaces'
 import GroupForm from './GroupForm.vue'
 
@@ -16,7 +16,7 @@ const props = defineProps<{
 /**
  * Variables - Copy the group data to a reactive variable.
  */
-const formData = ref<GroupEditForm>({
+const formData = ref<GroupEditRequest>({
     slug: props.group.slug,
     name: props.group.name,
     description: props.group.description,

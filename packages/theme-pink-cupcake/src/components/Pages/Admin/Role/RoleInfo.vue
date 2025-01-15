@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
-import type { RoleApi } from '@userfrosting/sprinkle-admin/interfaces'
+import type { RoleResponse } from '@userfrosting/sprinkle-admin/interfaces'
 import RoleEditModal from './RoleEditModal.vue'
 import RoleDeleteModal from './RoleDeleteModal.vue'
 
 const router = useRouter()
 const { role } = defineProps<{
-    role: RoleApi
+    role: RoleResponse
 }>()
 
 const emits = defineEmits(['updated'])

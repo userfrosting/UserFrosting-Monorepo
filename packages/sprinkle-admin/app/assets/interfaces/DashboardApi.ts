@@ -19,7 +19,7 @@ export interface SystemInfo {
     projectPath: string
 }
 
-export interface DashboardApi {
+export interface DashboardResponse {
     counter: {
         users: number
         roles: number

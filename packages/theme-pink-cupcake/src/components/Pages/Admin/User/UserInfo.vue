@@ -3,7 +3,7 @@ import { defineProps, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
 import moment from 'moment'
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
-import type { UserApi } from '@userfrosting/sprinkle-admin/interfaces'
+import type { UserResponse } from '@userfrosting/sprinkle-admin/interfaces'
 import UserEditModal from './UserEditModal.vue'
 import UserDeleteModal from './UserDeleteModal.vue'
 import UserActivateModal from './UserActivateModal.vue'
@@ -12,7 +12,7 @@ import UserPasswordResetModal from './UserPasswordResetModal.vue'
 
 const router = useRouter()
 const { user } = defineProps<{
-    user: UserApi
+    user: UserResponse
 }>()
 
 const emits = defineEmits(['updated'])

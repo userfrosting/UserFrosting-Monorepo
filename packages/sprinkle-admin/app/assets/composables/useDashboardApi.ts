@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
-import type { DashboardApi } from '../interfaces'
+import type { DashboardResponse } from '../interfaces'
 
-const defaultDashboardApi: DashboardApi = {
+const defaultDashboardApi: DashboardResponse = {
     counter: {
         users: 0,
         roles: 0,
@@ -34,7 +34,7 @@ export const useDashboardApi = defineStore('dashboardApi', {
     actions: {
         async load() {
             return axios
-                .get<DashboardApi>('/api/dashboard')
+                .get<DashboardResponse>('/api/dashboard')
                 .then((response) => {
                     this.data = response.data
 

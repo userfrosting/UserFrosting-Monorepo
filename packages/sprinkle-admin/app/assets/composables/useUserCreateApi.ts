@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { Severity, type AlertInterface } from '@userfrosting/sprinkle-core/interfaces'
-import type { UserCreateForm, UserCreateResponse } from '../interfaces'
+import type { UserCreateRequest, UserCreateResponse } from '../interfaces'
 
 // TODO : Add validation
 // 'schema://requests/user/create.yaml'
@@ -13,7 +13,7 @@ export function useUserCreateApi() {
     const apiLoading = ref<Boolean>(false)
     const apiError = ref<AlertInterface | null>(null)
 
-    async function submitUserCreate(data: UserCreateForm) {
+    async function submitUserCreate(data: UserCreateRequest) {
         apiLoading.value = true
         apiError.value = null
         return axios

@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { Severity, type AlertInterface } from '@userfrosting/sprinkle-core/interfaces'
-import type { GroupCreateForm, GroupCreateResponse } from '../interfaces'
+import type { GroupCreateRequest, GroupCreateResponse } from '../interfaces'
 
 // TODO : Add validation
 // 'schema://requests/group/create.yaml'
@@ -13,7 +13,7 @@ export function useGroupCreateApi() {
     const apiLoading = ref<Boolean>(false)
     const apiError = ref<AlertInterface | null>(null)
 
-    async function submitGroupCreate(data: GroupCreateForm) {
+    async function submitGroupCreate(data: GroupCreateRequest) {
         apiLoading.value = true
         apiError.value = null
         return axios

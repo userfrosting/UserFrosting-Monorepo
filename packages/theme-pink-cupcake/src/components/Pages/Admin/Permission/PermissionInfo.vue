@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import type { PermissionApi } from '@userfrosting/sprinkle-admin/interfaces'
+import type { PermissionResponse } from '@userfrosting/sprinkle-admin/interfaces'
 
 const { permission } = defineProps<{
-    permission: PermissionApi
+    permission: PermissionResponse
 }>()
 </script>
 

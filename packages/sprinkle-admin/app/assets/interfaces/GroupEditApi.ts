@@ -1,7 +1,7 @@
 /**
  * Interfaces - What the API expects and what it returns
  */
-export interface GroupEditForm {
+export interface GroupEditRequest {
     slug: string
     name: string
     description: string
@@ -11,5 +11,5 @@ export interface GroupEditForm {
 export interface GroupEditResponse {
     success: boolean
     message: string
-    group: GroupEditForm
+    group: GroupEditRequest
 }

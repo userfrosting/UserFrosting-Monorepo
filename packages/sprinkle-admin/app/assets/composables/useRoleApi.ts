@@ -1,7 +1,7 @@
 import { ref, watch } from 'vue'
 import axios from 'axios'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
-import type { RoleApi } from '../interfaces'
+import type { RoleResponse } from '../interfaces'
 import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 
 /**
@@ -10,7 +10,7 @@ import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 export function useRoleApi(route: any) {
     const loading = ref(false)
     const error = ref<AlertInterface | null>()
-    const role = ref<RoleApi>({
+    const role = ref<RoleResponse>({
         id: 0,
         slug: '',
         name: '',
@@ -26,7 +26,7 @@ export function useRoleApi(route: any) {
         error.value = null
 
         await axios
-            .get<RoleApi>('/api/roles/r/' + route.params.slug)
+            .get<RoleResponse>('/api/roles/r/' + route.params.slug)
             .then((response) => {
                 role.value = response.data
 

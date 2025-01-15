@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { Severity, type AlertInterface } from '@userfrosting/sprinkle-core/interfaces'
-import type { UserEditForm, UserEditResponse } from '../interfaces'
+import type { UserEditRequest, UserEditResponse } from '../interfaces'
 
 // TODO : Add validation
 // 'schema://requests/user/edit-info.yaml'
@@ -13,7 +13,7 @@ export function useUserEditApi() {
     const apiLoading = ref<Boolean>(false)
     const apiError = ref<AlertInterface | null>(null)
 
-    async function submitUserEdit(user_name: string, data: UserEditForm) {
+    async function submitUserEdit(user_name: string, data: UserEditRequest) {
         apiLoading.value = true
         apiError.value = null
         return axios

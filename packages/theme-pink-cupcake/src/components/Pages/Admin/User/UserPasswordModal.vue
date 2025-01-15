@@ -2,7 +2,7 @@
 import UIkit from 'uikit'
 import { ref, watch } from 'vue'
 import { useUserUpdateApi } from '@userfrosting/sprinkle-admin/composables'
-import type { UserPasswordApi } from '@userfrosting/sprinkle-admin/interfaces'
+import type { UserPasswordRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import type { UserInterface } from '@userfrosting/sprinkle-account/interfaces'
 import UserPasswordForm from './UserPasswordForm.vue'
 
@@ -16,7 +16,7 @@ const props = defineProps<{
 /**
  * Variables - Copy the user data to a reactive variable.
  */
-const formData = ref<UserPasswordApi>({
+const formData = ref<UserPasswordRequest>({
     password: '',
     passwordc: ''
 })

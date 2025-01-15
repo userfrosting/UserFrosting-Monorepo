@@ -1,7 +1,7 @@
 import { ref, watch } from 'vue'
 import axios from 'axios'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
-import type { PermissionApi } from '../interfaces'
+import type { PermissionResponse } from '../interfaces'
 import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 
 /**
@@ -10,7 +10,7 @@ import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 export function usePermissionApi(route: any) {
     const loading = ref(false)
     const error = ref<AlertInterface | null>()
-    const permission = ref<PermissionApi>({
+    const permission = ref<PermissionResponse>({
         id: 0,
         slug: '',
         name: '',
@@ -26,7 +26,7 @@ export function usePermissionApi(route: any) {
         error.value = null
 
         await axios
-            .get<PermissionApi>('/api/permissions/p/' + route.params.id)
+            .get<PermissionResponse>('/api/permissions/p/' + route.params.id)
             .then((response) => {
                 permission.value = response.data
 

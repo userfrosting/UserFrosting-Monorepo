@@ -2,13 +2,13 @@
 import UIkit from 'uikit'
 import { defineEmits, ref } from 'vue'
 import { useUserCreateApi } from '@userfrosting/sprinkle-admin/composables'
-import type { UserCreateForm } from '@userfrosting/sprinkle-admin/interfaces'
+import type { UserCreateRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import UserForm from './UserForm.vue'
 
 /**
  * Variables - Copy the group data to a reactive variable.
  */
-const formData = ref<UserCreateForm>({
+const formData = ref<UserCreateRequest>({
     user_name: '',
     group_id: 0,
     first_name: '',

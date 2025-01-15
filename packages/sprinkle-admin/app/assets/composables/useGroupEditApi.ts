@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { Severity, type AlertInterface } from '@userfrosting/sprinkle-core/interfaces'
-import type { GroupEditForm, GroupEditResponse } from '../interfaces'
+import type { GroupEditRequest, GroupEditResponse } from '../interfaces'
 
 // TODO : Add validation
 // 'schema://requests/group/edit-info.yaml'
@@ -13,7 +13,7 @@ export function useGroupEditApi() {
     const apiLoading = ref<Boolean>(false)
     const apiError = ref<AlertInterface | null>(null)
 
-    async function submitGroupEdit(slug: string, data: GroupEditForm) {
+    async function submitGroupEdit(slug: string, data: GroupEditRequest) {
         apiLoading.value = true
         apiError.value = null
         return axios

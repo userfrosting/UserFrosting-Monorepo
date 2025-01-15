@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { GroupEditForm } from '@userfrosting/sprinkle-admin/interfaces'
+import type { GroupEditRequest } from '@userfrosting/sprinkle-admin/interfaces'
 
 /**
  * Form Model
  */
-const formData = defineModel<GroupEditForm>({
+const formData = defineModel<GroupEditRequest>({
     default: {
         slug: '',
         name: '',

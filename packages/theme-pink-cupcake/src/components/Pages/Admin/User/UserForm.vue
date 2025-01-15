@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useConfigStore } from '@userfrosting/sprinkle-core/stores'
-import type { UserEditForm } from '@userfrosting/sprinkle-admin/interfaces'
+import type { UserEditRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import { useGroupsApi } from '@userfrosting/sprinkle-admin/composables'
 
 /**
  * Form Model
  */
-const formData = defineModel<UserEditForm>({
+const formData = defineModel<UserEditRequest>({
     default: {
         user_name: '',
         group_id: '',

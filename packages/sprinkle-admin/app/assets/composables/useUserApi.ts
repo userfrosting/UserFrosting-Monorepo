@@ -1,19 +1,20 @@
 import { ref, toValue, watchEffect } from 'vue'
 import axios from 'axios'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
-import type { UserApi } from '../interfaces'
+import type { UserResponse } from '../interfaces'
 
 /**
  * API used to fetch data about a specific user.
  *
  * This interface is tied to the `UserApi` API, accessed at the GET
- * `/api/users/u/{user_name}` endpoint and the `UserApi` Typescript interface.
+ * `/api/users/u/{user_name}` endpoint and the `UserResponse` Typescript 
+ * interface.
  *
  * This composable accept a {user_name} to select the user. Any changes to the
  * {user_name} is watched and will trigger an update.
  *
  * Available ref:
- * - user: UserApi
+ * - user: UserResponse
  * - error: AlertInterface | null
  * - loading: boolean
  * - fetchUser(): void - Trigger a refresh of the user data
@@ -21,7 +22,7 @@ import type { UserApi } from '../interfaces'
 export function useUserApi(user_name: any) {
     const loading = ref(false)
     const error = ref<AlertInterface | null>()
-    const user = ref<UserApi>({
+    const user = ref<UserResponse>({
         id: 0,
         user_name: '',
         first_name: '',
@@ -45,7 +46,7 @@ export function useUserApi(user_name: any) {
         error.value = null
 
         await axios
-            .get<UserApi>('/api/users/u/' + toValue(user_name))
+            .get<UserResponse>('/api/users/u/' + toValue(user_name))
             .then((response) => {
                 user.value = response.data
             })

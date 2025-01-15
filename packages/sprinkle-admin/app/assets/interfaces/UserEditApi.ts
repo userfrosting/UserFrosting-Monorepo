@@ -3,7 +3,7 @@ import type { UserInterface } from '@userfrosting/sprinkle-account/interfaces'
 /**
  * Interfaces - What the API expects and what it returns
  */
-export interface UserEditForm {
+export interface UserEditRequest {
     user_name: string
     group_id: number | null
     first_name: string

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { UserPasswordApi } from '@userfrosting/sprinkle-admin/interfaces'
+import type { UserPasswordRequest } from '@userfrosting/sprinkle-admin/interfaces'
 
 /**
  * Form Model
  */
-const formData = defineModel<UserPasswordApi>({
+const formData = defineModel<UserPasswordRequest>({
     default: {
         password: '',
         passwordc: ''

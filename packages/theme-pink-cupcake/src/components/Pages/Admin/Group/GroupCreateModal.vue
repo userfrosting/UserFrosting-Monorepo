@@ -2,13 +2,13 @@
 import UIkit from 'uikit'
 import { defineEmits, ref } from 'vue'
 import { useGroupCreateApi } from '@userfrosting/sprinkle-admin/composables'
-import type { GroupCreateForm } from '@userfrosting/sprinkle-admin/interfaces'
+import type { GroupCreateRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import GroupForm from './GroupForm.vue'
 
 /**
  * Variables - Copy the group data to a reactive variable.
  */
-const formData = ref<GroupCreateForm>({
+const formData = ref<GroupCreateRequest>({
     slug: '',
     name: '',
     description: '',

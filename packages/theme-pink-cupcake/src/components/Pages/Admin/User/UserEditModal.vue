@@ -2,7 +2,7 @@
 import UIkit from 'uikit'
 import { defineEmits, ref, watch } from 'vue'
 import { useUserEditApi } from '@userfrosting/sprinkle-admin/composables'
-import type { UserEditForm } from '@userfrosting/sprinkle-admin/interfaces'
+import type { UserEditRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import type { UserInterface } from '@userfrosting/sprinkle-account/interfaces'
 import UserForm from './UserForm.vue'
 
@@ -16,7 +16,7 @@ const props = defineProps<{
 /**
  * Variables - Copy the user data to a reactive variable.
  */
-const formData = ref<UserEditForm>({
+const formData = ref<UserEditRequest>({
     user_name: props.user.user_name,
     group_id: props.user.group_id,
     first_name: props.user.first_name,
