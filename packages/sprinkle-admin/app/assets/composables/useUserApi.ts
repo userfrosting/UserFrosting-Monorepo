@@ -7,7 +7,7 @@ import type { UserResponse } from '../interfaces'
  * API used to fetch data about a specific user.
  *
  * This interface is tied to the `UserApi` API, accessed at the GET
- * `/api/users/u/{user_name}` endpoint and the `UserResponse` Typescript 
+ * `/api/users/u/{user_name}` endpoint and the `UserResponse` Typescript
  * interface.
  *
  * This composable accept a {user_name} to select the user. Any changes to the
