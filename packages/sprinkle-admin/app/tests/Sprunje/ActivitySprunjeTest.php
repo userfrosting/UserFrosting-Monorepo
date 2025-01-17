@@ -44,7 +44,7 @@ class ActivitySprunjeTest extends AdminTestCase
                     ->count(2)
                     ->sequence(fn ($sequence) => [
                         'first_name' => 'First ' . $sequence->index,
-                        'last_name' => 'Name ' . $sequence->index,
+                        'last_name'  => 'Name ' . $sequence->index,
                     ])
                     ->hasActivities(3)
                     ->create();

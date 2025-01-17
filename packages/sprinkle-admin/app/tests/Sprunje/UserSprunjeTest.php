@@ -46,7 +46,7 @@ class UserSprunjeTest extends AdminTestCase
                 ->count(3)
                 ->sequence(fn ($sequence) => [
                     'first_name' => 'First ' . $sequence->index,
-                    'last_name' => 'Name ' . $sequence->index,
+                    'last_name'  => 'Name ' . $sequence->index,
                 ])
                 ->state(new Sequence(
                     ['flag_enabled' => 1, 'flag_verified' => 1],
