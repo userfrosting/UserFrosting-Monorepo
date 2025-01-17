@@ -1,6 +1,6 @@
 import { expect, test, describe } from 'vitest'
 import { mount, config } from '@vue/test-utils'
-import PageResendVerification from '../../views/PageResendVerification.vue'
+import PageResendVerification from '../../views/Account/PageResendVerification.vue'
 import CardBoxBig from '../../components/Content/CardBoxBig.vue'
 import CardBox from '../../components/Content/CardBox.vue'
 import UFAlert from '../../components/UFAlert.vue'

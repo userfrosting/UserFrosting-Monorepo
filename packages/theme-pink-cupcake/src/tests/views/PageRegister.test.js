@@ -1,6 +1,6 @@
 import { expect, test, describe } from 'vitest'
 import { mount, config } from '@vue/test-utils'
-import PageRegister from '../../views/PageRegister.vue'
+import PageRegister from '../../views/Account/PageRegister.vue'
 import CardBoxBig from '../../components/Content/CardBoxBig.vue'
 import CardBox from '../../components/Content/CardBox.vue'
 import UFAlert from '../../components/UFAlert.vue'
