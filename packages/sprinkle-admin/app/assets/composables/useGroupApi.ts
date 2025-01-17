@@ -1,16 +1,24 @@
-import { ref, watch } from 'vue'
+import { ref, toValue, watchEffect } from 'vue'
 import axios from 'axios'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
 import type { GroupResponse } from '../interfaces'
-import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 
 /**
  * API used to fetch a specific group.
  *
- * The Route object is used to watch the slug parameter. When the slug changes, the API is called.
- * TODO : The watch should be specific to the theme, and not the API.
+ * This interface is tied to the `GroupApi` API, accessed at the GET
+ * `/api/groups/g/{slug}` endpoint and the `GroupApi` Typescript interface.
+ *
+ * This composable accept a {slug} to select the group. Any changes to the
+ * {group} is watched and will trigger an update.
+ *
+ * Available ref:
+ * - group: GroupApi
+ * - error: AlertInterface | null
+ * - loading: boolean
+ * - fetchGroup(): void - Trigger a refresh of the data
  */
-export function useGroupApi(route: any) {
+export function useGroupApi(slug: any) {
     const loading = ref(false)
     const error = ref<AlertInterface | null>()
     const group = ref<GroupResponse>({
@@ -25,18 +33,14 @@ export function useGroupApi(route: any) {
         users_count: 0
     })
 
-    async function fetchApi() {
+    async function fetchGroup() {
         loading.value = true
         error.value = null
 
         await axios
-            .get<GroupResponse>('/api/groups/g/' + route.params.slug)
+            .get<GroupResponse>('/api/groups/g/' + toValue(slug))
             .then((response) => {
                 group.value = response.data
-
-                // Update Current Title
-                const page = usePageMeta()
-                page.title = group.value.name
             })
             .catch((err) => {
                 error.value = {
@@ -53,13 +57,9 @@ export function useGroupApi(route: any) {
             })
     }
 
-    watch(
-        () => route.params.slug,
-        () => {
-            fetchApi()
-        },
-        { immediate: true }
-    )
+    watchEffect(() => {
+        fetchGroup()
+    })
 
-    return { group, error, loading, fetchApi }
+    return { group, error, loading, fetchGroup }
 }

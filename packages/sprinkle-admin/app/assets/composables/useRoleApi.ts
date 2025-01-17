@@ -1,13 +1,25 @@
-import { ref, watch } from 'vue'
+import { ref, toValue, watchEffect } from 'vue'
 import axios from 'axios'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
 import type { RoleResponse } from '../interfaces'
-import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 
 /**
- * API Composable
+ * API used to fetch data about a specific role.
+ *
+ * This interface is tied to the `RoleApi` API, accessed at the GET
+ * `/api/roles/r/{slug}` endpoint and the `RoleResponse` Typescript
+ * interface.
+ *
+ * This composable accept a {slug} to select the role. Any changes to the
+ * {slug} is watched and will trigger an update.
+ *
+ * Available ref:
+ * - role: RoleResponse
+ * - error: AlertInterface | null
+ * - loading: boolean
+ * - fetchRole(): void - Trigger a refresh of the user data
  */
-export function useRoleApi(route: any) {
+export function useRoleApi(slug: any) {
     const loading = ref(false)
     const error = ref<AlertInterface | null>()
     const role = ref<RoleResponse>({
@@ -21,18 +33,14 @@ export function useRoleApi(route: any) {
         users_count: 0
     })
 
-    async function fetchApi() {
+    async function fetchRole() {
         loading.value = true
         error.value = null
 
         await axios
-            .get<RoleResponse>('/api/roles/r/' + route.params.slug)
+            .get<RoleResponse>('/api/roles/r/' + toValue(slug))
             .then((response) => {
                 role.value = response.data
-
-                // Update Current Title
-                const page = usePageMeta()
-                page.title = role.value.name
             })
             .catch((err) => {
                 error.value = {
@@ -48,13 +56,9 @@ export function useRoleApi(route: any) {
             })
     }
 
-    watch(
-        () => route.params.slug,
-        () => {
-            fetchApi()
-        },
-        { immediate: true }
-    )
+    watchEffect(() => {
+        fetchRole()
+    })
 
-    return { role, error, loading, fetchApi }
+    return { role, error, loading, fetchRole }
 }

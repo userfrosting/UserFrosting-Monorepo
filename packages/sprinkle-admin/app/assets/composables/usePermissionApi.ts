@@ -1,13 +1,25 @@
-import { ref, watch } from 'vue'
+import { ref, toValue, watchEffect } from 'vue'
 import axios from 'axios'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
 import type { PermissionResponse } from '../interfaces'
-import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
 
 /**
- * API Composable
+ * API used to fetch data about a specific permission.
+ *
+ * This interface is tied to the `PermissionApi` API, accessed at the GET
+ * `/api/permissions/p/{id}` endpoint and the `PermissionResponse` Typescript
+ * interface.
+ *
+ * This composable accept a {id} to select the permission. Any changes to the
+ * {id} is watched and will trigger an update.
+ *
+ * Available ref:
+ * - permission: PermissionResponse
+ * - error: AlertInterface | null
+ * - loading: boolean
+ * - fetchPermission(): void - Trigger a refresh of the user data
  */
-export function usePermissionApi(route: any) {
+export function usePermissionApi(id: any) {
     const loading = ref(false)
     const error = ref<AlertInterface | null>()
     const permission = ref<PermissionResponse>({
@@ -21,18 +33,14 @@ export function usePermissionApi(route: any) {
         deleted_at: null
     })
 
-    async function fetchApi() {
+    async function fetchPermission() {
         loading.value = true
         error.value = null
 
         await axios
-            .get<PermissionResponse>('/api/permissions/p/' + route.params.id)
+            .get<PermissionResponse>('/api/permissions/p/' + toValue(id))
             .then((response) => {
                 permission.value = response.data
-
-                // Update Current Title
-                const page = usePageMeta()
-                page.title = permission.value.name
             })
             .catch((err) => {
                 error.value = {
@@ -48,13 +56,9 @@ export function usePermissionApi(route: any) {
             })
     }
 
-    watch(
-        () => route.params.id,
-        () => {
-            fetchApi()
-        },
-        { immediate: true }
-    )
+    watchEffect(() => {
+        fetchPermission()
+    })
 
-    return { permission, error, loading }
+    return { permission, error, loading, fetchPermission }
 }
