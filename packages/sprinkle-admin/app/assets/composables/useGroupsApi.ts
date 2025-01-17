@@ -47,8 +47,5 @@ export function useGroupsApi() {
             })
     }
 
-    // Init the fetch
-    updateGroups()
-
     return { groups, error, loading, updateGroups }
 }

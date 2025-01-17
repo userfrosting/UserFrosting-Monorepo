@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
 import { ref } from 'vue'
-import { useUserCreateApi } from '@userfrosting/sprinkle-admin/composables'
+import { useGroupsApi, useUserCreateApi } from '@userfrosting/sprinkle-admin/composables'
 import type { UserCreateRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import UserForm from './UserForm.vue'
 
@@ -58,10 +58,15 @@ const submitForm = () => {
             })
         })
 }
+
+/**
+ * Load group list from API
+ */
+const { groups, updateGroups } = useGroupsApi()
 </script>
 
 <template>
-    <a v-bind="$attrs" :uk-toggle="'target: #modal-user-create'">
+    <a v-bind="$attrs" :uk-toggle="'target: #modal-user-create'" @click="updateGroups()">
         <slot><font-awesome-icon icon="user-plus" /> Create user</slot>
     </a>
 
@@ -69,7 +74,7 @@ const submitForm = () => {
     <UFModal id="modal-user-create" closable>
         <template #header>Create User</template>
         <template #default>
-            <UserForm v-model="formData" @submit="submitForm()" />
+            <UserForm v-model="formData" :groups="groups" @submit="submitForm()" />
         </template>
     </UFModal>
 </template>

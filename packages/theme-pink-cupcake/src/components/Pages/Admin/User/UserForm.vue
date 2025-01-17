@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { useConfigStore } from '@userfrosting/sprinkle-core/stores'
 import type { UserEditRequest } from '@userfrosting/sprinkle-admin/interfaces'
-import { useGroupsApi } from '@userfrosting/sprinkle-admin/composables'
+import type { GroupInterface } from '@userfrosting/sprinkle-account/interfaces'
+
+/**
+ * Props
+ */
+const { groups } = defineProps<{
+    groups: GroupInterface[]
+}>()
 
 /**
  * Form Model
@@ -27,11 +34,6 @@ function getDefaultLocale(): string {
 
 // Apply default locale to form data
 formData.value.locale = getDefaultLocale()
-
-/**
- * Load group list from API
- */
-const { groups } = useGroupsApi()
 
 /**
  * Emits

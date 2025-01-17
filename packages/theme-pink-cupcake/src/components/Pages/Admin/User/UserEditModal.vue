@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
 import { ref, watch } from 'vue'
-import { useUserEditApi } from '@userfrosting/sprinkle-admin/composables'
+import { useGroupsApi, useUserEditApi } from '@userfrosting/sprinkle-admin/composables'
 import type { UserEditRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import type { UserInterface } from '@userfrosting/sprinkle-account/interfaces'
 import UserForm from './UserForm.vue'
@@ -86,10 +86,19 @@ const submitForm = () => {
             })
         })
 }
+
+/**
+ * Load group list from API
+ */
+const { groups, updateGroups } = useGroupsApi()
 </script>
 
 <template>
-    <a href="#" v-bind="$attrs" :uk-toggle="'target: #modal-user-edit-' + props.user.user_name">
+    <a
+        href="#"
+        v-bind="$attrs"
+        :uk-toggle="'target: #modal-user-edit-' + props.user.user_name"
+        @click="updateGroups()">
         <slot> <font-awesome-icon icon="pen-to-square" fixed-width /> Edit User </slot>
     </a>
 
@@ -97,7 +106,7 @@ const submitForm = () => {
     <UFModal :id="'modal-user-edit-' + props.user.user_name" closable>
         <template #header> Edit User </template>
         <template #default>
-            <UserForm v-model="formData" @submit="submitForm()" />
+            <UserForm v-model="formData" :groups="groups" @submit="submitForm()" />
         </template>
     </UFModal>
 </template>
