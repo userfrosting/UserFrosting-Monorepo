@@ -3,7 +3,6 @@
         class="uf-main uk-section uk-section-default uk-section-muted"
         uk-height-viewport="expand: true">
         <div class="uk-container" data-test="slot">
-            <UFHeaderPage />
             <slot></slot>
         </div>
     </div>
