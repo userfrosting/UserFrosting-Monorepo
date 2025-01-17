@@ -1,6 +1,6 @@
 import { mount, config } from '@vue/test-utils'
 import { describe, test, expect, vi, afterEach } from 'vitest'
-import FormRegister from '../../../components/Content/FormRegister.vue'
+import FormRegister from '../../../components/Pages/Account/FormRegister.vue'
 import UFAlert from '../../../components/UFAlert.vue'
 import UIkit from 'uikit'
 import type { UserInterface, RegisterForm } from '@userfrosting/sprinkle-account/interfaces'

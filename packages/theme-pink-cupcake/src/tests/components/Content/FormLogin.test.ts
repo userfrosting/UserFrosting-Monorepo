@@ -1,6 +1,6 @@
 import { mount, config } from '@vue/test-utils'
 import { describe, test, afterEach, expect, vi } from 'vitest'
-import FormLogin from '../../../components/Content/FormLogin.vue'
+import FormLogin from '../../../components/Pages/Account/FormLogin.vue'
 import { useAuthStore } from '@userfrosting/sprinkle-account/stores'
 import UFAlert from '../../../components/UFAlert.vue'
 import UIkit from 'uikit'

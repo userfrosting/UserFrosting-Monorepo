@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import NavBarDropdown from './NavBarDropdown.vue'
-import FormLogin from '../Content/FormLogin.vue'
+import FormLogin from '../Pages/Account/FormLogin.vue'
 </script>
 
 <template>

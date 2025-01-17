@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import FormResendVerification from '../components/Content/FormResendVerification.vue'
+import FormResendVerification from '../../components/Pages/Account/FormResendVerification.vue'
 </script>
 
 <template>

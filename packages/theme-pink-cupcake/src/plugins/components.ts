@@ -17,9 +17,6 @@ import {
     MainContent,
     HeaderPage,
     FooterContent,
-    FormLogin,
-    FormRegister,
-    FormForgotPassword,
     NavBar,
     NavBarDropdown,
     NavBarDropdownSeparator,
@@ -52,9 +49,6 @@ export default {
             .component('UFMainContent', MainContent)
             .component('UFHeaderPage', HeaderPage)
             .component('UFFooterContent', FooterContent)
-            .component('UFFormLogin', FormLogin)
-            .component('UFFormRegister', FormRegister)
-            .component('UFFormForgotPassword', FormForgotPassword)
             .component('UFNavBar', NavBar)
             .component('UFNavBarDropdown', NavBarDropdown)
             .component('UFNavBarDropdownSeparator', NavBarDropdownSeparator)
@@ -88,9 +82,6 @@ declare module 'vue' {
         UFMainContent: typeof MainContent
         UFHeaderPage: typeof HeaderPage
         UFFooterContent: typeof FooterContent
-        UFFormLogin: typeof FormLogin
-        UFFormRegister: typeof FormRegister
-        UFFormForgotPassword: typeof FormForgotPassword
         UFNavBar: typeof NavBar
         UFNavBarDropdown: typeof NavBarDropdown
         UFNavBarDropdownSeparator: typeof NavBarDropdownSeparator

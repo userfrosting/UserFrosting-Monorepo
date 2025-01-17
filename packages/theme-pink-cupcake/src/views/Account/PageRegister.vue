@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import FormRegister from '../components/Content/FormRegister.vue'
+import FormRegister from '../../components/Pages/Account/FormRegister.vue'
 </script>
 
 <template>
