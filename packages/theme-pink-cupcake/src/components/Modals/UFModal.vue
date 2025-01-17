@@ -2,7 +2,6 @@
 /**
  * Modal Component
  */
-import { defineProps } from 'vue'
 
 /**
  * Emits - While not explicitly declare in the component, the modal component

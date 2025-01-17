@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
-import { defineEmits } from 'vue'
 import { useUserDeleteApi } from '@userfrosting/sprinkle-admin/composables'
 import type { UserInterface } from '@userfrosting/sprinkle-account/interfaces'
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'

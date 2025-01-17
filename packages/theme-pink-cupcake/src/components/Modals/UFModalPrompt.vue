@@ -2,7 +2,7 @@
 /**
  * Modal Alert Component - A simple modal with a message and an OK button
  */
-import { defineProps, useTemplateRef } from 'vue'
+import { useTemplateRef } from 'vue'
 
 /**
  * Emits - While not explicitly declare in the component, the modal component

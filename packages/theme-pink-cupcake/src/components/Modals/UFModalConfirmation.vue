@@ -2,7 +2,6 @@
 /**
  * Modal Confirmation Component
  */
-import { defineProps } from 'vue'
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
 
 /**

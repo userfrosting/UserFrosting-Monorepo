@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
-import { defineProps } from 'vue'
 
 const { slug } = defineProps<{
     slug: string

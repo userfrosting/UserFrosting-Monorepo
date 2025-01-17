@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 const { id } = defineProps<{
     id: string | number
 }>()

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import type { PermissionResponse } from '@userfrosting/sprinkle-admin/interfaces'
 
 const { permission } = defineProps<{

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
-import { defineEmits, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useUserEditApi } from '@userfrosting/sprinkle-admin/composables'
 import type { UserEditRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import type { UserInterface } from '@userfrosting/sprinkle-account/interfaces'

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
-import { defineEmits } from 'vue'
 import { useRoleDeleteApi } from '@userfrosting/sprinkle-admin/composables'
 import type { RoleInterface } from '@userfrosting/sprinkle-account/interfaces'
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'

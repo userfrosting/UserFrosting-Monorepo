@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
 import type { GroupResponse } from '@userfrosting/sprinkle-admin/interfaces'
 import GroupEditModal from './GroupEditModal.vue'

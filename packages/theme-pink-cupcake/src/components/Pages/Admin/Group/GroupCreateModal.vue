@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
-import { defineEmits, ref } from 'vue'
+import { ref } from 'vue'
 import { useGroupCreateApi } from '@userfrosting/sprinkle-admin/composables'
 import type { GroupCreateRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import GroupForm from './GroupForm.vue'

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
 import moment from 'moment'
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import type { UserInterface } from '@userfrosting/sprinkle-account/interfaces'
 import UserManageRolesModal from './UserManageRolesModal.vue'
 

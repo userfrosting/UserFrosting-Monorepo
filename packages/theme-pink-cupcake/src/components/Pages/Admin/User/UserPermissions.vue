@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 const { user_name } = defineProps<{
     user_name: string
 }>()

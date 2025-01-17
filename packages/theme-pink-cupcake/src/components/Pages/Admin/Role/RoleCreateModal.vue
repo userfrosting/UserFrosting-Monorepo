@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
-import { defineEmits, ref } from 'vue'
+import { ref } from 'vue'
 import { useRoleCreateApi } from '@userfrosting/sprinkle-admin/composables'
 import type { RoleCreateRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import RoleForm from './RoleForm.vue'

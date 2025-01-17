@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
-import { defineEmits, ref } from 'vue'
+import { ref } from 'vue'
 import { useUserCreateApi } from '@userfrosting/sprinkle-admin/composables'
 import type { UserCreateRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import UserForm from './UserForm.vue'
