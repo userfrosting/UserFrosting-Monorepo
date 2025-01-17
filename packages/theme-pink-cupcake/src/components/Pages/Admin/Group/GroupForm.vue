@@ -57,7 +57,11 @@ const emits = defineEmits(['submit'])
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Group Icon</label>
                 <div class="uk-inline uk-width-1-1">
-                    <font-awesome-icon class="fa-form-icon" :icon="formData.icon" fixed-width />
+                    <font-awesome-icon
+                        class="fa-form-icon"
+                        :icon="formData.icon"
+                        v-if="formData.icon"
+                        fixed-width />
                     <input
                         class="uk-input"
                         type="text"
