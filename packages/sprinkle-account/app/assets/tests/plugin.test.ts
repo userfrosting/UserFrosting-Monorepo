@@ -11,7 +11,12 @@ const mockAuthStore = {
     check: vi.fn()
 }
 
+// Mock the vue-router module
+vi.mock('vue-router')
+
 describe('Plugin', () => {
+    ;(useRouter as any).mockReturnValue({})
+
     test('should install the plugin with the provided options', () => {
         const app = createApp({})
         const router = useRouter()
