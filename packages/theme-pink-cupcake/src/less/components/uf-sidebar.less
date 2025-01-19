@@ -1,13 +1,25 @@
 // Variables
 // ========================================================================
 @sidebar-width: 260px;
-@sidebar-background: #38424d;
-@sidebar-nested-background: #2d353e;
+@sidebar-background: @global-secondary-background;
+@sidebar-nested-background: darken(@sidebar-background, 5%);
+@sidebar-over-background: rgba(0, 0, 0, 0.1);
+@sidebar-aside-color-mode: light;
+@sidebar-item-padding-vertical: 8px;
+@sidebar-item-padding-horizontal: 20px;
+@sidebar-item-border-width: 2px;
+@sidebar-item-border-color: @global-theme-color;
+@sidebar-item-first-padding-top: 20px;
+@sidebar-header-padding-vertical: @sidebar-item-padding-vertical;
+@sidebar-header-padding-horizontal: @sidebar-item-padding-horizontal;
+@sidebar-nested-padding: 4px;
+@sidebar-nested-padding-left: 24px;
 
 /* ========================================================================
    Component: Sidebar
  ========================================================================== */
-.uf-sidebar-left {
+aside.uf-sidenav {
+    --uk-inverse: @sidebar-aside-color-mode;
     position: fixed;
     left: 0;
     top: @navbar-nav-item-height;
@@ -18,46 +30,87 @@
     width: @sidebar-width;
     z-index: 2;
     transition: height 0.3s ease-out;
-    font-family: @navbar-navbar-nav-item-font;
+
+    /* Set main content beside sidebar */
+    ~ .uf-main {
+        margin-left: @sidebar-width;
+    }
+
+    // Darken background on hover, only on dark background
+    .uk-nav-default > li > a:hover {
+        background-color: @sidebar-over-background;
+    }
+
+    // Increment top padding for first item
+    .uk-nav-default > li:first-child {
+        padding-top: @sidebar-item-first-padding-top;
+    }
 }
 
-/* Set main content beside sidebar */
-.uf-sidebar-left ~ .uf-main {
-    margin-left: @sidebar-width;
+// Right side modifier
+aside.uf-sidenav-right {
+    left: auto;
+    right: 0;
+    ~ .uf-main {
+        margin-right: @sidebar-width;
+        margin-left: inherit;
+    }
 }
 
-/* Nav links */
-.uf-sidebar-left ul.uk-nav-default > li > a {
-    padding: 8px 20px;
-    border-left: 2px solid transparent;
-    transition: all 0.15s ease-out;
-    font-size: 1rem;
-    color: #bbb;
+// Color Mode
+aside.uf-sidenav:extend(.uk-light all) when (@sidebar-aside-color-mode = light) {
+}
+aside.uf-sidenav:extend(.uk-dark all) when (@sidebar-aside-color-mode = dark) {
 }
 
-.uf-sidebar-left ul.uk-nav-default > li > a:hover,
-.uf-sidebar-left ul.uk-nav-default > li.uk-open > a,
-.uf-sidebar-left ul.uk-nav-default > li.uk-active > a {
-    border-left: 2px solid @navbar-background;
-    color: white;
+// Sidebar items
+.uf-sidenav {
+    // Set padding for nav items.
+    // Add transparent border to avoid the element moving on hover
+    .uk-nav-default > li > a {
+        padding: @sidebar-item-padding-vertical @sidebar-item-padding-horizontal;
+        border-left: @sidebar-item-border-width solid transparent;
+        transition: all 0.15s ease-out;
+        font-size: @global-font-size;
+    }
+
+    // Add theme colored border on hover, open and active
+    .uk-nav-default > li > a:hover,
+    .uk-nav-default > li.uk-open > a,
+    .uk-nav-default > li.uk-active > a {
+        border-left: @sidebar-item-border-width solid @sidebar-item-border-color;
+    }
+
+    // Set nav header padding
+    .uk-nav-header {
+        padding: @sidebar-header-padding-vertical @sidebar-header-padding-horizontal;
+        border-left: @sidebar-item-border-width solid transparent;
+    }
+
+    // Move each nested level to the right and set background color
+    .uk-nav-default .uk-nav-sub {
+        padding-left: @sidebar-nested-padding-left;
+        background: @sidebar-nested-background;
+    }
+
+    // Set nested nav items sizing
+    .uk-nav-default .uk-nav-sub a {
+        font-size: @global-font-size;
+        padding: @sidebar-nested-padding;
+    }
 }
 
-.uf-sidebar-left ul.uk-nav-default > li > a:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
+// Rightside modifier
+.uf-sidenav-right {
+    .uk-nav-default > li > a {
+        border-right: @sidebar-item-border-width solid transparent;
+        border-left: 0px;
+    }
 
-/* Nav header */
-.uf-sidebar-left ul.uk-nav-default li.uk-nav-header {
-    padding: 20px 20px 8px 20px;
-}
-
-/* Nested navs */
-.uf-sidebar-left .uk-nav-default .uk-nav-sub {
-    padding-left: 24px;
-    background: @sidebar-nested-background;
-}
-
-.uf-sidebar-left .uk-nav-default .uk-nav-sub a {
-    font-size: 1rem;
-    padding: 4px;
+    .uk-nav-default > li > a:hover,
+    .uk-nav-default > li.uk-open > a,
+    .uk-nav-default > li.uk-active > a {
+        border-right: @sidebar-item-border-width solid @sidebar-item-border-color;
+        border-left: 0px;
+    }
 }

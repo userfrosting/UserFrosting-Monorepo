@@ -55,6 +55,7 @@ const isExternalLink = computed(() => {
                     v-if="faIcon"
                     class="uk-margin-small-right"
                     :icon="faIcon"
+                    fixed-width
                     data-test="faIcon" />
                 <slot>{{ label }}</slot>
             </a>
