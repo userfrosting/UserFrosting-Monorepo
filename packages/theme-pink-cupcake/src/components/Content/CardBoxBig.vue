@@ -6,7 +6,7 @@ defineProps({
 
 <template>
     <div class="uk-flex uk-flex-center uk-flex-middle">
-        <div class="uk-width-1-1@s uk-width-3-5@l uk-width-1-3@xl">
+        <div class="uk-width-1-1@s uk-width-3-4@l">
             <UFCardBox>
                 <template #header v-if="$slots.header || title">
                     <slot name="header">{{ title }}</slot>
