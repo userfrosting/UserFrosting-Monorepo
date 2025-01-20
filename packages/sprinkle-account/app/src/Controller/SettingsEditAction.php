@@ -72,7 +72,7 @@ class SettingsEditAction
         $this->handle($request);
 
         $payload = json_encode([
-            'message' => $this->translator->translate('ACCOUNT.SETTINGS.UPDATED')
+            'message' => $this->translator->translate('ACCOUNT.SETTINGS.UPDATED'),
         ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 

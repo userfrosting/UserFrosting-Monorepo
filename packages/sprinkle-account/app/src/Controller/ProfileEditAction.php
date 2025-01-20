@@ -72,7 +72,7 @@ class ProfileEditAction
         $payload = json_encode([
             // TODO : The message won't be in the right locale if the user
             //        changed it. We need to find a way to handle this.
-            'message' => $this->translator->translate('PROFILE.UPDATED')
+            'message' => $this->translator->translate('PROFILE.UPDATED'),
         ], JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
