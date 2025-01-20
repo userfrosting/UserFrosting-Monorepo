@@ -2,28 +2,23 @@ import { ref } from 'vue'
 import axios from 'axios'
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
 import type { ApiResponse, AlertInterface } from '@userfrosting/sprinkle-core/interfaces'
+import type { ProfileEditRequest } from '../interfaces'
 
 // TODO : Add validation
-// 'schema://requests/role/edit-field.yaml'
+// 'schema://requests/profile-settings.yaml'
 
 /**
- * API used to update role.
- *
- * This API is tied to the `RoleUpdateFieldAction` API, accessed at the
- * GET `/api/roles/r/{slug}/{field}` endpoint.
- *
- * This composable can be used to update {field} for a specific role.
+ * API Composable
  */
-export function useRoleUpdateApi() {
+export function useUserProfileEditApi() {
     const apiLoading = ref<Boolean>(false)
     const apiError = ref<AlertInterface | null>(null)
 
-    async function submitRoleUpdate(slug: string, fieldName: string, formData: any) {
+    async function submitProfileEdit(data: ProfileEditRequest) {
         apiLoading.value = true
         apiError.value = null
-
         return axios
-            .put<ApiResponse>('/api/roles/r/' + slug + '/' + fieldName, formData)
+            .post<ApiResponse>('/account/settings/profile', data)
             .then((response) => {
                 return {
                     message: response.data.message
@@ -46,5 +41,5 @@ export function useRoleUpdateApi() {
             })
     }
 
-    return { submitRoleUpdate, apiLoading, apiError }
+    return { submitProfileEdit, apiLoading, apiError }
 }

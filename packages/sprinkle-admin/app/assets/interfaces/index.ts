@@ -28,6 +28,3 @@ export type { UserEditRequest, UserEditResponse } from './UserEditApi'
 export type { UserPasswordRequest } from './UserPasswordApi'
 export type { UsersSprunjerResponse } from './UsersApi'
 export type { UserRoleSprunjeResponse } from './UserRolesApi'
-
-// Misc
-export type { ApiResponse } from './ApiResponse'

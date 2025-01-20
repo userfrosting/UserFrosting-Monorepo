@@ -14,48 +14,45 @@ namespace UserFrosting\Sprinkle\Account\Controller;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
-use UserFrosting\Config\Config;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\Fortress\Transformer\RequestDataTransformer;
 use UserFrosting\Fortress\Validator\ServerSideValidator;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
-use UserFrosting\Sprinkle\Account\Exceptions\EmailNotUniqueException;
 use UserFrosting\Sprinkle\Account\Exceptions\ForbiddenException;
-use UserFrosting\Sprinkle\Account\Exceptions\PasswordInvalidException;
+use UserFrosting\Sprinkle\Account\Exceptions\LocaleNotFoundException;
 use UserFrosting\Sprinkle\Account\Log\UserActivityLoggerInterface;
 use UserFrosting\Sprinkle\Core\Exceptions\ValidationException;
+use UserFrosting\Sprinkle\Core\I18n\SiteLocale;
 
 /**
- * Processes a request to update a user's account information.
+ * Processes a request to update a user's profile information.
  *
- * Processes the request from the user account settings form, checking that:
- * 1. The user correctly input their current password;
- * 2. They have the necessary permissions to update the posted field(s);
- * 3. The submitted data is valid.
+ * Processes the request from the user profile settings form, checking that:
+ * 1. They have the necessary permissions to update the posted field(s);
+ * 2. The submitted data is valid.
  * This route requires authentication.
  *
  * Middleware: AuthGuard
- * Route: /account/settings
- * Route Name: settings
+ * Route: /account/settings/profile
+ * Route Name: settings.profile
  * Request type: POST
  */
-class SettingsAction
+class ProfileEditAction
 {
     // Request schema to use to validate data.
-    protected string $schema = 'schema://requests/account-settings.yaml';
+    protected string $schema = 'schema://requests/profile-settings.yaml';
 
     /**
      * Inject dependencies.
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Authenticator $authenticator,
-        protected Config $config,
+        protected SiteLocale $locale,
         protected UserActivityLoggerInterface $logger,
-        protected UserInterface $userModel,
         protected RequestDataTransformer $transformer,
         protected ServerSideValidator $validator
     ) {
@@ -72,7 +69,14 @@ class SettingsAction
     {
         $this->handle($request);
 
-        return $response;
+        $payload = json_encode([
+            // TODO : The message won't be in the right locale if the user
+            //        changed it. We need to find a way to handle this.
+            'message' => $this->translator->translate('PROFILE.UPDATED')
+        ], JSON_THROW_ON_ERROR);
+        $response->getBody()->write($payload);
+
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     /**
@@ -97,45 +101,38 @@ class SettingsAction
         // Whitelist and set parameter defaults
         $data = $this->transformer->transform($schema, $params);
 
-        // Get current user. Won't be null, as AuthGuard prevent it.
+        // Get current user. Won't be null, as AuthGuard prevent it
         /** @var UserInterface */
         $currentUser = $this->authenticator->user();
+
+        // Ensure that in the case of using a single locale, that the locale is set
+        $locales = $this->locale->getAvailableIdentifiers();
+        if (count($locales) <= 1) {
+            $data['locale'] = $currentUser->locale;
+        }
 
         // Validate request data
         $this->validateData($schema, $data);
 
-        // Confirm current password
-        if ($currentUser->comparePassword($data['passwordcheck']) === false) {
-            throw new PasswordInvalidException();
-        }
+        // Check that locale is valid. Required is done in schema.
+        if (!in_array($data['locale'], $locales, true)) {
+            $e = new LocaleNotFoundException();
+            $e->setLocale($data['locale']);
 
-        // Remove password check, password confirmation from object data after validation
-        unset($data['passwordcheck']);
-        unset($data['passwordc']);
-
-        // If new email was submitted, check that the email address is not in use
-        if ($data['email'] !== $currentUser->email && $this->userModel::findUnique($data['email'], 'email') !== null) {
-            throw new EmailNotUniqueException();
-        }
-
-        // If password is empty, remove it from the data array
-        if ($data['password'] === '') {
-            unset($data['password']);
+            throw $e;
         }
 
         // Looks good, let's update with new values!
-        // Note that only fields listed in `account-settings.yaml` will be
+        // Note that only fields listed in `profile-settings.yaml` will be
         // permitted in $data, so this prevents the user from updating all columns in the DB
         $currentUser->fill($data);
         $currentUser->save();
 
         // Create activity record
-        $this->logger->info("User {$currentUser->user_name} updated their account settings.", [
-            'type'    => 'update_account_settings',
+        $this->logger->info("User {$currentUser->user_name} updated their profile settings.", [
+            'type'    => 'update_profile_settings',
             'user_id' => $currentUser->id,
         ]);
-
-        $this->alert->addMessage('success', 'ACCOUNT.SETTINGS.UPDATED');
     }
 
     /**
@@ -146,10 +143,6 @@ class SettingsAction
     protected function getSchema(): RequestSchemaInterface
     {
         $schema = new RequestSchema($this->schema);
-        $schema->set('password.validators.length.min', $this->config->get('site.password.length.min'));
-        $schema->set('password.validators.length.max', $this->config->get('site.password.length.max'));
-        $schema->set('passwordc.validators.length.min', $this->config->get('site.password.length.min'));
-        $schema->set('passwordc.validators.length.max', $this->config->get('site.password.length.max'));
 
         return $schema;
     }

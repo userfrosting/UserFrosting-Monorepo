@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
-import { Severity, type AlertInterface } from '@userfrosting/sprinkle-core/interfaces'
-import type { ApiResponse } from '../interfaces'
+import { Severity } from '@userfrosting/sprinkle-core/interfaces'
+import type { AlertInterface, ApiResponse } from '@userfrosting/sprinkle-core/interfaces'
 
 // TODO : Add validation
 // 'schema://requests/user/edit-field.yaml'

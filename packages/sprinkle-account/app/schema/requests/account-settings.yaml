@@ -3,18 +3,6 @@ passwordcheck:
   validators:
     required:
       message: PASSWORD.CONFIRM_CURRENT
-email:
-  validators:
-    required:
-      label: "&EMAIL"
-      message: VALIDATE.REQUIRED
-    length:
-      label: "&EMAIL"
-      min: 1
-      max: 150
-      message: VALIDATE.LENGTH_RANGE
-    email:
-      message: VALIDATE.INVALID_EMAIL
 password:
   validators:
     length:

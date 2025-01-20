@@ -7,7 +7,11 @@ import {
     PageLogin,
     PageRegister,
     PageForgotPassword,
-    PageResendVerification
+    PageResendVerification,
+    PageUserSettings,
+    PageUserSettingsProfile,
+    PageUserSettingsPassword,
+    PageUserSettingsEmail
 } from '../views/Account'
 import {
     FormLogin,
@@ -26,6 +30,10 @@ export default {
             .component('UFPageRegister', PageRegister)
             .component('UFPageForgotPassword', PageForgotPassword)
             .component('UFPageResendVerification', PageResendVerification)
+            .component('UFPageUserSettings', PageUserSettings)
+            .component('UFPageUserSettingsProfile', PageUserSettingsProfile)
+            .component('UFPageUserSettingsPassword', PageUserSettingsPassword)
+            .component('UFPageUserSettingsEmail', PageUserSettingsEmail)
     }
 }
 
@@ -39,5 +47,9 @@ declare module 'vue' {
         UFPageRegister: typeof PageRegister
         UFPageForgotPassword: typeof PageForgotPassword
         UFPageResendVerification: typeof PageResendVerification
+        UFPageUserSettings: typeof PageUserSettings
+        UFPageUserSettingsProfile: typeof PageUserSettingsProfile
+        UFPageUserSettingsPassword: typeof PageUserSettingsPassword
+        UFPageUserSettingsEmail: typeof PageUserSettingsEmail
     }
 }

@@ -12,13 +12,12 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Account\Tests\Controller;
 
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
 use UserFrosting\Sprinkle\Account\Tests\AccountTestCase;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class SettingsActionTest extends AccountTestCase
+class ProfileEmailEditActionTest extends AccountTestCase
 {
     use RefreshDatabase;
     use WithTestUser;
@@ -39,29 +38,22 @@ class SettingsActionTest extends AccountTestCase
         $this->actAsUser($user, true);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('POST', '/account/settings', [
+        $request = $this->createJsonRequest('POST', '/account/settings/email', [
             'passwordcheck' => 'potato',
             'email'         => 'testSettings@test.com',
-            'password'      => 'testrSetPassword',
-            'passwordc'     => 'testrSetPassword',
         ]);
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertResponse('', $response);
+        $this->assertJsonResponse([
+            'message' => 'Account settings updated',
+        ], $response);
         $this->assertResponseStatus(200, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
 
         // Refresh user, make sure password was hashed, and it actually changed.
         /** @var User */
         $freshUser = User::find($user->id);
-        $this->assertNotSame('testrSetPassword', $freshUser->password);
-        $this->assertTrue($freshUser->comparePassword('testrSetPassword'));
+        $this->assertSame('testSettings@test.com', $freshUser->email);
     }
 
     public function testSettingsWithNoPermissions(): void
@@ -71,44 +63,12 @@ class SettingsActionTest extends AccountTestCase
         $this->actAsUser($user); // No permissions !
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('POST', '/account/settings');
+        $request = $this->createJsonRequest('POST', '/account/settings/email');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
         $this->assertJsonResponse('Access Denied', $response, 'title');
         $this->assertResponseStatus(403, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('danger', array_reverse($messages)[0]['type']);
-    }
-
-    public function testSettingsOnlyEmailNoLocale(): void
-    {
-        /** @var User */
-        $user = User::factory(['password' => 'potato'])->create();
-        $this->actAsUser($user, permissions: ['update_account_settings']); // Assert specific permission while at it
-
-        // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('POST', '/account/settings', [
-            'passwordcheck' => 'potato',
-            'email'         => 'testSettings@test.com',
-            'password'      => '',
-            'passwordc'     => '',
-        ]);
-        $response = $this->handleRequest($request);
-
-        // Assert response status & body
-        $this->assertResponse('', $response);
-        $this->assertResponseStatus(200, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     public function testSettingsWithFailedValidation(): void
@@ -118,7 +78,7 @@ class SettingsActionTest extends AccountTestCase
         $this->actAsUser($user, true);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('POST', '/account/settings');
+        $request = $this->createJsonRequest('POST', '/account/settings/email');
         $response = $this->handleRequest($request);
 
         // Assert response status & body
@@ -133,11 +93,9 @@ class SettingsActionTest extends AccountTestCase
         $this->actAsUser($user, true);
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('POST', '/account/settings', [
+        $request = $this->createJsonRequest('POST', '/account/settings/email', [
             'passwordcheck' => 'foo', //<-- Not potato
             'email'         => 'testSettings@test.com',
-            'password'      => 'testrSetPassword',
-            'passwordc'     => 'testrSetPassword',
         ]);
         $response = $this->handleRequest($request);
 
@@ -157,11 +115,9 @@ class SettingsActionTest extends AccountTestCase
         $firstUser = User::factory()->create();
 
         // Create request with method and url and fetch response
-        $request = $this->createJsonRequest('POST', '/account/settings', [
+        $request = $this->createJsonRequest('POST', '/account/settings/email', [
             'passwordcheck' => 'potato',
             'email'         => $firstUser->email,
-            'password'      => 'testrSetPassword',
-            'passwordc'     => 'testrSetPassword',
         ]);
         $response = $this->handleRequest($request);
 

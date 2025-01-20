@@ -30,7 +30,7 @@ const emits = defineEmits(['submit'])
                     <input
                         class="uk-input"
                         type="password"
-                        placeholder="Username"
+                        placeholder="Password"
                         aria-label="Password"
                         data-test="password"
                         autofocus

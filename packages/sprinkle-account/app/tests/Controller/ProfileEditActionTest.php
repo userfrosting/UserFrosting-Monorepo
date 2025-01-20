@@ -12,14 +12,13 @@ declare(strict_types=1);
 
 namespace UserFrosting\Sprinkle\Account\Tests\Controller;
 
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
 use UserFrosting\Sprinkle\Account\Testing\WithTestUser;
 use UserFrosting\Sprinkle\Account\Tests\AccountTestCase;
 use UserFrosting\Sprinkle\Core\Testing\RefreshDatabase;
 
-class ProfileActionTest extends AccountTestCase
+class ProfileEditActionTest extends AccountTestCase
 {
     use RefreshDatabase;
     use WithTestUser;
@@ -48,7 +47,9 @@ class ProfileActionTest extends AccountTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertResponse('', $response);
+        $this->assertJsonResponse([
+            'message' => 'Profile settings updated',
+        ], $response);
         $this->assertResponseStatus(200, $response);
 
         // Make sure user was update
@@ -57,12 +58,6 @@ class ProfileActionTest extends AccountTestCase
         $this->assertSame('foo', $editedUser->first_name);
         $this->assertSame($user->last_name, $editedUser->last_name);
         $this->assertSame($user->locale, $editedUser->locale);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     public function testProfileWithNoPermissions(): void
@@ -78,12 +73,6 @@ class ProfileActionTest extends AccountTestCase
         // Assert response status & body
         $this->assertJsonResponse('Access Denied', $response, 'title');
         $this->assertResponseStatus(403, $response);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('danger', array_reverse($messages)[0]['type']);
     }
 
     public function testProfileWithOneLocale(): void

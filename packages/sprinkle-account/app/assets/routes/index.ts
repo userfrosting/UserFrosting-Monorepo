@@ -38,5 +38,35 @@ export default [
             }
         },
         component: () => import('../views/ResendVerificationView.vue')
+    },
+    {
+        path: '/account/settings',
+        name: 'account.settings',
+        redirect: { name: 'account.settings.profile' },
+        meta: {
+            auth: {
+                redirect: { name: 'account.login' }
+            },
+            title: 'Account settings',
+            description: 'Update your account settings, including email, name, and password.'
+        },
+        component: () => import('../views/UserSettings.vue'),
+        children: [
+            {
+                path: 'profile',
+                name: 'account.settings.profile',
+                component: () => import('../views/UserSettingsProfile.vue')
+            },
+            {
+                path: 'password',
+                name: 'account.settings.password',
+                component: () => import('../views/UserSettingsPassword.vue')
+            },
+            {
+                path: 'email',
+                name: 'account.settings.email',
+                component: () => import('../views/UserSettingsEmail.vue')
+            }
+        ]
     }
 ]

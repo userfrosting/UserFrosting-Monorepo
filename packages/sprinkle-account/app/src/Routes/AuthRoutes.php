@@ -24,11 +24,12 @@ use UserFrosting\Sprinkle\Account\Controller\DenyResetPasswordAction;
 use UserFrosting\Sprinkle\Account\Controller\ForgetPasswordAction;
 use UserFrosting\Sprinkle\Account\Controller\LoginAction;
 use UserFrosting\Sprinkle\Account\Controller\LogoutAction;
-use UserFrosting\Sprinkle\Account\Controller\ProfileAction;
+use UserFrosting\Sprinkle\Account\Controller\ProfileEditAction;
+use UserFrosting\Sprinkle\Account\Controller\ProfileEmailEditAction;
 use UserFrosting\Sprinkle\Account\Controller\RegisterAction;
 use UserFrosting\Sprinkle\Account\Controller\ResendVerificationAction;
 use UserFrosting\Sprinkle\Account\Controller\SetPasswordAction;
-use UserFrosting\Sprinkle\Account\Controller\SettingsAction;
+use UserFrosting\Sprinkle\Account\Controller\SettingsEditAction;
 use UserFrosting\Sprinkle\Account\Controller\SuggestUsernameAction;
 use UserFrosting\Sprinkle\Account\Controller\VerifyAction;
 use UserFrosting\Sprinkle\Core\Middlewares\NoCache;
@@ -51,8 +52,9 @@ class AuthRoutes implements RouteDefinitionInterface
         // Auth Guard
         $app->group('/account', function (RouteCollectorProxy $group) {
             $group->get('/logout', LogoutAction::class)->setName('account.logout');
-            $group->post('/settings', SettingsAction::class)->setName('settings');
-            $group->post('/settings/profile', ProfileAction::class)->setName('settings.profile');
+            $group->post('/settings', SettingsEditAction::class)->setName('settings');
+            $group->post('/settings/profile', ProfileEditAction::class)->setName('settings.profile');
+            $group->post('/settings/email', ProfileEmailEditAction::class)->setName('settings.email');
         })->add(AuthGuard::class)->add(NoCache::class);
 
         // No guard

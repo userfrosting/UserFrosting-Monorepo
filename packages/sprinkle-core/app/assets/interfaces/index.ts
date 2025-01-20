@@ -24,3 +24,6 @@ export type { AssociativeArray } from './common'
 export { Severity } from './severity'
 export type { Sprunjer, SprunjerData, SprunjerListable, SprunjerListableOption } from './sprunjer'
 export type { SprunjerRequest, SprunjerResponse } from './sprunjerApi'
+
+// Misc
+export type { ApiResponse } from './ApiResponse'
