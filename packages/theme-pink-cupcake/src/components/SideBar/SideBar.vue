@@ -1,6 +1,5 @@
 <template>
-    <!-- TODO : Hide and use offcanva for small screen or On demand -->
-    <aside class="uf-sidenav">
+    <aside class="uf-sidenav" id="uf-sidenav-aside">
         <ul class="uk-nav uk-nav-default">
             <slot></slot>
         </ul>

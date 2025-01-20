@@ -19,6 +19,15 @@ withDefaults(
             <div class="uk-navbar-container">
                 <div class="uk-container uk-container-expand">
                     <nav class="uk-navbar" uk-navbar>
+                        <ul class="uk-navbar-nav uk-hidden@m">
+                            <li>
+                                <a
+                                    class="uk-navbar-item uk-logo"
+                                    uk-toggle="target: #uf-sidenav-aside; cls: open">
+                                    <font-awesome-icon icon="bars" />
+                                </a>
+                            </li>
+                        </ul>
                         <div class="uk-navbar-left" data-test="navbar-left">
                             <AppLink :to="to" class="uk-navbar-item uk-logo" label="">
                                 <slot name="title">{{ title }}</slot>

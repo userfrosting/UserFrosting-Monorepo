@@ -22,7 +22,7 @@ async function sendLogin() {
         .login(form)
         .then((user) => {
             UIkit.notification({
-                message: 'Welcome back ' + user?.full_name + '!',
+                message: 'Welcome back ' + user?.full_name + '!', // TODO : Use API message
                 status: 'primary',
                 pos: 'top-right',
                 timeout: 4000

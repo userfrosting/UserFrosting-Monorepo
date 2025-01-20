@@ -47,6 +47,21 @@ aside.uf-sidenav {
     }
 }
 
+// uk-visible\@m --> @breakpoint-small-max
+// @media (max-width: @breakpoint-small-max) {}
+/* Phone landscape and smaller */
+@media (max-width: @breakpoint-small-max) {
+    aside.uf-sidenav:not(.open) {
+        display: none !important;
+    }
+
+    aside.uf-sidenav {
+        ~ .uf-main {
+            margin-left: inherit;
+        }
+    }
+}
+
 // Right side modifier
 aside.uf-sidenav-right {
     left: auto;
