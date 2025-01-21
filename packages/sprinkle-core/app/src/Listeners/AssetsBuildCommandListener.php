@@ -33,7 +33,7 @@ class AssetsBuildCommandListener
      */
     protected array $viteCommands = [
         'assets:install',
-        'assets:vite',
+        // 'assets:vite', // Disabled for now, bake should'n run the dev server
     ];
 
     public function __construct(protected Config $config)
