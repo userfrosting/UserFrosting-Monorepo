@@ -48,8 +48,8 @@ class AssetsBuildCommandListenerTest extends TestCase
     {
         return [
             ['webpack', ['assets:install', 'assets:webpack']],
-            ['foobar', ['assets:install', 'assets:vite']],
-            ['vite', ['assets:install', 'assets:vite']],
+            ['foobar', ['assets:install']],
+            ['vite', ['assets:install']],
         ];
     }
 }
