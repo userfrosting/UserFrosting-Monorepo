@@ -1,4 +1,5 @@
 {
+    "name": "userfrosting/userfrosting",
     "authors": [
         {
             "name": "Alexander Weissman",
@@ -98,7 +99,8 @@
             "UserFrosting\\Sprinkle\\Admin\\Tests\\": "packages/sprinkle-admin/app/tests/",
             "UserFrosting\\Sprinkle\\Core\\Tests\\": "packages/sprinkle-core/app/tests/",
             "UserFrosting\\Tests\\": "packages/framework/tests",
-            "UserFrosting\\Tests\\App\\": "packages/skeleton/app/tests/"
+            "UserFrosting\\Tests\\App\\": "packages/skeleton/app/tests/",
+            "Workers\\MonoRepo\\": "utils/"
         }
     }
 }

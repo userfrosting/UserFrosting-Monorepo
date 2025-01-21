@@ -11,3 +11,52 @@
 [![Donate](https://img.shields.io/badge/Ko--fi-Donate-blue?logo=ko-fi&logoColor=white)](https://ko-fi.com/lcharette)
 
 ## Setup
+
+1. Clone this repo
+   ```
+   git clone https://github.com/userfrosting/monorepo.git
+   ```
+2. Run Composer
+   ```
+   composer install
+   ```
+3. Run Bake
+   ```
+   php bakery serve
+   ```
+4. Run at the same time the PHP server and the Vite server is **two terminals**:
+   ```
+   php bakery assets:vite
+   ```
+   ```
+   php bakery serve
+   ```
+
+   ...or use the VSCode `==> Serve` pre-configured task.
+
+The app will be available at [http://localhost:8080](http://localhost:8080).
+
+## Composer
+
+The monorepo is managed by [Monorepo-builder](https://github.com/symplify/monorepo-builder) on the Composer side.   
+It's important to edit the individual package `composer.json`, not the root one. After each update, run this command.
+
+```
+vendor/bin/monorepo-builder merge
+```
+
+## Release
+   
+To release a new version, for example `6.0`, run this command. Composer will be updated, as well as NPM and a git tag will be pushed using the local user :
+
+```
+vendor/bin/monorepo-builder release 6.0
+```
+
+Or:
+
+```
+vendor/bin/monorepo-builder release patch
+```
+
+You can use `minor` and `major` too.
