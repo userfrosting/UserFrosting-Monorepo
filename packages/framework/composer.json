@@ -2,10 +2,13 @@
     "name": "userfrosting/framework",
     "type": "library",
     "description": "Framework for UserFrosting",
-    "keywords": ["userfrosting", "Framework"],
+    "keywords": [
+        "userfrosting",
+        "Framework"
+    ],
     "homepage": "https://github.com/userfrosting/framework",
-    "license" : "MIT",
-    "authors" : [
+    "license": "MIT",
+    "authors": [
         {
             "name": "Alexander Weissman",
             "homepage": "https://alexanderweissman.com"

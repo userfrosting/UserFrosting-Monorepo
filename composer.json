@@ -78,11 +78,11 @@
         "symplify/monorepo-builder": "^11.2"
     },
     "replace": {
-        "userfrosting/framework": "self.version",
-        "userfrosting/sprinkle-account": "self.version",
-        "userfrosting/sprinkle-admin": "self.version",
-        "userfrosting/sprinkle-core": "self.version",
-        "userfrosting/userfrosting": "self.version"
+        "userfrosting/framework": "6.0.0-alpha.2",
+        "userfrosting/sprinkle-account": "6.0.0-alpha.2",
+        "userfrosting/sprinkle-admin": "6.0.0-alpha.2",
+        "userfrosting/sprinkle-core": "6.0.0-alpha.2",
+        "userfrosting/userfrosting": "6.0.0-alpha.2"
     },
     "autoload": {
         "psr-4": {
@@ -102,5 +102,7 @@
             "UserFrosting\\Tests\\App\\": "packages/skeleton/app/tests/",
             "Workers\\MonoRepo\\": "utils/"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
