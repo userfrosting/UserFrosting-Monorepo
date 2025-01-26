@@ -381,20 +381,7 @@ return [
             // with the exception of English, which as the default language comes first.
             'available' => [
                 'en_US' => true,
-                'zh_CN' => true,
-                'es_ES' => true,
-                'ar'    => true,
-                'pt_BR' => true,
-                'pt_PT' => true,
-                'ru_RU' => true,
-                'de_DE' => true,
                 'fr_FR' => true,
-                'tr'    => true,
-                'it_IT' => true,
-                'th_TH' => true,
-                'fa'    => true,
-                'el'    => true,
-                'sr_RS' => true,
             ],
             // The default locale to use for non-registered users.
             // Browser requested languages might overwrite this value.
