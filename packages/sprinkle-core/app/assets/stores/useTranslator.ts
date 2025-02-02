@@ -83,7 +83,10 @@ export const useTranslator = defineStore(
             return DateTime.fromISO(date).setLocale(config.value.dates)
         }
 
-        function getMessageFromKey(key: string, placeholders: string | number | object): string {
+        function getMessageFromKey(
+            key: string,
+            placeholders: string | number | Record<string, any>
+        ): string {
             // Return direct match
             if (dictionary.value[key] !== undefined) {
                 return dictionary.value[key]
@@ -138,7 +141,7 @@ export const useTranslator = defineStore(
 
         function replacePlaceholders(
             message: string,
-            placeholders: string | number | object
+            placeholders: string | number | Record<string, any>
         ): string {
             // If placeholders is not an object at this point, we make it an object, using `plural` as the key
             if (typeof placeholders !== 'object') {
@@ -188,7 +191,7 @@ export const useTranslator = defineStore(
         }
 
         function getPluralForm(pluralValue: number): string {
-            // TODO
+            return '' // TODO
         }
 
         /**
