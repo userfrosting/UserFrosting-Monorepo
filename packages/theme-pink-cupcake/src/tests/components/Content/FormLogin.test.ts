@@ -49,6 +49,13 @@ describe('FormLogin.vue', () => {
         const wrapper = mount(FormLogin)
         await (wrapper.vm as any).sendLogin(form)
 
+        // Mock the useTranslator store
+        vi.mock('@userfrosting/sprinkle-core/stores', () => ({
+            useTranslator: () => ({
+                $t: vi.fn(() => 'Welcome back John Doe!')
+            })
+        }))
+
         // Spy on the authStore & UIkit notification method
         expect(useAuthStore).toHaveBeenCalled()
         expect(mockUseAuthStore.login).toHaveBeenCalledTimes(1)
@@ -89,6 +96,13 @@ describe('FormLogin.vue', () => {
         mockUseAuthStore.login.mockResolvedValueOnce({ full_name: 'John Doe' })
         vi.mocked(useAuthStore).mockReturnValue(mockUseAuthStore as any)
         vi.spyOn(UIkit, 'notification')
+
+        // Mock the useTranslator store
+        vi.mock('@userfrosting/sprinkle-core/stores', () => ({
+            useTranslator: () => ({
+                $t: vi.fn(() => 'Welcome back John Doe!')
+            })
+        }))
 
         const wrapper = mount(FormLogin)
         wrapper.find('[data-test="username"]').setValue('john.doe')
