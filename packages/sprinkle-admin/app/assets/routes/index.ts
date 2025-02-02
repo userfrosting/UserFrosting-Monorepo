@@ -8,7 +8,7 @@ const AdminDashboardRoutes = [
             auth: {
                 redirect: { name: 'account.login' }
             },
-            title: 'Dashboard'
+            title: 'DASHBOARD'
         },
         component: () => import('../views/DashboardView.vue')
     }

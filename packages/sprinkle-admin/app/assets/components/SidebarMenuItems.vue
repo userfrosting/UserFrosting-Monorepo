@@ -1,5 +1,10 @@
+<script setup lang="ts">
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
+const { $t } = useTranslator()
+</script>
+
 <template>
-    <UFSideBarItem :to="{ name: 'admin.dashboard' }" faIcon="gauge-high" label="Dashboard" />
+    <UFSideBarItem :to="{ name: 'admin.dashboard' }" faIcon="gauge-high" :label="$t('DASHBOARD')" />
     <UFSideBarItem :to="{ name: 'admin.users' }" faIcon="user" label="Users" />
     <UFSideBarItem :to="{ name: 'admin.activities' }" faIcon="list-check" label="Activities" />
     <UFSideBarItem :to="{ name: 'admin.roles' }" faIcon="address-card" label="Roles" />

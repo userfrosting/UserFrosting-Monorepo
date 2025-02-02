@@ -1,5 +1,6 @@
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import { useConfigStore } from '../stores'
 import { defineStore } from 'pinia'
 
@@ -17,6 +18,7 @@ export const usePageMeta = defineStore('pageMeta', () => {
      * Globally provided properties
      */
     const route = useRoute()
+    const { $t } = useTranslator()
 
     /**
      * States
@@ -68,7 +70,7 @@ export const usePageMeta = defineStore('pageMeta', () => {
 
         // Update Page Title & Description with current route
         title.value = route.meta.title || ''
-        description.value = route.meta.description || ''
+        description.value = $t(route.meta.description || '')
     }
 
     // Update the document title
@@ -90,7 +92,7 @@ export const usePageMeta = defineStore('pageMeta', () => {
      */
     const siteTitle = computed<string>(() => useConfigStore().get('site.title') || '')
     const pageFullTitle = computed<string>(() => {
-        return title.value ? title.value + ' | ' + siteTitle.value : siteTitle.value
+        return title.value ? $t(title.value) + ' | ' + siteTitle.value : siteTitle.value
     })
 
     /**

@@ -6,8 +6,7 @@ export default [
                 redirect: { name: 'account.login' }
             },
             title: 'Users',
-            description:
-                'A listing of the users for your site. Provides management tools including the ability to edit user details, manually activate users, enable/disable users, and more.'
+            description: 'USER.PAGE_DESCRIPTION'
         },
         children: [
             {
@@ -21,7 +20,7 @@ export default [
                 component: () => import('../views/UserView.vue'),
                 meta: {
                     title: 'User Details',
-                    description: 'View and edit user details.'
+                    description: 'USER.INFO_PAGE'
                 }
             }
         ]

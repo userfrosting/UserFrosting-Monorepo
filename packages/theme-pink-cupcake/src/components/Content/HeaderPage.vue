@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { usePageMeta } from '@userfrosting/sprinkle-core/composables'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
+const { $t } = useTranslator()
 const page = usePageMeta()
 
 const shouldShowHeader = computed(() => {
@@ -25,10 +27,10 @@ const shouldShowBreadcrumbs = computed(() => {
         <div uk-grid>
             <div class="uk-width-expand">
                 <h3 v-if="shouldShowTitle" class="uk-margin-remove">
-                    {{ page.title }}
+                    {{ $t(page.title) }}
                 </h3>
                 <p v-if="shouldShowDescription" class="uk-text-meta uk-margin-remove">
-                    {{ page.description }}
+                    {{ $t(page.description) }}
                 </p>
             </div>
             <div>
@@ -36,11 +38,11 @@ const shouldShowBreadcrumbs = computed(() => {
                     <ul class="uk-breadcrumb">
                         <li v-for="(crumb, index) in page.breadcrumbs" :key="index">
                             <span aria-current="page" v-if="index + 1 === page.breadcrumbs.length">
-                                {{ page.title }}
+                                {{ $t(page.title) }}
                             </span>
                             <router-link v-else :to="crumb.to">
                                 <font-awesome-icon icon="house" fixed-width v-if="index === 0" />
-                                {{ crumb.label }}
+                                {{ $t(crumb.label) }}
                             </router-link>
                         </li>
                     </ul>
