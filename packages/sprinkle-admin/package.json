@@ -35,9 +35,6 @@
     "files": [
         "app/assets"
     ],
-    "dependencies": {
-        "moment": "^2.30.1"
-    },
     "peerDependencies": {
         "@userfrosting/sprinkle-account": "^6.0.0-alpha",
         "@userfrosting/sprinkle-core": "^6.0.0-alpha",

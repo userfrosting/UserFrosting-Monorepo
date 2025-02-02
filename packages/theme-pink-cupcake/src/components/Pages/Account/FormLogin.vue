@@ -4,6 +4,7 @@ import UIkit from 'uikit'
 import type { AlertInterface } from '@userfrosting/sprinkle-core/interfaces'
 import type { LoginForm } from '@userfrosting/sprinkle-account/interfaces'
 import { useAuthStore } from '@userfrosting/sprinkle-account/stores'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 
 // Variables
 const loading = ref(false)
@@ -21,8 +22,12 @@ async function sendLogin() {
     await auth
         .login(form)
         .then((user) => {
+            // TODO : If the notification can be defined in sprinkle-core, and
+            // implemented in the theme, this notification could be moved to the
+            // API directly.
+            const { $t } = useTranslator()
             UIkit.notification({
-                message: 'Welcome back ' + user?.full_name + '!', // TODO : Use API message
+                message: $t('WELCOME', user ?? {}), // TODO : Same error as before, the locale is not updated yet and this is not a reactive variable.
                 status: 'primary',
                 pos: 'top-right',
                 timeout: 4000

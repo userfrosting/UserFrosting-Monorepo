@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import moment from 'moment'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
 import type { UserResponse } from '@userfrosting/sprinkle-admin/interfaces'
 import UserEditModal from './UserEditModal.vue'
@@ -10,6 +10,7 @@ import UserPasswordModal from './UserPasswordModal.vue'
 import UserPasswordResetModal from './UserPasswordResetModal.vue'
 
 const router = useRouter()
+const { $tdate } = useTranslator()
 const { user } = defineProps<{
     user: UserResponse
 }>()
@@ -52,7 +53,7 @@ const emits = defineEmits(['updated'])
                 <UFLabel :severity="Severity.Success" v-else>Active</UFLabel>
             </dd>
             <dt><font-awesome-icon icon="calendar" /> Created on</dt>
-            <dd class="uk-text-meta">{{ moment(user.created_at).format('MMMM Do, YYYY') }}</dd>
+            <dd class="uk-text-meta">{{ $tdate(user.created_at, 'DDD') }}</dd>
             <!-- <slot data-test="slot"></slot> -->
         </dl>
         <hr />

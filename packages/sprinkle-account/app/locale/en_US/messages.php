@@ -110,6 +110,8 @@ return [
 
     'FIRST_NAME' => 'First name',
 
+    'GUEST' => 'Guest',
+
     'HEADER_MESSAGE_ROOT' => 'YOU ARE SIGNED IN AS THE ROOT USER',
 
     'LAST_NAME' => 'Last name',
@@ -221,5 +223,5 @@ return [
         'NOT_AVAILABLE' => "Username <strong>{{user_name}}</strong> is not available. Choose a different name, or click 'suggest'.",
     ],
 
-    'WELCOME' => 'Welcome back, {{first_name}}',
+    'WELCOME' => 'Welcome back, {{full_name}}!',
 ];

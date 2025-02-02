@@ -158,7 +158,7 @@ class TranslatorTest extends TestCase
     /**
      * Run more complex translations outside the provider.
      */
-    public function testTranslate_withNested(): void
+    public function testTranslateWithNested(): void
     {
         // English translator
         $translator = $this->getTranslator();

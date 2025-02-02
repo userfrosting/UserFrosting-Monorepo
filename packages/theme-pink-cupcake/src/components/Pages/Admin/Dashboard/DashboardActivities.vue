@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import moment from 'moment'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
+const { $tdate } = useTranslator()
 </script>
 
 <template>
@@ -17,8 +18,7 @@ import moment from 'moment'
 
             <template #body="{ item }">
                 <UFSprunjeColumn>
-                    <div>{{ moment(item.occurred_at).format('dddd') }}</div>
-                    <div>{{ moment(item.occurred_at).format('MMM Do, YYYY h:mm a') }}</div>
+                    <div>{{ $tdate(item.occurred_at) }}</div>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn v-if="item.user">
                     <strong>

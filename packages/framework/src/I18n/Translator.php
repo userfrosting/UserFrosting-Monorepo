@@ -122,7 +122,7 @@ class Translator
      */
     protected function getMessageFromKey(string $messageKey, array|int &$placeholders): string
     {
-        // If we can't find a match, return $messageKey
+        // If we can't find a match, return the key
         if (!$this->dictionary->has($messageKey)) {
             return $messageKey;
         }
@@ -291,7 +291,7 @@ class Translator
                 continue;
             }
 
-            // We test if the placeholder value starts the "&" caracter.
+            // We test if the placeholder value starts the "&" character.
             // That means we need to translate that placeholder value
             if (substr($value, 0, 1) === '&') {
                 // Remove the current placeholder from the master $placeholder

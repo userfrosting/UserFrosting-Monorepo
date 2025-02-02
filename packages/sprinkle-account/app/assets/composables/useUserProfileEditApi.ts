@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import type { ApiResponse, AlertInterface } from '@userfrosting/sprinkle-core/interfaces'
 import type { ProfileEditRequest } from '../interfaces'
 
@@ -20,6 +21,9 @@ export function useUserProfileEditApi() {
         return axios
             .post<ApiResponse>('/account/settings/profile', data)
             .then((response) => {
+                // Reload the translator dictionary to reflect the user's language
+                useTranslator().load()
+
                 return {
                     message: response.data.message
                 }

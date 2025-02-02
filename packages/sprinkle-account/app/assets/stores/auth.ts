@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import type { UserInterface, LoginForm } from '../interfaces'
 import { type AlertInterface, Severity } from '@userfrosting/sprinkle-core/interfaces'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 
 interface AuthCheckApi {
     auth: boolean
@@ -30,6 +31,9 @@ export const useAuthStore = defineStore('auth', {
                 .post<UserInterface>('/account/login', form)
                 .then((response) => {
                     this.setUser(response.data)
+
+                    // Reload the translator dictionary to reflect the user's language
+                    useTranslator().load()
 
                     return this.user
                 })
@@ -71,18 +75,24 @@ export const useAuthStore = defineStore('auth', {
         },
         async logout() {
             this.unsetUser()
-            return axios.get('/account/logout').catch((err) => {
-                const error: AlertInterface = {
-                    ...{
-                        description: 'An error as occurred',
-                        style: Severity.Danger,
-                        closeBtn: true
-                    },
-                    ...err.response.data
-                }
+            return axios
+                .get('/account/logout')
+                .then(() => {
+                    // Reload the translator dictionary to reflect the default language
+                    useTranslator().load()
+                })
+                .catch((err) => {
+                    const error: AlertInterface = {
+                        ...{
+                            description: 'An error as occurred',
+                            style: Severity.Danger,
+                            closeBtn: true
+                        },
+                        ...err.response.data
+                    }
 
-                throw error
-            })
+                    throw error
+                })
         }
     }
 })

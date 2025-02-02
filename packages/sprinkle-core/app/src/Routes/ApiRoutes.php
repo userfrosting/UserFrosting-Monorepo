@@ -15,11 +15,13 @@ namespace UserFrosting\Sprinkle\Core\Routes;
 use Slim\App;
 use UserFrosting\Routes\RouteDefinitionInterface;
 use UserFrosting\Sprinkle\Core\Controller\ConfigController;
+use UserFrosting\Sprinkle\Core\Controller\DictionaryController;
 
 class ApiRoutes implements RouteDefinitionInterface
 {
     public function register(App $app): void
     {
         $app->get('/api/config', ConfigController::class)->setName('api.config');
+        $app->get('/api/dictionary', DictionaryController::class)->setName('api.dictionary');
     }
 }

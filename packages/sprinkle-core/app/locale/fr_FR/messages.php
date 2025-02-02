@@ -99,5 +99,5 @@ return [
     'OPTIONAL'                 => 'Facultatif',
     'BUILT_WITH_UF'            => 'Créé avec <a href="http://www.userfrosting.com">UserFrosting</a>',
     'ADMINLTE_THEME_BY'        => 'Thème par <strong><a href="https://adminlte.io">AdminLTE</a>.</strong> Tous droits réservés',
-    'WELCOME_TO'               => 'Bienvenue à {{title}}!',
+    'WELCOME_TO'               => 'Bienvenue sur {{title}}, {{user}}!',
 ];

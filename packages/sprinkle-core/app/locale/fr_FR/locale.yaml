@@ -3,5 +3,6 @@ regional: Français
 authors:
   - Louis Charette
 plural_rule: 2
+dates: fr-FR
 parents:
   - en_US

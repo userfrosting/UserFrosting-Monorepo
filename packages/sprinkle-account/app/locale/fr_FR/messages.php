@@ -52,6 +52,7 @@ return [
     ],
     'EMAIL_OR_USERNAME'   => 'Nom d\'utilisateur ou adresse email',
     'FIRST_NAME'          => 'Prénom',
+    'GUEST'               => 'Invité',
     'HEADER_MESSAGE_ROOT' => 'VOUS ÊTES CONNECTÉ EN TANT QUE L\'UTILISATEUR ROOT',
     'LAST_NAME'           => 'Nom de famille',
     'LOCALE'              => [
@@ -146,5 +147,5 @@ return [
     'USER_ID_INVALID'       => 'L\'identifiant d\'utilisateur demandé n\'existe pas.',
     'USER_OR_EMAIL_INVALID' => 'Nom d\'utilisateur ou adresse e-mail non valide.',
     'USER_OR_PASS_INVALID'  => 'Nom d\'utilisateur ou mot de passe incorrect.',
-    'WELCOME'               => 'Bienvenue {{first_name}}',
+    'WELCOME'               => 'Bienvenue {{full_name}}!',
 ];

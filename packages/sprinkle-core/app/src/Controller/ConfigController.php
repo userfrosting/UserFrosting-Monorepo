@@ -17,6 +17,11 @@ use UserFrosting\Sprinkle\Core\I18n\SiteLocaleInterface;
 
 /**
  * Return the config variables to use in the frontend.
+ *
+ * Middleware: none
+ * Route: /api/config
+ * Route Name: api.config
+ * Request type: GET
  */
 class ConfigController
 {

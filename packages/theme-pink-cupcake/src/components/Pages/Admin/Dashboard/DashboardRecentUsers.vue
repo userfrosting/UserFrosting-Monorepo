@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { UserInterface } from '@userfrosting/sprinkle-account/interfaces'
-import moment from 'moment'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
+const { getDateTime } = useTranslator()
 
 defineProps<{
     users: UserInterface[]
@@ -18,7 +19,7 @@ defineProps<{
                     <img :src="user.avatar" alt="User Image" class="uk-border-circle" />
                     <p class="uk-margin-remove">{{ user.full_name }}</p>
                     <p class="uk-margin-remove uk-text-meta">
-                        {{ moment(user.created_at).fromNow() }}
+                        {{ getDateTime(user.created_at).toRelative() }}
                     </p>
                 </RouterLink>
             </div>

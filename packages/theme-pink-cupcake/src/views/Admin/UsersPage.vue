@@ -1,12 +1,14 @@
 <script setup>
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
-import moment from 'moment'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import UserCreateModal from '../../components/Pages/Admin/User/UserCreateModal.vue'
 import UserEditModal from '../../components/Pages/Admin/User/UserEditModal.vue'
 import UserDeleteModal from '../../components/Pages/Admin/User/UserDeleteModal.vue'
 import UserActivateModal from '../../components/Pages/Admin/User/UserActivateModal.vue'
 import UserPasswordModal from '../../components/Pages/Admin/User/UserPasswordModal.vue'
 import UserPasswordResetModal from '../../components/Pages/Admin/User/UserPasswordResetModal.vue'
+
+const { $tdate } = useTranslator()
 </script>
 
 <template>
@@ -37,10 +39,7 @@ import UserPasswordResetModal from '../../components/Pages/Admin/User/UserPasswo
                     <div class="uk-text-meta">{{ item.email }}</div>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
-                    <div>{{ moment(item.last_activity.occurred_at).format('dddd') }}</div>
-                    <div>
-                        {{ moment(item.last_activity.occurred_at).format('MMM Do, YYYY h:mm a') }}
-                    </div>
+                    <div>{{ $tdate(item.last_activity.occurred_at) }}</div>
                     <i>{{ item.last_activity.description }}</i>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
