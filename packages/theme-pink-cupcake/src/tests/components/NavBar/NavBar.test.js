@@ -1,7 +1,14 @@
 import { expect, test, describe } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { mount, config } from '@vue/test-utils'
 import { createRouter, createWebHistory } from 'vue-router'
 import NavBar from '../../../components/NavBar/NavBar.vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+// Register font-awesome-icon component
+library.add(fas)
+config.global.stubs['FontAwesomeIcon'] = FontAwesomeIcon
 
 // Mock router
 const router = createRouter({
