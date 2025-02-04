@@ -27,6 +27,14 @@ const form: LoginForm = {
     password: 'password'
 }
 
+// Mock useTranslator load function
+const loadTranslator = vi.fn()
+vi.mock('@userfrosting/sprinkle-core/stores', () => ({
+    useTranslator: () => ({
+        load: loadTranslator
+    })
+}))
+
 describe('authStore', () => {
     beforeEach(() => {
         setActivePinia(createPinia())
@@ -67,6 +75,7 @@ describe('authStore', () => {
         expect(axios.post).toHaveBeenCalledWith('/account/login', form)
         expect(result).toStrictEqual(testUser)
         expect(authStore.user).toStrictEqual(testUser)
+        expect(loadTranslator).toHaveBeenCalled()
     })
 
     test('should throw an error when login fails', async () => {
@@ -141,6 +150,7 @@ describe('authStore', () => {
         // Assert
         expect(axios.get).toHaveBeenCalledWith('/account/logout')
         expect(authStore.user).toBeNull()
+        expect(loadTranslator).toHaveBeenCalled()
     })
 
     test('should throw an error when logout fails', async () => {
