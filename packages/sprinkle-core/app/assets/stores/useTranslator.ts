@@ -65,7 +65,7 @@ export const useTranslator = defineStore(
             date: string,
             format: string | object = DateTime.DATETIME_MED_WITH_WEEKDAY
         ): string {
-            const dt = DateTime.fromISO(date).setLocale(config.value.dates)
+            const dt = getDateTime(date)
             if (typeof format === 'object') {
                 return dt.toLocaleString(format)
             } else {

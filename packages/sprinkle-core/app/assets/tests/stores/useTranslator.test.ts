@@ -1,9 +1,9 @@
 import { describe, expect, beforeEach, test, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
+import { DateTime, Settings } from 'luxon'
 import axios from 'axios'
 import { useTranslator } from '../../stores/useTranslator'
 import type { DictionaryConfig, DictionaryEntries, DictionaryResponse } from '../../interfaces'
-import { DateTime } from 'luxon'
 
 const testDictionaryConfig: DictionaryConfig = {
     name: 'English',
@@ -288,6 +288,9 @@ describe('Date Tests', async () => {
         await load()
 
         // Assert basic translate method
+        // Force the default timezone, so the test is consistent regardless of
+        // the timezone of the runner
+        Settings.defaultZone = 'America/New_York'
         expect($tdate('2025-02-02T14:42:12.000000Z')).toBe('Sun, Feb 2, 2025, 9:42 AM')
         expect($tdate('2025-02-02T14:42:12.000000Z', 'DDD')).toBe('February 2, 2025')
         expect($tdate('2025-02-02T14:42:12.000000Z', DateTime.DATETIME_MED)).toBe(
@@ -308,6 +311,9 @@ describe('Date Tests', async () => {
         await load()
 
         // Assert basic translate method
+        // Force the default timezone, so the test is consistent regardless of
+        // the timezone of the runner
+        Settings.defaultZone = 'America/New_York'
         expect($tdate('2025-02-02T14:42:12.000000Z')).toBe('dim. 2 févr. 2025, 09:42')
         expect($tdate('2025-02-02T14:42:12.000000Z', 'DDD')).toBe('2 février 2025')
         expect($tdate('2025-02-02T14:42:12.000000Z', DateTime.DATETIME_MED)).toBe(
