@@ -69,7 +69,7 @@ const testDictionary: DictionaryResponse = {
 const testDictionaryFr: DictionaryResponse = {
     identifier: 'fr_FR',
     config: testDictionaryConfigFr,
-    dictionary: testDictionaryEntries // TODO
+    dictionary: testDictionaryEntries
 }
 
 describe('API Tests', async () => {
@@ -157,29 +157,28 @@ describe('Translator Tests', () => {
 
     test('Should handle pluralization with custom plural key', () => {
         const { $t } = useTranslator()
-        // expect($t('X_HUNGRY_CATS', { 'num': 0 })).toBe('0 hungry cats') // TODO : Fix this test
+        expect($t('X_HUNGRY_CATS', { num: 0 })).toBe('0 hungry cats')
         expect($t('X_HUNGRY_CATS', { num: 1 })).toBe('1 hungry cat')
         expect($t('X_HUNGRY_CATS', { num: 2 })).toBe('2 hungry cats')
         expect($t('X_HUNGRY_CATS', { num: 5 })).toBe('5 hungry cats')
 
         // Custom key can also be omitted in the placeholder if it's the only
         // placeholder even with custom plural key
-        // expect($t('X_HUNGRY_CATS', 5)).toBe('5 hungry cats') // TODO : Fix this test
+        expect($t('X_HUNGRY_CATS', 5)).toBe('5 hungry cats')
 
         // Test missing pluralization and placeholder (default to 1)
-        // expect($t('X_HUNGRY_CATS')).toBe('1 hungry cat') // TODO : Fix this test
+        expect($t('X_HUNGRY_CATS')).toBe('1 hungry cat')
     })
 
-    // TODO : Fix this test
-    // test('Should handle plurals default, when no placeholder', () => {
-    //     const { $t } = useTranslator()
-    //     expect($t('X_CARS')).toBe('a car')
-    // })
+    test('Should handle plurals default, when no placeholder', () => {
+        const { $t } = useTranslator()
+        expect($t('X_CARS')).toBe('a car')
+    })
 
     test('Should handle Key With No Plural', () => {
         const { $t } = useTranslator()
         expect($t('USERNAME', 123)).toBe('Username') // USERNAME has no placeholders
-        expect($t('X_FOO')).toBe('x foos') // {{plural}} is not defined, so it default to empty here
+        expect($t('X_FOO')).toBe('{{plural}}x foos') // 'X_FOO' doesn't have children, so it's not treated as a "pluralize-able" string
         expect($t('X_FOO', { plural: 1 })).toBe('1x foos') // Replace {{plural}} with 1
         expect($t('X_FOO', 1)).toBe('1x foos') // Replace {{plural}} with 1, without specifying the key
         expect($t('X_FOO', 123)).toBe('123x foos') // Replace {{plural}} with 123
@@ -250,13 +249,13 @@ describe('Translator Tests', () => {
         const { $t } = useTranslator()
         expect($t('X_RULES', 0)).toBe('no rules')
         expect($t('X_RULES', 1)).toBe('1 rule')
-        // expect($t('X_RULES', 2)).toBe('2 rule') // TODO : Fix this test
+        expect($t('X_RULES', 2)).toBe('2 rule')
 
         // X_BANANAS
         expect($t('X_BANANAS', 0)).toBe('no bananas')
-        // expect($t('X_BANANAS', 1)).toBe('no bananas') // TODO : Fix this test
-        // expect($t('X_BANANAS', 2)).toBe('no bananas') // TODO : Fix this test
-        // expect($t('X_BANANAS', 5)).toBe('no bananas') // TODO : Fix this test
+        expect($t('X_BANANAS', 1)).toBe('no bananas')
+        expect($t('X_BANANAS', 2)).toBe('no bananas')
+        expect($t('X_BANANAS', 5)).toBe('no bananas')
     })
 
     // The keys are int, but don't follow the rules. It will fallback to the literal key
@@ -271,10 +270,6 @@ describe('Translator Tests', () => {
         expect($t('X_DOGS', 102)).toBe('X_DOGS') // This one is not hardcoded
         expect($t('X_DOGS', 1000)).toBe('An island of dogs') // Still fallback, if the key is a string representing and INT
     })
-
-    // testTranslateWithNested
-    // testGetPluralFormWithException
-    // testGetPluralFormWithNoDefineRule
 })
 
 describe('Date Tests', async () => {
@@ -324,3 +319,55 @@ describe('Date Tests', async () => {
         expect(getDateTime('2025-02-02T14:42:12.000000Z').monthLong).toBe('février')
     })
 })
+
+describe('Plural Form Tests', () => {
+    beforeEach(async () => {
+        // Arrange
+        setActivePinia(createPinia())
+        const translator = useTranslator()
+        const { load } = translator
+        const response = { data: testDictionary }
+        vi.spyOn(axios, 'get').mockResolvedValue(response as any)
+
+        // Act
+        await load()
+    })
+
+    test('Should return correct plural form for rule 1', () => {
+        const { getPluralForm } = useTranslator()
+        expect(getPluralForm(0, 1)).toBe(2)
+        expect(getPluralForm(1, 1)).toBe(1)
+        expect(getPluralForm(2, 1)).toBe(2)
+        expect(getPluralForm(20, 1)).toBe(2)
+    })
+
+    test('Should return correct plural form for rule 2', () => {
+        const { getPluralForm } = useTranslator()
+        expect(getPluralForm(0, 2)).toBe(1) // French = zero is singular
+        expect(getPluralForm(1, 2)).toBe(1)
+        expect(getPluralForm(2, 2)).toBe(2)
+        expect(getPluralForm(20, 2)).toBe(2)
+    })
+
+    test('Should throw error for invalid rule', () => {
+        const { getPluralForm } = useTranslator()
+        expect(() => getPluralForm(1, 16)).toThrow('The rule number 16 must be between 0 and 15')
+    })
+
+    test('Should use default rule if forceRule is not provided', () => {
+        const { getPluralForm } = useTranslator()
+        expect(getPluralForm(0)).toBe(2)
+        expect(getPluralForm(1)).toBe(1)
+        expect(getPluralForm(2)).toBe(2)
+    })
+
+    test('Should used the specified rule if forceRule is provided', () => {
+        const { getPluralForm } = useTranslator()
+        expect(getPluralForm(0, 1)).toBe(2) // English
+        expect(getPluralForm(0, 2)).toBe(1) // French
+        expect(getPluralForm(5, 1)).toBe(2) // English
+        expect(getPluralForm(5, 8)).toBe(3) // Slavic
+    })
+})
+
+// TODO : Test each plural rules

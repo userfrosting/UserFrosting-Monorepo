@@ -22,7 +22,7 @@ namespace UserFrosting\I18n\PluralRules;
  */
 final class Rule3 implements RuleInterface
 {
-    public static function getRule(int $number): int
+    public static function selectPluralForm(int $number): int
     {
         if ($number == 0) {
             return 1;

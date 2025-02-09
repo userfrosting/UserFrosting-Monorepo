@@ -22,11 +22,11 @@ namespace UserFrosting\I18n\PluralRules;
 interface RuleInterface
 {
     /**
-     * Return the rule to apply.
+     * Return the plural form to apply.
      *
-     * @param int $number The number we want the rule for
+     * @param int $number The number we want the plural form for
      *
-     * @return int The rule
+     * @return int The plural form to use
      */
-    public static function getRule(int $number): int;
+    public static function selectPluralForm(int $number): int;
 }

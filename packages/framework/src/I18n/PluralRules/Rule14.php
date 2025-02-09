@@ -22,7 +22,7 @@ namespace UserFrosting\I18n\PluralRules;
  */
 final class Rule14 implements RuleInterface
 {
-    public static function getRule(int $number): int
+    public static function selectPluralForm(int $number): int
     {
         if ($number % 10 == 1) {
             return 1;

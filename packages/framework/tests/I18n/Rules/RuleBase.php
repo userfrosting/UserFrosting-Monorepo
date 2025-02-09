@@ -39,7 +39,7 @@ abstract class RuleBase extends TestCase
     public function testRule(int $number, int $expectedResult): void
     {
         $rule = $this->ruleToTest;
-        $result = $rule::getRule($number);
+        $result = $rule::selectPluralForm($number);
         $this->assertSame($expectedResult, $result);
     }
 

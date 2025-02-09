@@ -142,7 +142,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -154,7 +154,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -166,7 +166,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -178,7 +178,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -190,7 +190,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -202,7 +202,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -214,7 +214,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -226,7 +226,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -238,7 +238,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -250,7 +250,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>int</em> <strong>$number</strong>)</strong> : <em>int The rule</em><br /><em>Return the rule to apply.</em> |
+| public static | <strong>selectPluralForm(</strong><em>int</em> <strong>$number</strong>)</strong> : <em>int The rule</em><br /><em>Return the rule to apply.</em> |
 
 <hr />
 
@@ -260,7 +260,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -272,7 +272,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -284,7 +284,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -296,7 +296,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -308,7 +308,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -320,7 +320,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 
@@ -332,7 +332,7 @@
 
 | Visibility | Function |
 |:-----------|:---------|
-| public static | <strong>getRule(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
+| public static | <strong>selectPluralForm(</strong><em>mixed</em> <strong>$number</strong>)</strong> : <em>mixed</em> |
 
 *This class implements [\UserFrosting\I18n\PluralRules\RuleInterface](#interface-userfrostingi18npluralrulesruleinterface)*
 

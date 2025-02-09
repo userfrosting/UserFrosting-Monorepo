@@ -231,7 +231,7 @@ class Translator
 
     /**
      * Return the correct plural message form to use.
-     * When multiple plural form are available for a message, this method will return the correct oen to use based on the numeric value.
+     * When multiple plural form are available for a message, this method will return the correct one to use based on the numeric value.
      *
      * @param mixed[] $messageArray The array with all the form inside ($pluralRule => $message)
      * @param int     $pluralValue  The numeric value used to select the correct message
@@ -240,7 +240,9 @@ class Translator
      */
     protected function getPluralMessageKey(array $messageArray, int $pluralValue): ?int
     {
-        // Bypass the rules for a value of "0" so that "0 users" may be displayed as "No users".
+        // Bypass the rules for a value of "0". Instead of returning the correct
+        // plural form (>= 1), we force return the "0" form, which can used to
+        // display "0 users" as "No users".
         if ($pluralValue == 0 && isset($messageArray[0])) {
             return 0;
         }
@@ -253,7 +255,8 @@ class Translator
             return $usePluralForm;
         }
 
-        // If the key we need doesn't exist, use the previous available one.
+        // If the key we need doesn't exist, use the previous available one, including the special "0" form
+        // This is a fallback to avoid errors when the dictionary is not complete
         $numbers = array_keys($messageArray);
         foreach (array_reverse($numbers) as $num) {
             if (is_int($num) && $num > $usePluralForm) {
@@ -326,25 +329,20 @@ class Translator
      *
      * @see https://developer.mozilla.org/en-US/docs/Mozilla/Localization/Localization_and_Plurals
      *
-     * @param int|float $number    The number we want to get the plural case for. Float numbers are floored.
-     * @param int|bool  $forceRule False to use the plural rule of the language package
-     *                             or an integer to force a certain plural rule
+     * @param int|float $number    The number we want to get the plural form of. Float numbers are floored.
+     * @param int|null  $forceRule Used to force a certain plural rule. Null (default) to use the plural rule of the language package.
      *
-     * @return int The plural-case we need to use for the number plural-rule combination
+     * @return int The plural form we need to use for the number & plural rule combination
      */
-    public function getPluralForm(int|float $number, int|bool $forceRule = false): int
+    public function getPluralForm(int|float $number, ?int $forceRule = null): int
     {
-        if (is_int($forceRule)) {
-            $ruleNumber = $forceRule;
-        } else {
-            $ruleNumber = $this->dictionary->getLocale()->getPluralRule();
-        }
+        $rule = $forceRule ?? $this->dictionary->getLocale()->getPluralRule();
 
         // Get the rule class
-        if (!array_key_exists($ruleNumber, $this->rulesClass)) {
-            throw new OutOfRangeException("The rule number '$ruleNumber' must be between 0 and 15.");
+        if (!array_key_exists($rule, $this->rulesClass)) {
+            throw new OutOfRangeException("The rule number '$rule' must be between 0 and 15.");
         }
 
-        return $this->rulesClass[$ruleNumber]::getRule((int) $number);
+        return $this->rulesClass[$rule]::selectPluralForm((int) $number);
     }
 }

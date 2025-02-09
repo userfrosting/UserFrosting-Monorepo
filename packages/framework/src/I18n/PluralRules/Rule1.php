@@ -21,7 +21,7 @@ namespace UserFrosting\I18n\PluralRules;
  */
 final class Rule1 implements RuleInterface
 {
-    public static function getRule(int $number): int
+    public static function selectPluralForm(int $number): int
     {
         return ($number == 1) ? 1 : 2;
     }

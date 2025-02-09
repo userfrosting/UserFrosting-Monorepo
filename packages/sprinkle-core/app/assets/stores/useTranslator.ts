@@ -8,6 +8,45 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import type { DictionaryEntries, DictionaryResponse, DictionaryConfig } from '../interfaces'
 import { DateTime } from 'luxon'
+import type { PluralRules } from './Helpers/PluralRules'
+import {
+    rule0,
+    rule1,
+    rule2,
+    rule3,
+    rule4,
+    rule5,
+    rule6,
+    rule7,
+    rule8,
+    rule9,
+    rule10,
+    rule11,
+    rule12,
+    rule13,
+    rule14,
+    rule15
+} from './Helpers/PluralRules'
+
+// List all available plural rules
+const rules: PluralRules = {
+    0: rule0,
+    1: rule1,
+    2: rule2,
+    3: rule3,
+    4: rule4,
+    5: rule5,
+    6: rule6,
+    7: rule7,
+    8: rule8,
+    9: rule9,
+    10: rule10,
+    11: rule11,
+    12: rule12,
+    13: rule13,
+    14: rule14,
+    15: rule15
+}
 
 export const useTranslator = defineStore(
     'translator',
@@ -39,16 +78,14 @@ export const useTranslator = defineStore(
         }
 
         // The translate function
-        function $t(key: string, placeholders: string | number | object = ''): string {
-            // console.debug('Translating', key, placeholders)
+        function $t(key: string, placeholders: string | number | object = {}): string {
+            const { message, placeholders: mutatedPlaceholders } = getMessageFromKey(
+                key,
+                placeholders
+            )
+            placeholders = mutatedPlaceholders
 
-            let message: string = getMessageFromKey(key, placeholders)
-            // console.debug('Message', message, key, placeholders)
-
-            message = replacePlaceholders(message, placeholders)
-            // console.debug('Translated', message)
-
-            return message
+            return replacePlaceholders(message, placeholders)
         }
 
         /**
@@ -83,13 +120,14 @@ export const useTranslator = defineStore(
             return DateTime.fromISO(date).setLocale(config.value.dates)
         }
 
+        // TODO : Add doc + make Placeholders a type
         function getMessageFromKey(
             key: string,
             placeholders: string | number | Record<string, any>
-        ): string {
+        ): { message: string; placeholders: string | number | Record<string, any> } {
             // Return direct match
             if (dictionary.value[key] !== undefined) {
-                return dictionary.value[key]
+                return { message: dictionary.value[key], placeholders }
             }
 
             // First, let's see if we can get the plural rules.
@@ -106,37 +144,38 @@ export const useTranslator = defineStore(
                 pluralValue = Number(placeholders)
             } else if (dictionary.value[key + '.@TRANSLATION'] !== undefined) {
                 // We have a `@TRANSLATION` instruction, return this
-                return dictionary.value[key + '.@TRANSLATION']
+                return { message: dictionary.value[key + '.@TRANSLATION'], placeholders }
             }
 
             // If placeholders is a numeric value, we transform back to an array for replacement in the main message
             if (typeof placeholders === 'number' || typeof placeholders === 'string') {
                 placeholders = { [pluralKey]: pluralValue }
+            } else if (typeof placeholders === 'object' && placeholders[pluralKey] === undefined) {
+                placeholders = { ...placeholders, [pluralKey]: pluralValue }
             }
 
             // At this point, we need to go deeper and find the correct plural form to use
-            const pluralRuleKey = pluralValue === 0 ? 0 : pluralValue <= 1 ? '1' : '2' // TODO: Implement plural rules
-            // $plural = $this->getPluralMessageKey($message, $pluralValue);
+            const pluralRuleKey = getPluralMessageKey(key, pluralValue)
 
             // Only return if the plural is not null. Will happen if the message array don't follow the rules
             if (dictionary.value[key + '.' + pluralRuleKey] !== undefined) {
-                return dictionary.value[key + '.' + pluralRuleKey]
+                return { message: dictionary.value[key + '.' + pluralRuleKey], placeholders }
             }
 
             // One last check... If we don't have a rule, but the $pluralValue
             // as a key does exist, we might still be able to return it
             if (dictionary.value[key + '.' + pluralValue] !== undefined) {
-                return dictionary.value[key + '.' + pluralValue]
+                return { message: dictionary.value[key + '.' + pluralValue], placeholders }
             }
 
             // Return @TRANSLATION match
             if (dictionary.value[key + '.@TRANSLATION'] !== undefined) {
-                return dictionary.value[key + '.@TRANSLATION']
+                return { message: dictionary.value[key + '.@TRANSLATION'], placeholders }
             }
 
             // If the message is an array, but we can't find a plural form or a "@TRANSLATION" instruction, we can't go further.
             // We can't return the array, so we'll return the key
-            return key
+            return { message: key, placeholders }
         }
 
         function replacePlaceholders(
@@ -165,7 +204,7 @@ export const useTranslator = defineStore(
                     // Remove the current placeholder from the master $placeholder
                     // array, otherwise we end up in an infinite loop
                     const data = Object.fromEntries(
-                        Object.entries(placeholders).filter(([k, v]) => k !== name)
+                        Object.entries(placeholders).filter(([k]) => k !== name)
                     )
 
                     // Translate placeholders value and place it in the main $placeholder array
@@ -190,8 +229,50 @@ export const useTranslator = defineStore(
             return message
         }
 
-        function getPluralForm(pluralValue: number): string {
-            return '' // TODO
+        /**
+         * Return the correct plural message form to use.
+         * When multiple plural form are available for a message, this method will return the correct oen to use based on the numeric value.
+         *
+         * @param int     $pluralValue  The numeric value used to select the correct message
+         *
+         * @return int|null Returns which key from $messageArray to use
+         */
+        function getPluralMessageKey(key: string, pluralValue: number): number | null {
+            // Bypass the rules for a value of "0". Instead of returning the
+            // correct plural form (>= 1), we force return the "0" form, which
+            // can used to display "0 users" as "No users".
+            if (pluralValue === 0 && dictionary.value[key + '.0'] !== undefined) {
+                return 0
+            }
+
+            // Get the correct plural form to use depending on the language
+            const pluralForm = getPluralForm(pluralValue)
+
+            // If the dictionary contains a string for this form, return the form
+            if (dictionary.value[key + '.' + pluralForm] !== undefined) {
+                return pluralForm
+            }
+
+            // If the key we need doesn't exist, use the previous available one, including the special "0" form
+            // This is a fallback to avoid errors when the dictionary is not complete
+            for (let i = pluralForm; i >= 0; i--) {
+                if (dictionary.value[key + '.' + i] !== undefined) {
+                    return i
+                }
+            }
+
+            // If no key was found, null will be returned
+            return null
+        }
+
+        function getPluralForm(pluralValue: number, forceRule?: number): number {
+            const rule = forceRule ?? config.value.plural_rule
+
+            if (rule < 0 || rule >= Object.keys(rules).length) {
+                throw new Error(`The rule number ${rule} must be between 0 and 15`)
+            }
+
+            return rules[rule](pluralValue)
         }
 
         /**
