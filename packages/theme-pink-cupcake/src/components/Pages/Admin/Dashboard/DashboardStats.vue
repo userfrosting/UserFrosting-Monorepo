@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { useTranslator } from '@userfrosting/sprinkle-core/stores'
-const { $t } = useTranslator()
 defineProps<{
     users: number
     roles: number

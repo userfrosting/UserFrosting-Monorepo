@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference types="@userfrosting/sprinkle-core" />
 
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'

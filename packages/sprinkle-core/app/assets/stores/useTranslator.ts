@@ -78,7 +78,7 @@ export const useTranslator = defineStore(
         }
 
         // The translate function
-        function $t(key: string, placeholders: string | number | object = {}): string {
+        function translate(key: string, placeholders: string | number | object = {}): string {
             const { message, placeholders: mutatedPlaceholders } = getMessageFromKey(
                 key,
                 placeholders
@@ -98,7 +98,7 @@ export const useTranslator = defineStore(
          * @see https://moment.github.io/luxon/#/formatting?id=presets
          * @see https://moment.github.io/luxon/#/formatting?id=table-of-tokens
          */
-        function $tdate(
+        function translateDate(
             date: string,
             format: string | object = DateTime.DATETIME_MED_WITH_WEEKDAY
         ): string {
@@ -208,7 +208,7 @@ export const useTranslator = defineStore(
                     )
 
                     // Translate placeholders value and place it in the main $placeholder array
-                    placeholders[name] = $t(value.substring(1), data)
+                    placeholders[name] = translate(value.substring(1), data)
                 }
             }
 
@@ -217,7 +217,7 @@ export const useTranslator = defineStore(
             // pre-translate the message string vars
             // We use some regex magic to detect them !
             message = message.replace(/{{&(([^}]+[^a-z]))}}/g, (match, p1) => {
-                return $t(p1, placeholders)
+                return translate(p1, placeholders)
             })
 
             // Now it's time to replace the remaining placeholder.
@@ -278,7 +278,16 @@ export const useTranslator = defineStore(
         /**
          * Return store
          */
-        return { dictionary, load, config, identifier, $t, $tdate, getPluralForm, getDateTime }
+        return {
+            dictionary,
+            load,
+            config,
+            identifier,
+            translate,
+            translateDate,
+            getPluralForm,
+            getDateTime
+        }
     },
     { persist: true }
 )

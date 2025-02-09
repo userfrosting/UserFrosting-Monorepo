@@ -1,8 +1,3 @@
-<script lang="ts" setup>
-import { useTranslator } from '@userfrosting/sprinkle-core/stores'
-const { $tdate } = useTranslator()
-</script>
-
 <template>
     <UFCardBox title="Latest Activities">
         <UFSprunjeTable

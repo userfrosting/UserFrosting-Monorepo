@@ -52,7 +52,7 @@ describe('FormLogin.vue', () => {
         // Mock the useTranslator store
         vi.mock('@userfrosting/sprinkle-core/stores', () => ({
             useTranslator: () => ({
-                $t: vi.fn(() => 'Welcome back John Doe!')
+                translate: vi.fn(() => 'Welcome back John Doe!')
             })
         }))
 
@@ -100,7 +100,7 @@ describe('FormLogin.vue', () => {
         // Mock the useTranslator store
         vi.mock('@userfrosting/sprinkle-core/stores', () => ({
             useTranslator: () => ({
-                $t: vi.fn(() => 'Welcome back John Doe!')
+                translate: vi.fn(() => 'Welcome back John Doe!')
             })
         }))
 

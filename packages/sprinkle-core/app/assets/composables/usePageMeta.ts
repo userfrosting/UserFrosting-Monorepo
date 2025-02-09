@@ -18,7 +18,7 @@ export const usePageMeta = defineStore('pageMeta', () => {
      * Globally provided properties
      */
     const route = useRoute()
-    const { $t } = useTranslator()
+    const { translate } = useTranslator()
 
     /**
      * States
@@ -70,7 +70,7 @@ export const usePageMeta = defineStore('pageMeta', () => {
 
         // Update Page Title & Description with current route
         title.value = route.meta.title || ''
-        description.value = $t(route.meta.description || '')
+        description.value = translate(route.meta.description || '')
     }
 
     // Update the document title
@@ -92,7 +92,7 @@ export const usePageMeta = defineStore('pageMeta', () => {
      */
     const siteTitle = computed<string>(() => useConfigStore().get('site.title') || '')
     const pageFullTitle = computed<string>(() => {
-        return title.value ? $t(title.value) + ' | ' + siteTitle.value : siteTitle.value
+        return title.value ? translate(title.value) + ' | ' + siteTitle.value : siteTitle.value
     })
 
     /**

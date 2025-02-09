@@ -1,3 +1,4 @@
+import type { App } from 'vue'
 import { useConfigStore, useTranslator } from './stores'
 
 /**
@@ -6,8 +7,13 @@ import { useConfigStore, useTranslator } from './stores'
  * This recipe is responsible for loading the configuration from the api.
  */
 export default {
-    install: () => {
+    install: (app: App) => {
         useConfigStore().load()
-        useTranslator().load()
+
+        // Load translations & add $t to global properties
+        const { translate, translateDate, load } = useTranslator()
+        load()
+        app.config.globalProperties.$t = translate
+        app.config.globalProperties.$tdate = translateDate
     }
 }

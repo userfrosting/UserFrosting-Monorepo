@@ -1,14 +1,11 @@
 <script setup>
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
-import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import UserCreateModal from '../../components/Pages/Admin/User/UserCreateModal.vue'
 import UserEditModal from '../../components/Pages/Admin/User/UserEditModal.vue'
 import UserDeleteModal from '../../components/Pages/Admin/User/UserDeleteModal.vue'
 import UserActivateModal from '../../components/Pages/Admin/User/UserActivateModal.vue'
 import UserPasswordModal from '../../components/Pages/Admin/User/UserPasswordModal.vue'
 import UserPasswordResetModal from '../../components/Pages/Admin/User/UserPasswordResetModal.vue'
-
-const { $tdate } = useTranslator()
 </script>
 
 <template>

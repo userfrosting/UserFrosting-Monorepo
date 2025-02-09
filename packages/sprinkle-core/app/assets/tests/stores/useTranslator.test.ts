@@ -77,7 +77,7 @@ describe('API Tests', async () => {
         // Arrange
         setActivePinia(createPinia())
         const translator = useTranslator()
-        const { $t, load } = translator
+        const { translate, load } = translator
         const response = { data: testDictionary }
         vi.spyOn(axios, 'get').mockResolvedValue(response as any)
 
@@ -100,9 +100,9 @@ describe('API Tests', async () => {
         expect(translator.identifier).toBe('en_US')
 
         // Assert basic translate method
-        expect($t('YES')).toBe('Yes')
-        expect($t('NO')).toBe('No')
-        expect($t('WELCOME_TO')).toBe('Welcome to {{title}}!')
+        expect(translate('YES')).toBe('Yes')
+        expect(translate('NO')).toBe('No')
+        expect(translate('WELCOME_TO')).toBe('Welcome to {{title}}!')
     })
 })
 
@@ -120,112 +120,112 @@ describe('Translator Tests', () => {
     })
 
     test('Should handle basic translation', () => {
-        const { $t } = useTranslator()
-        expect($t('USERNAME')).toBe('Username')
+        const { translate } = useTranslator()
+        expect(translate('USERNAME')).toBe('Username')
     })
 
     test('Should handle key not existing', () => {
-        const { $t } = useTranslator()
-        expect($t('NOT_EXIST')).toBe('NOT_EXIST')
-        expect($t('NOT EXIST')).toBe('NOT EXIST')
+        const { translate } = useTranslator()
+        expect(translate('NOT_EXIST')).toBe('NOT_EXIST')
+        expect(translate('NOT EXIST')).toBe('NOT EXIST')
     })
 
     test('Should handle @TRANSLATION', () => {
-        const { $t } = useTranslator()
-        expect($t('ERROR')).toBe('The Error')
-        expect($t('ERROR.TITLE')).toBe("We've sensed a great disturbance in the Force.")
+        const { translate } = useTranslator()
+        expect(translate('ERROR')).toBe('The Error')
+        expect(translate('ERROR.TITLE')).toBe("We've sensed a great disturbance in the Force.")
     })
 
     test('Should handle placeholders', () => {
-        const { $t } = useTranslator()
-        expect($t('WELCOME_TO')).toBe('Welcome to {{title}}!') // Placeholder not replaced
-        expect($t('WELCOME_TO', { title: 'UserFrosting' })).toBe('Welcome to UserFrosting!')
-        expect($t('WELCOME_TO', { bar: 'UserFrosting' })).toBe('Welcome to {{title}}!') // Wrong key
-        expect($t('WELCOME_TO', 'UserFrosting')).toBe('Welcome to {{title}}!') // Key not provided
-        expect($t('WELCOME_TO', { title: 'UserFrosting', foo: 'bar' })).toBe(
+        const { translate } = useTranslator()
+        expect(translate('WELCOME_TO')).toBe('Welcome to {{title}}!') // Placeholder not replaced
+        expect(translate('WELCOME_TO', { title: 'UserFrosting' })).toBe('Welcome to UserFrosting!')
+        expect(translate('WELCOME_TO', { bar: 'UserFrosting' })).toBe('Welcome to {{title}}!') // Wrong key
+        expect(translate('WELCOME_TO', 'UserFrosting')).toBe('Welcome to {{title}}!') // Key not provided
+        expect(translate('WELCOME_TO', { title: 'UserFrosting', foo: 'bar' })).toBe(
             'Welcome to UserFrosting!'
         ) // Extra key not used
     })
 
     test('Should handle basic plurals', () => {
-        const { $t } = useTranslator()
-        expect($t('X_CARS', 0)).toBe('no cars')
-        expect($t('X_CARS', 1)).toBe('a car')
-        expect($t('X_CARS', 2)).toBe('2 cars')
-        expect($t('X_CARS', 5)).toBe('5 cars')
+        const { translate } = useTranslator()
+        expect(translate('X_CARS', 0)).toBe('no cars')
+        expect(translate('X_CARS', 1)).toBe('a car')
+        expect(translate('X_CARS', 2)).toBe('2 cars')
+        expect(translate('X_CARS', 5)).toBe('5 cars')
     })
 
     test('Should handle pluralization with custom plural key', () => {
-        const { $t } = useTranslator()
-        expect($t('X_HUNGRY_CATS', { num: 0 })).toBe('0 hungry cats')
-        expect($t('X_HUNGRY_CATS', { num: 1 })).toBe('1 hungry cat')
-        expect($t('X_HUNGRY_CATS', { num: 2 })).toBe('2 hungry cats')
-        expect($t('X_HUNGRY_CATS', { num: 5 })).toBe('5 hungry cats')
+        const { translate } = useTranslator()
+        expect(translate('X_HUNGRY_CATS', { num: 0 })).toBe('0 hungry cats')
+        expect(translate('X_HUNGRY_CATS', { num: 1 })).toBe('1 hungry cat')
+        expect(translate('X_HUNGRY_CATS', { num: 2 })).toBe('2 hungry cats')
+        expect(translate('X_HUNGRY_CATS', { num: 5 })).toBe('5 hungry cats')
 
         // Custom key can also be omitted in the placeholder if it's the only
         // placeholder even with custom plural key
-        expect($t('X_HUNGRY_CATS', 5)).toBe('5 hungry cats')
+        expect(translate('X_HUNGRY_CATS', 5)).toBe('5 hungry cats')
 
         // Test missing pluralization and placeholder (default to 1)
-        expect($t('X_HUNGRY_CATS')).toBe('1 hungry cat')
+        expect(translate('X_HUNGRY_CATS')).toBe('1 hungry cat')
     })
 
     test('Should handle plurals default, when no placeholder', () => {
-        const { $t } = useTranslator()
-        expect($t('X_CARS')).toBe('a car')
+        const { translate } = useTranslator()
+        expect(translate('X_CARS')).toBe('a car')
     })
 
     test('Should handle Key With No Plural', () => {
-        const { $t } = useTranslator()
-        expect($t('USERNAME', 123)).toBe('Username') // USERNAME has no placeholders
-        expect($t('X_FOO')).toBe('{{plural}}x foos') // 'X_FOO' doesn't have children, so it's not treated as a "pluralize-able" string
-        expect($t('X_FOO', { plural: 1 })).toBe('1x foos') // Replace {{plural}} with 1
-        expect($t('X_FOO', 1)).toBe('1x foos') // Replace {{plural}} with 1, without specifying the key
-        expect($t('X_FOO', 123)).toBe('123x foos') // Replace {{plural}} with 123
+        const { translate } = useTranslator()
+        expect(translate('USERNAME', 123)).toBe('Username') // USERNAME has no placeholders
+        expect(translate('X_FOO')).toBe('{{plural}}x foos') // 'X_FOO' doesn't have children, so it's not treated as a "pluralize-able" string
+        expect(translate('X_FOO', { plural: 1 })).toBe('1x foos') // Replace {{plural}} with 1
+        expect(translate('X_FOO', 1)).toBe('1x foos') // Replace {{plural}} with 1, without specifying the key
+        expect(translate('X_FOO', 123)).toBe('123x foos') // Replace {{plural}} with 123
     })
 
     test('Should handle plurals for different plural rules', () => {
-        const { $t } = useTranslator()
+        const { translate } = useTranslator()
 
         // English plural rule is 1
-        expect($t('COLOR', 0)).toBe('colors')
-        expect($t('COLOR', 1)).toBe('color')
-        expect($t('COLOR', 2)).toBe('colors')
-        expect($t('COLOR', 3)).toBe('colors')
+        expect(translate('COLOR', 0)).toBe('colors')
+        expect(translate('COLOR', 1)).toBe('color')
+        expect(translate('COLOR', 2)).toBe('colors')
+        expect(translate('COLOR', 3)).toBe('colors')
 
         // Same as above, but with a custom plural key (french)
         // Note "0" is plural (colors) in english, singular (couleur) in french !
         // TODO : Implement plurals & load custom locale
-        // expect($t('COLOR', 0)).toBe('colors')
-        // expect($t('COLOR', 1)).toBe('color')
-        // expect($t('COLOR', 2)).toBe('colors')
-        // expect($t('COLOR', 3)).toBe('colors')
+        // expect(translate('COLOR', 0)).toBe('colors')
+        // expect(translate('COLOR', 1)).toBe('color')
+        // expect(translate('COLOR', 2)).toBe('colors')
+        // expect(translate('COLOR', 3)).toBe('colors')
     })
 
     test('Should handle a simple replacement when the key is not defined in dictionary', () => {
-        const { $t } = useTranslator()
-        expect($t('You are {{status}}', { status: 'dumb' })).toBe('You are dumb')
+        const { translate } = useTranslator()
+        expect(translate('You are {{status}}', { status: 'dumb' })).toBe('You are dumb')
     })
 
     test('Should handle @TRANSLATION when the key have plural rules', () => {
-        const { $t } = useTranslator()
-        expect($t('MY_CARS')).toBe('My cars') // @TRANSLATION is used, not the 1 rule
-        expect($t('MY_CARS', 1)).toBe('I have a {{type}} car')
-        expect($t('MY_CARS', 2)).toBe('I have 2 {{type}} cars')
+        const { translate } = useTranslator()
+        expect(translate('MY_CARS')).toBe('My cars') // @TRANSLATION is used, not the 1 rule
+        expect(translate('MY_CARS', 1)).toBe('I have a {{type}} car')
+        expect(translate('MY_CARS', 2)).toBe('I have 2 {{type}} cars')
     })
 
     test('Should handle complex placeholders', () => {
-        const { $t } = useTranslator()
-        expect($t('MY_CARS', { type: 'car' })).toBe('My cars')
-        expect($t('MY_CARS', { type: 'gaz', plural: 1 })).toBe('I have a gaz car')
-        expect($t('MY_CARS', { type: 'gaz', plural: 2 })).toBe('I have 2 gaz cars')
-        expect($t('MY_CARS', { type: '&CAR.GAS', plural: 2 })).toBe('I have 2 gas cars')
-        expect($t('MY_CARS', { type: '&CAR.EV', plural: 2 })).toBe('I have 2 electric cars')
-        expect($t('MY_CARS', { type: '&CAR.EV.FULL', plural: 1 })).toBe(
+        const { translate } = useTranslator()
+        expect(translate('MY_CARS', { type: 'car' })).toBe('My cars')
+        expect(translate('MY_CARS', { type: 'gaz', plural: 1 })).toBe('I have a gaz car')
+        expect(translate('MY_CARS', { type: 'gaz', plural: 2 })).toBe('I have 2 gaz cars')
+        expect(translate('MY_CARS', { type: '&CAR.GAS', plural: 2 })).toBe('I have 2 gas cars')
+        expect(translate('MY_CARS', { type: '&CAR.EV', plural: 2 })).toBe('I have 2 electric cars')
+        expect(translate('MY_CARS', { type: '&CAR.EV.FULL', plural: 1 })).toBe(
             'I have a full electric car'
         )
         expect(
-            $t('MY_CARS', {
+            translate('MY_CARS', {
                 type: '&CAR.FULL_MODEL',
                 plural: 5,
                 make: 'Toyota',
@@ -238,46 +238,46 @@ describe('Translator Tests', () => {
     // Test basic placeholder replacement using int as placeholder value (So they don't try to translate "min" and "max")
     // We don't want to end up with "Your test must be between _minimum_ and 200 potatoes"
     test('Should handle placeholder not overwritten by other key', () => {
-        const { $t } = useTranslator()
-        expect($t('TEST_LIMIT', { min: 4, max: 200 })).toBe(
+        const { translate } = useTranslator()
+        expect(translate('TEST_LIMIT', { min: 4, max: 200 })).toBe(
             'Your test must be between 4 and 200 potatoes.'
         )
     })
 
     // 2 will return singular as the plural is not defined
     test('Should handle pluralization with no rules', () => {
-        const { $t } = useTranslator()
-        expect($t('X_RULES', 0)).toBe('no rules')
-        expect($t('X_RULES', 1)).toBe('1 rule')
-        expect($t('X_RULES', 2)).toBe('2 rule')
+        const { translate } = useTranslator()
+        expect(translate('X_RULES', 0)).toBe('no rules')
+        expect(translate('X_RULES', 1)).toBe('1 rule')
+        expect(translate('X_RULES', 2)).toBe('2 rule')
 
         // X_BANANAS
-        expect($t('X_BANANAS', 0)).toBe('no bananas')
-        expect($t('X_BANANAS', 1)).toBe('no bananas')
-        expect($t('X_BANANAS', 2)).toBe('no bananas')
-        expect($t('X_BANANAS', 5)).toBe('no bananas')
+        expect(translate('X_BANANAS', 0)).toBe('no bananas')
+        expect(translate('X_BANANAS', 1)).toBe('no bananas')
+        expect(translate('X_BANANAS', 2)).toBe('no bananas')
+        expect(translate('X_BANANAS', 5)).toBe('no bananas')
     })
 
     // The keys are int, but don't follow the rules. It will fallback to the literal key
     test("Should handle plurals who doesn't follow the rules", () => {
-        const { $t } = useTranslator()
-        expect($t('X_DOGS')).toBe('X_DOGS')
-        expect($t('X_DOGS', 0)).toBe('X_DOGS')
-        expect($t('X_DOGS', 1)).toBe('X_DOGS')
-        expect($t('X_DOGS', 2)).toBe('X_DOGS') // No plural rules found
-        expect($t('X_DOGS', 5)).toBe('five dogs') // This one is hardcoded and will fallback as normal string key
-        expect($t('X_DOGS', 101)).toBe('101 Dalmatians') // Same here
-        expect($t('X_DOGS', 102)).toBe('X_DOGS') // This one is not hardcoded
-        expect($t('X_DOGS', 1000)).toBe('An island of dogs') // Still fallback, if the key is a string representing and INT
+        const { translate } = useTranslator()
+        expect(translate('X_DOGS')).toBe('X_DOGS')
+        expect(translate('X_DOGS', 0)).toBe('X_DOGS')
+        expect(translate('X_DOGS', 1)).toBe('X_DOGS')
+        expect(translate('X_DOGS', 2)).toBe('X_DOGS') // No plural rules found
+        expect(translate('X_DOGS', 5)).toBe('five dogs') // This one is hardcoded and will fallback as normal string key
+        expect(translate('X_DOGS', 101)).toBe('101 Dalmatians') // Same here
+        expect(translate('X_DOGS', 102)).toBe('X_DOGS') // This one is not hardcoded
+        expect(translate('X_DOGS', 1000)).toBe('An island of dogs') // Still fallback, if the key is a string representing and INT
     })
 })
 
 describe('Date Tests', async () => {
-    test('$tdate should return the correct values in English', async () => {
+    test('translateDate should return the correct values in English', async () => {
         // Arrange
         setActivePinia(createPinia())
         const translator = useTranslator()
-        const { $tdate, load, getDateTime } = translator
+        const { translateDate, load, getDateTime } = translator
         const response = { data: testDictionary }
         vi.spyOn(axios, 'get').mockResolvedValue(response as any)
         await load()
@@ -286,9 +286,9 @@ describe('Date Tests', async () => {
         // Force the default timezone, so the test is consistent regardless of
         // the timezone of the runner
         Settings.defaultZone = 'America/New_York'
-        expect($tdate('2025-02-02T14:42:12.000000Z')).toBe('Sun, Feb 2, 2025, 9:42 AM')
-        expect($tdate('2025-02-02T14:42:12.000000Z', 'DDD')).toBe('February 2, 2025')
-        expect($tdate('2025-02-02T14:42:12.000000Z', DateTime.DATETIME_MED)).toBe(
+        expect(translateDate('2025-02-02T14:42:12.000000Z')).toBe('Sun, Feb 2, 2025, 9:42 AM')
+        expect(translateDate('2025-02-02T14:42:12.000000Z', 'DDD')).toBe('February 2, 2025')
+        expect(translateDate('2025-02-02T14:42:12.000000Z', DateTime.DATETIME_MED)).toBe(
             'Feb 2, 2025, 9:42 AM'
         )
 
@@ -296,11 +296,11 @@ describe('Date Tests', async () => {
         expect(getDateTime('2025-02-02T14:42:12.000000Z').monthLong).toBe('February')
     })
 
-    test('$tdate should return the correct values in French', async () => {
+    test('translateDate should return the correct values in French', async () => {
         // Arrange
         setActivePinia(createPinia())
         const translator = useTranslator()
-        const { $tdate, load, getDateTime } = translator
+        const { translateDate, load, getDateTime } = translator
         const response = { data: testDictionaryFr }
         vi.spyOn(axios, 'get').mockResolvedValue(response as any)
         await load()
@@ -309,9 +309,9 @@ describe('Date Tests', async () => {
         // Force the default timezone, so the test is consistent regardless of
         // the timezone of the runner
         Settings.defaultZone = 'America/New_York'
-        expect($tdate('2025-02-02T14:42:12.000000Z')).toBe('dim. 2 févr. 2025, 09:42')
-        expect($tdate('2025-02-02T14:42:12.000000Z', 'DDD')).toBe('2 février 2025')
-        expect($tdate('2025-02-02T14:42:12.000000Z', DateTime.DATETIME_MED)).toBe(
+        expect(translateDate('2025-02-02T14:42:12.000000Z')).toBe('dim. 2 févr. 2025, 09:42')
+        expect(translateDate('2025-02-02T14:42:12.000000Z', 'DDD')).toBe('2 février 2025')
+        expect(translateDate('2025-02-02T14:42:12.000000Z', DateTime.DATETIME_MED)).toBe(
             '2 févr. 2025, 09:42'
         )
 

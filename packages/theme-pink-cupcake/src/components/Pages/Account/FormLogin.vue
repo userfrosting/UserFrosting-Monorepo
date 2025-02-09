@@ -25,9 +25,9 @@ async function sendLogin() {
             // TODO : If the notification can be defined in sprinkle-core, and
             // implemented in the theme, this notification could be moved to the
             // API directly.
-            const { $t } = useTranslator()
+            const { translate } = useTranslator()
             UIkit.notification({
-                message: $t('WELCOME', user ?? {}), // TODO : Same error as before, the locale is not updated yet and this is not a reactive variable.
+                message: translate('WELCOME', user ?? {}), // TODO : Same error as before, the locale is not updated yet and this is not a reactive variable.
                 status: 'primary',
                 pos: 'top-right',
                 timeout: 4000

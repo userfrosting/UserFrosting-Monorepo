@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
 import type { UserResponse } from '@userfrosting/sprinkle-admin/interfaces'
 import UserEditModal from './UserEditModal.vue'
@@ -10,7 +9,6 @@ import UserPasswordModal from './UserPasswordModal.vue'
 import UserPasswordResetModal from './UserPasswordResetModal.vue'
 
 const router = useRouter()
-const { $tdate } = useTranslator()
 const { user } = defineProps<{
     user: UserResponse
 }>()

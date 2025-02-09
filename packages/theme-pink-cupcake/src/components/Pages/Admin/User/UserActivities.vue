@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { useTranslator } from '@userfrosting/sprinkle-core/stores'
-const { $tdate } = useTranslator()
-
 const { user_name } = defineProps<{
     user_name: string
 }>()
