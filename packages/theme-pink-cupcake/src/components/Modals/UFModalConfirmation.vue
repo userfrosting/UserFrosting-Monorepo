@@ -102,7 +102,7 @@ const btnClass = (severity: Severity) => {
 <template>
     <UFModal :closable="closable" :bgClose="bgClose" :escClose="escClose">
         <template #header v-if="title || $slots.header">
-            <slot name="header">{{ $t(title) }}</slot>
+            <slot name="header">{{ $t(title ?? '') }}</slot>
         </template>
         <slot>
             <div class="uk-text-center">

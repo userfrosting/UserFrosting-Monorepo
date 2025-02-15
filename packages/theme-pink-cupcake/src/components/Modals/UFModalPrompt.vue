@@ -60,7 +60,7 @@ function submitPrompt() {
 <template>
     <UFModal>
         <template #header v-if="title || $slots.header">
-            <slot name="header">{{ $t(title) }}</slot>
+            <slot name="header">{{ $t(title ?? '') }}</slot>
         </template>
         <slot>
             <form class="uk-form-stacked" @submit="submitPrompt()">

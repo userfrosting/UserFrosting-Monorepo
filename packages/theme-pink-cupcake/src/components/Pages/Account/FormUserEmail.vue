@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import UIkit from 'uikit'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import { useUserEmailEditApi } from '@userfrosting/sprinkle-account/composables'
 import { useAuthStore } from '@userfrosting/sprinkle-account/stores'
 import type { EmailEditRequest } from '@userfrosting/sprinkle-account/interfaces'

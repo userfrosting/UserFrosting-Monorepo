@@ -4,7 +4,7 @@
         <p class="uk-text-small uk-text-center" data-test="slot">
             <slot></slot>
             <slot name="userfrosting">
-                <span v-if="this.$slots.default"> | </span>
+                <span v-if="$slots.default"> | </span>
                 <span v-html="$t('BUILT_WITH_UF')"></span>
                 <span>
                     | {{ $t('THEME_BY') }}
