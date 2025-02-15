@@ -23,13 +23,25 @@ return [
             'TITLE'       => 'Erreur 400: Mauvaise requête',
             'DESCRIPTION' => "Ce n'est probablement pas de votre faute.",
         ],
-
+        '401' => [
+            'TITLE'       => 'Non autorisé',
+            'DESCRIPTION' => "La requête nécessite une authentification utilisateur valide.",
+        ],
+        '403' => [
+            'TITLE'       => 'Interdit',
+            'DESCRIPTION' => "Vous n'êtes pas autorisé à effectuer l'opération demandée.",
+        ],
         '404' => [
-            'TITLE'       => 'Erreur 404: Page introuvable',
-            'DESCRIPTION' => 'Nous ne pouvons trouver ce que vous cherchez.',
-            'DETAIL'      => 'Nous avons tout tenté...',
-            'EXPLAIN'     => 'Nous ne pouvons trouver la page que vous cherchez.',
-            'RETURN'      => 'Cliquez <a href="{{url}}">ici</a> pour retourner à la page d\'accueil.',
+            'TITLE'       => 'Non trouvé',
+            'DESCRIPTION' => "La ressource demandée est introuvable.",
+        ],
+        '405' => [
+            'TITLE'       => 'Méthode non autorisée',
+            'DESCRIPTION' => "La méthode de requête n'est pas supportée pour la ressource demandée.",
+        ],
+        '410' => [
+            'TITLE'       => 'Parti',
+            'DESCRIPTION' => "La ressource cible n'est plus disponible sur le serveur d'origine.",
         ],
 
         'CONFIG' => [
@@ -39,18 +51,16 @@ return [
             'RETURN'      => 'Corrigez les erreurs suivantes, ensuite <a href="{{url}}"> recharger la page</a>.',
         ],
 
-        'DESCRIPTION' => 'Nous avons ressenti un grand bouleversement de la Force.',
-        'DETAIL'      => 'Voici les détails :',
+        // Generic title and description for error code not handled above
+        'TITLE'       => "Nous avons détecté une grande perturbation dans la Force.",
+        'DESCRIPTION' => "Oups, il semble que notre serveur ait fait une erreur. Si vous êtes un administrateur, veuillez vérifier les logs PHP ou UserFrosting.",
 
-        'ENCOUNTERED' => "D'oh! Quelque chose s'est produit. Aucune idée c'est quoi.",
-
-        'MAIL' => "Erreur fatale lors de l'envoie du courriel. Contactez votre administrateur. Si vous être administrateur, consultez les logs.",
+        'MAIL' => "Erreur fatale lors de l'envoi du courriel. Contactez votre administrateur. Si vous êtes administrateur, consultez les logs.",
         'MISC' => "Une erreur s'est produite.",
 
-        'RETURN' => 'Cliquez <a href="{{url}}">ici</a> pour retourner à la page d\'accueil.',
-
-        'SERVER' => "Oops, il semblerait que le serveur a gaffé. Si vous êtes administrateur, s-v-p vérifier les logs d'erreurs PHP ou ceux de UserFrosting.",
-
-        'TITLE' => 'Bouleversement de la Force',
+        'RATE_LIMIT_EXCEEDED' => [
+            'TITLE'       => 'Limite de taux dépassée',
+            'DESCRIPTION' => 'La limite de taux pour cette action a été dépassée. Vous devez attendre encore {{delay}} secondes avant de pouvoir faire une autre tentative.',
+        ],
     ],
 ];

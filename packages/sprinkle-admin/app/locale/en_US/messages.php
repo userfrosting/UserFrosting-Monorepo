@@ -104,7 +104,6 @@ return [
         1 => 'Role',//OK
         2 => 'Roles',//OK
 
-        'ASSIGN_NEW'          => 'Assign new role',
         'CREATE'              => 'Create role',//OK
         'CREATION_SUCCESSFUL' => 'Successfully created role <strong>{{name}}</strong>',
         'DELETE'              => 'Delete role',//OK
@@ -123,7 +122,7 @@ return [
         'NAME_IN_USE'         => 'A role named <strong>{{name}}</strong> already exist',
         'NOT_FOUND'           => 'Role not found',
         'PAGE'                => 'Roles', //OK
-        'PAGE_DESCRIPTION'    => 'A listing of the roles for your site.  Provides management tools for editing and deleting roles.', //OK
+        'PAGE_DESCRIPTION'    => 'A listing of the roles for your site. Provides management tools for editing and deleting roles.', //OK
         'PERMISSIONS'         => 'Role permissions',
         'PERMISSIONS_UPDATED' => 'Permissions updated for role <strong>{{name}}</strong>',
         'UPDATE'              => 'Update Roles', //OK
@@ -133,7 +132,6 @@ return [
 
     'SYSTEM_INFO' => [
         '@TRANSLATION'  => 'System information', //OK
-
         'DB_NAME'       => 'Database Name', //OK
         'DB_CONNECTION' => 'Database Connection', //OK
         'DB_VERSION'    => 'Database Version', //OK
@@ -156,7 +154,6 @@ return [
             'SET_PASSWORD'       => "Set the user's password as",
             'PASSWORD_RESET'     => 'A password reset link will be sent to <strong>{{email}}</strong>.',
         ],
-
         'ACTIVATE'          => 'Activate user', //OK
         'ACTIVATE_CONFIRM'  => 'Are you sure you want to activate <strong>{{full_name}} ({{user_name}})</strong> ?', //OK
         'CREATE'            => 'Create user', //OK

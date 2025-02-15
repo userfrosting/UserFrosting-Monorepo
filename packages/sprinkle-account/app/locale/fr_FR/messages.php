@@ -106,6 +106,7 @@ return [
     'EMAIL' => [
         'INVALID'               => 'Il n\'y a aucun compte pour <strong>{{email}}</strong>.',
         'IN_USE'                => 'Le email <strong>{{email}}</strong> est déjà utilisé.',
+        'NOT_FOUND'             => 'Il n\'y a aucun compte pour <strong>{{email}}</strong>.',
         'VERIFICATION_REQUIRED' => 'Email (vérification requise - utiliser une adresse réelle!)',
     ],
     'EMAIL_OR_USERNAME'   => 'Nom d\'utilisateur ou adresse email',
@@ -134,7 +135,9 @@ return [
     
     'PASSWORD' => [
         '@TRANSLATION'        => 'Mot de passe',
+        
         'BETWEEN'             => 'Entre {{min}} et {{max}} charactères',
+        
         'CONFIRM'             => 'Confirmer le mot de passe',
         'CONFIRM_CURRENT'     => 'Veuillez confirmer votre mot de passe actuel',
         'CONFIRM_NEW'         => 'Confirmer le nouveau mot de passe',
@@ -146,6 +149,7 @@ return [
         ],
         'CURRENT'         => 'Mot de passe actuel',
         'CURRENT_EXPLAIN' => 'Vous devez confirmer votre mot de passe actuel pour apporter des modifications',
+        
         'FORGOTTEN'       => 'Mot de passe oublié',
         'FORGET'          => [
             '@TRANSLATION'     => 'Mot de passe oublié?',
@@ -157,10 +161,14 @@ return [
             'REQUEST_CANNED'   => 'Demande de mot de passe perdu annulée.',
             'REQUEST_SENT'     => 'Si l\'adresse e-mail <strong>{{email}}</strong> correspond à un compte dans notre système, un lien de réinitialisation de mot de passe sera envoyé à <strong>{{email}}</strong>.',
         ],
+        
         'HASH_FAILED'       => 'Le hachage du mot de passe a échoué. Veuillez contacter un administrateur de site.',
+        
         'INVALID'           => 'Le mot de passe actuel ne correspond pas à celui que nous avons au dossier',
+        
         'NEW'               => 'Nouveau mot de passe',
         'NOTHING_TO_UPDATE' => 'Vous ne pouvez pas mettre à jour avec le même mot de passe',
+        
         'RESET'             => [
             '@TRANSLATION' => 'Réinitialiser le mot de passe',
             'CHOOSE'       => 'Veuillez choisir un nouveau mot de passe pour continuer.',
@@ -168,8 +176,10 @@ return [
             'PAGE'         => 'Choisissez un nouveau mot de passe pour votre compte.',
             'SEND'         => 'Définir un nouveau mot de passe',
         ],
+        
         'UPDATED' => 'Mot de passe du compte mis à jour',
     ],
+
     'PROFILE' => [
         'SETTINGS' => 'Paramètres du profil',
         'UPDATED'  => 'Paramètres du profil mis à jour',
@@ -179,12 +189,13 @@ return [
     'REGISTER'            => 'S\'inscrire',
     'REGISTER_ME'         => 'Créer mon compte',
     'REGISTRATION'        => [
-        'BROKEN'         => 'Nous sommes désolés, il ya un problème avec notre processus d\'enregistrement de compte. Veuillez nous contacter directement pour obtenir de l\'aide.',
         'COMPLETE_TYPE1' => 'Vous êtes inscrit avec succès. Vous pouvez maintenant vous connecter.',
         'COMPLETE_TYPE2' => 'Vous êtes inscrit avec succès. Vous recevrez bientôt un e-mail de validation contenant un lien pour activer votre compte. Vous ne pourrez pas vous connecter avant d\'avoir terminé cette étape.',
         'DISABLED'       => 'Désolé, l\'enregistrement de compte a été désactivé.',
+        'ERROR'          => 'Erreur d\'inscription',
         'LOGOUT'         => 'Désolé, vous ne pouvez pas vous inscrire tout en étant connecté. Veuillez vous déconnecter en premier.',
         'QUESTION'       => "Pas encore de compte?",//OK
+        'UNKNOWN'        => 'Un problème a été rencontré lors du processus d\'enregistrement du compte.',
         'WELCOME'        => 'L\'inscription est rapide et simple.',
     ],
     'REMEMBER_ME'             => 'Se souvenir de moi!',
@@ -205,9 +216,6 @@ return [
         'IN_USE'        => 'Le nom d\'utilisateur \'{{username}}\' est déjà utilisé.',
         'NOT_AVAILABLE' => 'Le nom d\'utilisateur <strong>{{user_name}}</strong> n\'est pas disponible. Choisissez un autre nom, ou cliquez sur « suggérer ».',
     ],
-    'USER_ID_INVALID'       => 'L\'identifiant d\'utilisateur demandé n\'existe pas.',
-    'USER_OR_EMAIL_INVALID' => 'Nom d\'utilisateur ou adresse e-mail non valide.',
-    'USER_OR_PASS_INVALID'  => 'Nom d\'utilisateur ou mot de passe incorrect.',
     
     'WELCOME'               => 'Bienvenue {{full_name}}!',
 ];

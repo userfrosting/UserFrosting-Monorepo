@@ -25,11 +25,9 @@ return [
         'VERIFY'       => 'Verify the captcha', //OK
     ],
     'COPYRIGHT'     => 'Copyright {{year}}', //OK
-
     'CSRF_MISSING' => 'Missing CSRF token. Try refreshing the page and then submitting again?',
 
-    'DB_INVALID'    => 'Cannot connect to the database.  If you are an administrator, please check your error log.',
-    'DESCRIPTION'   => 'Description',
+    'DB_INVALID'    => 'Cannot connect to the database. If you are an administrator, please check your error log.',
     'DOWNLOAD'      => [
         '@TRANSLATION' => 'Download',
         'CSV'          => 'Download CSV',
@@ -46,7 +44,6 @@ return [
         '@TRANSLATION' => 'Legal Policy',
         'DESCRIPTION'  => 'Our legal policy applies to your usage of this website and our services.',
     ],
-
     'LOCALE' => [
         '@TRANSLATION' => 'Locale', //OK
     ],
@@ -84,10 +81,8 @@ return [
 
     'THEME_BY'      => 'Theme built with', //OK
 
-    'UNKNOWN' => 'Unknown',
-
     // Actions words
-    'ACTIONS'                  => 'Actions',
+    'ACTIONS'                  => 'Actions', //OK
     'ACTIVATE'                 => 'Activate',
     'ACTIVE'                   => 'Active',
     'ADD'                      => 'Add',
@@ -105,6 +100,7 @@ return [
     'DELETE_CANNOT_UNDONE'     => 'This action cannot be undone.',
     'DELETE_NAMED'             => 'Delete {{name}}',
     'DENY'                     => 'Deny',
+    'DESCRIPTION'              => 'Description',
     'DISABLE'                  => 'Disable',
     'DISABLED'                 => 'Disabled',
     'EDIT'                     => 'Edit',
@@ -122,6 +118,7 @@ return [
     'PRINT'                    => 'Print',
     'REMOVE'                   => 'Remove',
     'UNACTIVATED'              => 'Unactivated',
+    'UNKNOWN' => 'Unknown',
     'UPDATE'                   => 'Update',
     'VIEW'                     => 'View',
     'YES'                      => 'Yes',

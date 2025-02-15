@@ -109,7 +109,6 @@ return [
         'NOT_FOUND'             => 'There is no account for <strong>{{email}}</strong>.',
         'VERIFICATION_REQUIRED' => 'Email (verification required - use a real address!)',//OK
     ],
-
     'EMAIL_OR_USERNAME' => 'Username or email address',
 
     'FIRST_NAME' => 'First name',//OK
@@ -132,7 +131,6 @@ return [
     'LOGOUT' => 'Logout',//OK
 
     'NAME' => 'Name',
-
     'NAME_AND_EMAIL' => 'Name and email',//OK
 
     'PASSWORD' => [
@@ -165,7 +163,9 @@ return [
         ],
 
         'HASH_FAILED'       => 'Password hashing failed. Please contact a site administrator.',
+        
         'INVALID'           => "Current password doesn't match the one we have on record",
+        
         'NEW'               => 'New Password',//OK
         'NOTHING_TO_UPDATE' => 'You cannot update with the same password',
 
@@ -189,19 +189,18 @@ return [
     'REGISTER'      => 'Register',//OK
     'REGISTER_ME'   => 'Sign me up',//OK
     'REGISTRATION'  => [
-        'ERROR'             => 'Registration error',
-        'UNKNOWN'           => 'A problem was encountered during the account registration process.',
         'COMPLETE_TYPE1'    => 'You have successfully registered. You can now sign in.',
         'COMPLETE_TYPE2'    => 'You have successfully registered. A link to activate your account has been sent to <strong>{{email}}</strong>.  You will not be able to sign in until you complete this step.',
         'DISABLED'          => "We're sorry, account registration has been disabled.",
+        'ERROR'             => 'Registration error',
         'LOGOUT'            => "I'm sorry, you cannot register for an account while logged in. Please log out first.",
         'QUESTION'          => "You don't have an account yet?",//OK
+        'UNKNOWN'           => 'A problem was encountered during the account registration process.',
         'WELCOME'           => 'Registration is fast and simple.',
     ],
     'REMEMBER_ME'               => 'Keep me signed in',
     'REMEMBER_ME_ON_COMPUTER'   => 'Remember me on this computer (not recommended for public computers)',
 
-    'SIGN_IN_HERE'          => 'Already have an account? <a href="{{url}}">Sign in here.</a>',
     'SIGNIN'                => 'Sign in',
     'SIGNIN_OR_REGISTER'    => 'Sign in or register',
     'SIGNUP'                => 'Sign Up',
@@ -211,8 +210,7 @@ return [
     'TOS_FOR'       => 'Terms and Conditions for {{title}}',
 
     'USERNAME' => [
-        '@TRANSLATION' => 'Username',//OK
-
+        '@TRANSLATION'  => 'Username',//OK
         'CHOOSE'        => 'Choose a unique username',
         'INVALID'       => 'Invalid username',
         'IN_USE'        => 'Username <strong>{{user_name}}</strong> is already in use.',
