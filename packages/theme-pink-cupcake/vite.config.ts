@@ -39,6 +39,7 @@ export default defineConfig({
             reportsDirectory: './_meta/_coverage',
             include: ['src/**/*.*'],
         },
+        setupFiles: ['src/tests/translator.setup.ts'],
         environment: 'happy-dom'
     }
 })
