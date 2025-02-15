@@ -5,14 +5,14 @@ const { user_name } = defineProps<{
 </script>
 
 <template>
-    <UFCardBox title="Activities">
+    <UFCardBox :title="$t('ACTIVITY', 2)">
         <UFSprunjeTable
             v-if="user_name !== ''"
             :dataUrl="'/api/users/u/' + user_name + '/activities'"
             :defaultSorts="{ occurred_at: 'desc' }">
             <template #header>
-                <UFSprunjeHeader sort="occurred_at">Activity Time</UFSprunjeHeader>
-                <UFSprunjeHeader sort="description">Description</UFSprunjeHeader>
+                <UFSprunjeHeader sort="occurred_at">{{ $t('ACTIVITY.TIME') }}</UFSprunjeHeader>
+                <UFSprunjeHeader sort="description">{{ $t('DESCRIPTION') }}</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">

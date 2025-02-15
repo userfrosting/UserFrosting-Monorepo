@@ -22,13 +22,13 @@ const emits = defineEmits(['submit'])
     <form v-on:submit.prevent="emits('submit')">
         <fieldset class="uk-fieldset uk-form-stacked">
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Name</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('ROLE.NAME') }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="pen-to-square" fixed-width />
                     <input
                         class="uk-input"
                         type="text"
-                        placeholder="Please enter a name for the role"
+                        :placeholder="$t('ROLE.NAME_EXPLAIN')"
                         aria-label="Role Name"
                         data-test="name"
                         autofocus
@@ -38,13 +38,13 @@ const emits = defineEmits(['submit'])
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Slug</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('SLUG') }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="tag" fixed-width />
                     <input
                         class="uk-input"
                         type="text"
-                        placeholder="Role Slug"
+                        :placeholder="$t('SLUG')"
                         aria-label="Role Slug"
                         data-test="slug"
                         tabindex="2"
@@ -54,10 +54,10 @@ const emits = defineEmits(['submit'])
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Description</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('DESCRIPTION') }}</label>
                 <textarea
                     class="uk-textarea"
-                    placeholder="Role Description"
+                    :placeholder="$t('DESCRIPTION')"
                     aria-label="Description"
                     data-test="description"
                     rows="6"
@@ -67,9 +67,11 @@ const emits = defineEmits(['submit'])
 
             <div class="uk-text-right" uk-margin>
                 <button class="uk-button uk-button-default uk-modal-close" type="button">
-                    Cancel
+                    {{ $t('CANCEL') }}
                 </button>
-                <button class="uk-button uk-button-primary" type="submit" tabindex="4">Save</button>
+                <button class="uk-button uk-button-primary" type="submit" tabindex="4">
+                    {{ $t('SAVE') }}
+                </button>
             </div>
         </fieldset>
     </form>

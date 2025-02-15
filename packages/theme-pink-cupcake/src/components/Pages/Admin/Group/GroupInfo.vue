@@ -24,7 +24,7 @@ const emits = defineEmits(['groupUpdated'])
         <hr />
         <!-- TODO : Find a way to slot the description list -->
         <dl class="uk-description-list">
-            <dt><font-awesome-icon icon="users" /> Users</dt>
+            <dt><font-awesome-icon icon="users" /> {{ $t('USER', group.users_count) }}</dt>
             <dd>
                 <span class="uk-badge">{{ group.users_count }}</span>
             </dd>

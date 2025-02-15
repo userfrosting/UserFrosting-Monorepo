@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
 import { ref, watch } from 'vue'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import { useGroupsApi, useUserEditApi } from '@userfrosting/sprinkle-admin/composables'
 import type { UserEditRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import type { UserInterface } from '@userfrosting/sprinkle-account/interfaces'
@@ -78,8 +79,9 @@ const submitForm = () => {
         })
         .catch((error) => {
             // Display an error notification
+            const { translate } = useTranslator()
             UIkit.notification({
-                message: error.description ?? 'An error occurred while saving the user.',
+                message: error.description ?? translate('ERROR.MISC'),
                 status: 'danger',
                 pos: 'top-right',
                 timeout: 4000
@@ -99,12 +101,12 @@ const { groups, updateGroups } = useGroupsApi()
         v-bind="$attrs"
         :uk-toggle="'target: #modal-user-edit-' + props.user.user_name"
         @click="updateGroups()">
-        <slot> <font-awesome-icon icon="pen-to-square" fixed-width /> Edit User </slot>
+        <slot> <font-awesome-icon icon="pen-to-square" fixed-width /> {{ $t('USER.EDIT') }} </slot>
     </a>
 
     <!-- This is the modal -->
     <UFModal :id="'modal-user-edit-' + props.user.user_name" closable>
-        <template #header> Edit User </template>
+        <template #header>{{ $t('USER.EDIT') }}</template>
         <template #default>
             <UserForm v-model="formData" :groups="groups" @submit="submitForm()" />
         </template>

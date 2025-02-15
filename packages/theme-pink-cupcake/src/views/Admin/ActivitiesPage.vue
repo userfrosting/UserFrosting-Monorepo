@@ -5,9 +5,9 @@
             searchColumn="user"
             :defaultSorts="{ occurred_at: 'desc' }">
             <template #header>
-                <UFSprunjeHeader sort="occurred_at">Activity Time</UFSprunjeHeader>
-                <UFSprunjeHeader sort="user">User</UFSprunjeHeader>
-                <UFSprunjeHeader sort="description">Description</UFSprunjeHeader>
+                <UFSprunjeHeader sort="occurred_at">{{ $t('ACTIVITY.TIME') }}</UFSprunjeHeader>
+                <UFSprunjeHeader sort="user">{{ $t('USER') }}</UFSprunjeHeader>
+                <UFSprunjeHeader sort="description">{{ $t('DESCRIPTION') }}</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">
@@ -27,7 +27,7 @@
                     <div class="uk-text-meta">{{ item.user.email }}</div>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn v-else>
-                    <i>Deleted User</i>
+                    <i>{{ $t('USER.DELETED') }}</i>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
                     <div>

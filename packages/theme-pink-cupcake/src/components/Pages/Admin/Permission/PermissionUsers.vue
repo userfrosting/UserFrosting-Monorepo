@@ -5,14 +5,14 @@ const { id } = defineProps<{
 </script>
 
 <template>
-    <UFCardBox title="Users with this permission">
+    <UFCardBox title="PERMISSION.USERS">
         <UFSprunjeTable
             :dataUrl="'/api/permissions/p/' + id + '/users'"
             searchColumn="name"
             hideFilters>
             <template #header>
-                <UFSprunjeHeader sort="name">User</UFSprunjeHeader>
-                <UFSprunjeHeader>Has permission via roles</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">{{ $t('USER') }}</UFSprunjeHeader>
+                <UFSprunjeHeader>{{ $t('PERMISSION.VIA_ROLES') }}</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">

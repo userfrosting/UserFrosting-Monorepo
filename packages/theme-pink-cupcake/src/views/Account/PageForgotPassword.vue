@@ -4,11 +4,8 @@ import FormForgotPassword from '../../components/Pages/Account/FormForgotPasswor
 
 <template>
     <UFCardBoxBig>
-        <h3 class="uk-card-title">Forgotten Password</h3>
-        <p>
-            Please enter the email address you used to sign up. A link with instructions to reset
-            your password will be emailed to you.
-        </p>
+        <h3 class="uk-card-title">{{ $t('PASSWORD.FORGOTTEN') }}</h3>
+        <p>{{ $t('PASSWORD.FORGET.EMAIL') }}</p>
         <FormForgotPassword />
     </UFCardBoxBig>
 </template>

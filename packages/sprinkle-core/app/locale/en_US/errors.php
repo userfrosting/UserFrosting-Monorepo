@@ -48,6 +48,7 @@ return [
         'DESCRIPTION' => "Oops, looks like our server might have goofed. If you're an admin, please check the PHP or UserFrosting logs.",
 
         'MAIL' => 'Fatal error attempting mail, contact your server administrator.  If you are the admin, please check the UserFrosting log.',
+        'MISC' => 'An error occurred.',//OK
 
         'RATE_LIMIT_EXCEEDED' => [
             'TITLE'       => 'Rate Limit Exceeded',

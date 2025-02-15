@@ -16,14 +16,15 @@ declare(strict_types=1);
  * @author Alexander Weissman
  */
 return [
-    'ABOUT' => 'About',
+    'BUILT_WITH_UF' => 'Created with <a href="http://www.userfrosting.com">UserFrosting</a>', //OK
 
     'CAPTCHA' => [
         '@TRANSLATION' => 'Captcha',
         'FAIL'         => 'You did not enter the captcha code correctly.',
-        'SPECIFY'      => 'Enter the captcha',
-        'VERIFY'       => 'Verify the captcha',
+        'SPECIFY'      => 'Enter the captcha', //OK
+        'VERIFY'       => 'Verify the captcha', //OK
     ],
+    'COPYRIGHT'     => 'Copyright {{year}}', //OK
 
     'CSRF_MISSING' => 'Missing CSRF token. Try refreshing the page and then submitting again?',
 
@@ -35,8 +36,8 @@ return [
     ],
 
     'EMAIL' => [
-        '@TRANSLATION' => 'Email',
-        'YOUR'         => 'Your email address',
+        '@TRANSLATION' => 'Email', //OK
+        'YOUR'         => 'Your email address', //OK
     ],
 
     'HOME'  => 'Home',
@@ -47,7 +48,7 @@ return [
     ],
 
     'LOCALE' => [
-        '@TRANSLATION' => 'Locale',
+        '@TRANSLATION' => 'Locale', //OK
     ],
 
     'NAME'       => 'Name',
@@ -55,17 +56,15 @@ return [
     'NO_RESULTS' => "Sorry, we've got nothing here.",
 
     'PAGINATION' => [
-        'GOTO' => 'Jump to Page',
-        'SHOW' => 'Show',
-
-        // Paginator
-        // possible variables: {size}, {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}
-        // also {page:input} & {startRow:input} will add a modifiable input in place of the value
-        'OUTPUT'   => '{startRow} to {endRow} of {filteredRows} ({totalRows})',
-        'NEXT'     => 'Next page',
-        'PREVIOUS' => 'Previous page',
-        'FIRST'    => 'First page',
-        'LAST'     => 'Last page',
+        // 'GOTO' => 'Jump to Page',
+        // 'SHOW' => 'Show',
+        'OUTPUT'   => 'Showing {{first}} - {{last}} of {{count}}',//OK
+        // 'NEXT'     => 'Next page',
+        'PAGE_X_OF_Y' => 'Page {{current}} of {{last}}', //OK
+        'PER_PAGE' => '{{count}} per page', //OK
+        // 'PREVIOUS' => 'Previous page',
+        // 'FIRST'    => 'First page',
+        // 'LAST'     => 'Last page',
     ],
     'PRIVACY' => [
         '@TRANSLATION' => 'Privacy Policy',
@@ -75,8 +74,15 @@ return [
     'SLUG'           => 'Slug',
     'SLUG_CONDITION' => 'Slug/Conditions',
     'SLUG_IN_USE'    => 'A <strong>{{slug}}</strong> slug already exists',
+    'SPRUNJE'        => [
+        'FILTERS'      => 'Filters',//OK
+        'FILTER_CLEAR' => 'Clear filters',//OK
+        'SEARCH'       => 'Search {{term}}...',//OK
+    ],
     'STATUS'         => 'Status',
     'SUGGEST'        => 'Suggest',
+
+    'THEME_BY'      => 'Theme built with', //OK
 
     'UNKNOWN' => 'Unknown',
 
@@ -85,13 +91,16 @@ return [
     'ACTIVATE'                 => 'Activate',
     'ACTIVE'                   => 'Active',
     'ADD'                      => 'Add',
-    'CANCEL'                   => 'Cancel',
-    'CONFIRM'                  => 'Confirm',
+    'CANCEL'                   => 'Cancel', //OK
+    'CONFIRM'                  => 'Confirm', //OK
+    'CONFIRM_ACTION'           => 'Please confirm to proceed.', //OK
+    'CONFIRMATION'             => 'Confirmation', //OK
     'CREATE'                   => 'Create',
+    'CREATED_ON'               => 'Created on', //OK
     'DELETE'                   => 'Delete',
     'DELETE_CONFIRM'           => 'Are you sure you want to delete this?',
     'DELETE_CONFIRM_YES'       => 'Yes, delete',
-    'DELETE_CONFIRM_NAMED'     => 'Are you sure you want to delete {{name}}?',
+    'DELETE_CONFIRM_NAMED'     => 'Are you sure you want to delete {{user_name}}?',
     'DELETE_CONFIRM_YES_NAMED' => 'Yes, delete {{name}}',
     'DELETE_CANNOT_UNDONE'     => 'This action cannot be undone.',
     'DELETE_NAMED'             => 'Delete {{name}}',
@@ -101,6 +110,9 @@ return [
     'EDIT'                     => 'Edit',
     'ENABLE'                   => 'Enable',
     'ENABLED'                  => 'Enabled',
+    'NO'                       => 'No',
+    'NONE'                     => 'None',
+    'OPTIONAL'                 => 'Optional',
     'OVERRIDE'                 => 'Override',
     'RESET'                    => 'Reset',
     'SAVE'                     => 'Save',
@@ -111,12 +123,6 @@ return [
     'REMOVE'                   => 'Remove',
     'UNACTIVATED'              => 'Unactivated',
     'UPDATE'                   => 'Update',
+    'VIEW'                     => 'View',
     'YES'                      => 'Yes',
-    'NO'                       => 'No',
-    'OPTIONAL'                 => 'Optional',
-
-    // Misc.
-    'BUILT_WITH_UF'     => 'Built with <a href="http://www.userfrosting.com">UserFrosting</a>',
-    'ADMINLTE_THEME_BY' => 'Theme by <strong><a href="https://adminlte.io">AdminLTE</a>.</strong> All rights reserved',
-    'WELCOME_TO'        => 'Welcome to {{title}}, {{user}}!',
 ];

@@ -48,7 +48,7 @@ const updateUser = (fieldName: string, value: string) => {
         v-bind="$attrs"
         :uk-toggle="'target: #confirm-user-activate-' + props.user.user_name"
         v-if="user.flag_verified == false">
-        <slot><font-awesome-icon icon="bolt" fixed-width /> Activate user</slot>
+        <slot><font-awesome-icon icon="bolt" fixed-width /> {{ $t('USER.ACTIVATE') }}</slot>
     </a>
 
     <a
@@ -56,7 +56,7 @@ const updateUser = (fieldName: string, value: string) => {
         v-bind="$attrs"
         :uk-toggle="'target: #confirm-user-disable-' + props.user.user_name"
         v-else-if="user.flag_enabled">
-        <slot><font-awesome-icon icon="minus-circle" fixed-width /> Disable user</slot>
+        <slot><font-awesome-icon icon="minus-circle" fixed-width /> {{ $t('USER.DISABLE') }}</slot>
     </a>
 
     <a
@@ -64,46 +64,46 @@ const updateUser = (fieldName: string, value: string) => {
         v-bind="$attrs"
         :uk-toggle="'target: #confirm-user-enable-' + props.user.user_name"
         v-else>
-        <slot><font-awesome-icon icon="plus-circle" fixed-width /> Enable user</slot>
+        <slot><font-awesome-icon icon="plus-circle" fixed-width /> {{ $t('USER.ENABLE') }}</slot>
     </a>
 
     <!-- This is the modal -->
     <UFModalConfirmation
         :id="'confirm-user-activate-' + props.user.user_name"
-        title="Activate User ?"
+        title="USER.ACTIVATE"
         @confirmed="updateUser('flag_verified', '1')"
-        acceptLabel="Yes, Activate User"
+        acceptLabel="USER.ACTIVATE"
         acceptIcon="check"
         :rejectIcon="null"
         :acceptSeverity="Severity.Success">
         <template #prompt>
-            Are you sure you want to activate <strong>{{ props.user.user_name }}</strong> ?
+            <p v-html="$t('USER.ACTIVATE_CONFIRM', props.user)"></p>
         </template>
     </UFModalConfirmation>
 
     <UFModalConfirmation
         :id="'confirm-user-disable-' + props.user.user_name"
-        title="Disable User ?"
+        title="USER.DISABLE"
         @confirmed="updateUser('flag_enabled', '0')"
-        acceptLabel="Yes, Disable User"
+        acceptLabel="USER.DISABLE"
         acceptIcon="check"
         :rejectIcon="null"
         :acceptSeverity="Severity.Success">
         <template #prompt>
-            Are you sure you want to disable <strong>{{ props.user.user_name }}</strong> ?
+            <p v-html="$t('USER.DISABLE_CONFIRM', props.user)"></p>
         </template>
     </UFModalConfirmation>
 
     <UFModalConfirmation
         :id="'confirm-user-enable-' + props.user.user_name"
-        title="Disable User ?"
+        title="USER.ENABLE"
         @confirmed="updateUser('flag_enabled', '1')"
-        acceptLabel="Yes, Enable User"
+        acceptLabel="USER.ENABLE"
         acceptIcon="check"
         :rejectIcon="null"
         :acceptSeverity="Severity.Success">
         <template #prompt>
-            Are you sure you want to enable <strong>{{ props.user.user_name }}</strong> ?
+            <p v-html="$t('USER.ENABLE_CONFIRM', props.user)"></p>
         </template>
     </UFModalConfirmation>
 </template>

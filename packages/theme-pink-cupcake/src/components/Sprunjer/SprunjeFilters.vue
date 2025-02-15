@@ -27,9 +27,9 @@ const listableOptions = (column: string) => {
 </script>
 
 <template>
-    <h3 class="uk-heading-divider">Filters</h3>
+    <h3 class="uk-heading-divider">{{ $t('SPRUNJE.FILTERS') }}</h3>
     <dl class="uk-description-list" v-for="(column, index) in filterable" :key="index">
-        <dt>{{ column }}</dt>
+        <dt>{{ $t(column) }}</dt>
         <dd>
             <select v-if="isListable(column)" v-model="filters[column]" class="uk-select">
                 <option value=""></option>
@@ -49,6 +49,6 @@ const listableOptions = (column: string) => {
         </dd>
     </dl>
     <button class="uk-button uk-button-default uk-button-small" @click="resetFilters">
-        <font-awesome-icon icon="xmark" fixed-width /> Clear filters
+        <font-awesome-icon icon="xmark" fixed-width /> {{ $t('SPRUNJE.FILTER_CLEAR') }}
     </button>
 </template>

@@ -8,7 +8,7 @@ const { user } = defineProps<{
 </script>
 
 <template>
-    <UFCardBox title="Roles">
+    <UFCardBox :title="$t('ROLE', 2)">
         <UFSprunjeTable
             v-if="user.user_name !== ''"
             :dataUrl="'/api/users/u/' + user.user_name + '/roles'"
@@ -22,8 +22,8 @@ const { user } = defineProps<{
             </template>
 
             <template #header>
-                <UFSprunjeHeader sort="name">Role</UFSprunjeHeader>
-                <UFSprunjeHeader sort="description">Description</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">{{ $t('ROLE') }}</UFSprunjeHeader>
+                <UFSprunjeHeader sort="description">{{ $t('DESCRIPTION') }}</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">

@@ -7,14 +7,14 @@ const { slug } = defineProps<{
 </script>
 
 <template>
-    <UFCardBox title="Group Users">
+    <UFCardBox title="GROUP.USERS">
         <UFSprunjeTable
             :dataUrl="'/api/groups/g/' + slug + '/users'"
             searchColumn="name"
             hideFilters>
             <template #header>
-                <UFSprunjeHeader sort="name">User</UFSprunjeHeader>
-                <UFSprunjeHeader>Status</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">{{ $t('USER') }}</UFSprunjeHeader>
+                <UFSprunjeHeader>{{ $t('STATUS') }}</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">
@@ -32,12 +32,14 @@ const { slug } = defineProps<{
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
                     <UFLabel :severity="Severity.Danger" v-if="item.flag_enabled == false">
-                        Disabled
+                        {{ $t('DISABLED') }}
                     </UFLabel>
                     <UFLabel :severity="Severity.Warning" v-else-if="item.flag_verified == false">
-                        Unactivated
+                        {{ $t('UNACTIVATED') }}
                     </UFLabel>
-                    <UFLabel :severity="Severity.Success" v-else>Active</UFLabel>
+                    <UFLabel :severity="Severity.Success" v-else>
+                        {{ $t('ENABLED') }}
+                    </UFLabel>
                 </UFSprunjeColumn>
             </template>
         </UFSprunjeTable>

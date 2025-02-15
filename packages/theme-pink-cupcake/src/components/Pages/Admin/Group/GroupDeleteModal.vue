@@ -40,20 +40,20 @@ const deleteConfirmed = () => {
 
 <template>
     <a href="#" v-bind="$attrs" :uk-toggle="'target: #confirm-group-delete-' + props.group.slug">
-        <slot><font-awesome-icon icon="trash" fixed-width /> Delete Group</slot>
+        <slot><font-awesome-icon icon="trash" fixed-width /> {{ $t('GROUP.DELETE') }}</slot>
     </a>
 
     <!-- This is the modal -->
     <UFModalConfirmation
         :id="'confirm-group-delete-' + props.group.slug"
-        title="Delete Group ?"
+        title="GROUP.DELETE"
         @confirmed="deleteConfirmed()"
-        acceptLabel="Yes, Delete Group"
+        acceptLabel="GROUP.DELETE_YES"
         acceptIcon="trash"
         :rejectIcon="null"
         :acceptSeverity="Severity.Danger">
         <template #prompt>
-            Are you sure you want to delete the <strong>{{ props.group.name }}</strong> group?
+            <div v-html="$t('GROUP.DELETE_CONFIRM', group)"></div>
         </template>
     </UFModalConfirmation>
 </template>

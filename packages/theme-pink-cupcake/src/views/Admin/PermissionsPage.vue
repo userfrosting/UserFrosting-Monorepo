@@ -2,8 +2,8 @@
     <UFCardBox>
         <UFSprunjeTable dataUrl="/api/permissions" searchColumn="name">
             <template #header>
-                <UFSprunjeHeader sort="name">Permission</UFSprunjeHeader>
-                <UFSprunjeHeader sort="properties">Description</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">{{ $t('PERMISSION') }}</UFSprunjeHeader>
+                <UFSprunjeHeader sort="properties">{{ $t('DESCRIPTION') }}</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">

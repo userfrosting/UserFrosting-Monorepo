@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import UIkit from 'uikit'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import type { RoleInterface } from '@userfrosting/sprinkle-account/interfaces'
 import { useRolePermissionsApi, useRoleUpdateApi } from '@userfrosting/sprinkle-admin/composables'
 
@@ -41,8 +42,9 @@ const submitForm = () => {
         })
         .catch((error) => {
             // Display an error notification
+            const { translate } = useTranslator()
             UIkit.notification({
-                message: error.description ?? 'An error occurred while creating the user.',
+                message: error.description ?? translate('ERROR.MISC'),
                 status: 'danger',
                 pos: 'top-right',
                 timeout: 4000
@@ -71,14 +73,14 @@ const modalName = computed(() => 'modal-role-manage-permission-' + role.slug)
 
 <template>
     <a v-bind="$attrs" :uk-toggle="'target: #' + modalName" @click="fetch(role.slug)">
-        <slot><font-awesome-icon icon="key" /> Manage Permissions</slot>
+        <slot><font-awesome-icon icon="key" /> {{ $t('PERMISSION.ASSIGN') }}</slot>
     </a>
 
     <!-- This is the modal -->
     <UFModal :id="modalName" class="uk-modal-container" closable>
-        <template #header>Manage Permissions - {{ role.name }}</template>
+        <template #header>{{ $t('PERMISSION.ASSIGN') }} - {{ role.name }}</template>
         <template #default>
-            <p>The selected permissions will be assigned to the role.</p>
+            <p>{{ $t('PERMISSION.ASSIGN.EXPLAIN') }}</p>
             <div class="uk-text-center" v-if="loading">
                 <font-awesome-icon icon="spinner" spin size="2xl" />
             </div>
@@ -96,8 +98,8 @@ const modalName = computed(() => 'modal-role-manage-permission-' + role.slug)
                                         type="checkbox"
                                         v-model="allSelected" />
                                 </th>
-                                <th>Permission</th>
-                                <th>Description</th>
+                                <th>{{ $t('PERMISSION') }}</th>
+                                <th>{{ $t('DESCRIPTION') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -129,13 +131,15 @@ const modalName = computed(() => 'modal-role-manage-permission-' + role.slug)
             </form>
         </template>
         <template #footer>
-            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">
+                {{ $t('CANCEL') }}
+            </button>
             <button
                 class="uk-button uk-button-primary"
                 type="submit"
                 @click="submitForm()"
                 :disabled="loading">
-                Update Permissions
+                {{ $t('PERMISSION.UPDATE') }}
             </button>
         </template>
     </UFModal>

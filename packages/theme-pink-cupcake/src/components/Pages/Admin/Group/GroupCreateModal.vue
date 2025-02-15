@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
 import { ref } from 'vue'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import { useGroupCreateApi } from '@userfrosting/sprinkle-admin/composables'
 import type { GroupCreateRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import GroupForm from './GroupForm.vue'
@@ -48,8 +49,9 @@ const submitForm = () => {
         })
         .catch((error) => {
             // Display an error notification
+            const { translate } = useTranslator()
             UIkit.notification({
-                message: error.description ?? 'An error occurred while saving the group.',
+                message: error.description ?? translate('ERROR.MISC'),
                 status: 'danger',
                 pos: 'top-right',
                 timeout: 4000
@@ -60,12 +62,12 @@ const submitForm = () => {
 
 <template>
     <a v-bind="$attrs" :uk-toggle="'target: #modal-group-create'">
-        <slot><font-awesome-icon icon="plus" fixed-width /> Create Group</slot>
+        <slot><font-awesome-icon icon="plus" fixed-width /> {{ $t('GROUP.CREATE') }}</slot>
     </a>
 
     <!-- This is the modal -->
     <UFModal id="modal-group-create" closable>
-        <template #header>Create Group</template>
+        <template #header>{{ $t('GROUP.CREATE') }}</template>
         <template #default>
             <GroupForm v-model="formData" @submit="submitForm()" />
         </template>

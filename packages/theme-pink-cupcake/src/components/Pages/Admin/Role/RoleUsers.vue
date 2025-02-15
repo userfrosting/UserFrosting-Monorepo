@@ -5,13 +5,13 @@ const { slug } = defineProps<{
 </script>
 
 <template>
-    <UFCardBox title="Role Users">
+    <UFCardBox title="ROLE.USERS">
         <UFSprunjeTable
             :dataUrl="'/api/roles/r/' + slug + '/users'"
             searchColumn="name"
             hideFilters>
             <template #header>
-                <UFSprunjeHeader sort="name">User</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">{{ $t('USER') }}</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">

@@ -47,8 +47,9 @@ const submitForm = () => {
         })
         .catch((error) => {
             // Display an error notification
+            const { translate } = useTranslator()
             UIkit.notification({
-                message: error.description ?? 'An error occurred.',
+                message: error.description ?? translate('ERROR.MISC'),
                 status: 'danger',
                 pos: 'top-right',
                 timeout: 4000
@@ -61,7 +62,8 @@ const submitForm = () => {
     <form v-on:submit.prevent="submitForm()">
         <fieldset class="uk-fieldset uk-form-stacked">
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">New Email</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('EMAIL') }}</label>
+                <span class="uk-text-meta">{{ $t('EMAIL.YOUR') }}</span>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="envelope" fixed-width />
                     <input
@@ -78,13 +80,16 @@ const submitForm = () => {
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Current Password</label>
+                <label class="uk-form-label" for="form-stacked-text">{{
+                    $t('PASSWORD.CURRENT')
+                }}</label>
+                <span class="uk-text-meta">{{ $t('PASSWORD.CURRENT_EXPLAIN') }}</span>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="key" fixed-width />
                     <input
                         class="uk-input"
                         type="password"
-                        placeholder="Current Password"
+                        :placeholder="$t('PASSWORD.CURRENT')"
                         aria-label="Current Password"
                         data-test="passwordcheck"
                         tabindex="2"
@@ -93,7 +98,9 @@ const submitForm = () => {
             </div>
 
             <div class="uk-text-center" uk-margin>
-                <button class="uk-button uk-button-primary" type="submit" tabindex="3">Save</button>
+                <button class="uk-button uk-button-primary" type="submit" tabindex="3">
+                    {{ $t('SAVE') }}
+                </button>
             </div>
         </fieldset>
     </form>

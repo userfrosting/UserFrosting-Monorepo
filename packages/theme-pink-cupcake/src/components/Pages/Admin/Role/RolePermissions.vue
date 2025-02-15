@@ -8,7 +8,7 @@ const { role } = defineProps<{
 </script>
 
 <template>
-    <UFCardBox title="Permissions">
+    <UFCardBox title="ROLE.PERMISSIONS">
         <UFSprunjeTable :dataUrl="'/api/roles/r/' + role.slug + '/permissions'" searchColumn="name">
             <template #actions="{ sprunjer }">
                 <RoleManagePermissionModal
@@ -18,8 +18,8 @@ const { role } = defineProps<{
             </template>
 
             <template #header>
-                <UFSprunjeHeader sort="name">Permission</UFSprunjeHeader>
-                <UFSprunjeHeader sort="properties">Description</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">{{ $t('PERMISSION') }}</UFSprunjeHeader>
+                <UFSprunjeHeader sort="properties">{{ $t('DESCRIPTION') }}</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">

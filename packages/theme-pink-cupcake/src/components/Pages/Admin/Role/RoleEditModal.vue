@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
 import { ref, watch } from 'vue'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import { useRoleEditApi } from '@userfrosting/sprinkle-admin/composables'
 import type { RoleEditRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import type { RoleInterface } from '@userfrosting/sprinkle-account/interfaces'
@@ -72,8 +73,9 @@ const submitForm = () => {
         })
         .catch((error) => {
             // Display an error notification
+            const { translate } = useTranslator()
             UIkit.notification({
-                message: error.description ?? 'An error occurred while saving the role.',
+                message: error.description ?? translate('ERROR.MISC'),
                 status: 'danger',
                 pos: 'top-right',
                 timeout: 4000
@@ -84,12 +86,12 @@ const submitForm = () => {
 
 <template>
     <a href="#" v-bind="$attrs" :uk-toggle="'target: #modal-role-edit-' + props.role.slug">
-        <slot> <font-awesome-icon icon="pen-to-square" fixed-width /> Edit Role </slot>
+        <slot> <font-awesome-icon icon="pen-to-square" fixed-width /> {{ $t('ROLE.EDIT') }} </slot>
     </a>
 
     <!-- This is the modal -->
     <UFModal :id="'modal-role-edit-' + props.role.slug" closable>
-        <template #header> Edit Role </template>
+        <template #header> {{ $t('ROLE.EDIT') }} </template>
         <template #default>
             <RoleForm v-model="formData" @submit="submitForm()" />
         </template>

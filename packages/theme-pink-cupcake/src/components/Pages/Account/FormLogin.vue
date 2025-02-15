@@ -52,7 +52,7 @@ async function sendLogin() {
                     <input
                         class="uk-input"
                         type="text"
-                        placeholder="Username"
+                        :placeholder="$t('USERNAME')"
                         aria-label="Username"
                         data-test="username"
                         v-model="form.user_name" />
@@ -64,7 +64,7 @@ async function sendLogin() {
                     <input
                         class="uk-input"
                         type="password"
-                        placeholder="Password"
+                        :placeholder="$t('PASSWORD')"
                         aria-label="Password"
                         data-test="password"
                         v-model="form.password" />
@@ -72,7 +72,7 @@ async function sendLogin() {
             </div>
             <div class="uk-text-center">
                 <button class="uk-button uk-button-primary" :disabled="loading" data-test="submit">
-                    Login
+                    {{ $t('LOGIN') }}
                 </button>
             </div>
         </fieldset>

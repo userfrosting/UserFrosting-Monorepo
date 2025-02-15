@@ -45,6 +45,7 @@ return [
         'ENCOUNTERED' => "D'oh! Quelque chose s'est produit. Aucune idée c'est quoi.",
 
         'MAIL' => "Erreur fatale lors de l'envoie du courriel. Contactez votre administrateur. Si vous être administrateur, consultez les logs.",
+        'MISC' => "Une erreur s'est produite.",
 
         'RETURN' => 'Cliquez <a href="{{url}}">ici</a> pour retourner à la page d\'accueil.',
 

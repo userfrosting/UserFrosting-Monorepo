@@ -28,7 +28,7 @@ const value = defineModel()
 defineProps({
     btnLabel: {
         type: String,
-        default: 'Ok'
+        default: 'OK'
     },
     title: {
         type: [String, null],
@@ -60,17 +60,17 @@ function submitPrompt() {
 <template>
     <UFModal>
         <template #header v-if="title || $slots.header">
-            <slot name="header">{{ title }}</slot>
+            <slot name="header">{{ $t(title) }}</slot>
         </template>
         <slot>
             <form class="uk-form-stacked" @submit="submitPrompt()">
-                <label class="uk-form-label" for="prompt-text">{{ prompt }}</label>
+                <label class="uk-form-label" for="prompt-text">{{ $t(prompt) }}</label>
                 <div class="uk-form-controls">
                     <input
                         type="text"
                         class="uk-input"
                         id="prompt-text"
-                        :placeholder="placeholder"
+                        :placeholder="$t(placeholder)"
                         v-model="value"
                         autofocus
                         tabindex="1" />
@@ -84,7 +84,7 @@ function submitPrompt() {
                     type="button"
                     tabindex="2"
                     ref="ok-btn">
-                    {{ btnLabel }}
+                    {{ $t(btnLabel) }}
                 </button>
             </slot>
         </template>

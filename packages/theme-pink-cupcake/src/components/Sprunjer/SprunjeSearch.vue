@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { inject, computed } from 'vue'
 import type { Sprunjer } from '@userfrosting/sprinkle-core/interfaces'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 
 const props = defineProps({
     column: {
@@ -16,7 +17,8 @@ const sprunjer = inject('sprunjer') as Sprunjer
 const { filters } = sprunjer
 
 const searchLabel = computed(() => {
-    return props.label ? 'Search ' + props.label + '...' : 'Search ' + props.column + '...'
+    const { translate } = useTranslator()
+    return props.label ?? translate('SPRUNJE.SEARCH', { term: props.column })
 })
 </script>
 

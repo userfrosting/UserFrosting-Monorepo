@@ -16,10 +16,10 @@ import UserPasswordResetModal from '../../components/Pages/Admin/User/UserPasswo
             </template>
 
             <template #header>
-                <UFSprunjeHeader sort="name">User</UFSprunjeHeader>
-                <UFSprunjeHeader sort="last_activity">Last Activity</UFSprunjeHeader>
-                <UFSprunjeHeader sort="status">Status</UFSprunjeHeader>
-                <UFSprunjeHeader>Actions</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">{{ $t('USER') }}</UFSprunjeHeader>
+                <UFSprunjeHeader sort="last_activity">{{ $t('ACTIVITY.LAST') }}</UFSprunjeHeader>
+                <UFSprunjeHeader sort="status">{{ $t('STATUS') }}</UFSprunjeHeader>
+                <UFSprunjeHeader>{{ $t('ACTIONS') }}</UFSprunjeHeader>
             </template>
 
             <template #body="{ item, sprunjer }">
@@ -41,16 +41,18 @@ import UserPasswordResetModal from '../../components/Pages/Admin/User/UserPasswo
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
                     <UFLabel :severity="Severity.Danger" v-if="item.flag_enabled == false">
-                        Disabled
+                        {{ $t('DISABLED') }}
                     </UFLabel>
                     <UFLabel :severity="Severity.Warning" v-else-if="item.flag_verified == false">
-                        Unactivated
+                        {{ $t('UNACTIVATED') }}
                     </UFLabel>
-                    <UFLabel :severity="Severity.Success" v-else>Active</UFLabel>
+                    <UFLabel :severity="Severity.Success" v-else>
+                        {{ $t('ACTIVE') }}
+                    </UFLabel>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
                     <button class="uk-button uk-button-primary uk-text-nowrap" type="button">
-                        Actions <span uk-drop-parent-icon></span>
+                        {{ $t('ACTIONS') }} <span uk-drop-parent-icon></span>
                     </button>
                     <div
                         class="uk-padding-small"
@@ -62,7 +64,7 @@ import UserPasswordResetModal from '../../components/Pages/Admin/User/UserPasswo
                                         name: 'admin.user',
                                         params: { user_name: item.user_name }
                                     }">
-                                    <font-awesome-icon icon="eye" fixed-width /> View
+                                    <font-awesome-icon icon="eye" fixed-width /> {{ $t('VIEW') }}
                                 </RouterLink>
                             </li>
                             <li>

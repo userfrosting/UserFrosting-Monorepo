@@ -72,7 +72,7 @@ class SiteLocale implements SiteLocaleInterface
         $options = [];
 
         foreach ($this->getAvailable() as $locale) {
-            $options[$locale->getIdentifier()] = $locale->getName();
+            $options[$locale->getIdentifier()] = $locale->getRegionalName();
         }
 
         // Sort the options by name before returning it

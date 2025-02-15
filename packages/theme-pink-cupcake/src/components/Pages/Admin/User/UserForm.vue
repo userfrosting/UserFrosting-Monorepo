@@ -45,13 +45,13 @@ const emits = defineEmits(['submit'])
     <form v-on:submit.prevent="emits('submit')">
         <fieldset class="uk-fieldset uk-form-stacked">
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Username</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('USERNAME') }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="edit" fixed-width />
                     <input
                         class="uk-input"
                         type="text"
-                        placeholder="Username"
+                        :placeholder="$t('USERNAME')"
                         aria-label="Username"
                         data-test="user_name"
                         autofocus
@@ -62,7 +62,7 @@ const emits = defineEmits(['submit'])
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Group</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('GROUP') }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="users" fixed-width />
                     <select
@@ -81,13 +81,13 @@ const emits = defineEmits(['submit'])
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">First Name</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('FIRST_NAME') }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="edit" fixed-width />
                     <input
                         class="uk-input"
                         type="text"
-                        placeholder="First Name"
+                        :placeholder="$t('FIRST_NAME')"
                         aria-label="First Name"
                         data-test="first_name"
                         tabindex="3"
@@ -96,13 +96,13 @@ const emits = defineEmits(['submit'])
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Last Name</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('LAST_NAME') }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="edit" fixed-width />
                     <input
                         class="uk-input"
                         type="text"
-                        placeholder="Last Name"
+                        :placeholder="$t('LAST_NAME')"
                         aria-label="Last Name"
                         data-test="last_name"
                         tabindex="4"
@@ -111,13 +111,13 @@ const emits = defineEmits(['submit'])
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Email</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('EMAIL') }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="envelope" fixed-width />
                     <input
                         class="uk-input"
                         type="text"
-                        placeholder="Email"
+                        :placeholder="$t('EMAIL')"
                         aria-label="Email"
                         data-test="email"
                         tabindex="5"
@@ -126,7 +126,7 @@ const emits = defineEmits(['submit'])
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Locale</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('LOCALE') }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="language" fixed-width />
                     <select
@@ -153,9 +153,11 @@ const emits = defineEmits(['submit'])
 
             <div class="uk-text-right" uk-margin>
                 <button class="uk-button uk-button-default uk-modal-close" type="button">
-                    Cancel
+                    {{ $t('CANCEL') }}
                 </button>
-                <button class="uk-button uk-button-primary" type="submit" tabindex="7">Save</button>
+                <button class="uk-button uk-button-primary" type="submit" tabindex="7">
+                    {{ $t('SAVE') }}
+                </button>
             </div>
         </fieldset>
     </form>

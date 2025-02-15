@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
 import { ref } from 'vue'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import { useRoleCreateApi } from '@userfrosting/sprinkle-admin/composables'
 import type { RoleCreateRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import RoleForm from './RoleForm.vue'
@@ -47,8 +48,9 @@ const submitForm = () => {
         })
         .catch((error) => {
             // Display an error notification
+            const { translate } = useTranslator()
             UIkit.notification({
-                message: error.description ?? 'An error occurred while creating the user.',
+                message: error.description ?? translate('ERROR.MISC'),
                 status: 'danger',
                 pos: 'top-right',
                 timeout: 4000
@@ -59,12 +61,12 @@ const submitForm = () => {
 
 <template>
     <a v-bind="$attrs" :uk-toggle="'target: #modal-role-create'">
-        <slot><font-awesome-icon icon="plus" /> Create Role</slot>
+        <slot><font-awesome-icon icon="plus" /> {{ $t('ROLE.CREATE') }}</slot>
     </a>
 
     <!-- This is the modal -->
     <UFModal id="modal-role-create" closable>
-        <template #header>Create Role</template>
+        <template #header>{{ $t('ROLE.CREATE') }}</template>
         <template #default>
             <RoleForm v-model="formData" @submit="submitForm()" />
         </template>

@@ -47,8 +47,8 @@ export default [
             auth: {
                 redirect: { name: 'account.login' }
             },
-            title: 'Account settings',
-            description: 'Update your account settings, including email, name, and password.'
+            title: 'ACCOUNT.SETTINGS',
+            description: 'ACCOUNT.SETTINGS.DESCRIPTION'
         },
         component: () => import('../views/UserSettings.vue'),
         children: [

@@ -21,7 +21,13 @@ function goToPage(goToPage: number) {
 <template>
     <div class="uk-child-width-auto" uk-grid>
         <div class="uk-text-left uk-text-meta">
-            <span>Showing {{ first }} - {{ last }} of {{ countFiltered }}</span>
+            <span>{{
+                $t('PAGINATION.OUTPUT', {
+                    first: first,
+                    last: last,
+                    count: countFiltered
+                })
+            }}</span>
         </div>
         <div class="uk-text-center uk-width-expand">
             <select
@@ -29,7 +35,7 @@ function goToPage(goToPage: number) {
                 aria-label="Select per page"
                 v-model="size">
                 <option v-for="option in rowsPerPageOptions" :key="option" :value="option">
-                    {{ option }} per page
+                    {{ $t('PAGINATION.PER_PAGE', { count: option }) }}
                 </option>
             </select>
         </div>
@@ -52,7 +58,14 @@ function goToPage(goToPage: number) {
                             <font-awesome-icon icon="angle-left" fixed-width />
                         </a>
                     </li>
-                    <li>Page {{ page + 1 }} of {{ totalPages + 1 }}</li>
+                    <li>
+                        {{
+                            $t('PAGINATION.PAGE_X_OF_Y', {
+                                current: page + 1,
+                                last: totalPages + 1
+                            })
+                        }}
+                    </li>
                     <li>
                         <a
                             @click="goToPage(page + 1)"

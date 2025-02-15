@@ -3,6 +3,8 @@
  * Modal Confirmation Component
  */
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
+const { translate } = useTranslator()
 
 /**
  * Emits - Events emitted by the component buttons. Note closing the modal with
@@ -55,13 +57,13 @@ const {
     icon = 'triangle-exclamation',
     acceptIcon = 'check',
     rejectIcon = 'xmark',
-    acceptLabel = 'Confirm',
-    rejectLabel = 'Cancel',
+    acceptLabel = 'CONFIRM',
+    rejectLabel = 'CANCEL',
     acceptSeverity = Severity.Primary,
     rejectSeverity = Severity.Default,
     cancelBtn = true,
-    title = 'Confirmation',
-    prompt = 'Please confirm to proceed moving forward.'
+    title = 'CONFIRMATION',
+    prompt = 'CONFIRM_ACTION'
 } = defineProps<Props>()
 
 /**
@@ -100,12 +102,12 @@ const btnClass = (severity: Severity) => {
 <template>
     <UFModal :closable="closable" :bgClose="bgClose" :escClose="escClose">
         <template #header v-if="title || $slots.header">
-            <slot name="header">{{ title }}</slot>
+            <slot name="header">{{ $t(title) }}</slot>
         </template>
         <slot>
             <div class="uk-text-center">
                 <p v-if="icon"><font-awesome-icon :icon="icon" class="uk-text-warning fa-4x" /></p>
-                <slot name="prompt">{{ prompt }}</slot>
+                <slot name="prompt">{{ $t(prompt) }}</slot>
             </div>
         </slot>
         <template #footer>
@@ -116,7 +118,7 @@ const btnClass = (severity: Severity) => {
                     type="button"
                     @click="$emit('cancelled')"
                     v-if="cancelBtn">
-                    <font-awesome-icon :icon="rejectIcon" v-if="rejectIcon" /> {{ rejectLabel }}
+                    <font-awesome-icon :icon="rejectIcon" v-if="rejectIcon" /> {{ $t(rejectLabel) }}
                 </button>
                 <button
                     class="uk-button uk-modal-close"
@@ -124,7 +126,7 @@ const btnClass = (severity: Severity) => {
                     type="button"
                     @click="$emit('confirmed')"
                     autofocus>
-                    <font-awesome-icon :icon="acceptIcon" v-if="acceptIcon" /> {{ acceptLabel }}
+                    <font-awesome-icon :icon="acceptIcon" v-if="acceptIcon" /> {{ $t(acceptLabel) }}
                 </button>
             </slot>
         </template>

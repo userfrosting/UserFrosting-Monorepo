@@ -35,7 +35,7 @@ async function sendForm() {
                     <input
                         class="uk-input"
                         type="email"
-                        placeholder="Email"
+                        :placeholder="$t('EMAIL')"
                         aria-label="Email"
                         data-test="email"
                         v-model="email" />
@@ -43,7 +43,7 @@ async function sendForm() {
             </div>
             <div class="uk-text-center">
                 <button class="uk-button uk-button-primary" :disabled="loading" data-test="submit">
-                    Email the verification link for my account
+                    {{ $t('ACCOUNT.VERIFICATION.SEND') }}
                 </button>
             </div>
         </fieldset>

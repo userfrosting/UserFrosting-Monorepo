@@ -3,7 +3,7 @@ import FormUserPassword from '../../components/Pages/Account/FormUserPassword.vu
 </script>
 
 <template>
-    <UFCardBox title="Update Password">
+    <UFCardBox :title="$t('ACCOUNT.SETTINGS.PASSWORD')">
         <FormUserPassword />
     </UFCardBox>
 </template>

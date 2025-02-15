@@ -15,13 +15,16 @@
  */
 return [
     'ACTIVITY' => [
-        1 => 'Activity',
-        2 => 'Activities',
+        1 => 'Activity', //OK
+        2 => 'Activities', //OK
 
-        'LAST' => 'Last Activity',
-        'PAGE' => 'A listing of user activities',
-        'TIME' => 'Activity Time',
+        'LAST'             => 'Last Activity', //OK
+        'LATEST'           => 'Latest Activities', //OK
+        'PAGE'             => 'Activities', //OK
+        'PAGE_DESCRIPTION' => 'A listing of user activities', //OK
+        'TIME'             => 'Activity Time', //OK
     ],
+    'ADMIN_PANEL' => 'Admin Panel', //OK
 
     'CACHE' => [
         'CLEAR'             => 'Clear cache',
@@ -31,7 +34,6 @@ return [
     ],
 
     'DASHBOARD'             => 'Dashboard',
-    'NO_FEATURES_YET'       => "It doesn't look like any features have been set up for this account...yet.  Maybe they haven't been implemented yet, or maybe someone forgot to give you access.  Either way, we're glad to have you aboard!",
     'DELETE_MASTER'         => 'You cannot delete the master account',
     'DELETION_SUCCESSFUL'   => 'User <strong>{{user_name}}</strong> has been successfully deleted.',
     'DETAILS_UPDATED'       => 'Account details updated for user <strong>{{user_name}}</strong>',
@@ -45,28 +47,29 @@ return [
         1 => 'Group',
         2 => 'Groups',
 
-        'CREATE'              => 'Create group',
+        'CREATE'              => 'Create group',//OK
         'CREATION_SUCCESSFUL' => 'Successfully created group <strong>{{name}}</strong>',
-        'DELETE'              => 'Delete group',
-        'DELETE_CONFIRM'      => 'Are you sure you want to delete the group <strong>{{name}}</strong>?',
+        'DELETE'              => 'Delete group',//OK
+        'DELETE_CONFIRM'      => 'Are you sure you want to delete the group <strong>{{name}}</strong>?',//OK
         'DELETE_DEFAULT'      => "You can't delete the group <strong>{{name}}</strong> because it is the default group for newly registered users.",
-        'DELETE_YES'          => 'Yes, delete group',
+        'DELETE_YES'          => 'Yes, delete group',//OK
         'DELETION_SUCCESSFUL' => 'Successfully deleted group <strong>{{name}}</strong>',
-        'EDIT'                => 'Edit group',
+        'EDIT'                => 'Edit group',//OK
         'EXCEPTION'           => 'Group error',
-        'ICON'                => 'Group icon',
-        'ICON_EXPLAIN'        => 'Icon for group members',
-        'INFO_PAGE'           => 'Group information page for {{name}}',
+        'ICON'                => 'Group icon',//OK
+        'ICON_EXPLAIN'        => 'Icon for group members',//OK
+        'INFO_PAGE'           => 'View and edit group details.', //OK
         'MANAGE'              => 'Manage group',
-        'NAME'                => 'Group name',
+        'NAME'                => 'Group name',//OK
         'NAME_IN_USE'         => 'A group named <strong>{{name}}</strong> already exist',
-        'NAME_EXPLAIN'        => 'Please enter a name for the group',
+        'NAME_EXPLAIN'        => 'Please enter a name for the group',//OK
         'NONE'                => 'No group',
         'NOT_EMPTY'           => "You can't do that because there are still users associated with the group <strong>{{name}}</strong>.",
         'NOT_FOUND'           => 'Group not found',
-        'PAGE_DESCRIPTION'    => 'A listing of the groups for your site.  Provides management tools for editing and deleting groups.',
-        'SUMMARY'             => 'Group Summary',
+        'PAGE'                => 'Groups', //OK
+        'PAGE_DESCRIPTION'    => 'A listing of the groups for your site.  Provides management tools for editing and deleting groups.', //OK
         'UPDATE'              => 'Details updated for group <strong>{{name}}</strong>',
+        'USERS'               => 'Users in this group',
     ],
 
     'MANUALLY_ACTIVATED'    => "{{user_name}}'s account has been manually activated",
@@ -75,68 +78,77 @@ return [
         'REQUIRED'          => 'Database update required',
     ],
 
-    'PERMISSION' => [
-        1 => 'Permission',
-        2 => 'Permissions',
+    'NO_FEATURES_YET'       => "It doesn't look like any features have been set up for this account...yet.  Maybe they haven't been implemented yet, or maybe someone forgot to give you access.  Either way, we're glad to have you aboard!",
 
-        'ASSIGN_NEW'        => 'Assign new permission',
-        'HOOK_CONDITION'    => 'Hook/Conditions',
-        'ID'                => 'Permission ID',
-        'INFO_PAGE'         => "Permission information page for '{{name}}'",
+    'PERMISSION' => [
+        1 => 'Permission',//OK
+        2 => 'Permissions',//OK
+
+        'ASSIGN'            => [
+            '@TRANSLATION' => 'Assign permissions',//OK
+            'EXPLAIN'      => 'The selected permissions will be assigned to the role.',//OK
+        ],
+        'HOOK_CONDITION'    => 'Hook/Conditions',//OK
+        'ID'                => 'Permission ID',//OK
+        'INFO_PAGE'         => 'View and edit permission details.', //OK
         'MANAGE'            => 'Manage permissions',
         'NOT_FOUND'         => 'Permission not found',
-        'PAGE_DESCRIPTION'  => 'A listing of the permissions for your site.  Provides management tools for editing and deleting permissions.',
-        'SUMMARY'           => 'Permission Summary',
-        'UPDATE'            => 'Update permissions',
+        'PAGE'              => 'Permissions', //OK
+        'PAGE_DESCRIPTION'  => 'A listing of the permissions for your site.  Provides management tools for editing and deleting permissions.', //OK
+        'UPDATE'            => 'Update permissions',//OK
+        'USERS'             => 'Users with this permission',//OK
         'VIA_ROLES'         => 'Has permission via roles',
     ],
 
     'ROLE' => [
-        1 => 'Role',
-        2 => 'Roles',
+        1 => 'Role',//OK
+        2 => 'Roles',//OK
 
         'ASSIGN_NEW'          => 'Assign new role',
-        'CREATE'              => 'Create role',
+        'CREATE'              => 'Create role',//OK
         'CREATION_SUCCESSFUL' => 'Successfully created role <strong>{{name}}</strong>',
-        'DELETE'              => 'Delete role',
-        'DELETE_CONFIRM'      => 'Are you sure you want to delete the role <strong>{{name}}</strong>?',
+        'DELETE'              => 'Delete role',//OK
+        'DELETE_CONFIRM'      => 'Are you sure you want to delete the role <strong>{{name}}</strong>?',//OK
         'DELETE_DEFAULT'      => "You can't delete the role <strong>{{name}}</strong> because it is a default role for newly registered users.",
-        'DELETE_YES'          => 'Yes, delete role',
+        'DELETE_YES'          => 'Yes, delete role',//OK
         'DELETION_SUCCESSFUL' => 'Successfully deleted role <strong>{{name}}</strong>',
-        'EDIT'                => 'Edit role',
+        'EDIT'                => 'Edit role',//OK
         'EXCEPTION'           => 'Role error',
         'HAS_USERS'           => "You can't do that because there are still users who have the role <strong>{{name}}</strong>.",
-        'INFO_PAGE'           => 'Role information page for {{name}}',
-        'MANAGE'              => 'Manage Roles',
-        'NAME'                => 'Name',
-        'NAME_EXPLAIN'        => 'Please enter a name for the role',
+        'INFO_PAGE'           => 'View and edit role details.', //OK
+        'MANAGE'              => 'Manage Roles', //OK
+        'MANAGE_EXPLAIN'      => 'The selected roles will be assigned to the user.', //OK
+        'NAME'                => 'Name',//OK
+        'NAME_EXPLAIN'        => 'Please enter a name for the role',//OK
         'NAME_IN_USE'         => 'A role named <strong>{{name}}</strong> already exist',
         'NOT_FOUND'           => 'Role not found',
-        'PAGE_DESCRIPTION'    => 'A listing of the roles for your site.  Provides management tools for editing and deleting roles.',
+        'PAGE'                => 'Roles', //OK
+        'PAGE_DESCRIPTION'    => 'A listing of the roles for your site.  Provides management tools for editing and deleting roles.', //OK
+        'PERMISSIONS'         => 'Role permissions',
         'PERMISSIONS_UPDATED' => 'Permissions updated for role <strong>{{name}}</strong>',
-        'SUMMARY'             => 'Role Summary',
+        'UPDATE'              => 'Update Roles', //OK
         'UPDATED'             => 'Details updated for role <strong>{{name}}</strong>',
+        'USERS'               => 'Users with this role',
     ],
 
     'SYSTEM_INFO' => [
-        '@TRANSLATION'  => 'System information',
+        '@TRANSLATION'  => 'System information', //OK
 
-        'DB_NAME'       => 'Database Name',
-        'DB_CONNECTION' => 'Database Connection',
-        'DB_VERSION'    => 'Database Version',
-        'DIRECTORY'     => 'Project Directory',
-        'PHP_VERSION'   => 'PHP Version',
-        'SERVER'        => 'Webserver Software',
-        'SPRINKLES'     => 'Loaded Sprinkles',
-        'UF_VERSION'    => 'Framework Version',
-        'URL'           => 'Site Root Url',
+        'DB_NAME'       => 'Database Name', //OK
+        'DB_CONNECTION' => 'Database Connection', //OK
+        'DB_VERSION'    => 'Database Version', //OK
+        'DIRECTORY'     => 'Project Directory', //OK
+        'PHP_VERSION'   => 'PHP Version', //OK
+        'SERVER'        => 'Webserver Software', //OK
+        'SPRINKLES'     => 'Loaded Sprinkles', //OK
+        'UF_VERSION'    => 'Framework Version', //OK
     ],
 
     'TOGGLE_COLUMNS' => 'Toggle columns',
 
     'USER' => [
-        1 => 'User',
-        2 => 'Users',
+        1 => 'User', //OK
+        2 => 'Users', //OK
 
         'ADMIN' => [
             'CHANGE_PASSWORD'    => 'Change User Password',
@@ -145,22 +157,25 @@ return [
             'PASSWORD_RESET'     => 'A password reset link will be sent to <strong>{{email}}</strong>.',
         ],
 
-        'ACTIVATE'          => 'Activate user',
-        'CREATE'            => 'Create user',
+        'ACTIVATE'          => 'Activate user', //OK
+        'ACTIVATE_CONFIRM'  => 'Are you sure you want to activate <strong>{{full_name}} ({{user_name}})</strong> ?', //OK
+        'CREATE'            => 'Create user', //OK
         'CREATED'           => 'User <strong>{{user_name}}</strong> has been successfully created',
-        'DELETE'            => 'Delete user',
-        'DELETE_CONFIRM'    => 'Are you sure you want to delete the user <strong>{{name}}</strong>?',
-        'DELETE_YES'        => 'Yes, delete user',
-        'DELETED'           => 'User deleted',
-        'DISABLE'           => 'Disable user',
+        'DELETE'            => 'Delete user', //OK
+        'DELETE_CONFIRM'    => 'Are you sure you want to delete the user <strong>{{full_name}} ({{user_name}})</strong>?', //OK
+        'DELETED'           => 'User deleted', //OK
+        'DISABLE'           => 'Disable user', //OK
+        'DISABLE_CONFIRM'   => 'Are you sure you want to disable <strong>{{full_name}} ({{user_name}})</strong> ?', //OK
         'EDIT'              => 'Edit user',
-        'ENABLE'            => 'Enable user',
-        'INFO_PAGE'         => 'User information page',
-        'LATEST'            => 'Latest Users',
-        'PAGE_DESCRIPTION'  => 'A listing of the users for your site.  Provides management tools including the ability to edit user details, manually activate users, enable/disable users, and more.',
-        'VIEW_ALL'          => 'View all users',
-        'WITH_PERMISSION'   => 'Users with this permission',
+        'ENABLE'            => 'Enable user', //OK
+        'ENABLE_CONFIRM'    => 'Are you sure you want to enable <strong>{{full_name}} ({{user_name}})</strong> ?', //OK
+        'INFO_PAGE'         => 'View and edit user details.', //OK
+        'LATEST'            => 'Latest Users', //OK
+        'PAGE'              => 'Users', //OK
+        'PAGE_DESCRIPTION'  => 'A listing of the users for your site. Provides management tools including the ability to edit user details, manually activate users, enable/disable users, and more.', //OK
+        'VIEW_ALL'          => 'View all users', //OK
     ],
+
     'X_USER' => [
         0 => 'No users',
         1 => '{{plural}} user',

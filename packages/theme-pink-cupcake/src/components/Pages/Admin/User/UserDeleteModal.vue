@@ -40,20 +40,20 @@ const deleteConfirmed = () => {
 
 <template>
     <a href="#" v-bind="$attrs" :uk-toggle="'target: #confirm-user-delete-' + props.user.user_name">
-        <slot><font-awesome-icon icon="trash" fixed-width /> Delete User</slot>
+        <slot><font-awesome-icon icon="trash" fixed-width /> {{ $t('USER.DELETE') }}</slot>
     </a>
 
     <!-- This is the modal -->
     <UFModalConfirmation
         :id="'confirm-user-delete-' + props.user.user_name"
-        title="Delete User ?"
+        title="USER.DELETE"
         @confirmed="deleteConfirmed()"
-        acceptLabel="Yes, Delete User"
+        acceptLabel="USER.DELETE"
         acceptIcon="trash"
         :rejectIcon="null"
         :acceptSeverity="Severity.Danger">
         <template #prompt>
-            Are you sure you want to delete <strong>{{ props.user.user_name }}</strong> ?
+            <p v-html="$t('USER.DELETE_CONFIRM', props.user)"></p>
         </template>
     </UFModalConfirmation>
 </template>

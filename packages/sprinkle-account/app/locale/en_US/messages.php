@@ -70,19 +70,23 @@ return [
                 'DESCRIPTION' => 'This password reset request could not be found, or has expired.',
             ],
         ],
-
         'EMAIL_UPDATED' => 'Account email updated',
         'ERROR'         => [
             '@TRANSLATION'  => 'Error validating account',
             'MISSING_PARAM' => "Account can't be registered as '{{param}}' is required.",
         ],
 
+        'HAVE_ONE'          => 'Already have an account ?',
+
         'MASTER_NOT_EXISTS' => 'You cannot register an account until the master account has been created!',
-        'MY'                => 'My Account',
+        'MY'                => 'My Account',//OK
 
         'SETTINGS' => [
-            '@TRANSLATION'  => 'Account settings',
-            'DESCRIPTION'   => 'Update your account settings, including email, name, and password.',
+            '@TRANSLATION'  => 'Account settings',//OK
+            'DESCRIPTION'   => 'Update your account settings, including email, name, and password.',//OK
+            'EMAIL'         => 'Update Email',//OK
+            'PASSWORD'      => 'Update Password',//OK
+            'PERSONAL'      => 'Personal Information',//OK
             'UPDATED'       => 'Account settings updated',
         ],
 
@@ -90,11 +94,11 @@ return [
 
         'VERIFICATION' => [
             'NEW_LINK_SENT'     => 'We have emailed a new verification link to {{email}}.  Please check your inbox and spam folders for this email.',
-            'RESEND'            => 'Resend verification email',
+            'RESEND'            => 'Resend verification email',//OK
             'COMPLETE'          => 'You have successfully verified your account. You can now login.',
-            'EMAIL'             => 'Please enter the email address you used to sign up, and your verification email will be resent.',
+            'EMAIL'             => 'Please enter the email address you used to sign up, and your verification email will be resent.',//OK
             'PAGE'              => 'Resend the verification email for your new account.',
-            'SEND'              => 'Email the verification link for my account',
+            'SEND'              => 'Email the verification link for my account',//OK
             'TOKEN_NOT_FOUND'   => 'Verification token does not exist / Account is already verified',
         ],
     ],
@@ -103,67 +107,58 @@ return [
         'INVALID'               => 'Invalid email',
         'IN_USE'                => 'Email <strong>{{email}}</strong> is already in use.',
         'NOT_FOUND'             => 'There is no account for <strong>{{email}}</strong>.',
-        'VERIFICATION_REQUIRED' => 'Email (verification required - use a real address!)',
+        'VERIFICATION_REQUIRED' => 'Email (verification required - use a real address!)',//OK
     ],
 
     'EMAIL_OR_USERNAME' => 'Username or email address',
 
-    'FIRST_NAME' => 'First name',
+    'FIRST_NAME' => 'First name',//OK
 
-    'GUEST' => 'Guest',
+    'GUEST' => 'Guest', //OK
 
     'HEADER_MESSAGE_ROOT' => 'YOU ARE SIGNED IN AS THE ROOT USER',
 
-    'LAST_NAME' => 'Last name',
+    'LAST_NAME' => 'Last name',//OK
     'LOCALE'    => [
-        'ACCOUNT' => 'The language and locale to use for your account',
+        'ACCOUNT' => 'The language and locale to use for your account', //OK
         'INVALID' => '{{locale}} is not a valid locale.',
     ],
     'LOGIN' => [
-        '@TRANSLATION'      => 'Login',
+        '@TRANSLATION'      => 'Login',//OK
         'ALREADY_COMPLETE'  => 'You are already logged in!',
         'SOCIAL'            => 'Or login with',
         'REQUIRED'          => 'Sorry, you must be logged in to access this resource.',
     ],
-    'LOGOUT' => 'Logout',
+    'LOGOUT' => 'Logout',//OK
 
     'NAME' => 'Name',
 
-    'NAME_AND_EMAIL' => 'Name and email',
-
-    'PAGE' => [
-        'LOGIN' => [
-            'DESCRIPTION'   => 'Sign in to your {{site_name}} account, or register for a new account.',
-            'SUBTITLE'      => 'Register for free, or sign in with an existing account.',
-            'TITLE'         => "Let's get started!",
-        ],
-    ],
+    'NAME_AND_EMAIL' => 'Name and email',//OK
 
     'PASSWORD' => [
-        '@TRANSLATION' => 'Password',
+        '@TRANSLATION' => 'Password',//OK
 
         'BETWEEN'   => 'Between {{min}}-{{max}} characters',
 
-        'CONFIRM'               => 'Confirm password',
+        'CONFIRM'               => 'Confirm password',//OK
         'CONFIRM_CURRENT'       => 'Please confirm your current password',
-        'CONFIRM_NEW'           => 'Confirm New Password',
-        'CONFIRM_NEW_EXPLAIN'   => 'Re-enter your new password',
-        'CONFIRM_NEW_HELP'      => 'Required only if selecting a new password',
+        'CONFIRM_NEW'           => 'Confirm New Password',//OK
+        'CONFIRM_NEW_EXPLAIN'   => 'Re-enter your new password',//OK
         'CREATE'                => [
             '@TRANSLATION'  => 'Create Password',
             'PAGE'          => 'Choose a password for your new account.',
             'SET'           => 'Set Password and Sign In',
         ],
-        'CURRENT'               => 'Current Password',
-        'CURRENT_EXPLAIN'       => 'You must confirm your current password to make changes',
+        'CURRENT'               => 'Current Password',//OK
+        'CURRENT_EXPLAIN'       => 'You must confirm your current password to make changes',//OK
 
-        'FORGOTTEN' => 'Forgotten Password',
+        'FORGOTTEN' => 'Forgotten Password',//OK
         'FORGET'    => [
-            '@TRANSLATION' => 'I forgot my password',
+            '@TRANSLATION' => 'Forgot your password?',//OK
 
             'COULD_NOT_UPDATE'  => "Couldn't update password.",
             'EMAIL'             => 'Please enter the email address you used to sign up. A link with instructions to reset your password will be emailed to you.',
-            'EMAIL_SEND'        => 'Email Password Reset Link',
+            'EMAIL_SEND'        => 'Email Password Reset Link',//OK
             'PAGE'              => 'Get a link to reset your password.',
             'REQUEST_CANNED'    => 'Lost password request cancelled.',
             'REQUEST_SENT'      => 'If the email <strong>{{email}}</strong> matches an account in our system, a password reset link will be sent to <strong>{{email}}</strong>.',
@@ -171,12 +166,13 @@ return [
 
         'HASH_FAILED'       => 'Password hashing failed. Please contact a site administrator.',
         'INVALID'           => "Current password doesn't match the one we have on record",
-        'NEW'               => 'New Password',
+        'NEW'               => 'New Password',//OK
         'NOTHING_TO_UPDATE' => 'You cannot update with the same password',
 
         'RESET' => [
-            '@TRANSLATION'      => 'Reset Password',
+            '@TRANSLATION'      => 'Reset Password',//OK
             'CHOOSE'            => 'Please choose a new password to continue.',
+            'CONFIRM'           => ' Are you sure you want to send <strong>{{full_name}} ({{ user_name }})</strong> a link that will allow them to reset their password ?',//OK
             'PAGE'              => 'Choose a new password for your account.',
             'SEND'              => 'Set New Password and Sign In',
         ],
@@ -190,9 +186,8 @@ return [
     ],
 
     'RATE_LIMIT_EXCEEDED'       => 'The rate limit for this action has been exceeded.  You must wait another {{delay}} seconds before you will be allowed to make another attempt.',
-
-    'REGISTER'      => 'Register',
-    'REGISTER_ME'   => 'Sign me up',
+    'REGISTER'      => 'Register',//OK
+    'REGISTER_ME'   => 'Sign me up',//OK
     'REGISTRATION'  => [
         'ERROR'             => 'Registration error',
         'UNKNOWN'           => 'A problem was encountered during the account registration process.',
@@ -200,6 +195,7 @@ return [
         'COMPLETE_TYPE2'    => 'You have successfully registered. A link to activate your account has been sent to <strong>{{email}}</strong>.  You will not be able to sign in until you complete this step.',
         'DISABLED'          => "We're sorry, account registration has been disabled.",
         'LOGOUT'            => "I'm sorry, you cannot register for an account while logged in. Please log out first.",
+        'QUESTION'          => "You don't have an account yet?",//OK
         'WELCOME'           => 'Registration is fast and simple.',
     ],
     'REMEMBER_ME'               => 'Keep me signed in',
@@ -215,7 +211,7 @@ return [
     'TOS_FOR'       => 'Terms and Conditions for {{title}}',
 
     'USERNAME' => [
-        '@TRANSLATION' => 'Username',
+        '@TRANSLATION' => 'Username',//OK
 
         'CHOOSE'        => 'Choose a unique username',
         'INVALID'       => 'Invalid username',

@@ -5,15 +5,15 @@ const { user_name } = defineProps<{
 </script>
 
 <template>
-    <UFCardBox title="Permissions">
+    <UFCardBox :title="$t('PERMISSION', 2)">
         <UFSprunjeTable
             v-if="user_name !== ''"
             :dataUrl="'/api/users/u/' + user_name + '/permissions'"
             searchColumn="name">
             <template #header>
-                <UFSprunjeHeader sort="name">Permission</UFSprunjeHeader>
-                <UFSprunjeHeader sort="properties">Description</UFSprunjeHeader>
-                <UFSprunjeHeader>Has permission via roles</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">{{ $t('PERMISSION') }}</UFSprunjeHeader>
+                <UFSprunjeHeader sort="properties">{{ $t('DESCRIPTION') }}</UFSprunjeHeader>
+                <UFSprunjeHeader>{{ $t('PERMISSION.VIA_ROLES') }}</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">

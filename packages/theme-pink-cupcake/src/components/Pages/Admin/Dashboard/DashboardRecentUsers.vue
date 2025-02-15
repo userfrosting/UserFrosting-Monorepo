@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
     <!-- TODO : Create user Card template -->
-    <UFCardBox title="Latest Users">
+    <UFCardBox :title="$t('USER.LATEST')">
         <div class="uk-grid uk-flex-center" uk-grid>
             <div v-for="user in users" :key="user.id" class="uk-text-center">
                 <RouterLink
@@ -26,7 +26,7 @@ defineProps<{
         </div>
         <template #footer>
             <RouterLink :to="{ name: 'admin.users' }" class="uk-text-center">
-                View All Users
+                {{ $t('USER.VIEW_ALL') }}
             </RouterLink>
         </template>
     </UFCardBox>

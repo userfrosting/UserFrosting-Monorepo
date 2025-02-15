@@ -5,7 +5,7 @@ export default [
             auth: {
                 redirect: { name: 'account.login' }
             },
-            title: 'Users',
+            title: 'USER.PAGE',
             description: 'USER.PAGE_DESCRIPTION'
         },
         children: [
@@ -19,7 +19,7 @@ export default [
                 name: 'admin.user',
                 component: () => import('../views/UserView.vue'),
                 meta: {
-                    title: 'User Details',
+                    title: 'USER.PAGE',
                     description: 'USER.INFO_PAGE'
                 }
             }

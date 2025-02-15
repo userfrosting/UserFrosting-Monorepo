@@ -16,14 +16,17 @@ declare(strict_types=1);
  * @author Louis Charette
  */
 return [
-    'ABOUT'        => 'À propos',
+    'BUILT_WITH_UF' => 'Créé avec <a href="http://www.userfrosting.com">UserFrosting</a>',
+
     'CAPTCHA'      => [
         '@TRANSLATION' => 'Captcha',
         'FAIL'         => 'La valeur du captcha n\'a pas été entrée correctement.',
         'SPECIFY'      => 'Entrer la valeur du captcha',
         'VERIFY'       => 'Vérification du captcha',
     ],
-    'CSRF_MISSING' => 'Jeton CSRF manquant. Essayez de rafraîchir la page et de soumettre de nouveau?',
+    'COPYRIGHT'     => 'Copyright {{year}}',
+    'CSRF_MISSING'  => 'Jeton CSRF manquant. Essayez de rafraîchir la page et de soumettre de nouveau?',
+
     'DB_INVALID'   => 'Impossible de se connecter à la base de données. Si vous êtes un administrateur, vérifiez votre journal d\'erreurs.',
     'DESCRIPTION'  => 'Description',
     'DOWNLOAD'     => [
@@ -31,8 +34,8 @@ return [
         'CSV'          => 'Télécharger CSV',
     ],
     'EMAIL' => [
-        '@TRANSLATION' => 'Email',
-        'YOUR'         => 'Votre adresse email',
+        '@TRANSLATION' => 'Courriel',
+        'YOUR'         => 'Votre adresse courriel',
     ],
     'HOME'  => 'Accueil',
     'LEGAL' => [
@@ -46,23 +49,35 @@ return [
     'NAVIGATION' => 'Menu principal',
     'NO_RESULTS' => 'Aucun résultat trouvé.',
     'PAGINATION' => [
-        'GOTO'     => 'Aller à la page',
-        'SHOW'     => 'Afficher',
-        'OUTPUT'   => '{startRow} à {endRow} de {filteredRows} ({totalRows})',
-        'NEXT'     => 'Prochaine page',
-        'PREVIOUS' => 'Page précédente',
-        'FIRST'    => 'Première page',
-        'LAST'     => 'Dernière page',
+        // 'GOTO'     => 'Aller à la page',
+        // 'SHOW'     => 'Afficher',
+        'OUTPUT'   => 'Affichage de {{first}} à {{last}} sur {{count}}',
+        // 'NEXT'     => 'Prochaine page',
+        'PAGE_X_OF_Y' => 'Page {{current}} de {{last}}', //OK
+        'PER_PAGE' => '{{count}} par page', //OK
+        // 'PREVIOUS' => 'Page précédente',
+        // 'FIRST'    => 'Première page',
+        // 'LAST'     => 'Dernière page',
     ],
     'PRIVACY' => [
         '@TRANSLATION' => 'Politique de confidentialité',
         'DESCRIPTION'  => 'Notre politique de confidentialité décrit le type d\'informations que nous recueillons de votre part et comment nous les utiliserons.',
     ],
+
     'SLUG'                     => 'Jeton',
     'SLUG_CONDITION'           => 'Jeton/Conditions',
     'SLUG_IN_USE'              => 'Un jeton <strong>{{slug}}</strong> existe déjà',
-    'STATUS'                   => 'Statut',
+    'SPRUNJE'                  => [
+        'FILTERS'      => 'Filtres',
+        'FILTER_CLEAR' => 'Effacer filtres',
+        'SEARCH'       => 'Rechercher',
+        'SEARCH_X'     => 'Rechercher {{term}}...',
+    ],
+    'STATUS'                   => 'État',
     'SUGGEST'                  => 'Suggérer',
+
+    'THEME_BY'      => 'Thème créé avec',
+
     'UNKNOWN'                  => 'Inconnu',
     'ACTIONS'                  => 'Actions',
     'ACTIVATE'                 => 'Autoriser',
@@ -70,7 +85,10 @@ return [
     'ADD'                      => 'Ajouter',
     'CANCEL'                   => 'Annuler',
     'CONFIRM'                  => 'Confirmer',
+    'CONFIRM_ACTION'           => 'Veuillez confirmer pour continuer.',
+    'CONFIRMATION'             => 'Confirmation',
     'CREATE'                   => 'Créer',
+    'CREATED_ON'               => 'Créé le',
     'DELETE'                   => 'Supprimer',
     'DELETE_CONFIRM'           => 'Êtes-vous sûr de vouloir supprimer ceci?',
     'DELETE_CONFIRM_YES'       => 'Oui, supprimer',
@@ -84,6 +102,9 @@ return [
     'EDIT'                     => 'Modifier',
     'ENABLE'                   => 'Activer',
     'ENABLED'                  => 'Activé',
+    'NO'                       => 'Non',
+    'NONE'                     => 'Aucun',
+    'OPTIONAL'                 => 'Facultatif',
     'OVERRIDE'                 => 'Forcer',
     'RESET'                    => 'Réinitialiser',
     'SAVE'                     => 'Sauvegarder',
@@ -94,10 +115,6 @@ return [
     'REMOVE'                   => 'Supprimer',
     'UNACTIVATED'              => 'Non activé',
     'UPDATE'                   => 'Mettre à jour',
+    'VIEW'                     => 'Voir',
     'YES'                      => 'Oui',
-    'NO'                       => 'Non',
-    'OPTIONAL'                 => 'Facultatif',
-    'BUILT_WITH_UF'            => 'Créé avec <a href="http://www.userfrosting.com">UserFrosting</a>',
-    'ADMINLTE_THEME_BY'        => 'Thème par <strong><a href="https://adminlte.io">AdminLTE</a>.</strong> Tous droits réservés',
-    'WELCOME_TO'               => 'Bienvenue sur {{title}}, {{user}}!',
 ];

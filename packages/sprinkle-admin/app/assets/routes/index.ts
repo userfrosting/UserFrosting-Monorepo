@@ -22,8 +22,8 @@ const AdminActivitiesRoutes = [
             auth: {
                 redirect: { name: 'account.login' }
             },
-            title: 'Activities',
-            description: 'List of all activities'
+            title: 'ACTIVITY.PAGE',
+            description: 'ACTIVITY.PAGE_DESCRIPTION'
         },
         component: () => import('../views/ActivitiesView.vue')
     }
@@ -36,9 +36,8 @@ const AdminGroupsRoutes = [
             auth: {
                 redirect: { name: 'account.login' }
             },
-            title: 'Groups',
-            description:
-                'A listing of the groups for your site. Provides management tools for editing and deleting groups.'
+            title: 'GROUP.PAGE',
+            description: 'GROUP.PAGE_DESCRIPTION'
         },
         children: [
             {
@@ -51,8 +50,7 @@ const AdminGroupsRoutes = [
                 name: 'admin.group',
                 component: () => import('../views/GroupView.vue'),
                 meta: {
-                    title: 'Group Details',
-                    description: 'View and edit group details.'
+                    description: 'GROUP.INFO_PAGE'
                 }
             }
         ]
@@ -66,9 +64,8 @@ const AdminPermissionsRoutes = [
             auth: {
                 redirect: { name: 'account.login' }
             },
-            title: 'Permissions',
-            description:
-                'A listing of the permissions for your site. Provides management tools for editing and deleting permissions.'
+            title: 'PERMISSION.PAGE',
+            description: 'PERMISSION.PAGE_DESCRIPTION'
         },
         children: [
             {
@@ -81,8 +78,7 @@ const AdminPermissionsRoutes = [
                 name: 'admin.permission',
                 component: () => import('../views/PermissionView.vue'),
                 meta: {
-                    title: 'Permission details',
-                    description: 'View and edit permission details.'
+                    description: 'PERMISSION.INFO_PAGE'
                 }
             }
         ]
@@ -95,9 +91,8 @@ const AdminRolesRoutes = [
             auth: {
                 redirect: { name: 'account.login' }
             },
-            title: 'Roles',
-            description:
-                'A listing of the roles for your site. Provides management tools for editing and deleting roles.'
+            title: 'ROLE.PAGE',
+            description: 'ROLE.PAGE_DESCRIPTION'
         },
         children: [
             {
@@ -110,8 +105,7 @@ const AdminRolesRoutes = [
                 name: 'admin.role',
                 component: () => import('../views/RoleView.vue'),
                 meta: {
-                    title: 'Role details',
-                    description: 'View and edit role details.'
+                    description: 'ROLE.INFO_PAGE'
                 }
             }
         ]

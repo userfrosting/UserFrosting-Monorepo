@@ -23,13 +23,13 @@ const emits = defineEmits(['submit'])
     <form v-on:submit.prevent="emits('submit')">
         <fieldset class="uk-fieldset uk-form-stacked">
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Group name</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('GROUP.NAME') }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="pen-to-square" fixed-width />
                     <input
                         class="uk-input"
                         type="text"
-                        placeholder="Please enter a name for the group"
+                        :placeholder="$t('GROUP.NAME_EXPLAIN')"
                         aria-label="Group Name"
                         data-test="name"
                         autofocus
@@ -39,14 +39,14 @@ const emits = defineEmits(['submit'])
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Slug</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('SLUG') }}</label>
                 <!-- <span class="pull-right"><a href="#" id="form-register-username-suggest">[{{translate('SUGGEST')}}]</a></span> -->
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="tag" fixed-width />
                     <input
                         class="uk-input"
                         type="text"
-                        placeholder="Group Slug"
+                        :placeholder="$t('SLUG')"
                         aria-label="Group Slug"
                         data-test="slug"
                         tabindex="2"
@@ -55,7 +55,8 @@ const emits = defineEmits(['submit'])
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Group Icon</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('GROUP.ICON') }}</label>
+                <span class="uk-text-meta">{{ $t('GROUP.ICON_EXPLAIN') }}</span>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon
                         class="fa-form-icon"
@@ -65,7 +66,7 @@ const emits = defineEmits(['submit'])
                     <input
                         class="uk-input"
                         type="text"
-                        placeholder="Icon for group members"
+                        :placeholder="$t('GROUP.ICON')"
                         aria-label="Group Icon"
                         data-test="icon"
                         tabindex="3"
@@ -74,7 +75,7 @@ const emits = defineEmits(['submit'])
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Description</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('DESCRIPTION') }}</label>
                 <textarea
                     class="uk-textarea"
                     placeholder="Group Description"
@@ -87,9 +88,11 @@ const emits = defineEmits(['submit'])
 
             <div class="uk-text-right" uk-margin>
                 <button class="uk-button uk-button-default uk-modal-close" type="button">
-                    Cancel
+                    {{ $t('CANCEL') }}
                 </button>
-                <button class="uk-button uk-button-primary" type="submit" tabindex="5">Save</button>
+                <button class="uk-button uk-button-primary" type="submit" tabindex="5">
+                    {{ $t('SAVE') }}
+                </button>
             </div>
         </fieldset>
     </form>

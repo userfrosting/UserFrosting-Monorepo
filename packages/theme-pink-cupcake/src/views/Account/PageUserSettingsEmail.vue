@@ -3,7 +3,7 @@ import FormUserEmail from '../../components/Pages/Account/FormUserEmail.vue'
 </script>
 
 <template>
-    <UFCardBox title="Update Email">
+    <UFCardBox :title="$t('ACCOUNT.SETTINGS.EMAIL')">
         <FormUserEmail />
     </UFCardBox>
 </template>

@@ -39,21 +39,20 @@ const confirmed = () => {
         href="#"
         v-bind="$attrs"
         :uk-toggle="'target: #confirm-user-reset-password-' + props.user.user_name">
-        <slot><font-awesome-icon icon="key" fixed-width /> Reset Password</slot>
+        <slot><font-awesome-icon icon="key" fixed-width /> {{ $t('PASSWORD.RESET') }}</slot>
     </a>
 
     <!-- This is the modal -->
     <UFModalConfirmation
         :id="'confirm-user-reset-password-' + props.user.user_name"
-        title="Confirm Action"
+        :title="$t('PASSWORD.RESET')"
         @confirmed="confirmed()"
-        acceptLabel="Yes"
+        :acceptLabel="$t('YES')"
         acceptIcon="check"
         :rejectIcon="null"
-        :acceptSeverity="Severity.Danger">
+        :acceptSeverity="Severity.Success">
         <template #prompt>
-            Are you sure you want to send <strong>{{ props.user.user_name }}</strong> a link that
-            will allow them to reset their password ?
+            <div v-html="$t('PASSWORD.RESET.CONFIRM', user)"></div>
         </template>
     </UFModalConfirmation>
 </template>

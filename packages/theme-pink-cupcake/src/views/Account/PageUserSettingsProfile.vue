@@ -3,7 +3,7 @@ import FormUserProfile from '../../components/Pages/Account/FormUserProfile.vue'
 </script>
 
 <template>
-    <UFCardBox title="Personal Information">
+    <UFCardBox :title="$t('ACCOUNT.SETTINGS.PERSONAL')">
         <FormUserProfile />
     </UFCardBox>
 </template>

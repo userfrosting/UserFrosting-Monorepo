@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
 import { ref, watch } from 'vue'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import { useUserUpdateApi } from '@userfrosting/sprinkle-admin/composables'
 import type { UserPasswordRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import type { UserInterface } from '@userfrosting/sprinkle-account/interfaces'
@@ -60,8 +61,9 @@ const submitForm = () => {
         })
         .catch((error) => {
             // Display an error notification
+            const { translate } = useTranslator()
             UIkit.notification({
-                message: error.description ?? 'An error occurred while saving the user.',
+                message: error.description ?? translate('ERROR.MISC'),
                 status: 'danger',
                 pos: 'top-right',
                 timeout: 4000
@@ -72,12 +74,14 @@ const submitForm = () => {
 
 <template>
     <a href="#" v-bind="$attrs" :uk-toggle="'target: #modal-user-password-' + props.user.user_name">
-        <slot> <font-awesome-icon icon="key" fixed-width /> Change User Password </slot>
+        <slot>
+            <font-awesome-icon icon="key" fixed-width /> {{ $t('USER.ADMIN.CHANGE_PASSWORD') }}
+        </slot>
     </a>
 
     <!-- This is the modal -->
     <UFModal :id="'modal-user-password-' + props.user.user_name" closable>
-        <template #header> Change User Password </template>
+        <template #header> {{ $t('USER.ADMIN.CHANGE_PASSWORD') }} </template>
         <template #default>
             <UserPasswordForm v-model="formData" @submit="submitForm()" />
         </template>

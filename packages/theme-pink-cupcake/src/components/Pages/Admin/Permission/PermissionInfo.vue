@@ -18,11 +18,15 @@ const { permission } = defineProps<{
         <hr />
         <!-- TODO : Find a way to slot the description list -->
         <dl class="uk-description-list">
-            <dt>Slug</dt>
+            <dt>{{ $t('PERMISSION.ID') }}</dt>
+            <dd>
+                <pre><code>{{ permission.id }}</code></pre>
+            </dd>
+            <dt>{{ $t('SLUG') }}</dt>
             <dd>
                 <pre><code>{{ permission.slug }}</code></pre>
             </dd>
-            <dt>Conditions</dt>
+            <dt>{{ $t('PERMISSION.HOOK_CONDITION') }}</dt>
             <dd>
                 <pre style="text-wrap: wrap"><code>{{ permission.conditions }}</code></pre>
             </dd>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import UIkit from 'uikit'
-import { useConfigStore } from '@userfrosting/sprinkle-core/stores'
+import { useConfigStore, useTranslator } from '@userfrosting/sprinkle-core/stores'
 import { useUserProfileEditApi } from '@userfrosting/sprinkle-account/composables'
 import { useAuthStore } from '@userfrosting/sprinkle-account/stores'
 import type { ProfileEditRequest } from '@userfrosting/sprinkle-account/interfaces'
@@ -50,8 +50,9 @@ const submitForm = () => {
         })
         .catch((error) => {
             // Display an error notification
+            const { translate } = useTranslator()
             UIkit.notification({
-                message: error.description ?? 'An error occurred.',
+                message: error.description ?? translate('ERROR.MISC'),
                 status: 'danger',
                 pos: 'top-right',
                 timeout: 4000
@@ -64,13 +65,13 @@ const submitForm = () => {
     <form v-on:submit.prevent="submitForm()">
         <fieldset class="uk-fieldset uk-form-stacked">
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">First Name</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('FIRST_NAME') }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="edit" fixed-width />
                     <input
                         class="uk-input"
                         type="text"
-                        placeholder="First Name"
+                        :placeholder="$t('FIRST_NAME')"
                         aria-label="First Name"
                         data-test="first_name"
                         tabindex="1"
@@ -80,13 +81,13 @@ const submitForm = () => {
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Last Name</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('LAST_NAME') }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="edit" fixed-width />
                     <input
                         class="uk-input"
                         type="text"
-                        placeholder="Last Name"
+                        :placeholder="$t('LAST_NAME')"
                         aria-label="Last Name"
                         data-test="last_name"
                         tabindex="2"
@@ -95,7 +96,7 @@ const submitForm = () => {
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Locale</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('LOCALE') }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="language" fixed-width />
                     <select
@@ -115,7 +116,9 @@ const submitForm = () => {
             </div>
 
             <div class="uk-text-center" uk-margin>
-                <button class="uk-button uk-button-primary" type="submit" tabindex="4">Save</button>
+                <button class="uk-button uk-button-primary" type="submit" tabindex="4">
+                    {{ $t('SAVE') }}
+                </button>
             </div>
         </fieldset>
     </form>

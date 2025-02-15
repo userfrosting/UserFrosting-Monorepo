@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
 import { ref } from 'vue'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import { useGroupsApi, useUserCreateApi } from '@userfrosting/sprinkle-admin/composables'
 import type { UserCreateRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import UserForm from './UserForm.vue'
@@ -50,8 +51,9 @@ const submitForm = () => {
         })
         .catch((error) => {
             // Display an error notification
+            const { translate } = useTranslator()
             UIkit.notification({
-                message: error.description ?? 'An error occurred while creating the user.',
+                message: error.description ?? translate('ERROR.MISC'),
                 status: 'danger',
                 pos: 'top-right',
                 timeout: 4000
@@ -67,12 +69,12 @@ const { groups, updateGroups } = useGroupsApi()
 
 <template>
     <a v-bind="$attrs" :uk-toggle="'target: #modal-user-create'" @click="updateGroups()">
-        <slot><font-awesome-icon icon="user-plus" /> Create user</slot>
+        <slot><font-awesome-icon icon="user-plus" /> {{ $t('USER.CREATE') }}</slot>
     </a>
 
     <!-- This is the modal -->
     <UFModal id="modal-user-create" closable>
-        <template #header>Create User</template>
+        <template #header>{{ $t('USER.CREATE') }}</template>
         <template #default>
             <UserForm v-model="formData" :groups="groups" @submit="submitForm()" />
         </template>

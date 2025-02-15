@@ -1,14 +1,14 @@
 <template>
-    <UFCardBox title="Latest Activities">
+    <UFCardBox :title="$t('ACTIVITY.LATEST')">
         <UFSprunjeTable
             dataUrl="/api/activities"
             :defaultSorts="{ occurred_at: 'desc' }"
             hidePagination
             hideFilters>
             <template #header>
-                <UFSprunjeHeader>Activity Time</UFSprunjeHeader>
-                <UFSprunjeHeader>User</UFSprunjeHeader>
-                <UFSprunjeHeader>Description</UFSprunjeHeader>
+                <UFSprunjeHeader>{{ $t('ACTIVITY.TIME') }}</UFSprunjeHeader>
+                <UFSprunjeHeader>{{ $t('USER') }}</UFSprunjeHeader>
+                <UFSprunjeHeader>{{ $t('DESCRIPTION') }}</UFSprunjeHeader>
             </template>
 
             <template #body="{ item }">
@@ -28,14 +28,14 @@
                     <div class="uk-text-meta">{{ item.user.email }}</div>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn v-else>
-                    <i>Deleted User</i>
+                    <i>{{ $t('USER.DELETED') }}</i>
                 </UFSprunjeColumn>
                 <UFSprunjeColumn>
                     <div>
-                        {{ item.ip_address }}
-                    </div>
-                    <div>
                         <i>{{ item.description }}</i>
+                    </div>
+                    <div class="uk-text-meta">
+                        {{ item.ip_address }}
                     </div>
                 </UFSprunjeColumn>
             </template>

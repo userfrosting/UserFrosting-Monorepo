@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import UIkit from 'uikit'
 import { ref, watch } from 'vue'
+import { useTranslator } from '@userfrosting/sprinkle-core/stores'
 import { useGroupEditApi } from '@userfrosting/sprinkle-admin/composables'
 import type { GroupEditRequest } from '@userfrosting/sprinkle-admin/interfaces'
 import type { GroupInterface } from '@userfrosting/sprinkle-account/interfaces'
@@ -74,8 +75,9 @@ const submitForm = () => {
         })
         .catch((error) => {
             // Display an error notification
+            const { translate } = useTranslator()
             UIkit.notification({
-                message: error.description ?? 'An error occurred while saving the group.',
+                message: error.description ?? translate('ERROR.MISC'),
                 status: 'danger',
                 pos: 'top-right',
                 timeout: 4000
@@ -86,12 +88,12 @@ const submitForm = () => {
 
 <template>
     <a href="#" v-bind="$attrs" :uk-toggle="'target: #modal-group-edit-' + props.group.slug">
-        <slot> <font-awesome-icon icon="pen-to-square" fixed-width /> Edit Group </slot>
+        <slot> <font-awesome-icon icon="pen-to-square" fixed-width /> {{ $t('GROUP.EDIT') }} </slot>
     </a>
 
     <!-- This is the modal -->
     <UFModal :id="'modal-group-edit-' + props.group.slug" closable>
-        <template #header> Edit Group </template>
+        <template #header> {{ $t('GROUP.EDIT') }} </template>
         <template #default>
             <GroupForm v-model="formData" @submit="submitForm()" />
         </template>

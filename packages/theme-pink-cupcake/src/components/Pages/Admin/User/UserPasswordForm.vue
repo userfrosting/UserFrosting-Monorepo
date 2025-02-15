@@ -24,13 +24,15 @@ const emits = defineEmits(['submit'])
 
         <fieldset class="uk-fieldset uk-form-stacked">
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Password</label>
+                <label class="uk-form-label" for="form-stacked-text">{{ $t('PASSWORD') }}</label>
+                <!-- <span class="uk-text-meta">{{ $t('PASSWORD.CONFIRM_NEW_EXPLAIN') }}</span> -->
+                <!-- {{translate('PASSWORD.BETWEEN', {min: site.password.length.min, max: site.password.length.max})}} -->
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="key" fixed-width />
                     <input
                         class="uk-input"
                         type="password"
-                        placeholder="Password"
+                        :placeholder="$t('PASSWORD')"
                         aria-label="Password"
                         data-test="password"
                         autofocus
@@ -38,17 +40,18 @@ const emits = defineEmits(['submit'])
                         autocomplete="false"
                         v-model="formData.password" />
                 </div>
-                <!-- {{translate('PASSWORD.BETWEEN', {min: site.password.length.min, max: site.password.length.max})}} -->
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Confirm Password</label>
+                <label class="uk-form-label" for="form-stacked-text">{{
+                    $t('PASSWORD.CONFIRM')
+                }}</label>
                 <div class="uk-inline uk-width-1-1">
                     <font-awesome-icon class="fa-form-icon" icon="key" fixed-width />
                     <input
                         class="uk-input"
                         type="password"
-                        placeholder="Confirm Password"
+                        :placeholder="$t('PASSWORD.CONFIRM')"
                         aria-label="Confirm Password"
                         data-test="passwordc"
                         tabindex="2"
@@ -58,9 +61,11 @@ const emits = defineEmits(['submit'])
 
             <div class="uk-text-right" uk-margin>
                 <button class="uk-button uk-button-default uk-modal-close" type="button">
-                    Cancel
+                    {{ $t('CANCEL') }}
                 </button>
-                <button class="uk-button uk-button-primary" type="submit" tabindex="3">Save</button>
+                <button class="uk-button uk-button-primary" type="submit" tabindex="3">
+                    {{ $t('SAVE') }}
+                </button>
             </div>
         </fieldset>
     </form>

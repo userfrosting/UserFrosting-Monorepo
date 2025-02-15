@@ -24,7 +24,7 @@ const emits = defineEmits(['updated'])
         <hr />
         <!-- TODO : Find a way to slot the description list -->
         <dl class="uk-description-list">
-            <dt><font-awesome-icon icon="users" /> Users</dt>
+            <dt><font-awesome-icon icon="users" /> {{ $t('USER', role.users_count) }}</dt>
             <dd>
                 <span class="uk-badge">{{ role.users_count }}</span>
             </dd>

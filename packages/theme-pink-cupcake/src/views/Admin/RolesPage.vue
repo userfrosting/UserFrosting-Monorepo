@@ -13,9 +13,9 @@ import RoleManagePermissionModal from '../../components/Pages/Admin/Role/RoleMan
             </template>
 
             <template #header>
-                <UFSprunjeHeader sort="name">Role</UFSprunjeHeader>
-                <UFSprunjeHeader sort="description">Description</UFSprunjeHeader>
-                <UFSprunjeHeader>Actions</UFSprunjeHeader>
+                <UFSprunjeHeader sort="name">{{ $t('ROLE') }}</UFSprunjeHeader>
+                <UFSprunjeHeader sort="description">{{ $t('DESCRIPTION') }}</UFSprunjeHeader>
+                <UFSprunjeHeader>{{ $t('ACTIONS') }}</UFSprunjeHeader>
             </template>
 
             <template #body="{ item, sprunjer }">
@@ -33,7 +33,7 @@ import RoleManagePermissionModal from '../../components/Pages/Admin/Role/RoleMan
                 <UFSprunjeColumn>{{ item.description }}</UFSprunjeColumn>
                 <UFSprunjeColumn>
                     <button class="uk-button uk-button-primary uk-text-nowrap" type="button">
-                        Actions <span uk-drop-parent-icon></span>
+                        {{ $t('ACTIONS') }} <span uk-drop-parent-icon></span>
                     </button>
                     <div
                         class="uk-padding-small"

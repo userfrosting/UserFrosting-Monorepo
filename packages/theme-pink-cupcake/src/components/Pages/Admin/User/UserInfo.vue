@@ -29,28 +29,32 @@ const emits = defineEmits(['updated'])
         <hr />
         <!-- TODO : Find a way to slot the description list -->
         <dl class="uk-description-list">
-            <dt><font-awesome-icon icon="envelope" /> Email</dt>
+            <dt><font-awesome-icon icon="envelope" /> {{ $t('EMAIL') }}</dt>
             <dd class="uk-text-meta">{{ user.email }}</dd>
-            <dt><font-awesome-icon icon="users" /> Group</dt>
+            <dt><font-awesome-icon icon="users" /> {{ $t('GROUP') }}</dt>
             <dd class="uk-text-meta" v-if="user.group">
                 <router-link :to="{ name: 'admin.group', params: { slug: user.group.slug } }">
                     {{ user.group.name }}
                 </router-link>
             </dd>
-            <dd class="uk-text-meta" v-else><i>None</i></dd>
-            <dt><font-awesome-icon icon="language" /> Locale</dt>
+            <dd class="uk-text-meta" v-else>
+                <i>{{ $t('NONE') }}</i>
+            </dd>
+            <dt><font-awesome-icon icon="language" /> {{ $t('LOCALE') }}</dt>
             <dd class="uk-text-meta">{{ user.locale_name }}</dd>
-            <dt><font-awesome-icon icon="user-shield" /> Status</dt>
+            <dt><font-awesome-icon icon="user-shield" /> {{ $t('STATUS') }}</dt>
             <dd class="uk-text-meta">
                 <UFLabel :severity="Severity.Danger" v-if="user.flag_enabled == false">
-                    Disabled
+                    {{ $t('DISABLED') }}
                 </UFLabel>
                 <UFLabel :severity="Severity.Warning" v-else-if="user.flag_verified == false">
-                    Unactivated
+                    {{ $t('UNACTIVATED') }}
                 </UFLabel>
-                <UFLabel :severity="Severity.Success" v-else>Active</UFLabel>
+                <UFLabel :severity="Severity.Success" v-else>
+                    {{ $t('ACTIVE') }}
+                </UFLabel>
             </dd>
-            <dt><font-awesome-icon icon="calendar" /> Created on</dt>
+            <dt><font-awesome-icon icon="calendar" /> {{ $t('CREATED_ON') }}</dt>
             <dd class="uk-text-meta">{{ $tdate(user.created_at, 'DDD') }}</dd>
             <!-- <slot data-test="slot"></slot> -->
         </dl>
