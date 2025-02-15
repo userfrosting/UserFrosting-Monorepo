@@ -109,7 +109,7 @@ class SiteLocaleTest extends TestCase
         // Set expectations. Note the sort applied here
         $expected = [
             'en_US' => 'English',
-            'fr_FR' => 'Tomato', // Just to be sure the fake locale are loaded ;)
+            'fr_FR' => 'Tomate', // Just to be sure the fake locale are loaded ;)
         ];
         $options = $locale->getAvailableOptions();
         $this->assertSame($expected, $options);
