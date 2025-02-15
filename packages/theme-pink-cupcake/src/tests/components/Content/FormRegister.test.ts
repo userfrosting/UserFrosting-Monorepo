@@ -81,6 +81,16 @@ const uikitNotification = {
     timeout: 4000
 }
 
+// Mock the config & translator store
+vi.mock('@userfrosting/sprinkle-core/stores', () => ({
+    useConfigStore: () => ({
+        get: vi.fn(() => 'Site Title')
+    }),
+    useTranslator: () => ({
+        translate: vi.fn(() => 'Welcome back John Doe!')
+    })
+}))
+
 describe('FormRegister.vue', () => {
     afterEach(() => {
         vi.clearAllMocks()
