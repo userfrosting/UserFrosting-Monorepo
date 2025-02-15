@@ -89,7 +89,7 @@ return [
     * redis are used on the same server.
     */
     'cache' => [
-        'driver'     => 'array', // Supported drivers : `file`, `memcached`, `redis`, `array`
+        'driver'     => 'file', // Supported drivers : `file`, `memcached`, `redis`, `array`
         'prefix'     => 'userfrosting',
         'memcached'  => [
             'host'   => '127.0.0.1',
@@ -385,7 +385,7 @@ return [
             ],
             // The default locale to use for non-registered users.
             // Browser requested languages might overwrite this value.
-            'default' => 'fr_FR',
+            'default' => 'en_US',
         ],
         'title' => 'UserFrosting', // Site display name
         // Global ufTable settings
