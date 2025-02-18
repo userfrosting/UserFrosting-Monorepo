@@ -13,7 +13,6 @@ namespace UserFrosting\Sprinkle\Account\Tests\Controller;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPMailer\PHPMailer\Exception as PHPMailerException;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Sprinkle\Account\Authenticate\Authenticator;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
@@ -157,6 +156,7 @@ class RegisterActionTest extends AccountTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
+        $this->assertJsonStructure(['user', 'message'], $response);
         $this->assertJsonStructure([
             'user_name',
             'first_name',
@@ -170,19 +170,14 @@ class RegisterActionTest extends AccountTestCase
             'id',
             'full_name',
             'avatar',
-        ], $response);
+        ], $response, 'user');
+        $this->assertJsonResponse('You have successfully registered. You can now sign in.', $response, 'message');
 
         // Make sure the user is added to the db by querying it
         /** @var User */
         $user = User::where('email', 'testRegister@test.com')->first();
         $this->assertSame('RegisteredUser', $user['user_name']);
         $this->assertSame('en_US', $user['locale']);
-
-        // Test message
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('success', array_reverse($messages)[0]['type']);
     }
 
     public function testRegisterWithFailedValidation(): void
@@ -251,6 +246,7 @@ class RegisterActionTest extends AccountTestCase
 
         // Assert response status & body
         $this->assertResponseStatus(200, $response);
+        $this->assertJsonStructure(['user', 'message'], $response);
         $this->assertJsonStructure([
             'user_name',
             'first_name',
@@ -264,7 +260,8 @@ class RegisterActionTest extends AccountTestCase
             'id',
             'full_name',
             'avatar',
-        ], $response);
+        ], $response, 'user');
+        $this->assertJsonResponse('You have successfully registered. A link to activate your account has been sent to <strong>testRegister@test.com</strong>. You will not be able to sign in until you complete this step.', $response, 'message');
     }
 
     public function testRegisterWithFailedEmailVerification(): void
@@ -300,14 +297,8 @@ class RegisterActionTest extends AccountTestCase
         $response = $this->handleRequest($request);
 
         // Assert response status & body
-        $this->assertResponseStatus(500, $response);
-        $this->assertJsonResponse('Fatal error attempting mail, contact your server administrator.  If you are the admin, please check the UserFrosting log.', $response, 'title');
-
-        // Assert alert
-        /** @var AlertStream */
-        $ms = $this->ci->get(AlertStream::class);
-        $messages = $ms->getAndClearMessages();
-        $this->assertSame('danger', array_reverse($messages)[0]['type']);
+        $this->assertResponseStatus(400, $response);
+        $this->assertJsonResponse('An error occurred while sending the verification email. Please contact your administrator.', $response, 'description');
     }
 
     public function testRegisterWithFailedThrottle(): void

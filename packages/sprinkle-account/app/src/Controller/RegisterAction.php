@@ -17,12 +17,12 @@ use PHPMailer\PHPMailer\Exception as PHPMailerException;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use UserFrosting\Alert\AlertStream;
 use UserFrosting\Config\Config;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaInterface;
 use UserFrosting\Fortress\Transformer\RequestDataTransformer;
 use UserFrosting\Fortress\Validator\ServerSideValidator;
+use UserFrosting\I18n\Translator;
 use UserFrosting\Session\Session;
 use UserFrosting\Sprinkle\Account\Account\Registration;
 use UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface;
@@ -70,7 +70,7 @@ class RegisterAction
      * @param \UserFrosting\Event\EventDispatcher $eventDispatcher
      */
     public function __construct(
-        protected AlertStream $alert,
+        protected Translator $translator,
         protected Config $config,
         protected Connection $db,
         protected EventDispatcherInterface $eventDispatcher,
@@ -97,8 +97,15 @@ class RegisterAction
      */
     public function __invoke(Request $request, Response $response): Response
     {
-        $payload = $this->handle($request);
-        $payload = json_encode($payload ?? [], JSON_THROW_ON_ERROR);
+        $newUser = $this->handle($request);
+        $message = ($this->requireEmailVerification())
+        ? 'REGISTRATION.COMPLETE_VERIFICATION'
+        : 'REGISTRATION.COMPLETE';
+        $data = [
+            'user'    => $newUser,
+            'message' => $this->translator->translate($message, $newUser),
+        ];
+        $payload = json_encode($data, JSON_THROW_ON_ERROR);
         $response->getBody()->write($payload);
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -109,9 +116,9 @@ class RegisterAction
      *
      * @param Request $request
      *
-     * @return mixed[]|null The newly created user
+     * @return mixed[] The newly created user
      */
-    protected function handle(Request $request): ?array
+    protected function handle(Request $request): array
     {
         // Throttle requests.
         $this->throttle();
@@ -176,16 +183,15 @@ class RegisterAction
                     $this->verificationEmail->send($user, 'mail/verify-account.html.twig');
                 } catch (PHPMailerException $e) {
                     // Use abstract message for security reasons - We don't want to show email is not working
-                    $this->alert->addMessage('danger', 'REGISTRATION.UNKNOWN');
+                    $exception = new RegistrationException($e->getMessage());
+                    $exception->setDescription('REGISTRATION.MAIL_ERROR');
 
-                    throw $e;
+                    throw $exception;
                 }
             }
 
             return $user;
         });
-
-        $this->addMessage($user);
 
         return $user->toArray();
     }
@@ -306,24 +312,6 @@ class RegisterAction
                 throw $e;
             }
         }
-    }
-
-    /**
-     * Add success message to the alert stream.
-     *
-     * @param UserInterface $user
-     */
-    protected function addMessage(UserInterface $user): void
-    {
-        // Verification required
-        if ($this->requireEmailVerification() === true) {
-            $this->alert->addMessage('success', 'REGISTRATION.COMPLETE_TYPE2', $user->toArray());
-        }
-
-        // No verification required
-        $this->alert->addMessage('success', 'REGISTRATION.COMPLETE_TYPE1');
-
-        // TODO : The alert should be changed to json return
     }
 
     /**

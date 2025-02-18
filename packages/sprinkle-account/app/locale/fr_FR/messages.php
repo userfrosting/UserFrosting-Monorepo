@@ -71,27 +71,27 @@ return [
             ],
         ],
         'EMAIL_UPDATED'       => 'Adresse email mise à jour',
-        'ERROR'         => [
+        'ERROR'               => [
             '@TRANSLATION'  => 'Error validating account',
             'MISSING_PARAM' => "Account can't be registered as '{{param}}' is required.",
         ],
-        
+
         'HAVE_ONE'            => 'Vous avez déjà un compte ?',
-        
+
         'MASTER_NOT_EXISTS'   => 'Vous ne pouvez pas enregistrer un compte tant que le compte principal n\'a pas été créé!',
-        'MY'                  => 'Mon compte',//OK  
-        
+        'MY'                  => 'Mon compte', //OK
+
         'SETTINGS'        => [
             '@TRANSLATION' => 'Paramètres du compte',
             'DESCRIPTION'  => 'Mettez à jour les paramètres de votre compte, y compris votre adresse e-mail, votre nom et votre mot de passe.',
-            'EMAIL'        => 'Mise à jour du email',//OK
-            'PASSWORD'     => 'Modifier le mot de passe',//OK
-            'PERSONAL'     => 'Information personnelle',//OK
+            'EMAIL'        => 'Mise à jour du email', //OK
+            'PASSWORD'     => 'Modifier le mot de passe', //OK
+            'PERSONAL'     => 'Information personnelle', //OK
             'UPDATED'      => 'Paramètres du compte mis à jour',
         ],
 
         'TOOLS'        => 'Outils du compte',
-        
+
         'VERIFICATION' => [
             'NEW_LINK_SENT'   => 'Nous avons envoyé un nouveau lien de vérification à {{email}}. Veuillez vérifier vos dossiers de boîte de réception et de spam pour ce courriel.',
             'RESEND'          => 'Renvoyer le courriel de validation',
@@ -102,7 +102,7 @@ return [
             'TOKEN_NOT_FOUND' => 'Le jeton de vérification n\'existe pas / Le compte est déjà vérifié',
         ],
     ],
-    
+
     'EMAIL' => [
         'INVALID'               => 'Il n\'y a aucun compte pour <strong>{{email}}</strong>.',
         'IN_USE'                => 'Le email <strong>{{email}}</strong> est déjà utilisé.',
@@ -110,13 +110,13 @@ return [
         'VERIFICATION_REQUIRED' => 'Email (vérification requise - utiliser une adresse réelle!)',
     ],
     'EMAIL_OR_USERNAME'   => 'Nom d\'utilisateur ou adresse email',
-    
+
     'FIRST_NAME'          => 'Prénom',
-    
+
     'GUEST'               => 'Invité',
 
     'HEADER_MESSAGE_ROOT' => 'VOUS ÊTES CONNECTÉ EN TANT QUE L\'UTILISATEUR ROOT',
-    
+
     'LAST_NAME'           => 'Nom de famille',
     'LOCALE'              => [
         'ACCOUNT' => 'La langue utilisé pour votre compte d\'utilisateur',
@@ -129,15 +129,15 @@ return [
         'REQUIRED'         => 'Désolé, vous devez être connecté pour accéder à cette ressource.',
     ],
     'LOGOUT'         => 'Déconnexion',
-    
+
     'NAME'           => 'Nom',
     'NAME_AND_EMAIL' => 'Nom et email',
-    
+
     'PASSWORD' => [
         '@TRANSLATION'        => 'Mot de passe',
-        
+
         'BETWEEN'             => 'Entre {{min}} et {{max}} charactères',
-        
+
         'CONFIRM'             => 'Confirmer le mot de passe',
         'CONFIRM_CURRENT'     => 'Veuillez confirmer votre mot de passe actuel',
         'CONFIRM_NEW'         => 'Confirmer le nouveau mot de passe',
@@ -149,7 +149,7 @@ return [
         ],
         'CURRENT'         => 'Mot de passe actuel',
         'CURRENT_EXPLAIN' => 'Vous devez confirmer votre mot de passe actuel pour apporter des modifications',
-        
+
         'FORGOTTEN'       => 'Mot de passe oublié',
         'FORGET'          => [
             '@TRANSLATION'     => 'Mot de passe oublié?',
@@ -161,14 +161,14 @@ return [
             'REQUEST_CANNED'   => 'Demande de mot de passe perdu annulée.',
             'REQUEST_SENT'     => 'Si l\'adresse e-mail <strong>{{email}}</strong> correspond à un compte dans notre système, un lien de réinitialisation de mot de passe sera envoyé à <strong>{{email}}</strong>.',
         ],
-        
+
         'HASH_FAILED'       => 'Le hachage du mot de passe a échoué. Veuillez contacter un administrateur de site.',
-        
+
         'INVALID'           => 'Le mot de passe actuel ne correspond pas à celui que nous avons au dossier',
-        
+
         'NEW'               => 'Nouveau mot de passe',
         'NOTHING_TO_UPDATE' => 'Vous ne pouvez pas mettre à jour avec le même mot de passe',
-        
+
         'RESET'             => [
             '@TRANSLATION' => 'Réinitialiser le mot de passe',
             'CHOOSE'       => 'Veuillez choisir un nouveau mot de passe pour continuer.',
@@ -176,7 +176,7 @@ return [
             'PAGE'         => 'Choisissez un nouveau mot de passe pour votre compte.',
             'SEND'         => 'Définir un nouveau mot de passe',
         ],
-        
+
         'UPDATED' => 'Mot de passe du compte mis à jour',
     ],
 
@@ -184,31 +184,32 @@ return [
         'SETTINGS' => 'Paramètres du profil',
         'UPDATED'  => 'Paramètres du profil mis à jour',
     ],
-    
+
     'RATE_LIMIT_EXCEEDED' => 'La limite de tentatives pour cette action a été dépassée. Vous devez attendre {{delay}} secondes avant de pouvoir effectuer une autre tentative.',
     'REGISTER'            => 'S\'inscrire',
     'REGISTER_ME'         => 'Créer mon compte',
     'REGISTRATION'        => [
-        'COMPLETE_TYPE1' => 'Vous êtes inscrit avec succès. Vous pouvez maintenant vous connecter.',
-        'COMPLETE_TYPE2' => 'Vous êtes inscrit avec succès. Vous recevrez bientôt un e-mail de validation contenant un lien pour activer votre compte. Vous ne pourrez pas vous connecter avant d\'avoir terminé cette étape.',
-        'DISABLED'       => 'Désolé, l\'enregistrement de compte a été désactivé.',
-        'ERROR'          => 'Erreur d\'inscription',
-        'LOGOUT'         => 'Désolé, vous ne pouvez pas vous inscrire tout en étant connecté. Veuillez vous déconnecter en premier.',
-        'QUESTION'       => "Pas encore de compte?",//OK
-        'UNKNOWN'        => 'Un problème a été rencontré lors du processus d\'enregistrement du compte.',
-        'WELCOME'        => 'L\'inscription est rapide et simple.',
+        'COMPLETE'              => 'Vous êtes inscrit avec succès. Vous pouvez maintenant vous connecter.',
+        'COMPLETE_VERIFICATION' => 'Vous êtes inscrit avec succès. Vous recevrez bientôt un e-mail de validation contenant un lien pour activer votre compte. Vous ne pourrez pas vous connecter avant d\'avoir terminé cette étape.',
+        'DISABLED'              => 'Désolé, l\'enregistrement de compte a été désactivé.',
+        'ERROR'                 => 'Erreur d\'inscription',
+        'LOGOUT'                => 'Désolé, vous ne pouvez pas vous inscrire tout en étant connecté. Veuillez vous déconnecter en premier.',
+        'QUESTION'              => 'Pas encore de compte?', //OK
+        'MAIL_ERROR'            => 'Une erreur est survenue lors de l\'envoi de l\'email de vérification. Veuillez contacter votre administrateur.',
+        'UNKNOWN'               => 'Un problème a été rencontré lors du processus d\'enregistrement du compte.',
+        'WELCOME'               => 'L\'inscription est rapide et simple.',
     ],
     'REMEMBER_ME'             => 'Se souvenir de moi!',
     'REMEMBER_ME_ON_COMPUTER' => 'Se souvenir de moi sur cet ordinateur (non recommandé pour les ordinateurs publics)',
-    
+
     'SIGNIN'                  => 'Se connecter',
     'SIGNIN_OR_REGISTER'      => 'Se connecter ou s\'inscrire',
     'SIGNUP'                  => 'S\'inscrire',
-    
+
     'TOS'                     => 'Termes et conditions',
     'TOS_AGREEMENT'           => 'En créant un compte avec {{site_title}}, vous acceptez les <a {{link_attributes | raw}}>termes et conditions</a>.',
     'TOS_FOR'                 => 'Termes et conditions pour {{title}}',
-    
+
     'USERNAME'                => [
         '@TRANSLATION'  => 'Nom d\'utilisateur',
         'CHOOSE'        => 'Choisissez un nom d\'utilisateur unique',
@@ -216,6 +217,6 @@ return [
         'IN_USE'        => 'Le nom d\'utilisateur \'{{username}}\' est déjà utilisé.',
         'NOT_AVAILABLE' => 'Le nom d\'utilisateur <strong>{{user_name}}</strong> n\'est pas disponible. Choisissez un autre nom, ou cliquez sur « suggérer ».',
     ],
-    
+
     'WELCOME'               => 'Bienvenue {{full_name}}!',
 ];
