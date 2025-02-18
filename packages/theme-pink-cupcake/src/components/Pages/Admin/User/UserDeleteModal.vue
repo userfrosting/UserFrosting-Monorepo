@@ -53,7 +53,7 @@ const deleteConfirmed = () => {
         :rejectIcon="null"
         :acceptSeverity="Severity.Danger">
         <template #prompt>
-            <p v-html="$t('USER.DELETE_CONFIRM', props.user)"></p>
+            <div v-html="$t('USER.DELETE_CONFIRM', props.user)"></div>
         </template>
     </UFModalConfirmation>
 </template>

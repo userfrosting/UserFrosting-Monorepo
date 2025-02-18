@@ -97,7 +97,6 @@ return [
     'DELETE_CONFIRM_YES'       => 'Yes, delete',
     'DELETE_CONFIRM_NAMED'     => 'Are you sure you want to delete {{user_name}}?',
     'DELETE_CONFIRM_YES_NAMED' => 'Yes, delete {{name}}',
-    'DELETE_CANNOT_UNDONE'     => 'This action cannot be undone.',
     'DELETE_NAMED'             => 'Delete {{name}}',
     'DENY'                     => 'Deny',
     'DESCRIPTION'              => 'Description',
@@ -118,8 +117,9 @@ return [
     'PRINT'                    => 'Print',
     'REMOVE'                   => 'Remove',
     'UNACTIVATED'              => 'Unactivated',
-    'UNKNOWN' => 'Unknown',
+    'UNKNOWN'                  => 'Unknown',
     'UPDATE'                   => 'Update',
     'VIEW'                     => 'View',
+    'WARNING_CANNOT_UNDONE'    => 'This action cannot be undone.',//OK
     'YES'                      => 'Yes',
 ];

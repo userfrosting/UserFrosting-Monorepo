@@ -97,7 +97,6 @@ return [
     'DELETE_CONFIRM_YES'       => 'Oui, supprimer',
     'DELETE_CONFIRM_NAMED'     => 'Êtes-vous sûr de vouloir supprimer {{name}}?',
     'DELETE_CONFIRM_YES_NAMED' => 'Oui, supprimer {{name}}',
-    'DELETE_CANNOT_UNDONE'     => 'Cette action ne peut être annulée.',
     'DELETE_NAMED'             => 'Supprimer {{name}}',
     'DENY'                     => 'Refuser',
     'DESCRIPTION'              => 'Description',
@@ -121,5 +120,6 @@ return [
     'UNKNOWN'                  => 'Inconnu',
     'UPDATE'                   => 'Mettre à jour',
     'VIEW'                     => 'Voir',
+    'WARNING_CANNOT_UNDONE'    => 'Cette action ne peut être annulée.',
     'YES'                      => 'Oui',
 ];

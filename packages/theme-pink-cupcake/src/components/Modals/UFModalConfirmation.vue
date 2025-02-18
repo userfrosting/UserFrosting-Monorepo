@@ -3,8 +3,6 @@
  * Modal Confirmation Component
  */
 import { Severity } from '@userfrosting/sprinkle-core/interfaces'
-import { useTranslator } from '@userfrosting/sprinkle-core/stores'
-const { translate } = useTranslator()
 
 /**
  * Emits - Events emitted by the component buttons. Note closing the modal with
@@ -49,6 +47,7 @@ interface Props {
     cancelBtn?: boolean
     title?: string | null
     prompt?: string
+    warning?: string
 }
 const {
     closable = false,
@@ -63,7 +62,8 @@ const {
     rejectSeverity = Severity.Default,
     cancelBtn = true,
     title = 'CONFIRMATION',
-    prompt = 'CONFIRM_ACTION'
+    prompt = 'CONFIRM_ACTION',
+    warning = 'WARNING_CANNOT_UNDONE'
 } = defineProps<Props>()
 
 /**
@@ -106,8 +106,13 @@ const btnClass = (severity: Severity) => {
         </template>
         <slot>
             <div class="uk-text-center">
-                <p v-if="icon"><font-awesome-icon :icon="icon" class="uk-text-warning fa-4x" /></p>
+                <p v-if="icon">
+                    <font-awesome-icon :icon="icon" class="uk-text-warning fa-4x" />
+                </p>
                 <slot name="prompt">{{ $t(prompt) }}</slot>
+                <div class="uk-text-meta" v-if="warning">
+                    <slot name="warning">{{ $t(warning) }}</slot>
+                </div>
             </div>
         </slot>
         <template #footer>

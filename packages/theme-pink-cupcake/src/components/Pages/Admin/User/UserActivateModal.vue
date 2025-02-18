@@ -77,7 +77,7 @@ const updateUser = (fieldName: string, value: string) => {
         :rejectIcon="null"
         :acceptSeverity="Severity.Success">
         <template #prompt>
-            <p v-html="$t('USER.ACTIVATE_CONFIRM', props.user)"></p>
+            <div v-html="$t('USER.ACTIVATE_CONFIRM', props.user)"></div>
         </template>
     </UFModalConfirmation>
 
@@ -90,7 +90,7 @@ const updateUser = (fieldName: string, value: string) => {
         :rejectIcon="null"
         :acceptSeverity="Severity.Success">
         <template #prompt>
-            <p v-html="$t('USER.DISABLE_CONFIRM', props.user)"></p>
+            <div v-html="$t('USER.DISABLE_CONFIRM', props.user)"></div>
         </template>
     </UFModalConfirmation>
 
@@ -103,7 +103,7 @@ const updateUser = (fieldName: string, value: string) => {
         :rejectIcon="null"
         :acceptSeverity="Severity.Success">
         <template #prompt>
-            <p v-html="$t('USER.ENABLE_CONFIRM', props.user)"></p>
+            <div v-html="$t('USER.ENABLE_CONFIRM', props.user)"></div>
         </template>
     </UFModalConfirmation>
 </template>
